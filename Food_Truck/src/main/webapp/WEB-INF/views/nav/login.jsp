@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-5">
 				<div class="login">
-					<form id="login-form" action="/loginChk" align="center">
+					<form id="login-form" action="/loginChk" >
 						<h2>Login</h2>
 						<p>Welcome to your account</p>
 <!-- 							페이스북 / 트위터 계정 연결 -->
@@ -31,7 +31,7 @@
 							<p>Remember me!</p>
 							<a href="#">Forgot Your Password ?</a>
 						</div>
-						<input type="submit" value="login" />
+						<p><input type="submit" value="login" /></p>
 					</form>
 				</div>
 			</div>

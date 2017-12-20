@@ -2405,12 +2405,28 @@ h4.heading {
 	10. Login / Register / ProductInsert(h2, p, label, input, textarea, button Ãß°¡)
 -------------------------*/
 .login-page page fix {
+<<<<<<< HEAD
 	position: relative;
 	margin: auto;
 	padding: auto;
+=======
+	position: absolute;
+>>>>>>> branch 'master' of https://github.com/dyyyy/foodtruck2017.git
 }
 
-.login h2, .product h2 {
+.row{
+top:0;right:0;bottom:0;left:0;
+display:flex;
+align-items:center;
+justify-content:center;
+  
+display:-webkit-flex;
+-webkit-align-items:center;
+-webkit-justify-content:center;
+
+}
+
+.login h2, .product h2, .join h2 {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 30px;
@@ -2418,7 +2434,7 @@ h4.heading {
   text-align: center;
 }
 
-.login p, .product p{
+.login p, .product p, .join p{
   font-size: 13px;
   font-weight: 400;
   text-align: center;
@@ -2444,7 +2460,7 @@ h4.heading {
   font-size: 20px;
   margin-right: 15px;
 }
-.login label, .product label {
+.login label, .product label, .join label {
   font-size: 13px;
   font-weight: 400;
   margin-bottom: 5px;
@@ -2457,10 +2473,28 @@ h4.heading {
   color: #3e3f3f;
   font-size: 13px;
   padding: 7px 15px;
+  width: 100%;
+}
+
+.join input {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #ccc;
+  color: #3e3f3f;
+  font-size: 13px;
+  padding: 7px 15px;
   width: 80%;
 }
 
 .login textarea {
+	background: #ebebeb none repeat scroll 0 0;
+  	border: 1px solid #ccc;
+  	color: #3e3f3f;
+  	font-size: 13px;
+  	padding: 7px 15px;
+  	width: 100%;
+}
+
+.join textarea {
 	background: #ebebeb none repeat scroll 0 0;
   	border: 1px solid #ccc;
   	color: #3e3f3f;
@@ -2511,7 +2545,7 @@ h4.heading {
   text-decoration:none;
 }
 
-.login input[type="button"] {
+.login input[type="button"], .join input[type="button"] {
   background: #b10505 none repeat scroll 0 0;
   border: medium none;
   color: #fff;
@@ -2524,12 +2558,12 @@ h4.heading {
   width: auto;
 }
 
-.login input[type="checkbox"] {
+.login input[type="checkbox"], .join input[type="checkbox"] {
   float: left;
   margin: 0 5px 0 0;
 }
 
-.login input[type="submit"], .product input[type="submit"] {
+.login input[type="submit"], .product input[type="submit"], .join input[type="submit"] {
   background: #f58d8d none repeat scroll 0 0;
   border: medium none;
   color: #fff;
@@ -2543,7 +2577,7 @@ h4.heading {
   width: auto;
 }
 
-.login input[type="reset"], .product input[type="reset"]{
+.login input[type="reset"], .product input[type="reset"], .join input[type="reset"]{
   background: #f58d8d none repeat scroll 0 0;
   border: medium none;
   color: #fff;
@@ -2557,11 +2591,11 @@ h4.heading {
   width: auto;
 }
 
-.login input[type="reset"]:hover, .product input[type="reset"]:hover{
+.login input[type="reset"]:hover, .product input[type="reset"]:hover, .join input[type="reset"]:hover{
   background: #555555 none repeat scroll 0 0;
 }
 
-.login input[type="submit"]:hover, .product input[type="submit"]:hover {
+.login input[type="submit"]:hover, .product input[type="submit"]:hover, .join input[type="submit"]:hover {
   background: #555555 none repeat scroll 0 0;
 }
 #facebook{background:#46629E;}
