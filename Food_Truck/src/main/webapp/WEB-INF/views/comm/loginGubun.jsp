@@ -73,7 +73,7 @@
 							if (gubun == 1) {
 						%>
 						
-						<li><a href="/adminBoard">관리자 메뉴<i class="fa fa-angle-down"></i></a>
+						<li><a href="#">관리자 메뉴<i class="fa fa-angle-down"></i></a>
 							<ul>
 								<li><a href="/adminMember">회원 관리</a></li>
 								<li><a href="/adminSeller">판매자 관리</a></li>
@@ -85,11 +85,11 @@
 							} else if (gubun == 2) {
 						%>
 						
-						<li><a href="/sellerBoard">판매자 메뉴<i class="fa fa-angle-down"></i></a>
+						<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 							<ul>
+								<li><a href="/productInsert">제품 등록</a></li>
 								<li><a href="/orderDetail">예약 내역</a></li>
 								<li><a href="/deliveryDetails">배달 내역</a></li>
-								<li><a href="/productInsert">제품 등록</a></li>
 								<li><a href="/sellerSetting">판매자 설정</a></li>
 							</ul>
 						</li>
@@ -98,7 +98,7 @@
 							} else if (gubun == 3) {
 						%>
 						
-						<li><a href="/myBoard">나의 주문<i class="fa fa-angle-down"></i></a>
+						<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
 							<ul>
 								<li><a href="/orderList">전체 주문 내역</a></li>
 								<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
@@ -111,7 +111,7 @@
 							}
 						%>
 
-						<li><a href="/serviceCenter">고객센터<i class="fa fa-angle-down"></i></a>
+						<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 							<ul>
 								<li><a href="/noticeBoard">공지사항</a></li>
 								<li><a href="/eventBoard">이벤트</a></li>

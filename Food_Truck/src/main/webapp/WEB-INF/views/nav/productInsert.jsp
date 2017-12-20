@@ -15,15 +15,18 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-5">
 				<div class="product">
-					<form id="signup-form" action="#">
+					<form id="signup-form" action="/insertProduct">
 						<h2>Fill Out Your FoodTruck's Menu</h2>
 						<p>your own menu</p>
+						<!-- 제품 번호 (prod_no) -->
+						<label>제품 번호<span>*</span></label>
+						<input type="text" name="prodNo">
 						<!-- 제품 이름 (prod_name) -->
 						<label>제품 이름<span>*</span></label>
 						<input type="text" name="prodName">
 						<!-- 제품 상세 (prod_content) -->
 						<label>제품 상세</label>
-						<textarea name="prodContent" id="message" rows="7" ></textarea>
+						<textarea name="prodContent" id="message" rows="10" ></textarea>
 						<!-- 가격 (prod_price) -->
 						<label>가격<span>*</span></label>
 						<input type="text" name="prodPrice">

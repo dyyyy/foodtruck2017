@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <style type=text/css>
-.test {
+.login input {
 	color:red;
 }
 </style>
@@ -16,11 +16,11 @@ jQuery( function($) {
 	var tel = /^[0-9]{8,11}$/; // 전화번호 검사식
 	
 	var	form = $('.form'), 
-			memberId = $('input[name=memberId]'), 
-			memberPw = $('input[name=memberPw]'),
-			memberPw1 = $('input[name=memberPw1]'),
-			memberName = $('input[name=memberName]'), 
-			memberTel = $('input[name=memberTel]');
+			memberId = $('input[name="memberId"]'), 
+			memberPw = $('input[name="memberPw"]'),
+			memberPw1 = $('input[name="memberPw1"]'),
+			memberName = $('input[name="memberName"]'), 
+			memberTel = $('input[name="memberTel"]');
 		
 
 	// 전송 버튼을 눌렀을 시 유효성 체크
@@ -41,20 +41,20 @@ jQuery( function($) {
 			alert("휴대폰번호를 입력해 주세요.");
 			memberTel.focus();
 			return false;
-		} else if($('input[name=agree1]').is(":checked") != true || $('input[name=agree2]').is(":checked") != true) {
+		} else if($('input[name="agree1"]').is(":checked") != true || $('input[name="agree2"]').is(":checked") != true) {
 			alert("이용약관 동의를 해야합니다.");
 			return false;
 		}
 	});
 	
 	
-	$('#checkId, input[name=memberPw], input[name=memberPw1]').after('<p></p>');
+	$('#checkId, input[name="memberPw"], input[name="memberPw1"]').after('<p></p>');
  
  	// 아이디 체크
  	memberId.keyup(function() {
  		var s = $("#checkId").next('p');
  		if(id.test(memberId.val()) != true) {
- 			s.text("이메일 형식이 맞지 않습니다.").css("color", "red");	
+ 			s.text("이메일 형식이 맞지 않습니다.").css("color", "red").font("Raleway");	
  		} else {
  			s.text(" ");
  		}
@@ -67,9 +67,9 @@ jQuery( function($) {
 		if (memberPw.val().length == 0) { // 입력 값이 없을 때
 			s.text('비밀번호를 입력해 주세요.'); 
 		} else if(pw.test(memberPw.val()) != true) {
-			s.text('비밀번호는 최소 8자리의 영문 및 숫자를 포함해야 합니다.').css("color", "red");
+			s.text('비밀번호는 최소 8자리의 영문 및 숫자를 포함해야 합니다.').css("color", "red").font("Raleway");	;
 		} else { 
-			s.text('사용 가능한 비밀번호 입니다.').css("color", "gray"); 
+			s.text('사용 가능한 비밀번호 입니다.').css("color", "gray").font("Raleway");
 		}
 	});
 	
@@ -79,9 +79,9 @@ jQuery( function($) {
 		var s = $(this).next('p');
 		// 입력한 비밀번호와 다를 때
 		if(memberPw.val() != memberPw1.val()) {
-			s.text('입력하신 비밀번호와 다릅니다.').css("color", "red");
+			s.text('입력하신 비밀번호와 다릅니다.').css("color", "red").font("Raleway")	;
 		} else {
-			s.text("ok").css("color", "gray");
+			s.text("위의 비밀번호와 일치합니다.").css("color", "gray").font("Raleway");
 		}
 	});
 	
@@ -103,80 +103,71 @@ jQuery( function($) {
 </script>
 
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 <jsp:include page="../comm/header.jsp"></jsp:include>
 
-
-</head>
-<body>
-<form class="form">
-<table border=1>
-	<tr>
-		<td><b class=test>*</b>아이디(이메일 입력)</td>
-		<td>
-			<input type=text name=memberId>
-			<button id=checkId>중복확인</button>
-		</td>
-	</tr>
-	<tr>
-		<td><b class=test>*</b>비밀번호</td>
-		<td><input type=password name=memberPw></td>
-	</tr>
-	<tr>
-		<td><b class=test>*</b>비밀번호확인</td>
-		<td><input type=password name=memberPw1></td>
-	</tr>
-	<tr>
-		<td><b class=test>*</b>이름</td>
-		<td><input type=text name=memberName></td>
-	</tr>
-	<tr>
-		<td><b class=test>*</b>휴대폰 번호</td>
-		<td>
-			<input type=text name=memberTel>
-			<button id=checkTel>휴대폰인증</button>
-		</td>
-	</tr>
-	<tr>
-		<td>이벤트 정보 수신 동의</td>
-		<td>
-			<input type=checkbox name=checkSNS>SNS
-			<input type=checkbox name=checkEmail>Email
-		</td>
-	</tr>
-	
-	<tr>
-		<td rowspan=4><b class=test>*</b>이용약관</td>
-	</tr>
-	<tr>
-		<td>
-			<textarea name=textarea></textarea><p>
-			<input type=checkbox name=agree1 check=unchecked>동의
-		</td>
-	</tr>
-	<tr>
-		<td><textarea name=textarea></textarea><p>
-		<input type=checkbox name=agree2 check=unchecked>동의
-		</td>
-	</tr>
-	
-	
-	
-</table>
-<input type=submit value=전송><input type=reset value=다시작성>
-
-</form>
-
-</body>
-</html>
-
-
-
-
+<!--start create member Area-->
+<div class="login-page page fix">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-5">
+				<div class="join">
+					<form id="signup-form" action="#">
+						<h2>Create A new Account</h2>
+						<p>Create your own account</p>
+						<!-- 이메일 (id) -->
+						<label>ID (이메일 형식)<span>*</span></label>
+						<input type="text" name="memberId">
+						<input type="button" id="checkId" value="중복확인"> 
+						<!-- 비밀번호 (memberPw) -->
+						<label>Password<span>*</span></label>
+						<input type="password" name="memberPw">
+						<!-- 비밀번호확인 (memberPw1) -->
+						<label>Confirm Password<span>*</span></label>
+						<input type="password" name="memberPw1">
+						<!-- 이름 -->
+						<label>Name<span>*</span></label>
+						<input type="text" name="memberName">
+						<!-- 휴대폰 번호  -->
+						<label>Phone Number<span>*</span></label>
+						<input type="text" name="memberTel">
+						<input type="button" id="checkTel" value="인증하기"> 
+						<!-- 이벤트 정보 수신 동의 -->
+						<label>이벤트 정보 수신 동의<span>*</span></label>
+						<div class="remember">
+							<input type="checkbox" name="checkSNS">
+							<p>sns</p>
+						</div>
+						<div class="remember">
+							<input type="checkbox" name="checkEmail">
+							<p>email</p>
+						</div>
+						<!-- 이용약관  -->
+						<label>이용약관<span>*</span></label>
+						<!-- 이용약관 1 -->
+						<textarea name=textarea rows="7"></textarea><p>
+						<div class="remember">
+							<input type="checkbox" name="agree1">
+							<p>동의</p>
+						</div><br><br>
+						
+						<!-- 이용약관 2 -->
+						<textarea name=textarea rows="7"></textarea><p>
+						<div class="remember">
+							<input type="checkbox" name="agree2">
+							<p>동의</p>
+						</div>
+						<!-- 버튼 -->
+						<input type="reset" value="Reset" >
+						<input type="submit" value="Sign up" >
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--End create member Area-->
+<br><br><br><br><br>
 <jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>

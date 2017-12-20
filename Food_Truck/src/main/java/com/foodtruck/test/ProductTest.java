@@ -22,40 +22,45 @@ public class ProductTest {
 	private MemberService memberservice;
 	
 	@Test
-	public void testAllList() throws Exception {
-		productService.getProductList();
-	}
-	
- 	@Test
-	public void testGetProduct() throws Exception {
+	public void getProduct() throws Exception {
 		productService.getProduct(2017121165);
 	}
 	
-	@Test
-	public void testInsertProduct() throws Exception {
-		ProductVO vo = new ProductVO();
-		vo.setProdNo(2017121390);
-		vo.setProdName("test");
-		vo.setProdContent("testÇÏ´ÂÁß");
-		vo.setProdPrice(30000);
-		
-		productService.insertProduct(vo);
-	}
-	
-	@Test
-	public void testDelelteProduct() throws Exception{
-		productService.deleteProduct(2017121390);
-	}
-	
-	@Test
-	public void testUpdateProduct() throws Exception {
-		ProductVO vo = new ProductVO();
-		vo.setProdNo(2017121311);
-		vo.setProdName("ÇÏÀ×");
-		vo.setProdContent("¸Þ·Õ");
-		vo.setProdPrice(10000);
-		productService.updateProduct(vo);
-	}
+//	@Test
+//	public void testAllList() throws Exception {
+//		productService.getProductList();
+//	}
+//	
+// 	@Test
+//	public void testGetProduct() throws Exception {
+//		productService.getProduct(2017121165);
+//	}
+//	
+//	@Test
+//	public void testInsertProduct() throws Exception {
+//		ProductVO vo = new ProductVO();
+//		vo.setProdNo(2017121390);
+//		vo.setProdName("test");
+//		vo.setProdContent("testÇÏ´ÂÁß");
+//		vo.setProdPrice(30000);
+//		
+//		productService.insertProduct(vo);
+//	}
+//	
+//	@Test
+//	public void testDelelteProduct() throws Exception{
+//		productService.deleteProduct(2017121390);
+//	}
+//	
+//	@Test
+//	public void testUpdateProduct() throws Exception {
+//		ProductVO vo = new ProductVO();
+//		vo.setProdNo(2017121311);
+//		vo.setProdName("ÇÏÀ×");
+//		vo.setProdContent("¸Þ·Õ");
+//		vo.setProdPrice(10000);
+//		productService.updateProduct(vo);
+//	}
 	
 	
 }

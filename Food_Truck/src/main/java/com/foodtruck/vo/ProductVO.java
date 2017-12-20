@@ -6,7 +6,7 @@ public class ProductVO {
 	private String prodName;		// 제품 이름
 	private String prodContent;		// 제품 내용
 	private int prodPrice;			// 금액
-	private int licenseNo;			// 사업자 번호
+	private String licenseNo;		// 사업자 번호
 	
 	// getter & setter
 	public int getProdNo() {
@@ -33,11 +33,10 @@ public class ProductVO {
 	public void setProdPrice(int prodPrice) {
 		this.prodPrice = prodPrice;
 	}
-	public int getLicenseNo() {
+	public String getLicenseNo() {
 		return licenseNo;
 	}
-	public void setLicenseNo(int licenseNo) {
+	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
-	
 }

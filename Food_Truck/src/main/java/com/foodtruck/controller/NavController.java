@@ -24,7 +24,7 @@ public class NavController {
 		return "nav/inquiry";
 	}
 	
-	// 로그인  가입 폼 테스트중  -> nav/login 으로 바꾸기
+	// 로그인
 	@RequestMapping("/login")
 	public String loginPage() {
 		return "nav/login";
@@ -33,7 +33,7 @@ public class NavController {
 	// 가입
 	@RequestMapping("/join")
 	public String joinPage() {
-		return "nav/test";
+		return "nav/join";
 	}
 
 	// FoodTrcuk List
@@ -66,12 +66,6 @@ public class NavController {
 		return "nav/jpFood";
 	}
 	
-	// 관리자 메뉴
-	@RequestMapping("/adminBoard")
-	public String adminBoardPage() {
-		return "nav/adminBoard";
-	}
-	
 	// 관리자 메뉴 - 회원관리
 	@RequestMapping("/adminMember")
 	public String adminMemberPage() {
@@ -90,22 +84,16 @@ public class NavController {
 		return "nav/adminFoodTruck";
 	}
 	
-	// 판매자 메뉴
-	@RequestMapping("/sellerBoard")
-	public String sellerBoardPage() {
-		return "nav/sellerBoard";
+	// 판매자 메뉴 - 제품 등록
+	@RequestMapping("/productInsert")
+	public String productInsertPage() {
+		return "nav/productInsert";
 	}
 	
 	// 판매자 메뉴 - 예약 내역
 	@RequestMapping("/orderDetail")
 	public String orderDetailPage() {
 		return "nav/orderDetail";
-	}
-	
-	// 판매자 메뉴 - 예약 내역
-	@RequestMapping("/productInsert")
-	public String productInsertPage() {
-		return "nav/productInsert";
 	}
 	
 	// 판매자 메뉴 - 배달 내역
@@ -118,12 +106,6 @@ public class NavController {
 	@RequestMapping("/sellerSetting")
 	public String sellerSettingPage() {
 		return "nav/sellerSetting";
-	}
-	
-	// 구매자 메뉴
-	@RequestMapping("/myBoard")
-	public String myBoardPage() {
-		return "nav/myBoard";
 	}
 	
 	// 구매자 메뉴 - 전체 주문 내역

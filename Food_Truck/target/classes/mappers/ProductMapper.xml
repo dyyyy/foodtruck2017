@@ -22,8 +22,8 @@
 	<!-- 제품 등록 -->
 	<insert id="insertProduct">
 		
-		INSERT INTO PRODUCT (PROD_NO, PROD_NAME, PROD_CONTENT, PROD_PRICE, FTRUCK_NO)
-		VALUES(#{prodNo}, #{prodName}, #{prodContent}, #{prodPrice}, #{ftruckNo})
+		INSERT INTO PRODUCT (PROD_NO, PROD_NAME, PROD_CONTENT, PROD_PRICE, LICENSE_NO)
+		VALUES(#{prodNo}, #{prodName}, #{prodContent}, #{prodPrice}, #{licenseNo})
 	
 	</insert>
 	

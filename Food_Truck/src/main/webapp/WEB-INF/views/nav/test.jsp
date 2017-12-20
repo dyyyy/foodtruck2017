@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<style type="text/css">
-.login input{
+<style type=text/css>
+.login input {
 	color:red;
 }
 </style>
@@ -41,7 +41,7 @@ jQuery( function($) {
 			alert("휴대폰번호를 입력해 주세요.");
 			memberTel.focus();
 			return false;
-		} else if($('input[name=agree1]').is(":checked") != true || $('input[name=agree2]').is(":checked") != true) {
+		} else if($('input[name="agree1"]').is(":checked") != true || $('input[name="agree2"]').is(":checked") != true) {
 			alert("이용약관 동의를 해야합니다.");
 			return false;
 		}
@@ -54,7 +54,7 @@ jQuery( function($) {
  	memberId.keyup(function() {
  		var s = $("#checkId").next('p');
  		if(id.test(memberId.val()) != true) {
- 			s.text("이메일 형식이 맞지 않습니다.").css("color", "red", "font", "Raleway");	
+ 			s.text("이메일 형식이 맞지 않습니다.").css("color", "red").font("Raleway");	
  		} else {
  			s.text(" ");
  		}
@@ -65,11 +65,11 @@ jQuery( function($) {
 	memberPw.keyup( function() {
 		var s = $(this).next('p'); 
 		if (memberPw.val().length == 0) { // 입력 값이 없을 때
-			s.text('비밀번호를 입력해 주세요.').font("Raleway"); 
+			s.text('비밀번호를 입력해 주세요.'); 
 		} else if(pw.test(memberPw.val()) != true) {
-			s.text('비밀번호는 최소 8자리의 영문 및 숫자를 포함해야 합니다.').css("color", "red").font("Raleway");
+			s.text('비밀번호는 최소 8자리의 영문 및 숫자를 포함해야 합니다.').css("color", "red").font("Raleway");	;
 		} else { 
-			s.text('사용 가능한 비밀번호 입니다.').css("color", "gray")z.font("Raleway"); 
+			s.text('사용 가능한 비밀번호 입니다.').css("color", "gray").font("Raleway");
 		}
 	});
 	
@@ -79,9 +79,9 @@ jQuery( function($) {
 		var s = $(this).next('p');
 		// 입력한 비밀번호와 다를 때
 		if(memberPw.val() != memberPw1.val()) {
-			s.text('입력하신 비밀번호와 다릅니다.').css("color", "red").font("Raleway");
+			s.text('입력하신 비밀번호와 다릅니다.').css("color", "red").font("Raleway")	;
 		} else {
-			s.text("위와 동일한 비밀번호 입니다.").css("color", "gray").font("Raleway");
+			s.text("위의 비밀번호와 일치합니다.").css("color", "gray").font("Raleway");
 		}
 	});
 	
@@ -100,10 +100,11 @@ jQuery( function($) {
 	
 	
 });
-</script>    
+</script>
+
 <html>
-<jsp:include page="../comm/header.jsp"></jsp:include>
 <body>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <!--start create member Area-->
 <div class="login-page page fix">
@@ -167,6 +168,6 @@ jQuery( function($) {
 </div>
 <!--End create member Area-->
 <br><br><br><br><br>
-</body>
 <jsp:include page="../comm/footer.jsp"></jsp:include>
+</body>
 </html>
