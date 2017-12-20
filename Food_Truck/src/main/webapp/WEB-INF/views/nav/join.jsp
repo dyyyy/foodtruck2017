@@ -107,11 +107,7 @@ jQuery( function($) {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
 <jsp:include page="../comm/header.jsp"></jsp:include>
-
-
-</head>
 <body>
 <form class="form">
 <table border=1>
@@ -168,15 +164,7 @@ jQuery( function($) {
 	
 </table>
 <input type=submit value=전송><input type=reset value=다시작성>
-
 </form>
-
 </body>
-</html>
-
-
-
-
 <jsp:include page="../comm/footer.jsp"></jsp:include>
-</body>
 </html>
