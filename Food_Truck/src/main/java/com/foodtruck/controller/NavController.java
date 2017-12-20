@@ -27,7 +27,7 @@ public class NavController {
 	// 로그인  가입 폼 테스트중  -> nav/login 으로 바꾸기
 	@RequestMapping("/login")
 	public String loginPage() {
-		return "nav/join";
+		return "nav/login";
 	}
 	
 	// 가입
