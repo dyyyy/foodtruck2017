@@ -11,9 +11,6 @@ import com.foodtruck.service.FoodTruckService;
 @Controller
 public class NavController {
 	
-	@Autowired
-	private FoodTruckService fservice;
-	
 	// 공지사항
 	@RequestMapping("/noticeBoard")
 	public String noticeBoardPage() {
@@ -42,48 +39,6 @@ public class NavController {
 	@RequestMapping("/join")
 	public String joinPage() {
 		return "nav/test";
-	}
-
-	// FoodTrcuk List
-	@RequestMapping("/menuBoard")
-	public String menuBoarPage(Model model)throws Exception {
-		model.addAttribute("list", fservice.getFoodTruckList());
-		return  "nav/menuBoard";
-	}
-	
-	// Korean Food
-	@RequestMapping("/korFood")
-	public String korFoodPage(Model model)throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(1));
-		return "nav/korFood";
-	}
-	
-	// Chinese Food
-	@RequestMapping("/chiFood")
-	public String chiFoodPage(Model model)throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(2));
-		return "nav/chiFood";
-	}
-	
-	// Western Food
-	@RequestMapping("/westFood")
-	public String westFoodPage(Model model)throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(3));
-		return "nav/westFood";
-	}
-	
-	// Japanese Food
-	@RequestMapping("/jpFood")
-	public String jpFoodPage(Model model)throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(4));
-		return "nav/jpFood";
-	}
-	
-	// 상세정보
-	@RequestMapping("/read")
-	public String foodinfo(@RequestParam("licenseNo")String licenseNo,Model model)throws Exception {
-		model.addAttribute("one",fservice.getFoodTruck(licenseNo));
-		return "nav/detail";
 	}
 	
 	// 관리자 메뉴
