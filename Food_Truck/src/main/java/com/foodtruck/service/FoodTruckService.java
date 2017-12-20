@@ -14,15 +14,22 @@ public class FoodTruckService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	//푸드트럭 정보
-	public FoodTruckVO getFoodTruck(int ftruckNo) throws Exception {
+	public FoodTruckVO getFoodTruck(String licenseNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		return dao.getFoodTruck(ftruckNo);
+		return dao.getFoodTruck(licenseNo);
 	}
 	//푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList() throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList();
 	}
+	
+	//카테고리별 리스트
+	public List<FoodTruckVO> getCategoryList(int category) throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getCategoryList(category);
+	}
+	
 	//푸드트럭 입력
 	public int insertFoodTruck(FoodTruckVO vo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
@@ -34,9 +41,9 @@ public class FoodTruckService {
 		return dao.updateTruck(vo);
 	}
 	//푸드트럭 삭제
-	public int deleteFoodTruck(int ftruckNo) throws Exception{
+	public int deleteFoodTruck(String licenseNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		return dao.deleteTruck(ftruckNo);
+		return dao.deleteTruck(licenseNo);
 	}
 
 }

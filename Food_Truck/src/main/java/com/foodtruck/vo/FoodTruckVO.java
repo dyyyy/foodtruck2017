@@ -1,7 +1,7 @@
 package com.foodtruck.vo;
 
 public class FoodTruckVO {
-   private int licenseNo;      	// 사업자 번호
+   private String licenseNo;      	// 사업자 번호
    private String ftruckName;   // 푸드 트럭 이름(상호명)
    private String ftruckTel;   	// 푸드 트럭 전화번호
    private String ftruckAddr;   // 푸드 트럭 주소
@@ -12,12 +12,13 @@ public class FoodTruckVO {
    private String ftruckImg;   	// 푸드트럭 이미지
    private String latitude;     // 위도
    private String longitude;   	// 경도
+   private int category;		// 카테고리번호
    
    // getter & setter
-   public int getLicenseNo() {
+   public String getLicenseNo() {
       return licenseNo;
    }
-   public void setLicenseNo(int licenseNo) {
+   public void setLicenseNo(String licenseNo) {
       this.licenseNo = licenseNo;
    }
    public String getFtruckName() {
@@ -80,4 +81,16 @@ public class FoodTruckVO {
    public void setLongitude(String longitude) {
       this.longitude = longitude;
    }
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public int getCategory() {
+		return category;
+	}
+	public void setCategory(int category) {
+		this.category = category;
+	}
 }

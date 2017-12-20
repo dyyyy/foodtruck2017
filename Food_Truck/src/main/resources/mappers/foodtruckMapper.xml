@@ -12,11 +12,18 @@
       where license_No = #{licenseNo}
    </select>
    
+   <!-- 푸드트럭 카테고리별 리스트 -->
+   <select id="getCategoryList" resultMap="FoodTruckMap">
+   	  select *
+   	  from
+   	  foodtruck
+   	  where category = #{category}
+   </select>
+   
    <!--  푸드트럭 전체 리스트   -->
    <select id="getFoodTruckList" resultMap="FoodTruckMap">
       select *
       from foodtruck
-      
    </select>
    
    <!-- 푸드트럭 등록  -->

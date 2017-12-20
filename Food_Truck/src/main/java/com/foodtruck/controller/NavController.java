@@ -1,7 +1,12 @@
 package com.foodtruck.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.foodtruck.service.FoodTruckService;
 
 @Controller
 public class NavController {
@@ -34,36 +39,6 @@ public class NavController {
 	@RequestMapping("/join")
 	public String joinPage() {
 		return "nav/join";
-	}
-
-	// FoodTrcuk List
-	@RequestMapping("/menuBoard")
-	public String menuBoarPage() {
-		return  "nav/menuBoard";
-	}
-	
-	// Korean Food
-	@RequestMapping("/korFood")
-	public String korFoodPage() {
-		return "nav/korFood";
-	}
-	
-	// Chinese Food
-	@RequestMapping("/chiFood")
-	public String chiFoodPage() {
-		return "nav/chiFood";
-	}
-	
-	// Western Food
-	@RequestMapping("/westFood")
-	public String westFoodPage() {
-		return "nav/westFood";
-	}
-	
-	// Japanese Food
-	@RequestMapping("/jpFood")
-	public String jpFoodPage() {
-		return "nav/jpFood";
 	}
 	
 	// 관리자 메뉴 - 회원관리
