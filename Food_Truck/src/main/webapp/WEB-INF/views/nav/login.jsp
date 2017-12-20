@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-5">
 				<div class="login">
-					<form id="login-form" action="/loginChk">
+					<form id="login-form" action="/loginChk" align="center">
 						<h2>Login</h2>
 						<p>Welcome to your account</p>
 <!-- 							페이스북 / 트위터 계정 연결 -->

@@ -2406,6 +2406,8 @@ h4.heading {
 -------------------------*/
 .login-page page fix {
 	position: relative;
+	margin: auto;
+	padding: auto;
 }
 
 .login h2, .product h2 {
