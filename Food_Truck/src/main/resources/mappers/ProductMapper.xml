@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.foodtruck.dao.ProductDAO">
+	
+	<!-- 제품 정보 -->
+	<select id="getProduct" resultMap="ProductMap">
+	
+		SELECT * FROM PRODUCT
+		<where> PROD_NO=#{prodNo} </where>
+	
+	</select>
+
+	<!-- 제품 리스트 -->
+	<select id="getProductList" resultMap="ProductMap">
+	
+		SELECT * FROM PRODUCT
+	
+	</select>
+	
+	<!-- 제품 등록 -->
+	<insert id="insertProduct">
+		
+		INSERT INTO PRODUCT (PROD_NO, PROD_NAME, PROD_CONTENT, PROD_PRICE, FTRUCK_NO)
+		VALUES(#{prodNo}, #{prodName}, #{prodContent}, #{prodPrice}, #{ftruckNo})
+	
+	</insert>
+	
+	<!-- 제품 수정 -->
+	<update id="updateProduct">
+	
+		UPDATE PRODUCT
+		SET PROD_NAME=#{prodName}, PROD_CONTENT=#{prodContent}, PROD_PRICE=#{prodPrice}
+		<where> PROD_NO=#{prodNo} </where>
+		
+	</update>
+	
+	<!-- 제품 삭제 -->
+	<delete id="deleteProduct">
+	
+		DELETE FROM PRODUCT
+		<where> PROD_NO=#{prodNo}</where>
+		
+	</delete>
+	
+	<resultMap type="ProductVO" id="ProductMap">
+		<result column="PROD_NO" property="prodNo"/>
+		<result column="PROD_NAME" property="prodName"/>
+		<result column="PROD_CONTENT" property="prodContent"/>
+		<result column="PROD_PRICE" property="prodPrice"/>
+		<result column="LICENSE_NO" property="licenseNo"/>
+	</resultMap>
+</mapper>

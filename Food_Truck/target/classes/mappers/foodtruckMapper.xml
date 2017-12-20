@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace ="com.foodtruck.dao.FoodTruckDAO">
+
+   <!--  푸드트럭 상세정보  -->
+   <select id="getFoodTruck" resultMap="FoodTruckMap">
+      select *
+      from 
+      foodtruck
+      where license_No = #{licenseNo}
+   </select>
+   
+   <!--  푸드트럭 전체 리스트   -->
+   <select id="getFoodTruckList" resultMap="FoodTruckMap">
+      select *
+      from foodtruck
+      
+   </select>
+   
+   <!-- 푸드트럭 등록  -->
+   <insert id="insertFoodTruck">
+      insert into foodtruck (license_no,ftruck_name,ftruck_tel,ftruck_addr,FTRUCK_DLV_YN,FTRUCK_RSV_YN,ftruck_state,ftruck_img)
+      values (#{licenseNo},#{ftruckName},#{ftruckTel},#{ftruckAddr},#{ftruckDlvYn},#{ftruckRsvYn},#{ftruckState},#{ftruckImg})
+   </insert>
+   
+   <!-- 푸드트럭 삭제   -->
+   <delete id="deleteTruck">
+      delete from foodtruck
+      where license_No = #{licenseNo}
+   </delete>
+   
+   <!--  푸드트럭 수정  -->
+   <update id="updateTruck">
+      update foodtruck set ftruck_name = #{ftruckName},ftruck_addr = #{ftruckAddr},ftruck_tel = #{ftruckTel},
+      FTRUCK_DLV_YN = #{ftruckDlvYn},FTRUCK_RSV_YN = #{ftruckRsvYn},ftruck_state = #{ftruckState}, ftruck_img = #{ftruckImg}
+      where license_No = #{licenseNo}
+   </update>
+   
+   <resultMap type="FoodTruckVO" id="FoodTruckMap">
+      <result column="LICENSE_NO" property="licenseNo"/>
+      <result column="FTRUCK_NAME" property="ftruckName"/>
+      <result column="FTRUCK_TEL" property="ftruckTel"/>
+      <result column="FTRUCK_ADDR" property="ftruckAddr"/>
+      <result column="FTRUCK_DLV_YN" property="ftruckDlvYn"/>
+      <result column="FTRUCK_RSV_YN" property="ftruckRsvYn"/>
+      <result column="FTRUCK_GRADE" property="ftruckGrade"/>
+      <result column="FTRUCK_STATE" property="ftruckState"/>
+      <result column="FTRUCK_IMG" property="ftruckImg"/>
+    </resultMap>
+</mapper>
