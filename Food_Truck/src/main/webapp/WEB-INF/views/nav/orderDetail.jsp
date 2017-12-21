@@ -4,14 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>제품 등록 PAGE</title>
+<title>OrderDetail Page</title>
 </head>
 <body>
+
 <jsp:include page="../comm/loginGubun.jsp"></jsp:include>
 
 
 
 
-<jsp:include page="../comm/footer.jsp"></jsp:include>
+<jsp:include page="../comm/footer.jsp"></jsp:include><br><br><br>
+
 </body>
 </html>

@@ -7,11 +7,6 @@
 </head>
 <body>
 <jsp:include page="../comm/header.jsp"></jsp:include>
-<div class="page-title fix"><!--Start Title-->
-	<div class="overlay section">
-		<h2>Product Details</h2>
-	</div>
-</div><!--End Title-->
 <section class="product-page page fix"><!--Start Product Details Area-->
 	<div class="container">
 		<div class="row">
