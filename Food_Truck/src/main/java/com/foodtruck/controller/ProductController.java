@@ -14,6 +14,8 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	//아진짜 귀찮네 아오 !!!
+	
 	
 	// 제품 등록
 	@RequestMapping("/insertProduct")
