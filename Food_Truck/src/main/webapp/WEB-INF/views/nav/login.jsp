@@ -11,10 +11,10 @@
 
 <div class="login-page page fix"><!--start login Area-->
 	<div class="container">
-		<div class="row">
+		<div class="row2">
 			<div class="col-sm-6 col-md-5">
 				<div class="login">
-					<form id="login-form" action="/loginChk" >
+					<form id="login-form" action="/loginChk">
 						<h2>Login</h2>
 						<p>Welcome to your account</p>
 <!-- 							페이스북 / 트위터 계정 연결 -->

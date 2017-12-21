@@ -109,7 +109,7 @@ jQuery( function($) {
 <!--start create member Area-->
 <div class="login-page page fix">
 	<div class="container">
-		<div class="row">
+		<div class="row2">
 			<div class="col-sm-6 col-md-5">
 				<div class="join">
 					<form id="signup-form" action="#">
@@ -158,8 +158,8 @@ jQuery( function($) {
 							<p>동의</p>
 						</div>
 						<!-- 버튼 -->
-						<input type="reset" value="Reset" >
-						<input type="submit" value="Sign up" >
+						<p><input type="reset" value="Reset" >
+						<input type="submit" value="Sign up" ></p>
 					</form>
 				</div>
 			</div>
