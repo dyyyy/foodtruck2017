@@ -41,7 +41,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
+		// 아리가또
 		return "home";
 	}
 }
