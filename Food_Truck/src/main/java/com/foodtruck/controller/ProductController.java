@@ -17,6 +17,8 @@ public class ProductController {
 	//아진짜 귀찮네 아오 !!!
 	
 	
+	
+	//이거이거이거이거이거이거이찾아보라고뭐가내껀데?내꺼라거
 	// 제품 등록
 	@RequestMapping("/insertProduct")
 	public String insertProduct(ProductVO vo) {
