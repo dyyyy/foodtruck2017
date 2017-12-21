@@ -53,6 +53,7 @@ public class FoodTruckController {
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("licenseNo")String licenseNo,Model model)throws Exception {
 		//시발
+		//알어
 		model.addAttribute("one",fservice.getFoodTruck(licenseNo));
 		return "foodtruck/detail";
 	}
