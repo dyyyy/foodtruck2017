@@ -11,7 +11,7 @@
 
 <div class="login-page page fix"><!--start login Area-->
 	<div class="container">
-		<div class="row">
+		<div class="row2">
 			<div class="col-sm-6 col-md-5">
 				<div class="login">
 					<form id="login-form" action="/loginChk">
@@ -31,7 +31,7 @@
 							<p>Remember me!</p>
 							<a href="#">Forgot Your Password ?</a>
 						</div>
-						<input type="submit" value="login" />
+						<p><input type="submit" value="login" /></p>
 					</form>
 				</div>
 			</div>

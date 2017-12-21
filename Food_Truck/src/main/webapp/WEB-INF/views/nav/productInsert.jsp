@@ -12,7 +12,7 @@
 <!--start create member Area-->
 <div class="login-page page fix">
 	<div class="container">
-		<div class="row">
+		<div class="row2">
 			<div class="col-sm-6 col-md-5">
 				<div class="product">
 					<form id="signup-form" action="/insertProduct">
@@ -33,8 +33,9 @@
 						<!-- 사업자 번호 (license_no)  -->
 						<label>사업자 번호<span>*</span></label>
 						<input type="text" name=licenseNo>
-						<input type="reset" value="Reset" >
-						<input type="submit" value="Sign up" >
+						<!-- 버튼 -->
+						<p><input type="reset" value="Reset" >
+						<input type="submit" value="Sign up" ></p>
 					</form>
 				</div>
 			</div>
