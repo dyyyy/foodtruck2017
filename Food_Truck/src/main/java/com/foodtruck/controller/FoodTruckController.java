@@ -14,6 +14,10 @@ public class FoodTruckController {
 	@Autowired
 	private FoodTruckService fservice;
 	
+	
+	// test
+	
+	
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
 	public String menuBoarPage(Model model)throws Exception {
