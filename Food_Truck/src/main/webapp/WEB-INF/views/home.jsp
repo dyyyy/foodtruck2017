@@ -2353,9 +2353,7 @@
 
 <jsp:include page="comm/footer.jsp"></jsp:include>
 <p>손혜연 핵바보멍청이</p>
-
-
-
+<p>응 안돼 </p>
 <!-- 테스트중 나 슬램덩크 봐야되눈뎅? -->
 </body>
 </html>
