@@ -1,5 +1,7 @@
 package com.foodtruck.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,10 +53,9 @@ public class FoodTruckController {
 	
 	// 상세정보
 	@RequestMapping("/read")
-	public String foodinfo(@RequestParam("licenseNo")String licenseNo,Model model)throws Exception {
-		//시발
-		//알어
-		model.addAttribute("one",fservice.getFoodTruck(licenseNo));
-		return "foodtruck/detail";
-	}
+	   public String foodinfo(@RequestParam("licenseNo")String licenseNo,HttpServletRequest request)throws Exception {
+	      request.setAttribute("vo", fservice.getFoodTruck(licenseNo));
+	      
+	      return "foodtruck/detail";
+	   }
 }
