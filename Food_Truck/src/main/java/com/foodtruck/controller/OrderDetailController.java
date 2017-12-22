@@ -1,7 +1,10 @@
 package com.foodtruck.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.foodtruck.service.OrderDetailService;
@@ -14,9 +17,11 @@ public class OrderDetailController {
 	private OrderDetailService orderDetailService;
 	
 	@RequestMapping("/orderDetail")
-	public String orderDetailPage(OrderDetailVO vo) {
-
-		// 판매자 메뉴에서 예약 내역 클릭 했을 경우
+	public String orderDetailPage(Model model) {
+		
+		// 주문 상세 리스트
+		model.addAttribute("orderDetailList", orderDetailService.getOrderDetailList());
+		
 		return "nav/orderDetail";
 	}
 }
