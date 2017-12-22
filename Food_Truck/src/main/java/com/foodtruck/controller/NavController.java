@@ -65,11 +65,11 @@ public class NavController {
 		return "nav/productInsert";
 	}
 	
-	// 판매자 메뉴 - 예약 내역
-	@RequestMapping("/orderDetail")
-	public String orderDetailPage() {
-		return "nav/orderDetail";
-	}
+	// 판매자 메뉴 - 예약 내역 -> orderDetailController로 이동
+//	@RequestMapping("/orderDetail")
+//	public String orderDetailPage() {
+//		return "nav/orderDetail";
+//	}
 	
 	// 판매자 메뉴 - 배달 내역
 	@RequestMapping("/deliveryDetails")
