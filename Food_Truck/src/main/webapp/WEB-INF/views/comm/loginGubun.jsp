@@ -3,7 +3,7 @@
 <%
 	// 회원 구분 
 	String userId = (String) session.getAttribute("userId");
-	int gubun = (int) session.getAttribute("gubun");
+	String gubun = (String) session.getAttribute("gubun");
 %>
 <head>
 <meta charset="UTF-8">
@@ -70,7 +70,7 @@
 					<ul>
 						<%
 							// 1.관리자   2.판매자   3.일반회원
-							if (gubun == 1) {
+							if (gubun == "1") {
 						%>
 						
 						<li><a href="#">관리자 메뉴<i class="fa fa-angle-down"></i></a>
@@ -82,7 +82,7 @@
 						</li>
 
 						<%
-							} else if (gubun == 2) {
+							} else if (gubun == "2") {
 						%>
 						
 						<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
@@ -95,7 +95,7 @@
 						</li>
 
 						<%
-							} else if (gubun == 3) {
+							} else if (gubun == "3") {
 						%>
 						
 						<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>

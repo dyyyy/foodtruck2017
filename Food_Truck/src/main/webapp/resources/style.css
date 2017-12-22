@@ -2164,7 +2164,8 @@ to {
 .list-pro-image {
 	float: left;
 	margin-right: 30px;
-	width: 270px;
+	margin-top : 10px;
+	width : 100px;
 }
 
 .list-pro-image a {
@@ -3149,7 +3150,18 @@ h4.heading {
 	text-transform: uppercase;
 	width: auto;
 }
-
+.getoder{
+	background: #b10505 none repeat scroll 0 0;
+	border: medium none;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 350;
+	padding: 7px 15px;
+	text-decoration: none;
+	text-transform: uppercase;
+	width: auto;
+}
 .login input[type="checkbox"], .join input[type="checkbox"] {
 	float: left;
 	margin: 0 5px 0 0;
@@ -4393,47 +4405,6 @@ h4.heading {
 .commnet dt{
 		color: #9ba0a8;
 		    margin: 0;
-    padding: 0;
-    float: left;
-    width: 43px; height: 21.6px;
-}
-.star {
-   width: 80px;
-   height: 16px;
-   background: url('/resources/img/015.jpg') no-repeat -80px 0;
-}
-
-.star span {
-   display: block;
-   height: 16px;
-   background: url('/resources/img/015.jpg') no-repeat left top;
-   text-indent: -9999em;
-}
-
-.reviewlist {
-   border-bottom: 1px solid #a4a9b0;
-   border-color: gray;
-   color: #6b6b6b;
-   vertical-align: middle;
-}
-.comment{
-   font-size: 12px
-   line-height: 22px;
-   width: 138px;
-}
-.comment dl{
-   display: block;
-    
-    width: 43px; height: 21.6px;
-}
-.comment dd{
-       color: #5e636d;
-           margin: 0;
-    padding: 0;
-}
-.commnet dt{
-      color: #9ba0a8;
-          margin: 0;
     padding: 0;
     float: left;
     width: 43px; height: 21.6px;
