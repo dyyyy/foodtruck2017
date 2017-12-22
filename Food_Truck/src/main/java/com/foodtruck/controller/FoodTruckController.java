@@ -63,10 +63,10 @@ public class FoodTruckController {
 	// 상세정보
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("licenseNo") String licenseNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;
-		double count = 0;
-		double total = 0;
-		FoodTruckVO vo = fservice.getFoodTruck(licenseNo);
+		double pyengjum = 0;//리뷰 평점 합계
+		double count = 0; //리뷰 수
+		double total = 0; //푸드트럭 총 평점
+		FoodTruckVO vo = fservice.getFoodTruck(licenseNo);//푸드트럭 정보 호출
 		List<ReviewVO> list = rservice.getReviewList(licenseNo);// 리뷰 정보 호출
 		if(list.size()!=0) {
 			for (int i = 0; i < list.size(); i++) {
@@ -80,7 +80,7 @@ public class FoodTruckController {
 			total=0;		
 		}
 		vo.setFtruckGrade(total);
-		request.setAttribute("vo", vo);// 푸드트럭 정보 호출
+		request.setAttribute("vo", vo);
 		request.setAttribute("review", list);
 		return "foodtruck/detail";
 	}
