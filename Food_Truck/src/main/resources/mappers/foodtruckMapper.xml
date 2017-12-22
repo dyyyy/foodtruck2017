@@ -55,5 +55,6 @@
       <result column="FTRUCK_GRADE" property="ftruckGrade"/>
       <result column="FTRUCK_STATE" property="ftruckState"/>
       <result column="FTRUCK_IMG" property="ftruckImg"/>
+      <result column="FTRUCK_INTRO" property="ftruckIntro"/>
     </resultMap>
 </mapper>

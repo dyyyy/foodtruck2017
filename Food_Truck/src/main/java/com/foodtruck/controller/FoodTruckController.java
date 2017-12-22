@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.FoodTruckService;
+import com.foodtruck.service.ReviewService;
 
 @Controller
 public class FoodTruckController {
 
 	@Autowired
 	private FoodTruckService fservice;
+	@Autowired
+	private ReviewService rservice;
+	
 	
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
@@ -55,7 +59,7 @@ public class FoodTruckController {
 	@RequestMapping("/read")
 	   public String foodinfo(@RequestParam("licenseNo")String licenseNo,HttpServletRequest request)throws Exception {
 	      request.setAttribute("vo", fservice.getFoodTruck(licenseNo));
-	      
+	      request.setAttribute("review", rservice.getReviewList(licenseNo));
 	      return "foodtruck/detail";
 	   }
 }

@@ -12,7 +12,8 @@ public class FoodTruckVO {
    private String ftruckImg;   	// 푸드트럭 이미지
    private String latitude;     // 위도
    private String longitude;   	// 경도
-   private int category;		// 카테고리번호
+   private int category;
+   private String ftruckIntro;// 카테고리번호
    
    // getter & setter
    public String getLicenseNo() {
@@ -93,4 +94,12 @@ public class FoodTruckVO {
 	public void setCategory(int category) {
 		this.category = category;
 	}
+	public String getFtruckIntro() {
+		return ftruckIntro;
+	}
+	public void setFtruckIntro(String ftruckIntro) {
+		this.ftruckIntro = ftruckIntro;
+	}
+	
+	
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.foodtruck.dao.ReviewDAO">
+<!-- 리뷰 리스트 -->
+<select id="getReviewList" resultMap="ReviewMap">
+SELECT * FROM REVIEW <where>LICENSE_NO=#{licenseNo}</where>
+
+</select>
+
+	<resultMap type="ReviewVO" id="ReviewMap">
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="REV_SEQ" property="revSeq"/>
+		<result column="REV_CONTENT" property="revContent"/>
+		<result column="REV_DTM" property="revDtm"/>
+		<result column="REV_DEL_YN" property="revDelYn"/>
+		<result column="MEM_ID" property="memId"/>
+	</resultMap>
+</mapper>
