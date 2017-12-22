@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+<mapper namespace="com.foodtruck.dao.OrderDAO">
+
+	<!-- 주문 정보 -->
+	<select id="getOrder" resultMap="OrderMap">
+		
+		SELECT * FROM ORDERS
+		<where> order_no=#{ordNo} </where>
+	
+	</select>
+	
+	<!-- 주문 리스트 -->
+	<select id="getOrderList" resultMap="OrderMap">
+		
+		SELECT * FROM ORDERS
+	
+	</select>
+
+	<!-- resultMap -->
+	<resultMap type="OrderVO" id="OrderMap">
+		<result column="ORDER_NO" property="ordNo"/>
+		<result column="ORD_NAME" property="ordName"/>
+		<result column="ORD_TEL" property="ordTel"/>
+		<result column="ORD_DATE" property="ordDate"/>
+		<result column="ORD_RSV_DATE" property="ordRsvDate"/>
+		<result column="ORD_DLV_YN" property="ordDlyYn"/>
+		<result column="MEM_ID" property="memId"/>
+	
+	</resultMap>
+
+
+
+</mapper>
