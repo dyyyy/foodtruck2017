@@ -4,8 +4,9 @@
 <%@ page import="com.foodtruck.vo.ReviewVO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.*"%>
-
-출처: http://zupper.tistory.com/1289 [zupper's]
+<%
+	String gubun = (String) session.getAttribute("gubun");
+%>
 <%List<ReviewVO> list = (List<ReviewVO>) request.getAttribute("review");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +15,17 @@
 </head>
 <body onload="map()">
 	<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
+<%
+	if(gubun == null) {
+%>
 	<jsp:include page="../comm/header.jsp"></jsp:include>
+<%
+	} else {
+%>
+	<jsp:include page="../comm/loginGubun.jsp"></jsp:include>
+<%
+	}
+%>
 	<section class="product-page page fix"><!--Start Product Details Area-->
 	<div class="container">
 		<div class="row">

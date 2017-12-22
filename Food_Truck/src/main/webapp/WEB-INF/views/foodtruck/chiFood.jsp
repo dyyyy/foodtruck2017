@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String gubun = (String) session.getAttribute("gubun");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,12 +10,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../comm/header.jsp"></jsp:include>
-<div class="page-title fix"><!--Start Title-->
-	<div class="overlay section">
-		<h2>Shop List</h2>
-	</div>
-</div><!--End Title-->
+<%
+	if(gubun == null) {
+%>
+	<jsp:include page="../comm/header.jsp"></jsp:include>
+<%
+	} else {
+%>
+	<jsp:include page="../comm/loginGubun.jsp"></jsp:include>
+<%
+	}
+%>
 <!-- Shop Product Area Start -->
 <div class="shop-product-area section fix">
 	<div class="container">
@@ -123,7 +131,7 @@
 						<c:forEach items="${list}" var="all">
 						<div class="single-list-product col-sm-12">
 							<div class="list-pro-image">
-								<a href="product-details.html">
+								<a href="/read?licenseNo=${all.licenseNo}">
 									<img src="/resources/img/foodtruck/${all.ftruckImg}">
 								</a>
 							</div>
@@ -136,13 +144,7 @@
 									<i class="fa fa-star on"></i>
 									<i class="fa fa-star-half-o on"></i>
 								</div>
-								<h4 class="list-pro-price"><span class="new">$152</span><span class="old">$175</span></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua magna aliqua consectetur adicing elit, sed do eiusmod tempor incididunt ut labore magna aliqua consectetur adicing elit, sed do eiusmod tempor incunt ut labore magna aliqua consectetur adicing elit.</p>
-								<div class="list-actions-btn">
-									<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
-									<a class="favorite" href="#"><i class="fa fa-heart-o"></i></a>
-									<a class="cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-								</div>
+								<p>${all.ftruckIntro}</p>
 							</div>
 						</div>
 						</c:forEach>
