@@ -3,6 +3,9 @@
 <%@ page import="com.foodtruck.vo.FoodTruckVO"%>
 <%@ page import="com.foodtruck.vo.ReviewVO"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.text.*"%>
+
+출처: http://zupper.tistory.com/1289 [zupper's]
 <%List<ReviewVO> list = (List<ReviewVO>) request.getAttribute("review");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -77,13 +80,12 @@
 					<div class="star">
 						<span style="width: <%=vo.getFtruckGrade()*10%>%"></span>
 					</div>
-					<h3>
-						주소:<%=vo.getFtruckAddr() %></h3>
-
-					<h5>
-						전화번호:<%=vo.getFtruckTel() %></h5>
-
-
+					<div class="infomation" style="font-size: 15px; color: #5e636d">
+					평점:<%=vo.getFtruckGrade() %>점<br>
+					주소:<%=vo.getFtruckAddr() %><br>
+					전화번호:<%=vo.getFtruckTel() %><br>
+					배달여부:   <%=vo.getFtruckDlvYn() %>   예약여부:   <%=vo.getFtruckRsvYn() %>
+					</div>
 					<div class="review">
 						<div id="map" style="width: 550px; height: 370px;"></div>
 						<script type="text/javascript"
