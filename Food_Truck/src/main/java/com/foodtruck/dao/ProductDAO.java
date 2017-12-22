@@ -10,7 +10,7 @@ public interface ProductDAO {
 	public ProductVO getProduct(int prodNo);
 
 	// 力前 府胶飘
-	public List<ProductVO> getProductList();
+	public List<ProductVO> getProductList(String licenseNo);
 
 	// 力前 殿废
 	public int insertProduct(ProductVO vo);
