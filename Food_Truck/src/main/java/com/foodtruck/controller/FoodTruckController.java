@@ -60,6 +60,7 @@ public class FoodTruckController {
 	   public String foodinfo(@RequestParam("licenseNo")String licenseNo,HttpServletRequest request)throws Exception {
 	      request.setAttribute("vo", fservice.getFoodTruck(licenseNo));
 	      request.setAttribute("review", rservice.getReviewList(licenseNo));
+	      
 	      return "foodtruck/detail";
 	   }
 }
