@@ -13,10 +13,23 @@
 	
 	</select>
 	
+	<!-- 주문 상세 리스트 -->
+	<select id="getOrderDetailList" resultMap="OrderDetailMap">
+		
+		SELECT A.PROD_NO, A.ORDER_NO, B.PROD_NAME,  A.QTY, A.ORD_PRICE
+		FROM ORDERDETAIL A
+		INNER JOIN PRODUCT B
+		ON A.PROD_NO = B.PROD_NO
+		
+	</select>
+	
+	<!-- OrderDetailVO -->
 	<resultMap type="OrderDetailVO" id="OrderDetailMap">
 		<result column="PROD_NO" property="prodNo"/>
 		<result column="ORDER_NO" property="ordNo"/>
+		<result column="PROD_NAME" property="prodName"/>
 		<result column="QTY" property="qty"/>
 		<result column="ORD_PRICE" property="ordPrice"/>
 	</resultMap>
+	
 </mapper>

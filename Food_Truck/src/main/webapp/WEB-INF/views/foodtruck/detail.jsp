@@ -2,12 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.foodtruck.vo.FoodTruckVO"%>
 <%@ page import="com.foodtruck.vo.ReviewVO"%>
+<%@ page import="com.foodtruck.vo.ProductVO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.*"%>
 <%
 	String gubun = (String) session.getAttribute("gubun");
 %>
 <%List<ReviewVO> list = (List<ReviewVO>) request.getAttribute("review");%>
+<%List<ProductVO> list2 = (List<ProductVO>) request.getAttribute("product");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -213,7 +215,7 @@
 
 							}
 						</script>
-
+						<button class="getoder">주문하러가기!!</button>
 					</div>
 				</div>
 			</div>
@@ -224,15 +226,36 @@
 						<li class="active"><a data-toggle="tab" href="#description">푸드트럭
 								소개</a></li>
 						<li class=""><a data-toggle="tab" href="#review">리뷰</a></li>
+						<li class=""><a data-toggle="tab" href="#tags">상품</a></li>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div id="description" class="tab-pane fade active in"
-							role="tabpanel">
+						<div id="description" class="tab-pane fade active in" role="tabpanel">
 							<%=vo.getFtruckIntro() %>
 						</div>
+						<!-- 상품 리스트 시작 -->
+						<div id="tags" class="tab-pane fade" role="tabpanel">
+						<table class="reviewlist2" >
+						<%for(int i=0;i<list2.size();i++){ %>
+								<tr style="width: 860px; height: 95.2px;">
+									<td style="width: 120px; height: 94.8px;">
+										사진
+									</td>
+									<td style="width: 840px; height: 95.2px;"><%=list2.get(i).getProdName()%><%=list2.get(i).getProdContent() %></td>
+
+									<td style="width: 140px; height: 95.2px;">
+											<dl class="comment" > 
+											<dt>가격</dt>
+											<dd><%=list2.get(i).getProdPrice() %></dd>			
+									</dl>
+									</td>
+								</tr>
+								<%} %>	
+							</table>
+							</div>
+							<!-- 상품리스트 끝 -->
 						<div id="review" class="tab-pane fade" role="tabpanel">
-							<!-- 리뷰 테이블시작 -->
+							<!-- 리뷰 리스트 시작 -->
 							<table class="reviewlist">
 							<%for(int i=0;i<list.size();i++){ %>
 								<tr style="width: 860px; height: 95.2px;">
@@ -254,8 +277,9 @@
 								</tr>
 								<%} %>
 							</table>
-							<!-- 리뷰 테이블 끝 -->
+							<!-- 리뷰 리스트 끝 -->
 						</div>
+						
 					</div>
 				</div>
 			</div>

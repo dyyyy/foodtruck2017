@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.OrderDetailDAO;
 import com.foodtruck.vo.OrderDetailVO;
+import com.foodtruck.vo.ProductVO;
 
 @Service
 public class OrderDetailService {
@@ -25,7 +26,7 @@ public class OrderDetailService {
 		OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
 		return dao.getOrderDetailList();
 	}
-
+	
 	// 주문상세 입력
 	public int insertOrderDetail(OrderDetailVO vo) {
 		OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);

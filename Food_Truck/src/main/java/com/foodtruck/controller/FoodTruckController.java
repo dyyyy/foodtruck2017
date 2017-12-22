@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.FoodTruckService;
+import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
 
 @Controller
@@ -24,6 +26,8 @@ public class FoodTruckController {
 	private FoodTruckService fservice;
 	@Autowired
 	private ReviewService rservice;
+	@Autowired
+	private ProductService pservice;
 
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
@@ -63,16 +67,17 @@ public class FoodTruckController {
 	// 상세정보
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("licenseNo") String licenseNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;
-		double count = 0;
-		double total = 0;
-		FoodTruckVO vo = fservice.getFoodTruck(licenseNo);
-		List<ReviewVO> list = rservice.getReviewList(licenseNo);// 리뷰 정보 호출
-		if(list.size()!=0) {
-			for (int i = 0; i < list.size(); i++) {
-				double score = list.get(i).getGrade();
+		double pyengjum = 0;//리뷰 평점 합계
+		double count = 0; //리뷰 수
+		double total = 0; //푸드트럭 총 평점
+		FoodTruckVO vo = fservice.getFoodTruck(licenseNo);//푸드트럭 정보 호출
+		List<ReviewVO> Rlist = rservice.getReviewList(licenseNo);// 리뷰 정보 호출
+		List<ProductVO> Plist = pservice.getProductList(licenseNo);// 상품 정보 호출
+		if(Rlist.size()!=0) {
+			for (int i = 0; i < Rlist.size(); i++) {
+				double score = Rlist.get(i).getGrade();
 				pyengjum += score;
-				count = list.size();
+				count = Rlist.size();
 				total = pyengjum / count;
 				total = Double.parseDouble(String.format("%.2f",total));
 			}	
@@ -80,8 +85,9 @@ public class FoodTruckController {
 			total=0;		
 		}
 		vo.setFtruckGrade(total);
-		request.setAttribute("vo", vo);// 푸드트럭 정보 호출
-		request.setAttribute("review", list);
+		request.setAttribute("vo", vo);
+		request.setAttribute("review", Rlist);
+		request.setAttribute("product", Plist);
 		return "foodtruck/detail";
 	}
 }

@@ -15,7 +15,7 @@
 	<!-- 제품 리스트 -->
 	<select id="getProductList" resultMap="ProductMap">
 	
-		SELECT * FROM PRODUCT
+		SELECT * FROM PRODUCT <where>LICENSE_No=#{licenseNo}</where>
 	
 	</select>
 	
