@@ -20,7 +20,6 @@ import com.foodtruck.vo.SellerVO;
 @Controller
 public class LoginController {
 
-	//DFDFDF
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
@@ -48,7 +47,7 @@ public class LoginController {
 			System.out.println("일반회원");
 			if (mvo.getMemberPw().equals(userPw)) {
 				session.setAttribute("userId", mvo.getMemberId());
-				session.setAttribute("gubun", 3);
+				session.setAttribute("gubun", "3");
 				return "loginChk";
 			} else {
 				return "home";
@@ -59,7 +58,7 @@ public class LoginController {
 			System.out.println("관리자");
 			if(avo.getAdminPw().equals(userPw)) {
 				session.setAttribute("userId", avo.getAdminId());
-				session.setAttribute("gubun", 1);
+				session.setAttribute("gubun", "1");
 				return "loginChk";
 			} else {
 				return "home";
@@ -69,7 +68,7 @@ public class LoginController {
 			System.out.println("판매자");
 			if(svo.getSelPw().equals(userPw)) {
 				session.setAttribute("userId", svo.getSelId());
-				session.setAttribute("gubun", 2);
+				session.setAttribute("gubun", "2");
 				return "loginChk";
 			} else {
 				return "home";
