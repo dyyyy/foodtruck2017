@@ -3,7 +3,7 @@ package com.foodtruck.vo;
 public class OrderDetailVO {
 	
 	private int prodNo;		// 제품 번호
-	private int orderNo;	// 주문번호
+	private int ordNo;	// 주문번호
 	private int qty;		// 수량
 	private int ordPrice;	// 주문가격
 	
@@ -14,11 +14,11 @@ public class OrderDetailVO {
 	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
 	}
-	public int getOrderNo() {
-		return orderNo;
+	public int getOrdNo() {
+		return ordNo;
 	}
-	public void setOrderNo(int orderNo) {
-		this.orderNo = orderNo;
+	public void setOrdNo(int ordNo) {
+		this.ordNo = ordNo;
 	}
 	public int getQty() {
 		return qty;

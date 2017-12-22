@@ -5,12 +5,13 @@ public class OrderVO {
 	private int ordNo;			// 주문 번호
 	private String ordName;		// 이름
 	private String ordTel;		// 전화 번호
-	private String ordDlyYn;	// 배달 여부(Y/N)
 	private String ordDate;		// 주문 시간
 	private String ordRsvDate;	// 예약 일시
-	private String memberIdYn;	// 회원 여부(Y/N)
+	private String ordDlyYn;	// 배달 여부(Y/N)
+	private String memId;		// 회원 아이디
 	
 	// getter & setter
+	
 	public int getOrdNo() {
 		return ordNo;
 	}
@@ -29,12 +30,6 @@ public class OrderVO {
 	public void setOrdTel(String ordTel) {
 		this.ordTel = ordTel;
 	}
-	public String getOrdDlyYn() {
-		return ordDlyYn;
-	}
-	public void setOrdDlyYn(String ordDlyYn) {
-		this.ordDlyYn = ordDlyYn;
-	}
 	public String getOrdDate() {
 		return ordDate;
 	}
@@ -47,10 +42,16 @@ public class OrderVO {
 	public void setOrdRsvDate(String ordRsvDate) {
 		this.ordRsvDate = ordRsvDate;
 	}
-	public String getMemberIdYn() {
-		return memberIdYn;
+	public String getOrdDlyYn() {
+		return ordDlyYn;
 	}
-	public void setMemberIdYn(String memberIdYn) {
-		this.memberIdYn = memberIdYn;
+	public void setOrdDlyYn(String ordDlyYn) {
+		this.ordDlyYn = ordDlyYn;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 }

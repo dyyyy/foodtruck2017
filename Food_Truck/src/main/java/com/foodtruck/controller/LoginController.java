@@ -20,6 +20,7 @@ import com.foodtruck.vo.SellerVO;
 @Controller
 public class LoginController {
 
+	//DFDFDF
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
