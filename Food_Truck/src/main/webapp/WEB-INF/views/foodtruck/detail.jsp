@@ -14,6 +14,13 @@
 <html>
 <head>
 <title>Insert title here</title>
+<script type="text/javascript">
+function goOrder() {
+	order.action="order"
+	order.method="post"
+	order.submit();
+}
+</script>
 </head>
 <body onload="map()">
 	<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
@@ -215,7 +222,10 @@
 
 							}
 						</script>
-						<button class="getoder">주문하러가기!!</button>
+						<form name="order">
+						<button class="getoder" onclick="goOrder()">주문하러가기!!</button>
+						<input type="hidden" value="<%vo.getLicenseNo();%>" id="licence">
+						</form>
 					</div>
 				</div>
 			</div>
@@ -288,4 +298,5 @@
 	</section>
 	<!--End Product Details Area-->
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+	
 </body>
