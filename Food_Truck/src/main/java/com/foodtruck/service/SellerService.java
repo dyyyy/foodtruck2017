@@ -45,7 +45,7 @@ public class SellerService {
 	}
 	
 	// 사업자 번호 정보
-	public SellerVO getLicenseNo(String sellerId) {
+	public List<SellerVO> getLicenseNo(String sellerId) {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
 		return dao.getLicenseNo(sellerId);
 	}
