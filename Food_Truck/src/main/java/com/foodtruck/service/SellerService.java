@@ -43,5 +43,11 @@ public class SellerService {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
 		return dao.deleteSeller(sellerId);
 	}
+	
+	// 사업자 번호 정보
+	public List<SellerVO> getLicenseNo(String sellerId) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getLicenseNo(sellerId);
+	}
 
 }

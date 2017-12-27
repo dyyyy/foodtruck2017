@@ -20,4 +20,7 @@ public interface SellerDAO {
 
 	// 판매자 삭제
 	public int deleteSeller(String sellerId);
+	
+	// 사업자 번호 정보
+	public List<SellerVO> getLicenseNo(String sellerId);
 }

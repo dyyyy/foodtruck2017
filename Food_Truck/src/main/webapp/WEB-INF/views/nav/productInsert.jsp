@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
 					<form id="signup-form" action="/insertProduct">
 						<h2>Fill Out Your FoodTruck's Menu</h2>
 						<p>your own menu</p>
-						<!-- 제품 번호 (prod_no) -->
+						<!-- 제품 이름 (prod_name) -->
 						<label>제품 번호<span>*</span></label>
 						<input type="text" name="prodNo">
 						<!-- 제품 이름 (prod_name) -->
@@ -30,9 +31,16 @@
 						<!-- 가격 (prod_price) -->
 						<label>가격<span>*</span></label>
 						<input type="text" name="prodPrice">
+						<!-- 이미지 (prod_price) -->
+						<label>이미지</label>
+						<input type="file" name=prodImg>
 						<!-- 사업자 번호 (license_no)  -->
 						<label>사업자 번호<span>*</span></label>
-						<input type="text" name=licenseNo>
+						<select name="licenseNo">
+							<c:forEach items="${list}" var="list" >
+								<option value="${list.licenseNo}">${list.licenseNo}</option>
+							</c:forEach>
+						</select>
 						<!-- 버튼 -->
 						<p><input type="reset" value="Reset" >
 						<input type="submit" value="Sign up" ></p>
