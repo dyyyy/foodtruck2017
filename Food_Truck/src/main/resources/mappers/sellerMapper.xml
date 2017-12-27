@@ -44,12 +44,23 @@
 	
 	</delete>
 	
+	<!-- 사업자 번호 -->
+	<select id="getLicenseNo" resultMap="SellerMap">
+		
+		SELECT SELLER.SEL_ID, SELLER.SEL_NAME, LICENSE.LICENSE_NO
+		FROM SELLER
+		INNER JOIN LICENSE
+		ON SELLER.SEL_ID = LICENSE.SEL_ID
+		<where> SELLER.SEL_ID=#{selId} </where>
+		
+	</select>
 
 	<resultMap type="com.foodtruck.vo.SellerVO" id="SellerMap">
 		<result column="SEL_ID" property="selId"/>
 		<result column="SEL_PW" property="selPw"/>
 		<result column="SEL_NAME" property="selName"/>
 		<result column="SEL_TEL" property="selTel"/>
+		<result column="LICENSE_NO" property="licenseNo"/>
 	</resultMap>
 	
 </mapper>

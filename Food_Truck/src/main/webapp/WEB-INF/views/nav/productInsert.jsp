@@ -18,9 +18,6 @@
 					<form id="signup-form" action="/insertProduct">
 						<h2>Fill Out Your FoodTruck's Menu</h2>
 						<p>your own menu</p>
-						<!-- 제품 번호 (prod_no) -->
-						<label>제품 번호<span>*</span></label>
-						<input type="text" name="prodNo">
 						<!-- 제품 이름 (prod_name) -->
 						<label>제품 이름<span>*</span></label>
 						<input type="text" name="prodName">
@@ -32,7 +29,9 @@
 						<input type="text" name="prodPrice">
 						<!-- 사업자 번호 (license_no)  -->
 						<label>사업자 번호<span>*</span></label>
-						<input type="text" name=licenseNo>
+						<select>
+						<input type="" name=licenseNo>
+						</select>
 						<!-- 버튼 -->
 						<p><input type="reset" value="Reset" >
 						<input type="submit" value="Sign up" ></p>

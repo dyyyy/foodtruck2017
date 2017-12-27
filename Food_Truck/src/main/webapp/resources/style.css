@@ -3092,6 +3092,11 @@ h4.heading {
 	width: 100%;
 }
 
+.join input[type="radio"] {
+	display: inline;
+	width: 20px;
+}
+
 .product input {
 	background: #ebebeb none repeat scroll 0 0;
 	border: 1px solid #ccc;

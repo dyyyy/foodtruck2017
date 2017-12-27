@@ -31,7 +31,7 @@
 						<%for(int i=0;i<list.size();i++){ %>
 							<tr class="table-info">
 								<td class="produ">
-									<a href="#"><img alt="" src="<%list.get(i).get%>"></a>
+									<a href="#"><img alt="" src=""></a>
 								</td>
 								<td class="namedes">
 									<h2><a href="#"><%=list.get(i).getProdName() %></a></h2>

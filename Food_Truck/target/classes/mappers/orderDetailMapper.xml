@@ -7,29 +7,32 @@
 
 	<!-- 주문 상세 정보 -->
 	<select id="getOrderDetail" resultMap="OrderDetailMap">
-		
+
 		SELECT * FROM ORDERDETAIL
 		<where> ORDER_NO=#{ordNo} </where>
-	
+
 	</select>
-	
+
 	<!-- 주문 상세 리스트 -->
 	<select id="getOrderDetailList" resultMap="OrderDetailMap">
-		
-		SELECT A.PROD_NO, A.ORDER_NO, B.PROD_NAME,  A.QTY, A.ORD_PRICE
-		FROM ORDERDETAIL A
-		INNER JOIN PRODUCT B
-		ON A.PROD_NO = B.PROD_NO
-		
+
+		SELECT O.PROD_NO,O.ORDER_NO,P.PROD_NAME,O.QTY,O.ORD_PRICE
+		FROM ORDERDETAIL O,PRODUCT P
+		<where> 
+			O.PROD_NO = P.PROD_NO AND P.LICENSE_NO IN (SELECT L.LICENSE_NO FROM
+			LICENSE L
+		</where>
+		<where> L.SEL_ID = #{selId})</where>
+
 	</select>
-	
+
 	<!-- OrderDetailVO -->
 	<resultMap type="OrderDetailVO" id="OrderDetailMap">
-		<result column="PROD_NO" property="prodNo"/>
-		<result column="ORDER_NO" property="ordNo"/>
-		<result column="PROD_NAME" property="prodName"/>
-		<result column="QTY" property="qty"/>
-		<result column="ORD_PRICE" property="ordPrice"/>
+		<result column="PROD_NO" property="prodNo" />
+		<result column="ORDER_NO" property="ordNo" />
+		<result column="PROD_NAME" property="prodName" />
+		<result column="QTY" property="qty" />
+		<result column="ORD_PRICE" property="ordPrice" />
+		<result column="SEL_ID" property="selId" />
 	</resultMap>
-	
 </mapper>
