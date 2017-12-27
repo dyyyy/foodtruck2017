@@ -6,6 +6,7 @@ public class SellerVO {
 	private String selPw;		// 판매자 비밀번호
 	private String selName;		// 판매자 이름
 	private String selTel;		// 판매자 연락처
+	private String licenseNo;	// 사업자 번호
 	
 	// getter & setter
 	public String getSelId() {
@@ -32,5 +33,10 @@ public class SellerVO {
 	public void setSelTel(String selTel) {
 		this.selTel = selTel;
 	}
-	
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
+	}
 }

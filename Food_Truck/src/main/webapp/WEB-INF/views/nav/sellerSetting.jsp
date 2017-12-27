@@ -9,8 +9,6 @@
 <body>
 <jsp:include page="../comm/loginGubun.jsp"></jsp:include>
 
-판매자 메뉴 - 판매자 설정
-
 <jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>

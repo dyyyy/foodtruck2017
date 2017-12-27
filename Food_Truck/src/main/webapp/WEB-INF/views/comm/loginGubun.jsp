@@ -4,6 +4,7 @@
 	// 회원 구분 
 	String userId = (String) session.getAttribute("userId");
 	String gubun = (String) session.getAttribute("gubun");
+	
 %>
 <head>
 <meta charset="UTF-8">

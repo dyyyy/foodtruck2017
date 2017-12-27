@@ -115,6 +115,10 @@ jQuery( function($) {
 					<form id="signup-form" action="#">
 						<h2>Create A new Account</h2>
 						<p>Create your own account</p>
+						<!-- 회원 구분  -->
+						<label>일반 회원  / 판매자<span>*</span></label>
+						<label><input type="radio" name="gubun" value="member"> 일반 회원 
+						<input type="radio" name="gubun" value="seller"> 판매자 </label>
 						<!-- 이메일 (id) -->
 						<label>ID (이메일 형식)<span>*</span></label>
 						<input type="text" name="memberId">

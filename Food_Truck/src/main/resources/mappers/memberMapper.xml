@@ -50,6 +50,7 @@
 		<result column="MEM_PW" property="memberPw" />
 		<result column="MEM_NAME" property="memberName" />
 		<result column="MEM_TEL" property="memberTel" />
+		<result column="MEM_TEL" property="memberTel" />
 	</resultMap>
 
 </mapper>
