@@ -1,7 +1,5 @@
 package com.foodtruck.controller;
 
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
