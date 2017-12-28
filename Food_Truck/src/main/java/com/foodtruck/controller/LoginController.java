@@ -32,7 +32,7 @@ public class LoginController {
 
 		System.out.println(userId + " / " + userPw);
 		
-		// 회원 구분     1.운영자     2. 판매자     3. 일반회원
+		// 회원 구분     1.운영자     2. 판매자     3. 일반회원ss
 		MemberVO mvo = memberService.getMember(userId);
 		
 		if(mvo != null) {
