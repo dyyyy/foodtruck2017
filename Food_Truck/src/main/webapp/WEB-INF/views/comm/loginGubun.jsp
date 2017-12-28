@@ -88,7 +88,8 @@
 						
 						<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 							<ul>
-								<li><a href="/productInsert">제품 등록</a></li>
+<!-- 								<li><a href="/productInsert">제품 등록</a></li> -->
+								<li><a href="/insertProductForm">제품 등록</a></li>
 								<li><a href="/orderDetail">예약 내역</a></li>
 								<li><a href="/deliveryDetails">배달 내역</a></li>
 								<li><a href="/sellerSetting">판매자 설정</a></li>

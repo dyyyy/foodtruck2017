@@ -2066,7 +2066,7 @@ to {
 	margin-right: 5px;
 }
 
-.sort-by select, .show-product select {
+.sort-by select, .show-product select, .product select{
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -2079,6 +2079,21 @@ to {
 	text-transform: capitalize;
 }
 
+.product select{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: #fff url("img/bottom-arrow.png") no-repeat scroll 100% center;
+	border: 1px solid #d7d7d7;
+	color: #515151;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 0 5px;
+	text-transform: capitalize;
+	width: 130px
+}
+
+
 .show-product select {
 	background-position: 80% center;
 	margin-right: 5px;
@@ -2087,6 +2102,11 @@ to {
 
 .sort-by select option, .show-product select option {
 	padding: 2px 5px;
+}
+
+.product select option  {
+	padding: 2px 5px;
+	width: 120px;
 }
 
 .pro-Showing {

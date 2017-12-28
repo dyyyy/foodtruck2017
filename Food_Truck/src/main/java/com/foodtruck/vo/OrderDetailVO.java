@@ -53,3 +53,4 @@ public class OrderDetailVO {
             + ", ordPrice=" + ordPrice + ", sel_id=" + sel_id + "]";
    }
 }
+

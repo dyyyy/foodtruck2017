@@ -3,7 +3,6 @@ package com.foodtruck.dao;
 import java.util.List;
 
 import com.foodtruck.vo.OrderDetailVO;
-import com.foodtruck.vo.ProductVO;
 
 public interface OrderDetailDAO {
 

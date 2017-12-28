@@ -22,5 +22,5 @@ public interface SellerDAO {
 	public int deleteSeller(String sellerId);
 	
 	// 사업자 번호 정보
-	public SellerVO getLicenseNo(String sellerId);
+	public List<SellerVO> getLicenseNo(String sellerId);
 }
