@@ -10,20 +10,22 @@
 %>
 <%List<ReviewVO> list = (List<ReviewVO>) request.getAttribute("review");%>
 <%List<ProductVO> list2 = (List<ProductVO>) request.getAttribute("product");%>
+<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>Insert title here</title>
 <script type="text/javascript">
 function goOrder() {
-	order.action="order"
+	var licenseNo = <%=vo.getLicenseNo()%>;
+	order.action="order?licenseNo="+licenseNo
 	order.method="post"
 	order.submit();
 }
 </script>
 </head>
 <body onload="map()">
-	<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
+
 <%
 	if(gubun == null) {
 %>
@@ -104,7 +106,7 @@ function goOrder() {
 					평점:<%=vo.getFtruckGrade() %>점<br>
 					주소:<%=vo.getFtruckAddr() %><br>
 					전화번호:<%=vo.getFtruckTel() %><br>
-					배달여부:   <%=vo.getFtruckDlvYn() %>   예약여부:   <%=vo.getFtruckRsvYn() %>
+					배달여부:   <%=vo.getFtruckDlvYn() %>   예약여부:   <%=vo.getFtruckRsvYn() %>  
 					</div>
 					<div class="review">
 						<div id="map" style="width: 550px; height: 370px;"></div>
@@ -224,7 +226,7 @@ function goOrder() {
 						</script>
 						<form name="order">
 						<button class="getoder" onclick="goOrder()">주문하러가기!!</button>
-						<input type="hidden" value="<%vo.getLicenseNo();%>" id="licence">
+						
 						</form>
 					</div>
 				</div>

@@ -7,9 +7,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+function a(fm) {
+	alert();
+}
+$('input[id=qty]').change(function(){
+	
+	alert();
+})
+
+</script>
 </head>
 <body>
-<%List<ProductVO> list= (List<ProductVO>)request.getAttribute("Plist");  %>
+<%List<ProductVO> list= (List<ProductVO>)request.getAttribute("list");  %>
 <jsp:include page="../comm/loginGubun.jsp"></jsp:include>
 <section class="cart-page page fix"><!--Start Cart Area-->
 	<div class="container">
@@ -31,19 +42,21 @@
 						<%for(int i=0;i<list.size();i++){ %>
 							<tr class="table-info">
 								<td class="produ">
-									<a href="#"><img alt="" src=""></a>
+									<a href="#"><img alt="" src="<%=list.get(i).getProdImg()%>"></a>
 								</td>
 								<td class="namedes">
 									<h2><a href="#"><%=list.get(i).getProdName() %></a></h2>
-									<p><%list.get(i).getProdContent(); %></p>
+									<p><%=list.get(i).getProdContent() %></p>
 								</td>
 								<td class="unit">
-									<h5><%list.get(i).getProdPrice(); %></h5>
+									<h5><%=list.get(i).getProdPrice() %></h5>
 								</td>
 								<td class="quantity">
+								<form name="fm">
 									<div class="cart-plus-minus">
-										<input type="text" value="0" name="qtybutton" class="cart-plus-minus-box">
+										<input type="text" value="0" name="qtybutton" class="cart-plus-minus-box" id="qty" onchange="a(this)">
 									</div>
+								</form>
 								</td>
 								<td class="valu">
 									<h5>$120</h5>
@@ -63,7 +76,7 @@
 					<h3>DISCOUNT COUPON CODE</h3>
 					<input type="text" placeholder="DISCOUNT COUPON CODE HERE..." />
 					<a href="#">Apply Coupon</a>
-					<p><span>NOTE :</span> Shipping and Taxes are estimated and updated during checkout based on your billing and shipping information.</p>
+					
 				</div>
 			</div>
 			<div class="col-sm-6 col-md-5">
@@ -71,8 +84,8 @@
 					<a href="#">CLEAR SHOPPING CART</a>
 					<a href="#">UPDATE SHOPPING CART</a>
 					<div class="total">
-						<h5>Sub Total <span>$420</span></h5>
-						<h6>Grand Total <span>$420</span></h6>
+						<h5>총 금액 <span>$420</span></h5>
+						<h6>할인 적용가 <span>$420</span></h6>
 					</div>
 					<a id="procedto" href="checkout.html">PROCEED TO CHECK OUT</a>
 				</div>

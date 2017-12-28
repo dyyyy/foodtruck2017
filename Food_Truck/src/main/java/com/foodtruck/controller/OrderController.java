@@ -24,13 +24,11 @@ public class OrderController {
 	ProductService Pservice;
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session,/*@RequestParam("licenseNo") String licenseNo*/HttpServletRequest request) {
-		String licenseNo="2208183676";
+	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request) {
 		System.out.println("진입");
+		System.out.println(licenseNo);
 		List<ProductVO> Plist = Pservice.getProductList(licenseNo);
-		
-		System.out.println();
-		System.out.println("진입2");
+
 		request.setAttribute("list",Plist);
 		return "nav/order";
 	}

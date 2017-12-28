@@ -84,6 +84,7 @@ public class FoodTruckController {
 		}else {
 			total=0;		
 		}
+		System.out.println("¹øÈ£="+vo.getLicenseNo());
 		vo.setFtruckGrade(total);
 		request.setAttribute("vo", vo);
 		request.setAttribute("review", Rlist);
