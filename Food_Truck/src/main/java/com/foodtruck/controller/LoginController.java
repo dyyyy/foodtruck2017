@@ -1,5 +1,6 @@
 package com.foodtruck.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -24,55 +25,36 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
-
-	@Autowired
-	AdminService adminService;
-
-	@Autowired
-	SellerService sellerService;
 	
 	@RequestMapping("/loginChk")
 	public String loginchk(@RequestParam("userId") String userId, @RequestParam("userPw") String userPw,
-			HttpSession session, Model model ) {
+			HttpSession session, HttpServletRequest request) {
 
 		System.out.println(userId + " / " + userPw);
 		
-		// 회원 구분
+		// 회원 구분     1.운영자     2. 판매자     3. 일반회원
 		MemberVO mvo = memberService.getMember(userId);
-		AdminVO avo = adminService.getAdmin(userId); 
-		SellerVO svo = sellerService.getSeller(userId);		
 		
-		// 일반 회원일 경우
-		if (mvo != null) {
-			System.out.println("일반회원");
-			if (mvo.getMemberPw().equals(userPw)) {
-				session.setAttribute("userId", mvo.getMemberId());
-				session.setAttribute("gubun", "3");
-				return "loginChk";
-			} else {
+		if(mvo != null) {
+			if(mvo.getMemberPw().equals(userPw)) {
+				if(mvo.getMemberAuth() == 1 ) {
+					System.out.println("운영자 로그인");
+					session.setAttribute("userId", mvo.getMemberId());
+					session.setAttribute("gubun", mvo.getMemberAuth());
+					return "loginChk";
+				} else if(mvo.getMemberAuth() == 2) {
+					System.out.println("판매자 로그인");
+					session.setAttribute("userId", mvo.getMemberId());
+					session.setAttribute("gubun", mvo.getMemberAuth());
+					return "loginChk";
+				} else if(mvo.getMemberAuth() == 3) {
+					System.out.println("일반 회원 로그인");
+					session.setAttribute("userId", mvo.getMemberId());
+					session.setAttribute("gubun", mvo.getMemberAuth());
+					return "loginChk";
+				}
 				return "home";
-			}
-			
-		// 관리자일 경우
-		} else if(avo != null) {
-			System.out.println("관리자");
-			if(avo.getAdminPw().equals(userPw)) {
-				session.setAttribute("userId", avo.getAdminId());
-				session.setAttribute("gubun", "1");
-				return "loginChk";
-			} else {
-				return "home";
-			}
-		// 판매자일 경우
-		} else if(svo != null) {
-			System.out.println("판매자");
-			if(svo.getSelPw().equals(userPw)) {
-				session.setAttribute("userId", svo.getSelId());
-				session.setAttribute("gubun", "2");
-				return "loginChk";
-			} else {
-				return "home";
-			}
+			} 
 		}
 		return "home";
 	}

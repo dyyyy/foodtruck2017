@@ -35,7 +35,7 @@
 								<!-- 제품 이름 -->
 								<td class="unit">${detailList.prodName}</td>
 								<!-- 수량-->
-								<td class="unit">${detailList.qty}개</td>
+								<td class="unit">${detailList.ordQty}개</td>
 								<!-- 주문 총 가격 -->
 								<td class="unit">${detailList.ordPrice}원</td>
 							</tr>
