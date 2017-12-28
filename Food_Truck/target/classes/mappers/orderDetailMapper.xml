@@ -16,23 +16,32 @@
 	<!-- 주문 상세 리스트 -->
 	<select id="getOrderDetailList" resultMap="OrderDetailMap">
 
-		SELECT O.PROD_NO,O.ORDER_NO,P.PROD_NAME,O.QTY,O.ORD_PRICE
-		FROM ORDERDETAIL O,PRODUCT P
-		<where> 
-			O.PROD_NO = P.PROD_NO AND P.LICENSE_NO IN (SELECT L.LICENSE_NO FROM
-			LICENSE L
+		<!-- SELECT O.PROD_NO,O.ORDER_NO,P.PROD_NAME,O.QTY,O.ORD_PRICE -->
+		<!-- FROM ORDERDETAIL O,PRODUCT P -->
+		<!-- <where> -->
+		<!-- O.PROD_NO = P.PROD_NO AND P.LICENSE_NO IN (SELECT L.LICENSE_NO FROM -->
+		<!-- LICENSE L -->
+		<!-- </where> -->
+		<!-- <where> L.SEL_ID = #{selId})</where> -->
+
+	
+		SELECT O.PROD_NO, O.ORD_NO, P.PROD_NAME, O.ORD_QTY, O.ORD_PRICE
+		FROM ORDERDETAIL O, PRODUCT P, ORDERS
+		<where>
+			O.ORD_NO = ORDERS.ORD_NO
+			AND P.PROD_NO = O.PROD_NO
+			AND ORDERS.LICENSE_NO IN (SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID=#{memId})
 		</where>
-		<where> L.SEL_ID = #{selId})</where>
 
 	</select>
 
 	<!-- OrderDetailVO -->
 	<resultMap type="OrderDetailVO" id="OrderDetailMap">
 		<result column="PROD_NO" property="prodNo" />
-		<result column="ORDER_NO" property="ordNo" />
+		<result column="ORD_NO" property="ordNo" />
 		<result column="PROD_NAME" property="prodName" />
-		<result column="QTY" property="qty" />
+		<result column="ORD_QTY" property="ordQty" />
 		<result column="ORD_PRICE" property="ordPrice" />
-		<result column="SEL_ID" property="selId" />
+		<result column="MEM_ID" property="memId" />
 	</resultMap>
 </mapper>

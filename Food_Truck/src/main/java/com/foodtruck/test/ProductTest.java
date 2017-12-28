@@ -27,7 +27,7 @@ public class ProductTest {
 	
 	@Test
 	public void getProduct() throws Exception {
-//		OrderDetailService.getOrderDetailList();
-		sellerService.getLicenseNo("seller@daum.net");
+		OrderDetailService.getOrderDetailList("seller@daum.net");
+//		sellerService.getLicenseNo("seller@daum.net");
 	}
 }

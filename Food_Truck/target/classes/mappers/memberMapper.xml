@@ -8,8 +8,8 @@
 	<select id="getMember" resultMap="memberMap">
 
 		SELECT * FROM MEMBER
-		<where>MEM_ID=#{memberId}</where>
-
+		<where> MEM_ID=#{memberId} </where>
+	
 	</select>
 
 	<!-- 회원 리스트 -->
@@ -18,22 +18,24 @@
 		SELECT * FROM MEMBER
 
 	</select>
-
+	
 	<!-- 회원 등록 -->
 	<insert id="insertMember">
 
-		INSERT INTO MEMBER(MEM_ID, MEM_PW, MEM_NAME, MEM_TEL)
-		VALUES(#{memberId},
-		#{memberPw}, #{memberName}, #{memberTel})
+		INSERT INTO MEMBER
+		(MEM_ID, MEM_PW, MEM_NAME, MEM_TEL, MEM_AUTH)
+		VALUES
+		(#{memberId}, #{memberPw}, #{memberName}, #{memberTel}, #{memberAuth})
 
 	</insert>
 
 	<!-- 회원 수정 -->
 	<update id="updateMember">
 
-		UPDATE MEMBER SET
-		MEM_ID=#{memberId}, MRM_PW=#{memberPw},
-		MEM_NAME=#{memberName}, MEM_TEL=#{memberTel}
+		UPDATE MEMBER
+		SET MEM_PW=#{memberPw}, MEM_NAME=#{memberName},
+		MEM_TEL=#{memberTel}
+		<where> MEM_ID=#{memberId} </where>
 
 	</update>
 
@@ -50,7 +52,7 @@
 		<result column="MEM_PW" property="memberPw" />
 		<result column="MEM_NAME" property="memberName" />
 		<result column="MEM_TEL" property="memberTel" />
-		<result column="MEM_TEL" property="memberTel" />
+		<result column="MEM_AUTH" property="memberAuth" />
 	</resultMap>
 
 </mapper>
