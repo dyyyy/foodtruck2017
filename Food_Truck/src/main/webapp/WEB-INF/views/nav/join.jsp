@@ -8,6 +8,8 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+
+
 jQuery( function($) { 
 
 	// var id = /^[a-z0-9_-]{3,16}$/; // 아이디 검사식
@@ -72,6 +74,7 @@ jQuery( function($) {
  		    },
  		});
  	});
+	
 	
  
  	// 아이디 체크
@@ -141,7 +144,7 @@ jQuery( function($) {
 						<p>Create your own account</p>
 						<!-- 회원 구분  -->
 						<label>일반 회원  / 판매자<span>*</span></label>
-						<label><input type="radio" name="gubun" value="member"> 일반 회원 
+						<label><input type="radio" name="gubun" value="member" checked> 일반 회원 
 						<input type="radio" name="gubun" value="seller"> 판매자 </label>
 						<!-- 이메일 (id) -->
 						<label>ID (이메일 형식)<span>*</span></label>
@@ -150,7 +153,7 @@ jQuery( function($) {
 						<!-- 이메일 인증 -->
 						<label>이메일 인증<span>*</span></label>
 						<input type="text" name="checkMail">
-						<input type="button" id="checkMail" value="인증확인"> 
+						<input type=button id="checkMail" value="보내기"> 
 						<!-- 비밀번호 (memberPw) -->
 						<label>Password<span>*</span></label>
 						<input type="password" name="memberPw">

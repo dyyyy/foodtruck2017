@@ -2,6 +2,8 @@ package com.foodtruck.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +45,9 @@ public class MemberService {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.deleteMember(memberId);
 	}
+	
+	
+	
+
 
 }

@@ -3,6 +3,10 @@
 <body>
 <jsp:include page="comm/header.jsp"></jsp:include>
 <!--start Featured Product Area-->
+<% %>
+
+
+
 <div class="featured-product section fix">
 	<div class="container">
 		<div class="row">
