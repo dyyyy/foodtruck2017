@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.AdminService;
 import com.foodtruck.service.MemberService;
@@ -63,4 +64,5 @@ public class LoginController {
 	public String logoutPage() {
 		return "logout";
 	}
+	
 }

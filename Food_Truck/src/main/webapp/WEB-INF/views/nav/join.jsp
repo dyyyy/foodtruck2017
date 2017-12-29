@@ -15,7 +15,7 @@ jQuery( function($) {
 	var pw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/; // 비밀번호 검사식
 	var tel = /^[0-9]{8,11}$/; // 전화번호 검사식
 	
-	var	form = $('.form'), 
+	var	form = $('.joinForm'), 
 			memberId = $('input[name="memberId"]'), 
 			memberPw = $('input[name="memberPw"]'),
 			memberPw1 = $('input[name="memberPw1"]'),
@@ -44,11 +44,35 @@ jQuery( function($) {
 		} else if($('input[name="agree1"]').is(":checked") != true || $('input[name="agree2"]').is(":checked") != true) {
 			alert("이용약관 동의를 해야합니다.");
 			return false;
+		} else if($("#checkId").attr("result") == "unchecked") {
+			alert("아이디 중복체크를 해주세요.");
+			return false;
 		}
 	});
 	
 	
 	$('#checkId, input[name="memberPw"], input[name="memberPw1"]').after('<p></p>');
+	
+	
+	// 아이디 중복 체크
+	$("#checkId").click(function() {
+ 		$.ajax({
+ 			url : '/idCheck.do',  
+ 		    type : 'get',  
+ 		    data : memberId.serialize(),
+ 		    success : function(test) {
+ 		    	if(memberId.val() == "" || id.test(memberId.val()) != true) {
+ 		    		 alert("아이디를 확인해 주세요.");
+ 		    	} else if($.trim(test) == 0){
+ 		    		 alert("사용 가능한 아이디 입니다.");
+ 		    		 $("#checkId").attr("result", "checked");
+ 		    	} else{
+ 		    		alert("이미 사용하고 있는 아이디 입니다.");
+ 		    	}
+ 		    },
+ 		});
+ 	});
+	
  
  	// 아이디 체크
  	memberId.keyup(function() {
@@ -112,7 +136,7 @@ jQuery( function($) {
 		<div class="row2">
 			<div class="col-sm-6 col-md-5">
 				<div class="join">
-					<form id="signup-form" action="#">
+					<form id="signup-form" action="join1.do" method="post" class="joinForm">
 						<h2>Create A new Account</h2>
 						<p>Create your own account</p>
 						<!-- 회원 구분  -->
@@ -122,7 +146,11 @@ jQuery( function($) {
 						<!-- 이메일 (id) -->
 						<label>ID (이메일 형식)<span>*</span></label>
 						<input type="text" name="memberId">
-						<input type="button" id="checkId" value="중복확인"> 
+						<input type="button" id="checkId" value="중복확인" result="unchecked"> 
+						<!-- 이메일 인증 -->
+						<label>이메일 인증<span>*</span></label>
+						<input type="text" name="checkMail">
+						<input type="button" id="checkMail" value="인증확인"> 
 						<!-- 비밀번호 (memberPw) -->
 						<label>Password<span>*</span></label>
 						<input type="password" name="memberPw">
