@@ -1,3 +1,4 @@
+
 package com.foodtruck.vo;
 
 public class ProductVO {
@@ -47,3 +48,4 @@ public class ProductVO {
 		this.licenseNo = licenseNo;
 	}
 }
+
