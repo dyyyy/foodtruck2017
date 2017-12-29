@@ -74,6 +74,7 @@
 									<i class="fa fa-star-half-o on"></i>
 								</div>
 								<p>${all.ftruckIntro}</p>
+								
 							</div>
 						</div>
 						</c:forEach>
@@ -86,7 +87,7 @@
 								<span style="font-weight: bold">${i}</span>
 								</c:when>
 								<c:otherwise>
-								<a href="/korFood?index=${i*10}">${i }</a>
+								<a href="/CategoryFood?index=${i*10}&category=${all.category}">${i}</a>
 								</c:otherwise>
 								</c:choose></li>
 								 </c:forEach>
