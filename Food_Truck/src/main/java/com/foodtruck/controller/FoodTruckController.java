@@ -14,6 +14,7 @@ import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
 
@@ -29,38 +30,38 @@ public class FoodTruckController {
 
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
-	public String menuBoarPage(Model model) throws Exception {
-		model.addAttribute("list", fservice.getFoodTruckList());
+	public String menuBoarPage(Model model,@RequestParam("index") int index,HttpServletRequest request) throws Exception {
+		List<FoodTruckVO> list =fservice.getFoodTruckList(index);
+		 int max=fservice.getCountTruck();//총 푸드트럭 개수
+		 int nextPage= max/10;
+		 if(max%10!=0) {
+			 nextPage++;
+		 }
+		request.setAttribute("list",list); //rownum된 푸드트럭 리스트
+		request.setAttribute("curPage", index / 10);
+	    request.setAttribute("nextPage", nextPage);
 		return "foodtruck/menuBoard";
 	}
 
-	// Korean Food
-	@RequestMapping("/korFood")
-	public String korFoodPage(Model model) throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(1));
-		return "foodtruck/korFood";
+	// CategoryFood
+	@RequestMapping("/CategoryFood")
+	public String korFoodPage(Model model,@RequestParam("index") int index,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
+		vo.setCategory(category);
+		vo.setIndex(index);	
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		System.out.println("진입후");
+		int max=fservice.getCategoryCountTruck(category);//총 푸드트럭 개수
+		 int nextPage= max/10;
+		 if(max%10!=0) {
+			 nextPage++;
+		 }
+		 request.setAttribute("list",list);
+		 request.setAttribute("curPage", index / 10);
+		 request.setAttribute("nextPage", nextPage);
+		return "foodtruck/CategoryFood";
 	}
 
-	// Chinese Food
-	@RequestMapping("/chiFood")
-	public String chiFoodPage(Model model) throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(2));
-		return "foodtruck/chiFood";
-	}
-
-	// Western Food
-	@RequestMapping("/westFood")
-	public String westFoodPage(Model model) throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(3));
-		return "foodtruck/westFood";
-	}
-
-	// Japanese Food
-	@RequestMapping("/jpFood")
-	public String jpFoodPage(Model model) throws Exception {
-		model.addAttribute("list", fservice.getCategoryList(4));
-		return "foodtruck/jpFood";
-	}
 
 	// 상세정보
 	@RequestMapping("/read")

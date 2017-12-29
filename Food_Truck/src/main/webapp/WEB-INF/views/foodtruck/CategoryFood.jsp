@@ -78,19 +78,18 @@
 						</div>
 						</c:forEach>
 						<!-- Pagination -->
-						<div class="pagination">
+						<div class="pagination" >
 							<ul>
-								<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-								<li class="active"><span>1</span></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">6</a></li>
-								<li><a href="#">7</a></li>
-								<li><a href="#">8</a></li>
-								<li><a href="#">9</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+							<c:forEach var="i" begin="1" end="${requestScope.nextPage }">	
+								<li><c:choose>
+								<c:when test="${i==requestScope.curPage}">
+								<span style="font-weight: bold">${i}</span>
+								</c:when>
+								<c:otherwise>
+								<a href="/korFood?index=${i*10}">${i }</a>
+								</c:otherwise>
+								</c:choose></li>
+								 </c:forEach>
 							</ul>
 						</div>
 					</div>
