@@ -7,7 +7,6 @@ public class MemberVO {
 	private String memberPw;	// 회원 비밀번호
 	private String memberTel;	// 회원 전화번호
 	private String memberAuth;		// 회원 권한
-	private String licenseNo;
 	
 	// getter & setter
 	public String getMemberId() {
@@ -39,12 +38,6 @@ public class MemberVO {
 	}
 	public void setMemberAuth(String memberAuth) {
 		this.memberAuth = memberAuth;
-	}
-	public String getLicenseNo() {
-		return licenseNo;
-	}
-	public void setLicenseNo(String licenseNo) {
-		this.licenseNo = licenseNo;
 	}
 	
 

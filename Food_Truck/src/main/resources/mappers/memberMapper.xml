@@ -48,22 +48,16 @@
 	</delete>
 	
 	<!-- 사업자 번호 -->
-	<select id="getLicenseNo" resultMap="SellerMap">
+	<select id="getLicenseNo" resultMap="licenseMap" >
 		
-		SELECT SELLER.SEL_ID, SELLER.SEL_NAME, LICENSE.LICENSE_NO
-		FROM SELLER
+		SELECT LICENSE.LICENSE_NO AS LICENSE_NO
+		FROM MEMBER
 		INNER JOIN LICENSE
-		ON SELLER.SEL_ID = LICENSE.SEL_ID
-		<where> SELLER.SEL_ID=#{selId} </where>
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+		<where> MEMBER.MEM_ID=#{selId} </where>
 		
 	</select>
 
-	<resultMap type="com.foodtruck.vo.MemberVO" id="SellerMap">
-		<result column="SEL_ID" property="memberId"/>
-		<result column="SEL_NAME" property="memberName"/>
-		<result column="LICENSE_NO" property="licenseNo"/>
-	</resultMap>
-	
 	<resultMap type="com.foodtruck.vo.MemberVO" id="memberMap">
 		<result column="MEM_ID" property="memberId" />
 		<result column="MEM_PW" property="memberPw" />
@@ -71,5 +65,7 @@
 		<result column="MEM_TEL" property="memberTel" />
 		<result column="MEM_AUTH" property="memberAuth" />
 	</resultMap>
-
+	<resultMap type="com.foodtruck.vo.LicenseVO" id="licenseMap">
+		<result column="LICENSE_NO" property="licenseNo"/>
+	</resultMap>
 </mapper>

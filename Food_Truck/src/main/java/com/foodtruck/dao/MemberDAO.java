@@ -2,6 +2,7 @@ package com.foodtruck.dao;
 
 import java.util.List;
 
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 public interface MemberDAO {
@@ -22,5 +23,5 @@ public interface MemberDAO {
 	public int deleteMember(String memberId);
 	
 	//판매자의 라이센스번호
-	public List<MemberVO> getLicenseNo(String memberId);
+	public List<LicenseVO> getLicenseNo(String selId);
 }

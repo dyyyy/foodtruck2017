@@ -2,13 +2,12 @@ package com.foodtruck.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.MemberDAO;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 @Service
@@ -47,9 +46,9 @@ public class MemberService {
 	}
 
 	//판매자의 라이센스번호
-	public List<MemberVO> getLicenseNo(String memberId) {
+	public List<LicenseVO> getLicenseNo(String selId) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
-		return dao.getLicenseNo(memberId);
+		return dao.getLicenseNo(selId);
 	}
 
 

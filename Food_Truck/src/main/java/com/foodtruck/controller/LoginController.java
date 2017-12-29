@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
 import com.foodtruck.vo.MemberVO;
@@ -26,7 +27,7 @@ public class LoginController {
 	@RequestMapping("/loginform")
 	public String loginform() {
 		System.out.println("loginform");
-		return "/login/login";
+		return "sign/login";
 	}
 
 	// 로그인 했을때
@@ -43,12 +44,12 @@ public class LoginController {
 				return "home";
 			} else {
 				request.setAttribute("msg", "비밀번호가 맞지 않습니다.");
-				return "/login/msg";
+				return "comm/msg";
 			}
 		} else {
 
 			request.setAttribute("msg", "회원정보가 없거나 입력되지 않았습니다.");
-			return "/login/msg";
+			return "comm/msg";
 		}
 	}
 
@@ -59,4 +60,41 @@ public class LoginController {
 		return "home";
 	}
 
+	
+	
+	
+	
+	// 회원가입페이지
+	@RequestMapping("/joinform")
+	public String joinFormPage() {
+		return "sign/joinform";
+	}
+
+	// 회원 가입
+	@RequestMapping("/join")
+	public String insertMember(HttpServletRequest request, MemberVO vo) {
+
+		String gubun[] = request.getParameterValues("gubun");
+
+		for (String g : gubun) {
+			if (g.equals("member")) {
+				vo.setMemberAuth("3");
+			} else if (g.equals("seller")) {
+				vo.setMemberAuth("2");
+			}
+		}
+
+		memberService.insertMember(vo);
+
+		return "home";
+	}
+
+	// ID 중복체크
+	@ResponseBody
+	@RequestMapping("/idCheck")
+	public MemberVO memberIdCheck(HttpServletRequest request) {
+		String memberId = request.getParameter("memberId");
+
+		return memberService.getMember(memberId);
+	}
 }
