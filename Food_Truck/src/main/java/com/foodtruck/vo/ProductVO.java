@@ -1,8 +1,9 @@
+
 package com.foodtruck.vo;
 
 public class ProductVO {
 	
-	private int prodNo;				// 제품 번호
+	private String prodNo;				// 제품 번호
 	private String prodName;		// 제품 이름
 	private String prodContent;		// 제품 내용
 	private String prodImg;			// 제품 이미지
@@ -10,14 +11,15 @@ public class ProductVO {
 	private String licenseNo;		// 사업자 번호
 	
 	// getter & setter
-	public int getProdNo() {
-		return prodNo;
-	}
-	public void setProdNo(int prodNo) {
-		this.prodNo = prodNo;
-	}
+	
 	public String getProdName() {
 		return prodName;
+	}
+	public String getProdNo() {
+		return prodNo;
+	}
+	public void setProdNo(String prodNo) {
+		this.prodNo = prodNo;
 	}
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
@@ -47,3 +49,4 @@ public class ProductVO {
 		this.licenseNo = licenseNo;
 	}
 }
+

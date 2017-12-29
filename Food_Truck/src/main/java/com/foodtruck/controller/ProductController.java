@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.ProductService;
+import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.ProductVO;
 
 @Controller
@@ -21,10 +22,12 @@ public class ProductController {
 	private MemberService memberService;
 	
 	// 제품 등록 하는 폼으로 이동
-	@RequestMapping("insertProductForm")
+	@RequestMapping("/insertProductForm")
 	public String insertProductForm(Model model, HttpSession session) {
 		
-		String selId = (String)session.getAttribute("userId");
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		
+		String selId = mvo.getMemberId(); 
 		
 		// 사업자 번호 
 		model.addAttribute("list", memberService.getLicenseNo(selId));

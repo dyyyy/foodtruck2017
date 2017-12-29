@@ -5,20 +5,28 @@
 <%@ page import="com.foodtruck.vo.ProductVO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.*"%>
-<%
-	String gubun = (String) session.getAttribute("gubun");
-%>
+
 <%List<ReviewVO> list = (List<ReviewVO>) request.getAttribute("review");%>
 <%List<ProductVO> list2 = (List<ProductVO>) request.getAttribute("product");%>
+<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
 
-<%@include file="../comm/header.jsp" %>
 
+
+<%@include file="../comm/header.jsp"%>
 <!-- 
 <body onload="map()">
  -->
-	<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
 
-	<section class="product-page page fix"><!--Start Product Details Area-->
+<script type="text/javascript">
+function goOrder() {
+	var licenseNo = <%=vo.getLicenseNo()%>;
+	order.action="order?licenseNo="+licenseNo
+	order.method="post"
+	order.submit();
+}
+</script>
+<section class="product-page page fix">
+	<!--Start Product Details Area-->
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
@@ -84,10 +92,11 @@
 						<span style="width: <%=vo.getFtruckGrade()*10%>%"></span>
 					</div>
 					<div class="infomation" style="font-size: 15px; color: #5e636d">
-					평점:<%=vo.getFtruckGrade() %>점<br>
-					주소:<%=vo.getFtruckAddr() %><br>
-					전화번호:<%=vo.getFtruckTel() %><br>
-					배달여부:   <%=vo.getFtruckDlvYn() %>   예약여부:   <%=vo.getFtruckRsvYn() %>
+						평점:<%=vo.getFtruckGrade() %>점<br> 주소:<%=vo.getFtruckAddr() %><br>
+						전화번호:<%=vo.getFtruckTel() %><br> 배달여부:
+						<%=vo.getFtruckDlvYn() %>
+						예약여부:
+						<%=vo.getFtruckRsvYn() %>
 					</div>
 					<div class="review">
 						<div id="map" style="width: 550px; height: 370px;"></div>
@@ -111,7 +120,8 @@
                        
                      var positions = [
                              { title: '<%=vo.getFtruckName()%>',latlng: new daum.maps.LatLng(<%=vo.getLatitude() %>,<%=vo.getLongitude() %>),
-                                content:'<div style="padding:5px;"><%=vo.getFtruckName()%><br><a href="http://map.daum.net/link/to/<%=vo.getFtruckName()%>,<%=vo.getLatitude() %>,<%=vo.getLongitude() %>							" style="color:blue" target="_blank">길찾기</a></div>'
+                                content:'<div style="padding:5px;"><%=vo.getFtruckName()%><br><a href="http://map.daum.net/link/to/<%=vo.getFtruckName()%>,<%=vo.getLatitude() %>,<%=vo.getLongitude() %>
+							" style="color:blue" target="_blank">길찾기</a></div>'
 								} ];
 
 								for (var i = 0; i < positions.length; i++) {
@@ -205,7 +215,10 @@
 
 							}
 						</script>
-						<button class="getoder">주문하러가기!!</button>
+						<form name="order">
+							<button class="getoder" onclick="goOrder()">주문하러가기!!</button>
+
+						</form>
 					</div>
 				</div>
 			</div>
@@ -220,62 +233,70 @@
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div id="description" class="tab-pane fade active in" role="tabpanel">
-							<%=vo.getFtruckIntro() %>
+						<div id="description" class="tab-pane fade active in"
+							role="tabpanel">
+							<%=vo.getFtruckIntro()%>
 						</div>
 						<!-- 상품 리스트 시작 -->
 						<div id="tags" class="tab-pane fade" role="tabpanel">
-						<table class="reviewlist2" >
-						<%for(int i=0;i<list2.size();i++){ %>
+							<table class="reviewlist2">
+								<%
+									for (int i = 0; i < list2.size(); i++) {
+								%>
 								<tr style="width: 860px; height: 95.2px;">
-									<td style="width: 120px; height: 94.8px;">
-										사진
-									</td>
-									<td style="width: 840px; height: 95.2px;"><%=list2.get(i).getProdName()%><%=list2.get(i).getProdContent() %></td>
+									<td style="width: 120px; height: 94.8px;">사진</td>
+									<td style="width: 840px; height: 95.2px;"><%=list2.get(i).getProdName()%><%=list2.get(i).getProdContent()%></td>
 
 									<td style="width: 140px; height: 95.2px;">
-											<dl class="comment" > 
+										<dl class="comment">
 											<dt>가격</dt>
-											<dd><%=list2.get(i).getProdPrice() %></dd>			
-									</dl>
+											<dd><%=list2.get(i).getProdPrice()%></dd>
+										</dl>
 									</td>
 								</tr>
-								<%} %>	
+								<%
+									}
+								%>
 							</table>
-							</div>
-							<!-- 상품리스트 끝 -->
+						</div>
+						<!-- 상품리스트 끝 -->
 						<div id="review" class="tab-pane fade" role="tabpanel">
 							<!-- 리뷰 리스트 시작 -->
 							<table class="reviewlist">
-							<%for(int i=0;i<list.size();i++){ %>
+								<%
+									for (int i = 0; i < list.size(); i++) {
+								%>
 								<tr style="width: 860px; height: 95.2px;">
 									<td style="width: 120px; height: 94.8px;">
 										<div class="star">
 											<span style="width: <%=list.get(i).getGrade() * 10%>%"></span>
 										</div>
 									</td>
-									<td style="width: 840px; height: 95.2px;"><%=list.get(i).getRevContent() %></td>
+									<td style="width: 840px; height: 95.2px;"><%=list.get(i).getRevContent()%></td>
 
 									<td style="width: 140px; height: 95.2px;">
-											<dl class="comment" > 
+										<dl class="comment">
 											<dt>작성자</dt>
-											<dd><%=list.get(i).getMemId() %></dd>
+											<dd><%=list.get(i).getMemId()%></dd>
 											<dt>등록일</dt>
-											<dd><%=list.get(i).getRevDtm() %></dd>
-									</dl>
+											<dd><%=list.get(i).getRevDtm()%></dd>
+										</dl>
 									</td>
 								</tr>
-								<%} %>
+								<%
+									}
+								%>
 							</table>
 							<!-- 리뷰 리스트 끝 -->
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</section>
-	<!--End Product Details Area-->
-	<jsp:include page="../comm/footer.jsp"></jsp:include>
+</section>
+<!--End Product Details Area-->
+<jsp:include page="../comm/footer.jsp"></jsp:include>
+
 </body>

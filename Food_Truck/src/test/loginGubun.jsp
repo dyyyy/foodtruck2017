@@ -186,19 +186,19 @@
 					<nav>
 						<ul>
 							<!-- 푸드트럭 리스트 -->
-							<li><a href="/menuBoard" class="active">FoodTruck List</a></li>
+							<li><a href="/menuBoard?index=10" class="active">FoodTruck List</a></li>
 
 							<!-- 한식  -->
-							<li><a href="/korFood">Korean Food</a></li>
+							<li><a href="/CategoryFood?index=10&category=1">Korean Food</a></li>
 
 							<!-- 중식  -->
-							<li><a href="/chiFood">Chinese Food</a></li>
+							<li><a href="/CategoryFood?index=10&category=2">Chinese Food</a></li>
 
 							<!-- 양식  -->
-							<li><a href="/westFood">Western Food</a></li>
+							<li><a href="/CategoryFood?index=10&category=3">Western Food</a></li>
 
 							<!-- 일식  -->
-							<li><a href="/jpFood">Japanese Food</a></li>
+							<li><a href="/CategoryFood?index=10&category=4">Japanese Food</a></li>
 						</ul>
 					</nav>
 				</div>

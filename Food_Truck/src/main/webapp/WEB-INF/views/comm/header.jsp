@@ -1,3 +1,4 @@
+
 <%@page import="com.foodtruck.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -47,6 +48,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/responsive.css" />
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
 </head>
 
 <body>
@@ -90,7 +92,7 @@
 									</ul></li>
 
 								<li><a href="/loginform">로그인</a></li>
-								<li><a href="/join">회원가입</a></li>
+								<li><a href="/joinform">회원가입</a></li>
 
 
 
@@ -174,9 +176,8 @@
 					</div>
 					<div class="col-sm-4 col-lg-6">
 						<div class="logo text-center">
-							<a href="/"> <img
-								src="/resources/img/header/logo.png" alt="" /> <!-- 푸드 트럭 이미지  /  h4 밑에 설명 -->
-								<!-- 						<h4>online jewelry store</h4> -->
+							<a href="/"> <img src="/resources/img/header/logo.png" alt="" />
+								<!-- 푸드 트럭 이미지  /  h4 밑에 설명 --> <!-- 						<h4>online jewelry store</h4> -->
 							</a>
 						</div>
 					</div>
@@ -219,6 +220,7 @@
 		<!--End Header Area-->
 
 		<!--Start Main Menu Area-->
+		<!--Start Main Menu Area-->
 		<div class="menu-area">
 			<div class="container">
 				<div class="row">
@@ -227,25 +229,25 @@
 							<nav>
 								<ul>
 									<!-- 푸드트럭 리스트 -->
-									<li><a href="/menuBoard" class="active">FoodTruck List</a></li>
+									<li><a href="/menuBoard?index=10" class="active">FoodTruck
+											List</a></li>
 
 									<!-- 한식  -->
-									<li><a href="/korFood">Korean Food</a></li>
+									<li><a href="/CategoryFood?index=10&category=1">Korean
+											Food</a></li>
 
 									<!-- 중식  -->
-									<li><a href="/chiFood">Chinese Food</a></li>
+									<li><a href="/CategoryFood?index=10&category=2">Chinese
+											Food</a></li>
 
 									<!-- 양식  -->
-									<li><a href="/westFood">Western Food</a></li>
+									<li><a href="/CategoryFood?index=10&category=3">Western
+											Food</a></li>
 
 									<!-- 일식  -->
-									<li><a href="/jpFood">Japanese Food</a></li>
+									<li><a href="/CategoryFood?index=10&category=4">Japanese
+											Food</a></li>
 								</ul>
 							</nav>
 						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
 	</header>
