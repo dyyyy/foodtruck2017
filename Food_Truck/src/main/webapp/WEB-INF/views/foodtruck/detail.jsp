@@ -10,24 +10,14 @@
 %>
 <%List<ReviewVO> list = (List<ReviewVO>) request.getAttribute("review");%>
 <%List<ProductVO> list2 = (List<ProductVO>) request.getAttribute("product");%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>Insert title here</title>
-</head>
+
+<%@include file="../comm/header.jsp" %>
+
+<!-- 
 <body onload="map()">
+ -->
 	<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
-<%
-	if(gubun == null) {
-%>
-	<jsp:include page="../comm/header.jsp"></jsp:include>
-<%
-	} else {
-%>
-	<jsp:include page="../comm/loginGubun.jsp"></jsp:include>
-<%
-	}
-%>
+
 	<section class="product-page page fix"><!--Start Product Details Area-->
 	<div class="container">
 		<div class="row">

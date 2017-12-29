@@ -6,7 +6,7 @@ public class MemberVO {
 	private String memberName;	// 회원 이름
 	private String memberPw;	// 회원 비밀번호
 	private String memberTel;	// 회원 전화번호
-	private int memberAuth;		// 회원 권한
+	private String memberAuth;		// 회원 권한
 	
 	// getter & setter
 	public String getMemberId() {
@@ -33,10 +33,11 @@ public class MemberVO {
 	public void setMemberTel(String memberTel) {
 		this.memberTel = memberTel;
 	}
-	public int getMemberAuth() {
+	public String getMemberAuth() {
 		return memberAuth;
 	}
-	public void setMemberAuth(int memberAuth) {
+	public void setMemberAuth(String memberAuth) {
 		this.memberAuth = memberAuth;
 	}
+
 }

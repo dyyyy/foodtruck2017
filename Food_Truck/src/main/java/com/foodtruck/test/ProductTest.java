@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.OrderDetailService;
 import com.foodtruck.service.ProductService;
-import com.foodtruck.service.SellerService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
@@ -22,8 +21,7 @@ public class ProductTest {
 	private MemberService memberservice;
 	@Autowired
 	private OrderDetailService OrderDetailService;
-	@Autowired
-	private SellerService sellerService;
+	
 	
 	@Test
 	public void getProduct() throws Exception {

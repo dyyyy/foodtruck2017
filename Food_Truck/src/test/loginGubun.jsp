@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	// 회원 구분 
-	String userId = (String) session.getAttribute("userId");
-	int gubun = (int) session.getAttribute("gubun");
-	
-%>
 <head>
 <meta charset="UTF-8">
 <title>Food Truck</title>
@@ -71,46 +65,43 @@
 					<ul>
 						<%
 							// 1.관리자   2.판매자   3.일반회원
-							if (gubun == 1) {
+							//if (gubun == 1) {
 						%>
-						
+
 						<li><a href="#">관리자 메뉴<i class="fa fa-angle-down"></i></a>
 							<ul>
 								<li><a href="/adminMember">회원 관리</a></li>
 								<li><a href="/adminSeller">판매자 관리</a></li>
 								<li><a href="/adminFoodTruck">푸드트럭 관리</a></li>
-							</ul>
-						</li>
+							</ul></li>
 
 						<%
-							} else if (gubun == 2) {
+							//} else if (gubun == 2) {
 						%>
-						
+
 						<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 							<ul>
-<!-- 								<li><a href="/productInsert">제품 등록</a></li> -->
+								<!-- 								<li><a href="/productInsert">제품 등록</a></li> -->
 								<li><a href="/insertProductForm">제품 등록</a></li>
 								<li><a href="/orderDetail">예약 내역</a></li>
 								<li><a href="/deliveryDetails">배달 내역</a></li>
 								<li><a href="/sellerSetting">판매자 설정</a></li>
-							</ul>
-						</li>
+							</ul></li>
 
 						<%
-							} else if (gubun == 3) {
+							//} else if (gubun == 3) {
 						%>
-						
+
 						<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
 							<ul>
 								<li><a href="/orderList">전체 주문 내역</a></li>
 								<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
 								<li><a href="/myWriting">내가 쓴글</a></li>
 								<li><a href="/mySetting">나의 설정</a></li>
-							</ul>
-						</li>
-						
+							</ul></li>
+
 						<%
-							}
+					//		}
 						%>
 
 						<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
@@ -118,15 +109,14 @@
 								<li><a href="/noticeBoard">공지사항</a></li>
 								<li><a href="/eventBoard">이벤트</a></li>
 								<li><a href="/inquiry">1:1 문의</a></li>
-							</ul>
-						</li>
-						
-						<% 
-							if(userId != null) {
+							</ul></li>
+
+						<%
+						//	if (userId != null) {
 						%>
-							<li><a href="/logout">로그아웃</a></li>
-						<% 		
-							}
+						<li><a href="/logout">로그아웃</a></li>
+						<%
+				//			}
 						%>
 					</ul>
 				</div>

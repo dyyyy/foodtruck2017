@@ -25,12 +25,6 @@ public class NavController {
 		return "nav/inquiry";
 	}
 	
-	// 로그인
-	@RequestMapping("/login")
-	public String loginPage() {
-		return "nav/login";
-	}
-	
 	// 가입
 	@RequestMapping("/join")
 	public String joinPage() {

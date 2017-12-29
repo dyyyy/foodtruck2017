@@ -43,5 +43,11 @@ public class MemberService {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.deleteMember(memberId);
 	}
+	
+	//판매자의 라이센스번호
+	public List<MemberVO> getLicenseNo(String memberId) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getLicenseNo(memberId);
+	}
 
 }

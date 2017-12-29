@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foodtruck.service.MemberService;
 import com.foodtruck.service.ProductService;
-import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.ProductVO;
 
 @Controller
@@ -18,7 +18,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	@Autowired
-	private SellerService sellerService;
+	private MemberService memberService;
 	
 	// 제품 등록 하는 폼으로 이동
 	@RequestMapping("insertProductForm")
@@ -27,7 +27,7 @@ public class ProductController {
 		String selId = (String)session.getAttribute("userId");
 		
 		// 사업자 번호 
-		model.addAttribute("list", sellerService.getLicenseNo(selId));
+		model.addAttribute("list", memberService.getLicenseNo(selId));
 		
 		return "nav/productInsert";
 	}

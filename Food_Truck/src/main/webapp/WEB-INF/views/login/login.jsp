@@ -1,20 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<jsp:include page="../comm/header.jsp"></jsp:include>
+<%@include file="../comm/header.jsp" %>
 
 <div class="login-page page fix"><!--start login Area-->
 	<div class="container">
 		<div class="row2">
 			<div class="col-sm-6 col-md-5">
 				<div class="login">
-					<form id="login-form" action="/loginChk">
+					<form id="login-form" action="/login" method="post">
 						<h2>Login</h2>
 						<p>Welcome to your account</p>
 <!-- 							페이스북 / 트위터 계정 연결 -->
@@ -23,9 +16,9 @@
 <!-- 							<a id="twitter" href="#"><i class="fa fa-twitter"></i>Sign In with Twitter</a> -->
 <!-- 						</div> -->
 						<label>ID<span>*</span></label>
-						<input type="text" name="userId" />
+						<input type="text" name="id" />
 						<label>Password<span>*</span></label>
-						<input type="password" name="userPw"/>
+						<input type="password" name="pw"/>
 						<div class="remember">
 							<input type="checkbox" />
 							<p>Remember me!</p>

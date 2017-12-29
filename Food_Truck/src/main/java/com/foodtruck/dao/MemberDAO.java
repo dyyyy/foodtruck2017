@@ -20,4 +20,7 @@ public interface MemberDAO {
 
 	// 회원 삭제
 	public int deleteMember(String memberId);
+	
+	//판매자의 라이센스번호
+	public List<MemberVO> getLicenseNo(String memberId);
 }
