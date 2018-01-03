@@ -27,6 +27,7 @@ public class LoginController {
 	@RequestMapping("/loginform")
 	public String loginform() {
 		System.out.println("loginform");
+		logger.info("loginform");
 		return "sign/login";
 	}
 
@@ -59,10 +60,6 @@ public class LoginController {
 		session.invalidate();
 		return "home";
 	}
-
-	
-	
-	
 	
 	// 회원가입페이지
 	@RequestMapping("/joinform")

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.OrderDetailDAO;
 import com.foodtruck.vo.OrderDetailVO;
-import com.foodtruck.vo.ProductVO;
 
 @Service
 public class OrderDetailService {

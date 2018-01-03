@@ -2,12 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.foodtruck.vo.ProductVO"%>
 <%@ page import="java.util.List"%>
-<!DOCTYPE html>    
+<!DOCTYPE html>
 <html>
 
-<%@include file="../comm/header.jsp" %>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body onload="init()">
+
+	<%@include file="../comm/nav.jsp"%>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -54,6 +56,7 @@
 
 	<form name="form">
 		<%
+			@SuppressWarnings("unchecked")
 			List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
 		%>
 		<section class="cart-page page fix">

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <% String msg = (String)request.getAttribute("msg"); %>
 
 <script type="text/javascript">
 alert('<%=msg%>');
 <!-- 
-location.href="/loginform"  // ÆäÀÌÁö ÀÌµ¿...   
+location.href="/loginform"  // íŽ˜ì´ì§€ ì´ë™...   
 --> 
 </script>

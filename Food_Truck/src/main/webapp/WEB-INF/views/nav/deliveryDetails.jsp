@@ -3,9 +3,14 @@
 <!DOCTYPE html>    
 <html>
 
-<%@include file="../comm/header.jsp" %>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body>
+
+<%@include file="../comm/nav.jsp" %>
+
+
+
 판매자 메뉴 - 배달 내역
 
 <jsp:include page="../comm/footer.jsp"></jsp:include>

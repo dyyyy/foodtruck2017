@@ -3,9 +3,11 @@
 <!DOCTYPE html>    
 <html>
 
-<%@include file="../comm/header.jsp" %>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body>
+
+<%@include file="../comm/nav.jsp" %>
 
 <div class="login-page page fix"><!--start login Area-->
 	<div class="container">
@@ -41,5 +43,6 @@
 <BR><BR><BR><BR>
 
 <jsp:include page="../comm/footer.jsp"></jsp:include>
+
 </body>
 </html>

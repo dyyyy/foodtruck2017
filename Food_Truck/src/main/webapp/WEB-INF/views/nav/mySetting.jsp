@@ -3,9 +3,12 @@
 <!DOCTYPE html>    
 <html>
 
-<%@include file="../comm/header.jsp" %>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body>
+
+<%@include file="../comm/nav.jsp" %>
+
 구매자 메뉴 - 나의 설정
 
 <jsp:include page="../comm/footer.jsp"></jsp:include>

@@ -4,9 +4,12 @@
 <!DOCTYPE html>    
 <html>
 
-<%@include file="../comm/header.jsp" %>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body>
+
+<%@include file="../comm/nav.jsp" %>
+
 <!-- Shop Product Area Start -->
 <div class="shop-product-area section fix">
 	<div class="container">

@@ -4,9 +4,12 @@
 <!DOCTYPE html>    
 <html>
 
-<%@include file="../comm/header.jsp" %>
+<jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body>
+
+<%@include file="../comm/nav.jsp" %>
+
 <!--start create member Area-->
 <div class="login-page page fix">
 	<div class="container">
@@ -49,6 +52,7 @@
 </div>
 <!--End create member Area-->
 <br><br><br><br><br>
+
 <jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>
