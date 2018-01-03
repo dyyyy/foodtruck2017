@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>    
+<html>
+
 <%@include file="../comm/header.jsp" %>
+
+<body>
 
 <div class="login-page page fix"><!--start login Area-->
 	<div class="container">
@@ -34,6 +39,7 @@
 <!--End login Area-->
 
 <BR><BR><BR><BR>
+
 <jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>

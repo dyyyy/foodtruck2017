@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.foodtruck.vo.ProductVO"%>
 <%@ page import="java.util.List"%>
+<!DOCTYPE html>    
+<html>
 
 <%@include file="../comm/header.jsp" %>
 

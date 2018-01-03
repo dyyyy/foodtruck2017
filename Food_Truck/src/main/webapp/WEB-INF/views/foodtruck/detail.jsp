@@ -10,9 +10,12 @@
 <%List<ProductVO> list2 = (List<ProductVO>) request.getAttribute("product");%>
 <%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo");%>
 
+<!DOCTYPE html>    
+<html>
+
+<%@include file="../comm/header.jsp" %>
 
 <head>
-<%@include file="../comm/header.jsp"%>
 <script type="text/javascript">
 function goOrder() {
 	var licenseNo = <%=vo.getLicenseNo()%>;
@@ -22,6 +25,7 @@ function goOrder() {
 }
 </script>
 </head>
+
 <body onload="map()">
 
 	<section class="product-page page fix"><!--Start Product Details Area-->
