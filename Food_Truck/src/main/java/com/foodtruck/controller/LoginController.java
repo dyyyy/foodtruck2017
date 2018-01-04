@@ -1,3 +1,4 @@
+
 package com.foodtruck.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,3 +96,4 @@ public class LoginController {
 		return memberService.getMember(memberId);
 	}
 }
+

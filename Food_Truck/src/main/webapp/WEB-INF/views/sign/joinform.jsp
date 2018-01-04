@@ -49,6 +49,9 @@
 			} else if ($("#checkId").attr("result") == "unchecked") {
 				alert("아이디 중복체크를 해주세요.");
 				return false;
+			} else if($("#finalcheck").attr("result") == "unchecked"){
+				alert("이메일 인증을 해주세요");
+				return false;
 			}
 		});
 
@@ -59,7 +62,7 @@
 		$("#checkId").click(
 				function() {
 					$.ajax({
-						url : '/idCheck.do',
+						url : '/idCheck',
 						type : 'get',
 						data : memberId.serialize(),
 						success : function(test) {
@@ -69,13 +72,47 @@
 							} else if ($.trim(test) == 0) {
 								alert("사용 가능한 아이디 입니다.");
 								$("#checkId").attr("result", "checked");
+								$("#checkId").css("display", "none");
+								$("#comform").css("display", "inline");
 							} else {
 								alert("이미 사용하고 있는 아이디 입니다.");
 							}
 						},
 					});
 				});
-
+		//이메일 인증
+		//var finalnum;
+		$('#comform').click(function() {
+			$.ajax({
+				url: '/check',
+				type: 'post',
+				data: memberId.serialize(),
+				async:false,
+				success:function(test){
+					$("#comform").css("display", "none");
+					$("#cknum").css("display", "inline");
+					$("#finalcheck").css("display", "inline");
+					$('#finalcheck').click(function(){
+						var number=document.getElementById('cknum').value;
+						var ck=test
+						if(ck==number){
+							alert("인증완료!");
+							$("#finalcheck").attr("result", "checked");
+						}else{
+							alert("인증번호를 확인해주세요!");
+							
+						}
+					})
+					
+					
+					
+					
+				} 
+			});
+		});
+		
+		
+		
 		// 아이디 체크
 		memberId.keyup(function() {
 			var s = $("#checkId").next('p');
@@ -148,11 +185,12 @@
 							<!-- 이메일 (id) -->
 							<label>ID (이메일 형식)<span>*</span></label> <input type="text"
 								name="memberId"> <input type="button" id="checkId"
-								value="중복확인" result="unchecked">
-							<!-- 이메일 인증 -->
-							<label>이메일 인증<span>*</span></label> <input type="text"
-								name="checkMail"> <input type=button id="checkMail"
-								value="보내기">
+								value="중복확인" result="unchecked" style="display: inline;">
+							<input type="button" id="comform" value="인증하기" result="unchecked"
+								style="display: none;">
+								<input type="text" style="display: none;" id="cknum">
+								<input type="button" id="finalcheck" value="인증완료" result="unchecked"
+								style="display: none;">
 							<!-- 비밀번호 (memberPw) -->
 							<label>Password<span>*</span></label> <input type="password"
 								name="memberPw">
