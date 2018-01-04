@@ -29,6 +29,13 @@
 		where fft.nm
 		between #{index}-9 and #{index}
 	</select>
+	
+	
+	<!-- 푸드트럭 위클리 랭킹 -->
+	<select id="getFoodTruckRank" resultMap="FoodTruckMap" parameterType="int">
+		select * from (select * from foodtruck order by ftruck_grade desc) where <![CDATA[rownum<=10]]>
+	</select>
+	
 
 	<!-- 푸드트럭 등록 -->
 	<insert id="insertFoodTruck">

@@ -44,6 +44,14 @@ public class FoodTruckService {
 		return null;
 	}
 	
+	// 푸드트럭 위클리 랭킹
+	public List<FoodTruckVO> getFoodTruckRank() {
+		System.out.println("11111");
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		System.out.println(dao.getFoodTruckRank());
+		return dao.getFoodTruckRank();
+	}
+
 	//푸드트럭 입력
 	public int insertFoodTruck(FoodTruckVO vo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);

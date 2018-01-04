@@ -14,6 +14,9 @@ public interface FoodTruckDAO {
 	
 	// 카테고리별 리스트
 	public List<FoodTruckVO> getCategoryList(PageVO vo)throws Exception;
+	
+	// 푸드트럭 위클리 랭킹
+	public List<FoodTruckVO> getFoodTruckRank();
 
 	// 푸드트럭 등록
 	public int insertFoodTruck(FoodTruckVO vo)throws Exception;
