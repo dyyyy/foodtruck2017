@@ -60,7 +60,7 @@
 		<result column="SEL_PW" property="selPw"/>
 		<result column="SEL_NAME" property="selName"/>
 		<result column="SEL_TEL" property="selTel"/>
-		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="LICENSE_NO" property="licenseNo"/>aa
 	</resultMap>
 	
 </mapper>
