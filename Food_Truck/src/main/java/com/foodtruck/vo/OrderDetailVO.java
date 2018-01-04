@@ -2,32 +2,32 @@ package com.foodtruck.vo;
 
 public class OrderDetailVO {
 
-	private int prodNo; 	 // 제품 번호
-	private int ordNo; 		 // 주문 번호
+	private String prodNo; 	 // 제품 번호
+	private String ordNo; 		 // 주문 번호
 	private String prodName; // 제품 이름
 	private int ordQty; 	 // 수량
 	private int ordPrice; 	 // 주문가격
 	private String memId; 	 // 판매자 아이디
 
 	// getter & setter
-	public int getProdNo() {
+	public String getProdName() {
+		return prodName;
+	}
+
+	public String getProdNo() {
 		return prodNo;
 	}
 
-	public void setProdNo(int prodNo) {
+	public void setProdNo(String prodNo) {
 		this.prodNo = prodNo;
 	}
 
-	public int getOrdNo() {
+	public String getOrdNo() {
 		return ordNo;
 	}
 
-	public void setOrdNo(int ordNo) {
+	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
-	}
-
-	public String getProdName() {
-		return prodName;
 	}
 
 	public void setProdName(String prodName) {
