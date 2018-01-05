@@ -43,7 +43,7 @@ public class LoginController {
 			if (mvo.getMemberPw().equals(pw)) {
 				session.setAttribute("member", mvo);
 				System.out.println("로그인성공");
-				return "home";
+				return "redirect:/";
 			} else {
 				request.setAttribute("msg", "비밀번호가 맞지 않습니다.");
 				return "comm/msg";
@@ -59,7 +59,7 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	
 	// 회원가입페이지
