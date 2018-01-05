@@ -103,82 +103,82 @@ public class FoodTruckController {
 	}
 	
 	//오픈 api받아오기
-	@RequestMapping("/api")
-	   public void inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	      
-	      request.setCharacterEncoding("utf-8");
-	      response.setContentType("text/html; charset=utf-8");
-
-	      String addr = "http://www.localdata.kr/platform/rest/24_87_01_P/openApi?authKey=";
-	      String serviceKey = "mqvI9PePHU5a4wcrdPyt2wCtulRkfOMEZCFVtKJNqaU=";
-	      String parameter = "";
-	      // serviceKey = URLEncoder.encode(serviceKey,"utf-8");
-
-	      PrintWriter out = response.getWriter();
-	      // PrintWriter out = new PrintWriter(new OutputStream
-	      // Writer(response.getOutputStream(),"KSC5601"));
-	      // ServletOutputStream out = response.getOutputStream();
-	      //api중 가져올 조건을 등록하기 예)영업중인 푸드트럭만 가져오기
-	      parameter = parameter + "&" + "state=01";
-	      parameter = parameter + "&" + "addrType=0";
-	      parameter = parameter + "&" + "resultType=json";
-	      parameter = parameter + "&" + "pageSize=1000";
-
-	      addr = addr + serviceKey + parameter;
-	      URL url = new URL(addr);
-
-	      System.out.println(addr);
-
-	      // BufferedReader in = new BufferedReader(new
-	      // InputStreamReader(url.openStream(), "UTF-8"));
-
-	      InputStream in = url.openStream();
-	      // CachedOutputStream bos = new CachedOutputStream();
-	      ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
-	      IOUtils.copy(in, bos1);
-	      in.close();
-	      bos1.close();
-
-	      String mbos = bos1.toString("UTF-8");
-	      System.out.println("mbos: " + mbos);
-
-	      byte[] b = mbos.getBytes("UTF-8");
-	      String s = new String(b, "UTF-8");
-	      out.println(s);
-	      System.out.println("s: " + s);
-
-	      JSONObject json = new JSONObject();
-	      json.put("data", s);
-	      // json.put("data", data);
-	      System.out.println("json: " + json);
-	      //api의 구조
-	      JSONObject jso = json.getJSONObject("data");
-	      JSONObject js = jso.getJSONObject("result");
-	      JSONObject jj = js.getJSONObject("body");
-	      JSONObject items = jj.getJSONObject("rows");
-	      JSONArray jArray = items.getJSONArray("row");
-	      
-	      //받아온 api 데이터를 list에 넣는 작업
-	      List<ApiVO> list = new ArrayList<ApiVO>();
-	      for (int i = 0; i < list.size(); i++) {
-	         JSONObject a = jArray.getJSONObject(i);
+	   @RequestMapping("/api")
+	      public void inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	         
-	         ApiVO vo = new ApiVO();
-	         vo.setBplcNm(a.getString("bplcNm"));
-	         vo.setSiteTel(a.getString("siteTel"));
-	         vo.setRdnWhlAddr(a.getString("rdnWhlAddr"));
-	         vo.setSiteWhlAddr(a.getString("siteWhlAddr"));
-	         vo.setApvPermYmd(a.getString("apvPermYmd"));
-	         vo.setDtlStateNm(a.getString("dtlStateNm"));
-	         vo.setX(a.getString("x"));
-	         vo.setY(a.getString("y"));
-	         list.add(vo);
-	      }
-	      //int i = service.inputAddr(list);
-	     
-	      for(int i=0;i<list.size();i++) {
-	    	  System.out.println(list.get(i).getBplcNm());
-	      }
-	}    
+	         request.setCharacterEncoding("utf-8");
+	         response.setContentType("text/html; charset=utf-8");
+
+	         String addr = "http://www.localdata.kr/platform/rest/24_87_01_P/openApi?authKey=";
+	         String serviceKey = "mqvI9PePHU5a4wcrdPyt2wCtulRkfOMEZCFVtKJNqaU=";
+	         String parameter = "";
+	         // serviceKey = URLEncoder.encode(serviceKey,"utf-8");
+
+	         PrintWriter out = response.getWriter();
+	         // PrintWriter out = new PrintWriter(new OutputStream
+	         // Writer(response.getOutputStream(),"KSC5601"));
+	         // ServletOutputStream out = response.getOutputStream();
+	         //api중 가져올 조건을 등록하기 예)영업중인 푸드트럭만 가져오기
+	         parameter = parameter + "&" + "state=01";
+	         parameter = parameter + "&" + "addrType=0";
+	         parameter = parameter + "&" + "resultType=json";
+	         parameter = parameter + "&" + "pageSize=1000";
+
+	         addr = addr + serviceKey + parameter;
+	         URL url = new URL(addr);
+
+	         System.out.println(addr);
+
+	         // BufferedReader in = new BufferedReader(new
+	         // InputStreamReader(url.openStream(), "UTF-8"));
+
+	         InputStream in = url.openStream();
+	         // CachedOutputStream bos = new CachedOutputStream();
+	         ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+	         IOUtils.copy(in, bos1);
+	         in.close();
+	         bos1.close();
+
+	         String mbos = bos1.toString("UTF-8");
+	         System.out.println("mbos: " + mbos);
+
+	         byte[] b = mbos.getBytes("UTF-8");
+	         String s = new String(b, "UTF-8");
+	         out.println(s);
+	         System.out.println("s: " + s);
+
+	         JSONObject json = new JSONObject();
+	         json.put("data", s);
+	         // json.put("data", data);
+	         System.out.println("json: " + json);
+	         //api의 구조
+	         JSONObject jso = json.getJSONObject("data");
+	         JSONObject js = jso.getJSONObject("result");
+	         JSONObject jj = js.getJSONObject("body");
+	         JSONObject items = jj.getJSONObject("rows");
+	         JSONArray jArray = items.getJSONArray("row");
+	         
+	         //받아온 api 데이터를 list에 넣는 작업
+	         List<ApiVO> list = new ArrayList<ApiVO>();
+	         for (int i = 0; i < list.size(); i++) {
+	            JSONObject a = jArray.getJSONObject(i);
+	            
+	            ApiVO vo = new ApiVO();
+	            vo.setBplcNm(a.getString("bplcNm"));
+	            vo.setSiteTel(a.getString("siteTel"));
+	            vo.setRdnWhlAddr(a.getString("rdnWhlAddr"));
+	            vo.setSiteWhlAddr(a.getString("siteWhlAddr"));
+	            vo.setApvPermYmd(a.getString("apvPermYmd"));
+	            vo.setDtlStateNm(a.getString("dtlStateNm"));
+	            vo.setX(a.getString("x"));
+	            vo.setY(a.getString("y"));
+	            list.add(vo);
+	         }
+	         //int i = service.inputAddr(list);
+	        
+	         for(int i=0;i<list.size();i++) {
+	            System.out.println(list.get(i).getBplcNm());
+	         }
+	   }       
 
 }
