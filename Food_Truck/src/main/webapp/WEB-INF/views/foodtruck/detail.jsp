@@ -30,10 +30,11 @@
 		order.submit();
 	}
 </script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kVz0Er4ERmUrd5eHhHXi&submodules=geocoder"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kVz0Er4ERmUrd5eHhHXi&submodules=geocoder"></script>
 </head>
 
-<body>
+<body onload="map()">
 
 	<%@include file="../comm/nav.jsp"%>
 
@@ -110,105 +111,106 @@
 							예약여부:
 							<%=vo.getFtruckRsvYn()%>
 						</div>
-						
+
 						<div class="review">
-							<!-- 네이버지도 시작 -->
-							<div id="map" style="width: 550px; height: 330px;"></div>
+							<div id="map" style="width: 550px; height: 370px;"></div>
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a898d01cf109199d2b5c34d8e1c5835&libraries=services,clusterer,drawing"></script>
+							<script type="text/javascript">
+								function map() {
+									var mapContainer = document
+											.getElementById('map'), // 지도를 표시할 div  
+									mapOption = {
+										center : new daum.maps.LatLng(
+												33.450701, 126.570667), // 지도의 중심좌표
+										level : 11
+									// 지도의 확대 레벨
+									};
+									var map = new daum.maps.Map(mapContainer,
+											mapOption);
 
-							<script>
-							var mapOptions = {
-								    center: new naver.maps.LatLng(37.3595704, 127.105399),
-								    zoom: 8
-								};
-							var map = new naver.maps.Map('map', mapOptions);
-							
-							
-							//정보창
-							var HOME_PATH = window.HOME_PATH || '.';
-							var foodtruck = new naver.maps.LatLng(<%=vo.getLatitude()%>, <%=vo.getLongitude()%>),
-							 marker = new naver.maps.Marker({
-						        map: map,
-						        position: foodtruck
-						    });			
-							var contentString = [
-						        '<div class="iw_inner">',
-						        '   <h3>서울특별시청</h3>',
-						        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-						        '       <img src="'+ HOME_PATH +'/img/example/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br />',
-						        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-						        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-						        '   </p>',
-						        '</div>'
-						    ].join('');
-							var infowindow = new naver.maps.InfoWindow({
-							    content: contentString
-							});
-							naver.maps.Event.addListener(marker, "click", function(e) {
-							    if (infowindow.getMap()) {
-							        infowindow.close();
-							    } else {
-							        infowindow.open(map, marker);
-							    }
-							});
-							infowindow.close(map, marker);
-							//정보창 끝
-							
-							
-							
-							
-							//내위치찾기
-							function onSuccessGeolocation(position) {
-							    var location = new naver.maps.LatLng(position.coords.latitude,
-							                                         position.coords.longitude);
+									// 주소-좌표 변환 객체를 생성합니다
+									var geocoder = new daum.maps.services.Geocoder();
 
-							    map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
-							    map.setZoom(10); // 지도의 줌 레벨을 변경합니다.
+									// 주소로 좌표를 검색합니다
+									geocoder.addressSearch('<%=vo.getFtruckAddr()%>', function(result, status) {
 
-							    var infowindow1 = new naver.maps.InfoWindow({
-									content: '<div style="padding:5px;">' +
-								        '여기에 계신가요?'+'</div>'
-								        		
-								});//내위치 말풍선
-							    
-							    var marker2 = new naver.maps.Marker({
-							        position: new naver.maps.LatLng(location.lat() , location.lng()),
-							        map: map
-							    });
-							    
-							    naver.maps.Event.addListener(marker2, "click", function(e) {
-								    if (infowindow1.getMap()) {
-								        infowindow1.close();
-								    } else {
-								        infowindow1.open(map, marker);
-								    }
-								});
-							    
-							    infowindow1.open(map, location);
-							}
+									    // 정상적으로 검색이 완료됐으면 
+									     if (status === daum.maps.services.Status.OK) {
 
-							function onErrorGeolocation() {
-							    var center = map.getCenter();
+									        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-							    infowindow1.setContent('<div style="padding:20px;">' +
-							        '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+									        // 결과값으로 받은 위치를 마커로 표시합니다
+									        var marker = new daum.maps.Marker({
+									            map: map,
+									            position: coords
+									        });
 
-							    infowindow1.open(map, center);
-							}
+									        // 인포윈도우로 장소에 대한 설명을 표시합니다
+									        var infowindow = new daum.maps.InfoWindow({
+									            content: '<div style="padding:5px;"><%=vo.getFtruckName()%><br><a href="http://map.daum.net/link/search/<%=vo.getFtruckAddr()%>"style="color:blue" target="_blank">길찾기</a></div>'
+									        });
+									        infowindow.open(map, marker);
 
-							$(window).on("load", function() {
-							    if (navigator.geolocation) {
-							        navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
-							    } else {
-							        var center = map.getCenter();
+									        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+									        
+									    } 
+									});
 
-							        infowindow1.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
-							        infowindow1.open(map, center);
-							    }
-							});
-
+									// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+									if (navigator.geolocation) {
+										// GeoLocation을 이용해서 접속 위치를 얻어옵니다
+										navigator.geolocation
+												.getCurrentPosition(function(
+														position) {
+													var lat = position.coords.latitude, // 위도
+													lon = position.coords.longitude; // 경도
+													var locPosition = new daum.maps.LatLng(
+															lat, lon), // 마커가 표시될 위치를
+													// geolocation으로
+													// 얻어온 좌표로 생성합니다
+													message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에
+													// 표시될 내용입니다
+													// 마커와 인포윈도우를 표시합니다
+													displayMarker(locPosition,
+															message);
+												});
+									} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+										var locPosition = new daum.maps.LatLng(
+												33.450701, 126.570667), message = 'geolocation을 사용할수 없어요..'
+										displayMarker(locPosition, message);
+									}
+									// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+									function displayMarker(locPosition, message) {
+										// 마커를 생성합니다
+										var marker = new daum.maps.Marker({
+											map : map,
+											position : locPosition
+										});
+										var iwContent = message, // 인포윈도우에 표시할 내용
+										iwRemoveable = true;
+										// 인포윈도우를 생성합니다
+										var infowindow = new daum.maps.InfoWindow(
+												{
+													content : iwContent,
+													removable : iwRemoveable
+												});
+										// 인포윈도우를 마커위에 표시합니다
+										infowindow.open(map, marker);
+										// 마커에 클릭이벤트를 등록합니다
+										daum.maps.event.addListener(marker,
+												'click', function() {
+													// 마커 위에 인포윈도우를 표시합니다
+													infowindow
+															.open(map, marker);
+												});
+										// 지도 중심좌표를 접속위치로 변경합니다
+										map.setCenter(locPosition);
+									}
+								}
 							</script>
 							<form name="order">
 								<button class="getoder" onclick="goOrder()">주문하러가기!!</button>
+
 							</form>
 						</div>
 					</div>
@@ -274,7 +276,9 @@
 											</dl>
 										</td>
 									</tr>
-									<%}%>
+									<%
+										}
+									%>
 								</table>
 								<!-- 리뷰 리스트 끝 -->
 							</div>
