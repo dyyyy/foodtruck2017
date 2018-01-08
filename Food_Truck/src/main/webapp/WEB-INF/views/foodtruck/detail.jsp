@@ -30,10 +30,6 @@
 		order.submit();
 	}
 </script>
-<script type="text/javascript"
-	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=kVz0Er4ERmUrd5eHhHXi&submodules=geocoder"></script>
-</head>
-
 <body onload="map()">
 
 	<%@include file="../comm/nav.jsp"%>
@@ -148,8 +144,7 @@
 											var content='<div class="wrap">' + 
 								            '    <div class="info">' + 
 								            '        <div class="title">' + 
-								            '            <%=vo.getFtruckName()%>' + 
-								            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+								            '            <%=vo.getFtruckName()%>' +  
 								            '        </div>' + 
 								            '        <div class="body">' + 
 								            '            <div class="img">' +//이미지 작업후 수정예정
