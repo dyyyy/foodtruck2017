@@ -17,9 +17,9 @@ public class ReviewService {
 	private SqlSessionTemplate sessionTemplate;
 	
 		// ¸®ºä ¸®½ºÆ®
-		public List<ReviewVO> getReviewList(String licenseNo) {
+		public List<ReviewVO> getReviewList(String ftruckNo) {
 			ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
-			return dao.getReviewList(licenseNo);
+			return dao.getReviewList(ftruckNo);
 		}
 
 		// ¸®ºä ÀÔ·Â

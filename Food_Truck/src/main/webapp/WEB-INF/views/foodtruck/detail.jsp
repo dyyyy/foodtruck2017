@@ -147,7 +147,7 @@
 
 									        // 인포윈도우로 장소에 대한 설명을 표시합니다
 									        var infowindow = new daum.maps.InfoWindow({
-									            content: '<div style="padding:5px;"><%=vo.getFtruckName()%><br><a href="http://map.daum.net/link/search/<%=vo.getFtruckAddr()%>"style="color:blue" target="_blank">길찾기</a></div>'
+									    content:'<div style="padding:5px;"><%=vo.getFtruckName()%></br><a href="http://map.daum.net/link/search/<%=vo.getFtruckAddr()%>"style="color:blue" target="_blank">길찾기</a></div>'
 									        });
 									        infowindow.open(map, marker);
 

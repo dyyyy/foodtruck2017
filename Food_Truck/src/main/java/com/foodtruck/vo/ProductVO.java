@@ -8,7 +8,7 @@ public class ProductVO {
 	private String prodContent;		// 제품 내용
 	private String prodImg;			// 제품 이미지
 	private int prodPrice;			// 금액
-	private String licenseNo;		// 사업자 번호
+	private String ftruckNo;		// 사업자 번호
 	
 	// getter & setter
 	
@@ -42,11 +42,11 @@ public class ProductVO {
 	public void setProdPrice(int prodPrice) {
 		this.prodPrice = prodPrice;
 	}
-	public String getLicenseNo() {
-		return licenseNo;
+	public String getftruckNo() {
+		return ftruckNo;
 	}
-	public void setLicenseNo(String licenseNo) {
-		this.licenseNo = licenseNo;
+	public void setftruckNo(String ftruckNo) {
+		this.ftruckNo = ftruckNo;
 	}
 }
 

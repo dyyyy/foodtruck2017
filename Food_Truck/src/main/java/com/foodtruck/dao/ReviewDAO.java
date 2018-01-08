@@ -7,7 +7,7 @@ import com.foodtruck.vo.ReviewVO;
 public interface ReviewDAO {
 
 		// ¸®ºä ¸®½ºÆ®
-		public List<ReviewVO> getReviewList(String licenseNo);
+		public List<ReviewVO> getReviewList(String ftruckNo);
 
 		// ¸®ºä µî·Ï
 		public int insertReview(ReviewVO vo);

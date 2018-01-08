@@ -41,7 +41,7 @@ public class ProductController {
 		
 		productService.insertProduct(vo);
 		System.out.println("제품 등록 성공!");
-		System.out.println(vo.getLicenseNo());
+		System.out.println(vo.getftruckNo());
 		return "home";
 	}
 }

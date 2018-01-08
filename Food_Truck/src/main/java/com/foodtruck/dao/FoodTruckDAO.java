@@ -7,7 +7,7 @@ import com.foodtruck.vo.PageVO;
 public interface FoodTruckDAO {
 	
 	// 푸드트럭 정보
-	public FoodTruckVO getFoodTruck(String licenseNo)throws Exception;
+	public FoodTruckVO getFoodTruck(String ftruckNo)throws Exception;
 
 	// 푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList(int indexs)throws Exception;
@@ -25,7 +25,7 @@ public interface FoodTruckDAO {
 	public int updateTruck(FoodTruckVO vo)throws Exception;
 
 	// 푸드트럭 삭제
-	public int deleteTruck(String licenseNo)throws Exception;
+	public int deleteTruck(String ftruckNo)throws Exception;
 	
 	//푸드트럭 전체count(페이징처리)
 	public int getCountTruck()throws Exception;

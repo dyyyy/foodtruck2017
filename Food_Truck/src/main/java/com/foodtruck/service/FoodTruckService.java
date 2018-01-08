@@ -15,9 +15,9 @@ public class FoodTruckService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	//푸드트럭 정보
-	public FoodTruckVO getFoodTruck(String licenseNo) throws Exception {
+	public FoodTruckVO getFoodTruck(String ftruckNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		return dao.getFoodTruck(licenseNo);
+		return dao.getFoodTruck(ftruckNo);
 	}
 	//푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList(int index) throws Exception{

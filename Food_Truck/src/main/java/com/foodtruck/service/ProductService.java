@@ -22,9 +22,9 @@ public class ProductService {
 	}
 
 	// 상품 리스트
-	public List<ProductVO> getProductList(String licenseNo) {
+	public List<ProductVO> getProductList(String ftruckNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
-		return dao.getProductList(licenseNo);
+		return dao.getProductList(ftruckNo);
 	}
 
 	// 상품 입력

@@ -55,7 +55,7 @@
 								</a>
 							</div>
 							<div class="list-pro-des fix">
-								<a class="pro-name" href="/read?licenseNo=${all.licenseNo}">${all.ftruckName}</a>
+								<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
 								<div class="pro-ratting">
 									<i class="fa fa-star on"></i>
 									<i class="fa fa-star on"></i>
