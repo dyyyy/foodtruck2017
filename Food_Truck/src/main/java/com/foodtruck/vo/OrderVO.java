@@ -2,20 +2,21 @@ package com.foodtruck.vo;
 
 public class OrderVO {
 	
-	private int ordNo;			// 주문 번호
+	private String ordNo;			// 주문 번호
 	private String ordName;		// 이름
 	private String ordTel;		// 전화 번호
 	private String ordDate;		// 주문 시간
 	private String ordRsvDate;	// 예약 일시
 	private String ordDlyYn;	// 배달 여부(Y/N)
+	private int ordStat;
+	private int cookStat;
 	private String memId;		// 회원 아이디
-	
+	private String licenseNo;
 	// getter & setter
-	
-	public int getOrdNo() {
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(int ordNo) {
+	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
 	public String getOrdName() {
@@ -48,10 +49,30 @@ public class OrderVO {
 	public void setOrdDlyYn(String ordDlyYn) {
 		this.ordDlyYn = ordDlyYn;
 	}
+	public int getOrdStat() {
+		return ordStat;
+	}
+	public void setOrdStat(int ordStat) {
+		this.ordStat = ordStat;
+	}
+	public int getCookStat() {
+		return cookStat;
+	}
+	public void setCookStat(int cookStat) {
+		this.cookStat = cookStat;
+	}
 	public String getMemId() {
 		return memId;
 	}
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
+	}
+	
+	
 }

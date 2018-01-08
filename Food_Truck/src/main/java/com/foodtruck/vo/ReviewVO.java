@@ -1,24 +1,25 @@
 package com.foodtruck.vo;
 
 public class ReviewVO {
-	private String licenseNo;
+	
 	private int revSeq;
+	private String ftruckNo;
 	private String revContent;
 	private String revDtm;
 	private String revDelYn;
 	private double grade;
 	private String memId;
-	public String getLicenseNo() {
-		return licenseNo;
-	}
-	public void setLicenseNo(String licenseNo) {
-		this.licenseNo = licenseNo;
-	}
 	public int getRevSeq() {
 		return revSeq;
 	}
 	public void setRevSeq(int revSeq) {
 		this.revSeq = revSeq;
+	}
+	public String getFtruckNo() {
+		return ftruckNo;
+	}
+	public void setFtruckNo(String ftruckNo) {
+		this.ftruckNo = ftruckNo;
 	}
 	public String getRevContent() {
 		return revContent;
@@ -51,5 +52,5 @@ public class ReviewVO {
 		this.memId = memId;
 	}
 	
-	
+		
 }
