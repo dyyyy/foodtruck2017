@@ -72,12 +72,14 @@ public class FoodTruckController {
 		double count = 0; //리뷰 수
 		double total = 0; //푸드트럭 총 평점
 		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//푸드트럭 정보 호출
+		if(vo.getFtruckAddr()==null) {
+			vo.setFtruckAddr(vo.getFtruckAddr2());
+		}
+		
 		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// 리뷰 정보 호출
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// 상품 정보 호출
 		if(Rlist.size()!=0) {
-			System.out.println("진입1");
 			for (int i = 0; i < Rlist.size(); i++) {
-				System.out.println("진입2");
 				double score = Rlist.get(i).getGrade();
 				pyengjum += score;
 				count = Rlist.size();
@@ -85,13 +87,8 @@ public class FoodTruckController {
 				total = Double.parseDouble(String.format("%.2f",total));
 			}	
 		}else {
-			System.out.println("진입3");
 			total=0;		
 		}
-		System.out.println("진입4");
-		System.out.println(total);
-		System.out.println("진입5");
-		System.out.println(vo.getFtruckGrade());
 		vo.setFtruckGrade(total);
 		request.setAttribute("vo", vo);
 		request.setAttribute("review", Rlist);
