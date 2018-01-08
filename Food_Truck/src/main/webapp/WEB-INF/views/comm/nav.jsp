@@ -32,16 +32,17 @@
 								//로그인 안했을때
 								if (!isLogin) {
 							%>
-
+							<li><a href="/loginform">로그인</a></li>
+							<li><a href="/joinform">회원가입</a></li>
+							
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard">공지사항</a></li>
 									<li><a href="/eventBoard">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
-								</ul></li>
-
-							<li><a href="/loginform">로그인</a></li>
-							<li><a href="/joinform">회원가입</a></li>
+								</ul>
+							</li>
+							
 							<%
 								} else {
 							%>
@@ -51,12 +52,7 @@
 									//비회원
 									case "0":
 							%>
-							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="/noticeBoard">공지사항</a></li>
-									<li><a href="/eventBoard">이벤트</a></li>
-									<li><a href="/inquiry">1:1 문의</a></li>
-								</ul></li>
+							<li>로그인되지 않았습니다.</li>
 							<%
 								break;
 									//일반회원
@@ -76,7 +72,7 @@
 							%>
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<!-- 								<li><a href="/productInsert">제품 등록</a></li> -->
+									<!--<li><a href="/productInsert">제품 등록</a></li> -->
 									<li><a href="/insertProductForm">제품 등록</a></li>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
@@ -96,10 +92,20 @@
 							<%
 								break;
 									default:
-										System.out.println("인증되지 않은 회원입니다");
+										%>
+										<li>로그인되지 않았습니다.</li>
+										<%
 										break;
 									}
-
+							%>
+							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
+								<ul>
+									<li><a href="/noticeBoard">공지사항</a></li>
+									<li><a href="/eventBoard">이벤트</a></li>
+									<li><a href="/inquiry">1:1 문의</a></li>
+								</ul>
+							</li>
+							<%
 								}
 							%>
 						</ul>
