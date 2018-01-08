@@ -70,17 +70,66 @@
 						<!-- Pagination -->
 						<div class="pagination" >
 							<ul>
-							<c:forEach var="i" begin="1" end="${requestScope.nextPage }">	
-								<li><c:choose>
-								<c:when test="${i==requestScope.curPage}">
-								<span style="font-weight: bold">${i}</span>
-								</c:when>
-								<c:otherwise>
-								<a href="/CategoryFood?index=${i*10}&category=${all.category}">${i}</a>
-								</c:otherwise>
-								</c:choose></li>
-								 </c:forEach>
-							</ul>
+								<%
+									int pageNo;//페이지번호
+									int tot = (int) request.getAttribute("pagecount");//전체 게시물수
+									try {
+										pageNo = (int) request.getAttribute("pageNo");//페이지번호
+									} catch (Exception e) {
+										pageNo = 1;
+									}
+									int currentPage = pageNo;//페이지번호
+									int countList = 10;
+									int countPage = 10;
+									int totalPage = tot / countList;//페이지당 게시물수()--  만약 게시물이 10개이면 페이지 수는 1개가된다.
+									if (tot % countList > 0) {
+										totalPage++;
+									}
+									///////////////////////////////////적용완료
+
+									if (totalPage < currentPage) {
+										currentPage = totalPage;
+									} //게시물이 없을경우  0개의 게시물일떄 페이지는 1로 해준다.
+
+									////////////////////////////
+									int startPage = ((currentPage - 1) / 10) * 10 + 1;
+									int endPage = startPage + countPage - 1;
+									if (endPage > totalPage) {
+										endPage = totalPage;
+									}
+									if (startPage > 1) {
+								%>
+								<li><a href="menuBoard?pageNo=1">처음</a></li>
+								<%
+									}
+									if (currentPage > 1) {
+								%>
+								<li><a href="menuBoard?pageNo=<%=currentPage - 1%>"><i class="fa fa-angle-left"></i></a></li>
+								<%
+									}
+									for (int iCount = startPage; iCount <= endPage; iCount++) {
+										if (iCount == currentPage) {
+								%>
+								<li class="active"><span><%=iCount%></span></li>
+								<%
+									} else {
+								%>
+								<li><a href="menuBoard?pageNo=<%=iCount%>"><%=iCount%></a><li>
+								<%
+									}
+									}
+									if (currentPage < totalPage) {
+								%>
+								<li><a href="menuBoard?pageNo=<%=currentPage + 1%>"><i class="fa fa-angle-right"></i></a></li>
+								<%
+									}
+									if (endPage < totalPage) {
+								%>
+								<li><a href="menuBoard?pageNo=<%=totalPage%>">끝</a></li>
+								<%
+									}
+								%>
+								</ul>
 						</div>
 					</div>
 				</div>

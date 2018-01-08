@@ -41,35 +41,26 @@ public class FoodTruckController {
 
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
-	public String menuBoarPage(Model model,@RequestParam("index") int index,HttpServletRequest request) throws Exception {
-		List<FoodTruckVO> list =fservice.getFoodTruckList(index);
-		 int max=fservice.getCountTruck();//총 푸드트럭 개수
-		 int nextPage= max/10;
-		 if(max%10!=0) {
-			 nextPage++;
-		 }
-		request.setAttribute("list",list); //rownum된 푸드트럭 리스트
-		request.setAttribute("curPage", index / 10);
-	    request.setAttribute("nextPage", nextPage);
+	public String menuBoarPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request) throws Exception {
+		List<FoodTruckVO> list =fservice.getFoodTruckList(pageNo);//rownum된 푸드트럭 리스트
+		 int pagecount=fservice.getCountTruck();//총 푸드트럭 개수
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+	     request.setAttribute("pagecount", pagecount);//총 페이지 수
 		return "foodtruck/menuBoard";
 	}
 
 	// CategoryFood
 	@RequestMapping("/CategoryFood")
-	public String korFoodPage(Model model,@RequestParam("index") int index,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
+	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
 		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		vo.setIndex(index);	
+		vo.setPageNo(pageNo);	
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
-		System.out.println("진입후");
-		int max=fservice.getCategoryCountTruck(category);//총 푸드트럭 개수
-		 int nextPage= max/10;
-		 if(max%10!=0) {
-			 nextPage++;
-		 }
+		int pagecount=fservice.getCategoryCountTruck(category);//총 푸드트럭 개수
+		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
-		 request.setAttribute("curPage", index / 10);
-		 request.setAttribute("nextPage", nextPage);
+	     request.setAttribute("pagecount", pagecount);
 		return "foodtruck/CategoryFood";
 	}
 

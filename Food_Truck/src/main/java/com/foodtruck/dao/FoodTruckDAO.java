@@ -10,7 +10,7 @@ public interface FoodTruckDAO {
 	public FoodTruckVO getFoodTruck(String ftruckNo)throws Exception;
 
 	// 푸드트럭 리스트
-	public List<FoodTruckVO> getFoodTruckList(int indexs)throws Exception;
+	public List<FoodTruckVO> getFoodTruckList(int pageNo)throws Exception;
 	
 	// 카테고리별 리스트
 	public List<FoodTruckVO> getCategoryList(PageVO vo)throws Exception;

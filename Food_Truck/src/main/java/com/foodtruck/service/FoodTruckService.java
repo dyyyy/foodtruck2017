@@ -20,9 +20,9 @@ public class FoodTruckService {
 		return dao.getFoodTruck(ftruckNo);
 	}
 	//푸드트럭 리스트
-	public List<FoodTruckVO> getFoodTruckList(int index) throws Exception{
+	public List<FoodTruckVO> getFoodTruckList(int pageNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		return dao.getFoodTruckList(index);
+		return dao.getFoodTruckList(pageNo);
 	}
 	
 	//카테고리별 리스트

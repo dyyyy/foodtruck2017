@@ -1,15 +1,16 @@
 package com.foodtruck.vo;
 
 public class PageVO {
-	private int index;
+	private int pageNo;
 	private int category;
 	
 	
-	public int getIndex() {
-		return index;
+	
+	public int getPageNo() {
+		return pageNo;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
 	}
 	public int getCategory() {
 		return category;
