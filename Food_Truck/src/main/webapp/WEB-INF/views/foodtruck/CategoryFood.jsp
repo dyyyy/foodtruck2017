@@ -99,12 +99,12 @@
 									}
 									if (startPage > 1) {
 								%>
-								<li><a href="CategoryFood?pageNo=1">처음</a></li>
+								<li><a href="CategoryFood?pageNo=1&category=<%=request.getAttribute("categoryno")%>">처음</a></li>
 								<%
 									}
 									if (currentPage > 1) {
 								%>
-								<li><a href="CategoryFood?pageNo=<%=currentPage - 1%>"><i class="fa fa-angle-left"></i></a></li>
+								<li><a href="CategoryFood?pageNo=<%=currentPage - 1%>&category=<%=request.getAttribute("categoryno")%>"><i class="fa fa-angle-left"></i></a></li>
 								<%
 									}
 									for (int iCount = startPage; iCount <= endPage; iCount++) {
@@ -114,18 +114,18 @@
 								<%
 									} else {
 								%>
-								<li><a href="CategoryFood?pageNo=<%=iCount%>"><%=iCount%></a><li>
+								<li><a href="CategoryFood?pageNo=<%=iCount%>&category=<%=request.getAttribute("categoryno")%>"><%=iCount%></a><li>
 								<%
 									}
 									}
 									if (currentPage < totalPage) {
 								%>
-								<li><a href="CategoryFood?pageNo=<%=currentPage + 1%>"><i class="fa fa-angle-right"></i></a></li>
+								<li><a href="CategoryFood?pageNo=<%=currentPage + 1%>&category=<%=request.getAttribute("categoryno")%>"><i class="fa fa-angle-right"></i></a></li>
 								<%
 									}
 									if (endPage < totalPage) {
 								%>
-								<li><a href="CategoryFood?pageNo=<%=totalPage%>">끝</a></li>
+								<li><a href="CategoryFood?pageNo=<%=totalPage%>&category=<%=request.getAttribute("categoryno")%>">끝</a></li>
 								<%
 									}
 								%>

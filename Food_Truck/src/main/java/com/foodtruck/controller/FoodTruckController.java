@@ -61,6 +61,7 @@ public class FoodTruckController {
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
 	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
 		return "foodtruck/CategoryFood";
 	}
 
