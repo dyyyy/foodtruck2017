@@ -18,10 +18,11 @@
 		select ffft.* from
 		(select fft.*from
 		(select rownum as rnum, ft.*
-		from (select foodtruck.* from
+		from (select foodtruck.*
+		from
 		foodtruck where category=#{category} order by FTRUCK_REG) ft)fft
-		where rownum&lt;=#{pageNo}+9)ffft
-		where rnum>=#{pageNo}
+		where rownum &lt;=#{pageNo}+9)ffft
+		where rnum >=#{pageNo}
 	</select>
 
 	<!-- 푸드트럭 전체 리스트 -->
@@ -29,9 +30,11 @@
 		parameterType="int">
 		select ffft.* from
 		(select fft.*from
-		(select rownum as rnum, ft.*
+		(select rownum as
+		rnum, ft.*
 		from (select foodtruck.* from
-		foodtruck order by FTRUCK_REG) ft)fft
+		foodtruck order by FTRUCK_REG)
+		ft)fft
 		where rownum&lt;=#{pageNo}+9)ffft
 		where rnum>=#{pageNo}
 	</select>

@@ -42,8 +42,16 @@ public class FoodTruckController {
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
 	public String menuBoarPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request) throws Exception {
-		List<FoodTruckVO> list =fservice.getFoodTruckList(pageNo);//rownum된 푸드트럭 리스트
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+		}
+		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownum된 푸드트럭 리스트
+		;
 		 int pagecount=fservice.getCountTruck();//총 푸드트럭 개수
+		 System.out.println("페이지 번호"+pageNo);
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
 	     request.setAttribute("pagecount", pagecount);//총 페이지 수
