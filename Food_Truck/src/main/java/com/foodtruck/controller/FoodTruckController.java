@@ -63,7 +63,15 @@ public class FoodTruckController {
 	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
 		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		vo.setPageNo(pageNo);	
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
+		}
+		
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
 		int pagecount=fservice.getCategoryCountTruck(category);//ÃÑ ÇªµåÆ®·° °³¼ö
 		 request.setAttribute("pageNo", pageNo);
