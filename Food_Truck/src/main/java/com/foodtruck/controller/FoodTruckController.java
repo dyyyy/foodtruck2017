@@ -1,16 +1,22 @@
 package com.foodtruck.controller;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +31,9 @@ import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
+
+import com.sun.xml.internal.txw2.Document;
+import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference.Elements;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -48,13 +57,13 @@ public class FoodTruckController {
 		}else {
 			NpageNo=(pageNo-1)*10+1;
 		}
-		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownumµÈ ÇªµåÆ®·° ¸®½ºÆ®
+		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownumï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 		;
-		 int pagecount=fservice.getCountTruck();//ÃÑ ÇªµåÆ®·° °³¼ö
-		 System.out.println("ÆäÀÌÁö ¹øÈ£"+pageNo);
+		 int pagecount=fservice.getCountTruck();//ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		 System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£"+pageNo);
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
-	     request.setAttribute("pagecount", pagecount);//ÃÑ ÆäÀÌÁö ¼ö
+	     request.setAttribute("pagecount", pagecount);//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		return "foodtruck/menuBoard";
 	}
 
@@ -73,7 +82,7 @@ public class FoodTruckController {
 		}
 		
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
-		int pagecount=fservice.getCategoryCountTruck(category);//ÃÑ ÇªµåÆ®·° °³¼ö
+		int pagecount=fservice.getCategoryCountTruck(category);//ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
 	     request.setAttribute("pagecount", pagecount);
@@ -82,19 +91,19 @@ public class FoodTruckController {
 	}
 
 
-	// »ó¼¼Á¤º¸
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;//¸®ºä ÆòÁ¡ ÇÕ°è
-		double count = 0; //¸®ºä ¼ö
-		double total = 0; //ÇªµåÆ®·° ÃÑ ÆòÁ¡
-		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//ÇªµåÆ®·° Á¤º¸ È£Ãâ
+		double pyengjum = 0;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Õ°ï¿½
+		double count = 0; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		double total = 0; //Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
 		
-		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ¸®ºä Á¤º¸ È£Ãâ
-		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// »óÇ° Á¤º¸ È£Ãâ
+		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
+		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
 		if(Rlist.size()!=0) {
 			for (int i = 0; i < Rlist.size(); i++) {
 				double score = Rlist.get(i).getGrade();
@@ -113,83 +122,93 @@ public class FoodTruckController {
 		return "foodtruck/detail";
 	}
 	
-	//¿ÀÇÂ api¹Þ¾Æ¿À±â
+	//ï¿½ï¿½ï¿½ï¿½ apiï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 	   @RequestMapping("/api")
-	      public void inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	         
-	         request.setCharacterEncoding("utf-8");
-	         response.setContentType("text/html; charset=utf-8");
+	   public String inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		      //logger.info("PublicData2");
+		   List<ApiVO> list = new ArrayList<ApiVO>();
+		   
+		      request.setCharacterEncoding("utf-8");
+		      response.setContentType("text/html; charset=utf-8");
 
-	         String addr = "http://www.localdata.kr/platform/rest/24_87_01_P/openApi?authKey=";
-	         String serviceKey = "mqvI9PePHU5a4wcrdPyt2wCtulRkfOMEZCFVtKJNqaU=";
-	         String parameter = "";
-	         // serviceKey = URLEncoder.encode(serviceKey,"utf-8");
+		      String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?ServiceKey=";
+		      String serviceKey = "H%2F5lCacGTb8Gu0hK0t%2FZ%2BR04rZ7FtCgprC9i3gXHYFbGvnPOF1UikRkxLw07AXydV%2BN7SBJCExRUanyQ2DRgVQ%3D%3D";
+		      
+		      String parameter = "";
+		      // serviceKey = URLEncoder.encode(serviceKey,"utf-8");
+		      
+		      PrintWriter out = response.getWriter();
+		      Date date = new Date();
+		      SimpleDateFormat sdformat = new SimpleDateFormat("YYYYMMdd");
+		      String today = sdformat.format(date);//í˜„ìž¬ë‚ ì§œ
+		      // PrintWriter out = new PrintWriter(new OutputStream
+		      // Writer(response.getOutputStream(),"KSC5601"));
+		      // ServletOutputStream out = response.getOutputStream();
+		      parameter = parameter + "&" + "areaCode=1";
+		      parameter = parameter + "&" + "eventStartDate="+today;
+		      parameter = parameter + "&" + "eventEndDate=20181231";
+		      parameter = parameter + "&" + "pageNo=1&numOfRows=100";
+		      parameter = parameter + "&" + "arrange=B";
+		      parameter = parameter + "&" + "listYN=Y";
+		      parameter = parameter + "&" + "MobileOS=ETC";
+		      parameter = parameter + "&" + "MobileApp=aa";
+		      parameter = parameter + "&" + "_type=json";
 
-	         PrintWriter out = response.getWriter();
-	         // PrintWriter out = new PrintWriter(new OutputStream
-	         // Writer(response.getOutputStream(),"KSC5601"));
-	         // ServletOutputStream out = response.getOutputStream();
-	         //apiÁß °¡Á®¿Ã Á¶°ÇÀ» µî·ÏÇÏ±â ¿¹)¿µ¾÷ÁßÀÎ ÇªµåÆ®·°¸¸ °¡Á®¿À±â
-	         parameter = parameter + "&" + "state=01";
-	         parameter = parameter + "&" + "addrType=0";
-	         parameter = parameter + "&" + "resultType=json";
-	         parameter = parameter + "&" + "pageSize=1000";
+		      addr = addr + serviceKey + parameter;
+		      URL url = new URL(addr);
 
-	         addr = addr + serviceKey + parameter;
-	         URL url = new URL(addr);
+		      System.out.println(addr);
 
-	         System.out.println(addr);
+		      // BufferedReader in = new BufferedReader(new
+		      // InputStreamReader(url.openStream(), "UTF-8"));
 
-	         // BufferedReader in = new BufferedReader(new
-	         // InputStreamReader(url.openStream(), "UTF-8"));
+		      InputStream in = url.openStream();
+		      // CachedOutputStream bos = new CachedOutputStream();
+		      ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+		      IOUtils.copy(in, bos1);
+		      in.close();
+		      bos1.close();
 
-	         InputStream in = url.openStream();
-	         // CachedOutputStream bos = new CachedOutputStream();
-	         ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
-	         IOUtils.copy(in, bos1);
-	         in.close();
-	         bos1.close();
+		      String mbos = bos1.toString("UTF-8");
+		      System.out.println("mbos: " + mbos);
 
-	         String mbos = bos1.toString("UTF-8");
-	         System.out.println("mbos: " + mbos);
+		      byte[] b = mbos.getBytes("UTF-8");
+		      String s = new String(b, "UTF-8");
+		      out.println(s);
+		      System.out.println("s: " + s);
 
-	         byte[] b = mbos.getBytes("UTF-8");
-	         String s = new String(b, "UTF-8");
-	         out.println(s);
-	         System.out.println("s: " + s);
+		      JSONObject json = new JSONObject();
+		      json.put("data", s);
+		      // json.put("data", data);
+		      System.out.println("json: " + json);
 
-	         JSONObject json = new JSONObject();
-	         json.put("data", s);
-	         // json.put("data", data);
-	         System.out.println("json: " + json);
-	         //apiÀÇ ±¸Á¶
-	         JSONObject jso = json.getJSONObject("data");
-	         JSONObject js = jso.getJSONObject("result");
-	         JSONObject jj = js.getJSONObject("body");
-	         JSONObject items = jj.getJSONObject("rows");
-	         JSONArray jArray = items.getJSONArray("row");
-	         
-	         //¹Þ¾Æ¿Â api µ¥ÀÌÅÍ¸¦ list¿¡ ³Ö´Â ÀÛ¾÷
-	         List<ApiVO> list = new ArrayList<ApiVO>();
-	         for (int i = 0; i < list.size(); i++) {
-	            JSONObject a = jArray.getJSONObject(i);
-	            
-	            ApiVO vo = new ApiVO();
-	            vo.setBplcNm(a.getString("bplcNm"));
-	            vo.setSiteTel(a.getString("siteTel"));
-	            vo.setRdnWhlAddr(a.getString("rdnWhlAddr"));
-	            vo.setSiteWhlAddr(a.getString("siteWhlAddr"));
-	            vo.setApvPermYmd(a.getString("apvPermYmd"));
-	            vo.setDtlStateNm(a.getString("dtlStateNm"));
-	            vo.setX(a.getString("x"));
-	            vo.setY(a.getString("y"));
-	            list.add(vo);
-	         }
-	         //int i = service.inputAddr(list);
-	        
-	         for(int i=0;i<list.size();i++) {
-	            System.out.println(list.get(i).getBplcNm());
-	         }
-	   }       
+		      JSONObject jso = json.getJSONObject("data");
+		      JSONObject js = jso.getJSONObject("response");
+		      JSONObject jj = js.getJSONObject("body");
+		      JSONObject items = jj.getJSONObject("items");
+		      JSONArray jArray = items.getJSONArray("item");
+
+		      
+		      
+		      for (int j = 0; j < list.size(); j++) {
+		         JSONObject a = jArray.getJSONObject(j);
+		         
+		         ApiVO vo = new ApiVO();
+		         vo.setAddr1(a.getString("addr1"));
+		         vo.setTitle(a.getString("title"));
+		         vo.setMapx(a.getString("mapx"));
+		         vo.setMapy(a.getString("mapy"));
+		         vo.setEventstartdate(a.getString("eventstartdate"));
+		         vo.setEventenddate(a.getString("eventenddate"));
+		         vo.setTel(a.getString("tel"));
+		         
+		         list.add(vo);
+		      }
+		   
+		     // int i = service.inputAddr(list);
+		      //System.out.println(i);
+		      return "test";
+		   }
+	   
 
 }

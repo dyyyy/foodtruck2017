@@ -1,63 +1,64 @@
 package com.foodtruck.vo;
-//ÃÖÃÊ api¸¦ °¡Á®¿À´Â VOÀÔ´Ï´Ù.
+
 public class ApiVO {
-	private String bplcNm;//»ç¾÷Àå¸í
-	private String siteTel;//ÀüÈ­¹øÈ£
-	private String rdnWhlAddr;//µµ·Î¸íÁÖ¼Ò
-	private String siteWhlAddr;//±¸ÁÖ¼Ò
-	private String apvPermYmd;//ÇªµåÆ®·° µî·ÏÀÏ
-	private String dtlStateNm;//¿µ¾÷»óÅÂ
-	private String x;//À§µµ
-	private String y;//°æµµ
+	
+	private String addr1;//ì£¼ì†Œ
+	private String title;//ì œëª©
+	private String tel;//ì „í™”ë²ˆí˜¸
+	private String eventstartdate;//ì‹œì‘ì¼
+	private String eventenddate;//ì¢…ë£Œì¼
+	private String firstimage2;//ì¸ë„¤ì¼ ì´ë¯¸ì§€
+	private String mapx;
+	private String mapy;
 	
 	
-	public String getBplcNm() {
-		return bplcNm;
+	public String getAddr1() {
+		return addr1;
 	}
-	public void setBplcNm(String bplcNm) {
-		this.bplcNm = bplcNm;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
-	public String getSiteTel() {
-		return siteTel;
+	public String getTitle() {
+		return title;
 	}
-	public void setSiteTel(String siteTel) {
-		this.siteTel = siteTel;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getRdnWhlAddr() {
-		return rdnWhlAddr;
+	public String getTel() {
+		return tel;
 	}
-	public void setRdnWhlAddr(String rdnWhlAddr) {
-		this.rdnWhlAddr = rdnWhlAddr;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
-	public String getSiteWhlAddr() {
-		return siteWhlAddr;
+	public String getEventstartdate() {
+		return eventstartdate;
 	}
-	public void setSiteWhlAddr(String siteWhlAddr) {
-		this.siteWhlAddr = siteWhlAddr;
+	public void setEventstartdate(String eventstartdate) {
+		this.eventstartdate = eventstartdate;
 	}
-	public String getApvPermYmd() {
-		return apvPermYmd;
+	public String getEventenddate() {
+		return eventenddate;
 	}
-	public void setApvPermYmd(String apvPermYmd) {
-		this.apvPermYmd = apvPermYmd;
+	public void setEventenddate(String eventenddate) {
+		this.eventenddate = eventenddate;
 	}
-	public String getDtlStateNm() {
-		return dtlStateNm;
+	public String getFirstimage2() {
+		return firstimage2;
 	}
-	public void setDtlStateNm(String dtlStateNm) {
-		this.dtlStateNm = dtlStateNm;
+	public void setFirstimage2(String firstimage2) {
+		this.firstimage2 = firstimage2;
 	}
-	public String getX() {
-		return x;
+	public String getMapx() {
+		return mapx;
 	}
-	public void setX(String x) {
-		this.x = x;
+	public void setMapx(String mapx) {
+		this.mapx = mapx;
 	}
-	public String getY() {
-		return y;
+	public String getMapy() {
+		return mapy;
 	}
-	public void setY(String y) {
-		this.y = y;
+	public void setMapy(String mapy) {
+		this.mapy = mapy;
 	}
 	
 	
