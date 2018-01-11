@@ -61,6 +61,26 @@ public class FoodTruckController {
 		return "foodtruck/menuBoard";
 	}
 
+	// FoodTruck 바둑판 List
+	@RequestMapping("/menuBoard2")
+	public String menuBoardPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request)throws Exception {
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+		}
+		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownum된 푸드트럭 리스트
+		;
+		 int pagecount=fservice.getCountTruck();//총 푸드트럭 개수
+		 System.out.println("페이지 번호"+pageNo);
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+	     request.setAttribute("pagecount", pagecount);//총 페이지 수
+	     
+		return "foodtruck/menuBoard2";
+	}
+	
 	// CategoryFood
 	@RequestMapping("/CategoryFood")
 	public String korFoodPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request,
