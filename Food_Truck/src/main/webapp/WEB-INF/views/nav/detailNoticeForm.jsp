@@ -1,58 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-</head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script>
+	$(function() {
+		
+	});
+</script>
 
+</head>
 <jsp:include page="../comm/header.jsp"></jsp:include>
 
 <body>
 
 <%@include file="../comm/nav.jsp" %>
 
-
 	<div class="featured-product section fix">
 		<div class="container">
-			<!-- notice title -->
+		<!-- notice title -->
 			<div class="section-title" style="text-align: left">
 				<h2 style="font-size: 30px">Notice</h2>
 				<div class="underline" style="margin: 0px; width: 200px;"></div>
 			</div>
-			
-			<!-- notice -->
-			<table class="table notice-main">
+		
+		
+			<table class="table">
 				<tr>
-					<th>글번호</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>조회수</th>
-					<th>등록일</th>
+					<td colspan=3>${vo.noticeTitle}</td>
 				</tr>
-				<c:forEach var="rank" items="${rank}">
-					<tr>
-						<td>${rank.noticeNo }</td>
-						<td><a href="/detailNoticeForm?noticeNo=${rank.noticeNo}">${rank.noticeTitle}</a></td>
-						<td>${rank.noticeWriter}</td>
-						<td>${rank.noticeCnt}</td>
-						<td>${rank.regDate}</td>
-					</tr>
-				</c:forEach>
+				<tr>
+					<th>등록일</th>
+					<td>${vo.regDate}</td>
+					<th>조회수</th>
+					<td>${vo.noticeCnt}</td>
+				</tr>
+				<tr>
+					<td colspan=2 class="notice-content">${vo.noticeContent}</td>
+				</tr>
+				<tr>
+					<th>작성자</th>
+					<td>${vo.noticeWriter}</td>
+				</tr>
 			</table>
-			<%
-				//로그인 체크!
-				if (mvo != null) {
-					isLogin = true;
-					if(mvo.getMemberAuth().equals("1")) {
-			%>
-				<button onclick="location.href='/writeNoticeForm'" style="margin-right:0px">글쓰기</button>
-			<% }} %>
+			<button onclick="location.href='/updateNoticeForm?noticeNo=${vo.noticeNo}'">수정</button>
+			<button id=delete onclick="location.href='/deleteNotice?noticeNo=${vo.noticeNo}'">삭제</button>
+			<button onclick="location.href='/noticeBoard'">목록</button>
+			
+			
 		</div>
 	</div>
 
+
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
+
 </body>
 </html>

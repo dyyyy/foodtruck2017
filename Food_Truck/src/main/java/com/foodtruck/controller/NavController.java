@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class NavController {
-
+	
+/*
 	// 공지사항
 	@RequestMapping("/noticeBoard")
 	public String noticeBoardPage() {
 		return "nav/noticeBoard";
 	}
-
+*/
 	// 이벤트
 	@RequestMapping("/eventBoard")
 	public String eventBoardPage() {
