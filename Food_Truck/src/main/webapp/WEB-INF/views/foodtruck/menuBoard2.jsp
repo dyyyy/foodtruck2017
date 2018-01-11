@@ -10,60 +10,52 @@
 <body>
 
 	<%@include file="../comm/nav.jsp"%>
-
-
-	<!-- Shop Product Area Start -->
 	<div class="shop-product-area section fix">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-9">
-					<div class="row">
-						<!-- Shop Tool Bar -->
-						<div class="shop-tool-bar col-sm-12 fix">
-							<div class="view-mode">
-								<a href="/menuBoard2?pageNo=1"><i class="fa fa-th"></i></a> 
-								<a href="/menuBoard?pageNo=1" class="active">
-								<i class="fa fa-th-list"></i></a>
-							</div>
-							<div class="sort-by">
-								<span>Sort By</span> <select name="sort-by">
-									<option selected="selected" value="mercede">price:
-										Lower</option>
-									<option value="saab">price(low&gt;high)</option>
-									<option value="mercedes">price(high &gt; low)</option>
-									<option value="audi">rating(highest)</option>
-								</select>
-							</div>
-							<div class="show-product">
-								<span>Show</span> <select name="sort-by">
-									<option selected="selected" value="mercede">16</option>
-									<option value="saab">20</option>
-									<option value="mercedes">24</option>
-								</select> <span>Per Page</span>
-							</div>
-							<div class="pro-Showing">
-								<span>Showing 1 - 12 of 16 items</span>
-							</div>
+		<div class="container">	
+			<div class="col-md-9">
+				<div class="row">
+					<div class="shop-tool-bar col-sm-12 fix">
+						<div class="view-mode">
+							<a href="/menuBoard2?pageNo=1" class="active"><i class="fa fa-th"></i></a>
+							<a href="/menuBoard?pageNo=1"><i class="fa fa-th-list"></i></a>
 						</div>
-						<div class="shop-products">
-							<!-- Single Product -->
+						<div class="sort-by">
+							<span>Sort By</span>
+							<select name="sort-by">
+								<option selected="selected" value="mercede">price: Lower</option>
+								<option value="saab">price(low&gt;high)</option>
+								<option value="mercedes">price(high &gt; low)</option>
+								<option value="audi">rating(highest)</option>
+							</select>
+						</div>
+					</div>
+					<div class="shop-products">
+							<!-- Single Product Start -->
 							<c:forEach items="${list}" var="all">
-								<div class="single-list-product col-sm-12">
-									<div class="list-pro-image">
-										<a href="/read?licenseNo=${all.licenseNo}"> <img
-											src="/resources/img/foodtruck/${all.ftruckImg}">
+							<div class="col-sm-4 fix">
+								<div class="product-item fix">
+									<div class="product-img-hover">
+										<!-- Product image -->
+										<a href="/read?ftruckNo=${all.ftruckNo}">
+											<img src="/resources/img/foodtruck/${all.ftruckImg}" />
 										</a>
 									</div>
-									<div class="list-pro-des fix">
-										<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
-										<div class="pro-ratting">
-											<i class="fa fa-star on"></i> <i class="fa fa-star on"></i> <i
-												class="fa fa-star on"></i> <i class="fa fa-star on"></i> <i
-												class="fa fa-star-half-o on"></i>
+									<div class="pro-name-price-ratting">
+										<!-- Product Name -->
+										<div class="pro-name">
+											<a href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
 										</div>
-										<p>${all.ftruckIntro}</p>
+										<!-- Product Ratting -->
+										<div class="pro-ratting">
+											<i class="on fa fa-star"></i>
+											<i class="on fa fa-star"></i>
+											<i class="on fa fa-star"></i>
+											<i class="on fa fa-star"></i>
+											<i class="on fa fa-star-half-o"></i>
+										</div>
 									</div>
 								</div>
+							</div><!-- Single Product End -->
 							</c:forEach>
 							<!-- Pagination -->
 							<div class="pagination">
@@ -97,12 +89,12 @@
 									}
 									if (startPage > 1) {
 								%>
-								<li><a href="menuBoard?pageNo=1">처음</a></li>
+								<li><a href="menuBoard2?pageNo=1">처음</a></li>
 								<%
 									}
 									if (currentPage > 1) {
 								%>
-								<li><a href="menuBoard?pageNo=<%=currentPage - 1%>"><i class="fa fa-angle-left"></i></a></li>
+								<li><a href="menuBoard2?pageNo=<%=currentPage - 1%>"><i class="fa fa-angle-left"></i></a></li>
 								<%
 									}
 									for (int iCount = startPage; iCount <= endPage; iCount++) {
@@ -112,18 +104,18 @@
 								<%
 									} else {
 								%>
-								<li><a href="menuBoard?pageNo=<%=iCount%>"><%=iCount%></a><li>
+								<li><a href="menuBoard2?pageNo=<%=iCount%>"><%=iCount%></a><li>
 								<%
 									}
 									}
 									if (currentPage < totalPage) {
 								%>
-								<li><a href="menuBoard?pageNo=<%=currentPage + 1%>"><i class="fa fa-angle-right"></i></a></li>
+								<li><a href="menuBoard2?pageNo=<%=currentPage + 1%>"><i class="fa fa-angle-right"></i></a></li>
 								<%
 									}
 									if (endPage < totalPage) {
 								%>
-								<li><a href="menuBoard?pageNo=<%=totalPage%>">끝</a></li>
+								<li><a href="menuBoard2?pageNo=<%=totalPage%>">끝</a></li>
 								<%
 									}
 								%>
@@ -134,7 +126,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- Shop Product Area End -->
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
