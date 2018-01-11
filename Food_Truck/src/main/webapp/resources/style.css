@@ -4531,3 +4531,13 @@ h4.heading {
 	color: #888;
 	overflow: hidden;
 }
+
+.notice-content {
+	height:400px;
+}
+
+.table th {
+	background-color: #D5D5D5;
+	width:60px;
+	text-align:center;   
+}
