@@ -8,10 +8,17 @@ public class ApiVO {
 	private String eventstartdate;//시작일
 	private String eventenddate;//종료일
 	private String firstimage2;//썸네일 이미지
-	private String mapx;
-	private String mapy;
+	private String firstimage;//대표 이미지
+	private String mapx;//위도
+	private String mapy;//경도
 	
 	
+	public String getFirstimage() {
+		return firstimage;
+	}
+	public void setFirstimage(String firstimage) {
+		this.firstimage = firstimage;
+	}
 	public String getAddr1() {
 		return addr1;
 	}

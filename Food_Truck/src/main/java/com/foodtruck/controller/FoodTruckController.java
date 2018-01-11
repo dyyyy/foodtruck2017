@@ -1,10 +1,7 @@
 package com.foodtruck.controller;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -16,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.jsoup.Jsoup;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,15 +31,9 @@ import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
 
-import com.sun.xml.internal.txw2.Document;
-import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference.Elements;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 @Controller
 public class FoodTruckController {
-	//dd
+	// dd
 	@Autowired
 	private FoodTruckService fservice;
 	@Autowired
@@ -50,70 +43,71 @@ public class FoodTruckController {
 
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
-	public String menuBoarPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request) throws Exception {
-		int NpageNo=0;
-		if(pageNo==1) {
-			pageNo=1;
-		}else {
-			NpageNo=(pageNo-1)*10+1;
+	public String menuBoarPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
+			throws Exception {
+		int NpageNo = 0;
+		if (pageNo == 1) {
+			pageNo = 1;
+		} else {
+			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);// rownum�� Ǫ��Ʈ�� ����Ʈ
 		;
-		 int pagecount=fservice.getCountTruck();//�� Ǫ��Ʈ�� ����
-		 System.out.println("������ ��ȣ"+pageNo);
-		 request.setAttribute("pageNo", pageNo);
-		 request.setAttribute("list",list);
-	     request.setAttribute("pagecount", pagecount);//�� ������ ��
+		int pagecount = fservice.getCountTruck();// �� Ǫ��Ʈ�� ����
+		System.out.println("������ ��ȣ" + pageNo);
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("list", list);
+		request.setAttribute("pagecount", pagecount);// �� ������ ��
 		return "foodtruck/menuBoard";
 	}
 
 	// CategoryFood
 	@RequestMapping("/CategoryFood")
-	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
-		PageVO vo =new PageVO();
+	public String korFoodPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request,
+			@RequestParam("category") int category) throws Exception {
+		PageVO vo = new PageVO();
 		vo.setCategory(category);
-		int NpageNo=0;
-		if(pageNo==1) {
-			pageNo=1;
-			vo.setPageNo(pageNo);	
-		}else {
-			NpageNo=(pageNo-1)*10+1;
-			vo.setPageNo(NpageNo);	
+		int NpageNo = 0;
+		if (pageNo == 1) {
+			pageNo = 1;
+			vo.setPageNo(pageNo);
+		} else {
+			NpageNo = (pageNo - 1) * 10 + 1;
+			vo.setPageNo(NpageNo);
 		}
-		
-		List<FoodTruckVO> list=fservice.getCategoryList(vo);
-		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
-		 request.setAttribute("pageNo", pageNo);
-		 request.setAttribute("list",list);
-	     request.setAttribute("pagecount", pagecount);
-	     request.setAttribute("categoryno", category);
+
+		List<FoodTruckVO> list = fservice.getCategoryList(vo);
+		int pagecount = fservice.getCategoryCountTruck(category);// �� Ǫ��Ʈ�� ����
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("list", list);
+		request.setAttribute("pagecount", pagecount);
+		request.setAttribute("categoryno", category);
 		return "foodtruck/CategoryFood";
 	}
-
 
 	// ������
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;//���� ���� �հ�
-		double count = 0; //���� ��
-		double total = 0; //Ǫ��Ʈ�� �� ����
-		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//Ǫ��Ʈ�� ���� ȣ��
-		if(vo.getFtruckAddr()==null) {
+		double pyengjum = 0;// ���� ���� �հ�
+		double count = 0; // ���� ��
+		double total = 0; // Ǫ��Ʈ�� �� ����
+		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);// Ǫ��Ʈ�� ���� ȣ��
+		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-		
+
 		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ���� ���� ȣ��
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ��ǰ ���� ȣ��
-		if(Rlist.size()!=0) {
+		if (Rlist.size() != 0) {
 			for (int i = 0; i < Rlist.size(); i++) {
 				double score = Rlist.get(i).getGrade();
 				pyengjum += score;
 				count = Rlist.size();
 				total = pyengjum / count;
-				total = Double.parseDouble(String.format("%.2f",total));
-			}	
-		}else {
-			total=0;		
+				total = Double.parseDouble(String.format("%.2f", total));
+			}
+		} else {
+			total = 0;
 		}
 		vo.setFtruckGrade(total);
 		request.setAttribute("vo", vo);
@@ -121,94 +115,96 @@ public class FoodTruckController {
 		request.setAttribute("product", Plist);
 		return "foodtruck/detail";
 	}
-	
-	//���� api�޾ƿ���
-	   @RequestMapping("/api")
-	   public String inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		      //logger.info("PublicData2");
-		   List<ApiVO> list = new ArrayList<ApiVO>();
-		   
-		      request.setCharacterEncoding("utf-8");
-		      response.setContentType("text/html; charset=utf-8");
 
-		      String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?ServiceKey=";
-		      String serviceKey = "H%2F5lCacGTb8Gu0hK0t%2FZ%2BR04rZ7FtCgprC9i3gXHYFbGvnPOF1UikRkxLw07AXydV%2BN7SBJCExRUanyQ2DRgVQ%3D%3D";
-		      
-		      String parameter = "";
-		      // serviceKey = URLEncoder.encode(serviceKey,"utf-8");
-		      
-		      PrintWriter out = response.getWriter();
-		      Date date = new Date();
-		      SimpleDateFormat sdformat = new SimpleDateFormat("YYYYMMdd");
-		      String today = sdformat.format(date);//현재날짜
-		      // PrintWriter out = new PrintWriter(new OutputStream
-		      // Writer(response.getOutputStream(),"KSC5601"));
-		      // ServletOutputStream out = response.getOutputStream();
-		      parameter = parameter + "&" + "areaCode=1";
-		      parameter = parameter + "&" + "eventStartDate="+today;
-		      parameter = parameter + "&" + "eventEndDate=20181231";
-		      parameter = parameter + "&" + "pageNo=1&numOfRows=100";
-		      parameter = parameter + "&" + "arrange=B";
-		      parameter = parameter + "&" + "listYN=Y";
-		      parameter = parameter + "&" + "MobileOS=ETC";
-		      parameter = parameter + "&" + "MobileApp=aa";
-		      parameter = parameter + "&" + "_type=json";
+	@RequestMapping("/api")
+	public String inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// logger.info("PublicData2");
 
-		      addr = addr + serviceKey + parameter;
-		      URL url = new URL(addr);
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 
-		      System.out.println(addr);
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?ServiceKey=";
+		String serviceKey = "H%2F5lCacGTb8Gu0hK0t%2FZ%2BR04rZ7FtCgprC9i3gXHYFbGvnPOF1UikRkxLw07AXydV%2BN7SBJCExRUanyQ2DRgVQ%3D%3D";
 
-		      // BufferedReader in = new BufferedReader(new
-		      // InputStreamReader(url.openStream(), "UTF-8"));
+		String parameter = "";
+		// serviceKey = URLEncoder.encode(serviceKey,"utf-8");
 
-		      InputStream in = url.openStream();
-		      // CachedOutputStream bos = new CachedOutputStream();
-		      ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
-		      IOUtils.copy(in, bos1);
-		      in.close();
-		      bos1.close();
+		PrintWriter out = response.getWriter();
+		Date date = new Date();
+		SimpleDateFormat sdformat = new SimpleDateFormat("YYYYMMdd");
+		String today = sdformat.format(date);// �쁽�옱�궇吏�
+		// PrintWriter out = new PrintWriter(new OutputStream
+		// Writer(response.getOutputStream(),"KSC5601"));
+		// ServletOutputStream out = response.getOutputStream();
+		parameter = parameter + "&" + "areaCode=1";
+		parameter = parameter + "&" + "cat1=A02";
+		parameter = parameter + "&" + "cat2=A0207";
+		parameter = parameter + "&" + "eventStartDate=" + today;
+		parameter = parameter + "&" + "eventEndDate=20191231";
+		parameter = parameter + "&" + "pageNo=1&numOfRows=100";
+		parameter = parameter + "&" + "arrange=B";
+		parameter = parameter + "&" + "listYN=Y";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=aa";
+		parameter = parameter + "&" + "_type=json";
 
-		      String mbos = bos1.toString("UTF-8");
-		      System.out.println("mbos: " + mbos);
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
 
-		      byte[] b = mbos.getBytes("UTF-8");
-		      String s = new String(b, "UTF-8");
-		      out.println(s);
-		      System.out.println("s: " + s);
+		System.out.println(addr);
 
-		      JSONObject json = new JSONObject();
-		      json.put("data", s);
-		      // json.put("data", data);
-		      System.out.println("json: " + json);
+		// BufferedReader in = new BufferedReader(new
+		// InputStreamReader(url.openStream(), "UTF-8"));
 
-		      JSONObject jso = json.getJSONObject("data");
-		      JSONObject js = jso.getJSONObject("response");
-		      JSONObject jj = js.getJSONObject("body");
-		      JSONObject items = jj.getJSONObject("items");
-		      JSONArray jArray = items.getJSONArray("item");
+		InputStream in = url.openStream();
+		// CachedOutputStream bos = new CachedOutputStream();
+		ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+		IOUtils.copy(in, bos1);
+		in.close();
+		bos1.close();
 
-		      
-		      
-		      for (int j = 0; j < list.size(); j++) {
-		         JSONObject a = jArray.getJSONObject(j);
-		         
-		         ApiVO vo = new ApiVO();
-		         vo.setAddr1(a.getString("addr1"));
-		         vo.setTitle(a.getString("title"));
-		         vo.setMapx(a.getString("mapx"));
-		         vo.setMapy(a.getString("mapy"));
-		         vo.setEventstartdate(a.getString("eventstartdate"));
-		         vo.setEventenddate(a.getString("eventenddate"));
-		         vo.setTel(a.getString("tel"));
-		         
-		         list.add(vo);
-		      }
-		   
-		     // int i = service.inputAddr(list);
-		      //System.out.println(i);
-		      return "test";
-		   }
-	   
+		String mbos = bos1.toString("UTF-8");
 
+		byte[] b = mbos.getBytes("UTF-8");
+		String s = new String(b, "UTF-8");
+		out.println(s);
+
+		/* json parsing */
+
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(s);
+		JSONObject json = (JSONObject) obj;
+
+		// json.put("data", data);
+
+		JSONObject js = (JSONObject) json.get("response");
+		JSONObject jj = (JSONObject) js.get("body");
+		JSONObject items = (JSONObject) jj.get("items");
+		JSONArray jArray = (JSONArray) items.get("item");
+
+		List<ApiVO> list = new ArrayList<ApiVO>();
+		for (int j = 0; j < jArray.size(); j++) {
+			JSONObject a = (JSONObject) jArray.get(j);
+			ApiVO vo = new ApiVO();
+
+			vo.setAddr1(a.get("addr1").toString());
+			vo.setTitle(a.get("title").toString());
+			vo.setMapx(a.get("mapx").toString());
+			vo.setMapy(a.get("mapy").toString());
+			vo.setEventstartdate(a.get("eventstartdate").toString());
+			vo.setEventenddate(a.get("eventenddate").toString());
+			vo.setTel(a.get("tel").toString());
+			vo.setFirstimage(a.get("firstimage").toString());
+			vo.setFirstimage2(a.get("firstimage2").toString());
+			list.add(vo);
+
+		}
+		for (int j = 0; j < list.size(); j++) {
+
+			System.out.println("list:" + list.get(j).getFirstimage());
+
+		}
+		
+		return "nav/recommend";
+	}
 }
