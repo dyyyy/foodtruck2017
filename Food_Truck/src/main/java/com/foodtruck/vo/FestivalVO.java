@@ -1,6 +1,6 @@
 package com.foodtruck.vo;
 
-public class ApiVO {
+public class FestivalVO {
 	
 	private String addr1;//주소
 	private String title;//제목

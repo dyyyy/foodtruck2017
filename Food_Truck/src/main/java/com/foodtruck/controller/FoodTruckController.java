@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
-import com.foodtruck.vo.ApiVO;
+import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
@@ -61,7 +61,7 @@ public class FoodTruckController {
 		return "foodtruck/menuBoard";
 	}
 
-	// FoodTruck ¹ÙµÏÆÇ List
+	// FoodTruck ï¿½Ùµï¿½ï¿½ï¿½ List
 	@RequestMapping("/menuBoard2")
 	public String menuBoardPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request)throws Exception {
 		int NpageNo=0;
@@ -70,13 +70,13 @@ public class FoodTruckController {
 		}else {
 			NpageNo=(pageNo-1)*10+1;
 		}
-		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownumµÈ ÇªµåÆ®·° ¸®½ºÆ®
+		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownumï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 		;
-		 int pagecount=fservice.getCountTruck();//ÃÑ ÇªµåÆ®·° °³¼ö
-		 System.out.println("ÆäÀÌÁö ¹øÈ£"+pageNo);
+		 int pagecount=fservice.getCountTruck();//ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		 System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£"+pageNo);
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
-	     request.setAttribute("pagecount", pagecount);//ÃÑ ÆäÀÌÁö ¼ö
+	     request.setAttribute("pagecount", pagecount);//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	     
 		return "foodtruck/menuBoard2";
 	}
@@ -139,7 +139,7 @@ public class FoodTruckController {
 	@RequestMapping("/api")
 	public String inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// logger.info("PublicData2");
-		List<ApiVO> list = new ArrayList<ApiVO>();
+		List<FestivalVO> list = new ArrayList<FestivalVO>();
 		int num[] = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32 };
 
 		for (int q = 0; q < num.length; q++) {
@@ -210,7 +210,7 @@ public class FoodTruckController {
 
 				for (int j = 0; j < jArray.size(); j++) {
 					JSONObject a = (JSONObject) jArray.get(j);
-					ApiVO vo = new ApiVO();
+					FestivalVO vo = new FestivalVO();
 					vo.setAddr1(a.get("addr1").toString());
 					vo.setTitle(a.get("title").toString());
 					vo.setMapx(a.get("mapx").toString());
