@@ -13,12 +13,17 @@ public class NavController {
 		return "nav/noticeBoard";
 	}
 */
+
+	
+/*	
 	// 이벤트
 	@RequestMapping("/eventBoard")
 	public String eventBoardPage() {
 		return "nav/eventBoard";
 	}
-
+*/
+	
+	
 	// 1:1 문의
 	@RequestMapping("/inquiry")
 	public String inquiryPage() {

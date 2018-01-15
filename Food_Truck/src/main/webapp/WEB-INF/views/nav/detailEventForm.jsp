@@ -24,7 +24,7 @@
 		<div class="container">
 		<!-- notice title -->
 			<div class="section-title" style="text-align: left">
-				<h2 style="font-size: 30px">Notice</h2>
+				<h2 style="font-size: 30px">Event</h2>
 				<div class="underline" style="margin: 0px; width: 200px;"></div>
 			</div>
 		
@@ -48,9 +48,9 @@
 					<td>${vo.noticeWriter}</td>
 				</tr>
 			</table>
-			<button onclick="location.href='/updateNoticeForm?noticeNo=${vo.noticeNo}'">수정</button>
-			<button id=delete onclick="location.href='/deleteNotice?noticeNo=${vo.noticeNo}'">삭제</button>
-			<button onclick="location.href='/noticeBoard'">목록</button>
+			<button onclick="location.href='/updateEventForm?noticeNo=${vo.noticeNo}'">수정</button>
+			<button id=delete onclick="location.href='/deleteEvent?noticeNo=${vo.noticeNo}'">삭제</button>
+			<button onclick="location.href='/eventBoard'">목록</button>
 			
 			
 		</div>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodtruck.dao.EventDAO">
+
+
+	<!-- 이벤트 정보 -->
+	<select id="getEvent" resultMap="EventMap">
+		select * from event_bd where notice_no=#{noticeNo}
+	</select>
+
+
+	<!-- 이벤트 전체 리스트 -->
+	<select id="getEventBoardList" resultMap="EventMap">
+		SELECT * FROM event_bd order by notice_no desc
+	</select>
+	
+
+	<!-- 이벤트 등록 -->
+	<insert id="insertEvent" parameterType="com.foodtruck.vo.EventVO">
+		insert into event_bd (notice_no, mem_id, notice_title, notice_writer, notice_content) 
+		values((select NVL(MAX(notice_no)+1, 1)FROM event_bd), #{memberId}, #{noticeTitle}, #{noticeWriter}, #{noticeContent})
+	</insert>
+
+
+	<!-- 이벤트 수정 -->	
+	<update id="updateEvent" parameterType="com.foodtruck.vo.EventVO">
+		update event_bd set notice_title=#{noticeTitle}, notice_content=#{noticeContent}, notice_writer=#{noticeWriter}
+		where notice_no=#{noticeNo}
+	</update>
+	
+	
+	<!-- 이벤트 조회수 -->
+	<update id="countEvent" parameterType="int">
+ 		update event_bd set notice_cnt=notice_cnt+1 where notice_no=#{noticeNo}
+ 	</update>
+ 	
+ 	
+ 	<!-- 이벤트 삭제 -->
+ 	<delete id="deleteEvent" parameterType="com.foodtruck.vo.EventVO">
+ 		delete from event_bd where notice_no=#{noticeNo}
+ 	</delete>
+ 	
+ 	
+ 	<!-- resultMap -->
+	<resultMap type="EventVO" id="EventMap">
+		<result column="NOTICE_NO" property="noticeNo"/>
+		<result column="NOTICE_TITLE" property="noticeTitle"/>
+		<result column="NOTICE_WRITER" property="noticeWriter"/>
+		<result column="NOTICE_CONTENT" property="noticeContent"/>
+		<result column="NOTICE_REG" property="noticeReg"/>
+		<result column="NOTICE_CNT" property="noticeCnt"/>
+	
+	</resultMap>
+	
+	
+</mapper>
