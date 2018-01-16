@@ -38,7 +38,7 @@
 						<td><a href="/detailNoticeForm?noticeNo=${rank.noticeNo}">${rank.noticeTitle}</a></td>
 						<td>${rank.noticeWriter}</td>
 						<td>${rank.noticeCnt}</td>
-						<td>${rank.regDate}</td>
+						<td>${rank.noticeReg}</td>
 					</tr>
 				</c:forEach>
 			</table>
