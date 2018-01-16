@@ -6,21 +6,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-	// °ü¸®ÀÚ ¸Þ´º - ÀÏÁ¤°ü¸®
-	@RequestMapping("/adminCalendar")
-	public String adminFoodTruckPage() {
-		return "admin/calendar";
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	@RequestMapping("/stute")
+	public String stute() {
+		return "admin/stute";
 	}
-	
-	// °ü¸®ÀÚ ¸Þ´º - Â÷Æ®
-	@RequestMapping("/adminChart")
-	public String adminChart() {
-		return "admin/chart";
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½Æ®
+	@RequestMapping("/sellerQnA")
+	public String sellerQnA() {
+		return "admin/sellerQnA";
 	}
-	
-	// °ü¸®ÀÚ ¸Þ´º - Åë°è ? 
-	@RequestMapping("/adminMain")
-	public String adminMain() {
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½ï¿½ ?
+	@RequestMapping("/memberQnA")
+	public String memberQnA() {
+		return "admin/memberQnA";
+	}
+
+	@RequestMapping("/festival")
+	public String festival() {
+		return "admin/festival";
+	}
+	@RequestMapping("/admin")
+	public String admin() {
 		return "admin/main";
 	}
 }

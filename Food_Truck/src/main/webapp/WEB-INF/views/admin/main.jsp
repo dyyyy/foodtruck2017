@@ -12,41 +12,27 @@
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li class="active">
-                            <a href="/adminMain"><i class="icon-chevron-right"></i> Dashboard</a>
+                    	<li class="active">
+                            <a href="/admin"><i class="icon-chevron-right"></i>메인</a>
                         </li>
                         <li>
-                            <a href="/adminCalendar"><i class="icon-chevron-right"></i> Calendar</a>
+                            <a href="/stute"><i class="icon-chevron-right"></i>푸드트럭 현황&상태</a>
                         </li>
                         <li>
-                            <a href="/adminChart"><i class="icon-chevron-right"></i> Statistics (Charts)</a>
+                            <a href="/sellerQnA"><i class="icon-chevron-right"></i>판매자 게시판</a>
+                        </li>
+                        <li>
+                            <a href="/memberQnA"><i class="icon-chevron-right"></i>Q&A</a>
+                        </li>
+                        <li>
+                            <a href="/festival"><i class="icon-chevron-right"></i>축제관리</a>
                         </li>
                     </ul>
                 </div>
                 
                 <!--/span-->
                 <div class="span9" id="content">
-                    <div class="row-fluid">
-                        <div class="alert alert-success">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <h4>Success</h4>
-                        	The operation completed successfully</div>
-                        	<div class="navbar">
-                            	<div class="navbar-inner">
-	                                <ul class="breadcrumb">
-	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <li>
-	                                        <a href="#">Dashboard</a> <span class="divider">/</span>	
-	                                    </li>
-	                                    <li>
-	                                        <a href="#">Settings</a> <span class="divider">/</span>	
-	                                    </li>
-	                                    <li class="active">Tools</li>
-	                                </ul>
-                            	</div>
-                        	</div>
-                    	</div>
+                    
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">

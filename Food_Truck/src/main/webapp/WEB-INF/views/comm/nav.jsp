@@ -87,7 +87,7 @@
 								<ul>
 									<li><a href="/adminMember">회원 관리</a></li>
 									<li><a href="/adminSeller">판매자 관리</a></li>
-									<li><a href="/adminCalendar">푸드트럭 관리</a></li>
+									<li><a href="/admin">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;

@@ -43,7 +43,7 @@
 					
 					if(mvo.getMemberAuth().equals("1")) {
 				%>
-					<a class="brand" href="#">Admin Page</a>
+					<a class="brand" href="/admin">관리자</a>
 				<%
 					} else if(mvo.getMemberAuth().equals("2")) {
 				%>
