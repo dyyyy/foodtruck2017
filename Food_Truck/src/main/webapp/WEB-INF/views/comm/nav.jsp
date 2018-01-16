@@ -37,8 +37,8 @@
 							
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="/noticeBoard">공지사항</a></li>
-									<li><a href="/eventBoard">이벤트</a></li>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
 								</ul>
 							</li>
@@ -100,8 +100,8 @@
 							%>
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="/noticeBoard">공지사항</a></li>
-									<li><a href="/eventBoard">이벤트</a></li>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
 								</ul>
 							</li>

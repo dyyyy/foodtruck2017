@@ -26,19 +26,29 @@ public class NoticeController {
 	@Autowired
 	MemberService memberService;
 	
-	// °øÁö»çÇ×
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/noticeBoard")
-	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request) {
-		List<NoticeVO> list = noticeService.getNoticeBoardList();
-		
+	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request,@RequestParam("pageNo") int pageNo) throws Exception {
+		//í˜ì´ì§•ì²˜ë¦¬
+		int NpageNo = 0;
+		if (pageNo == 1) {
+			pageNo = 1;
+		} else {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		List<NoticeVO> list = noticeService.getNoticeBoardList(NpageNo);
 		if(list != null) {
 			model.addAttribute("rank", list);
 		}
+		int count=noticeService.getCountNotice();
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("pagecount", count);
+		
 		
 		return "nav/noticeBoard";
 	}
 	
-	// °øÁö»çÇ× »ó¼¼
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping("/detailNoticeForm")
 	public String detailNoticeForm(@RequestParam("noticeNo")int noticeNo, HttpServletRequest request) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
@@ -46,20 +56,20 @@ public class NoticeController {
 		
 		request.setAttribute("vo", vo);
 		
-		noticeService.countNotice(vo.getNoticeNo()); // Á¶È¸¼ö
+		noticeService.countNotice(vo.getNoticeNo()); // ï¿½ï¿½È¸ï¿½ï¿½
 		
 		return "nav/detailNoticeForm";
 	}
 	
 	
-	// °øÁö»çÇ× ±Û¾²±â
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½
 	@RequestMapping("/writeNoticeForm")
 	public String writeNotice() {
 		return "nav/writeNoticeForm";
 	}
 	
 	
-	// °øÁö»çÇ× µî·Ï
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping("/insertNotice")
 	public String insertNotice(HttpSession session, NoticeVO vo, MemberVO mvo) {
 		
@@ -69,11 +79,11 @@ public class NoticeController {
 //		vo.setMemberId(mvo.getMemberId());
 		
 		noticeService.insertNotice(vo);
-		return "redirect:/noticeBoard";
+		return "redirect:/noticeBoard?pageNo=1";
 	}
 
 	
-	// °øÁö»çÇ× ¼öÁ¤ Æû
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping("/updateNoticeForm")
 	public String updateNoticeForm(HttpServletRequest request, @RequestParam("noticeNo")int noticeNo) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
@@ -82,22 +92,22 @@ public class NoticeController {
 	}
 	
 	
-	// °øÁö»çÇ× ¼öÁ¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/updateNotice")
 	public String updateNotice(NoticeVO vo) {
 		noticeService.updateNotice(vo);
 		
 		System.out.println("update Controller");
-		return "redirect:/noticeBoard";
+		return "redirect:/noticeBoard?pageNo=1";
 	}
 	
 	
-	// °øÁö»çÇ× »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeVO vo) {
 		noticeService.deleteNotice(vo);
 		
-		return "redirect:/noticeBoard";
+		return "redirect:/noticeBoard?pageNo=1";
 	}
 	
 	

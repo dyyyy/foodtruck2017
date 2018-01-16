@@ -19,106 +19,89 @@ import com.foodtruck.vo.MemberVO;
 
 @Controller
 public class EventController {
-	
+
 	@Autowired
 	EventService eventService;
-	
+
 	@Autowired
 	MemberService memberService;
-	
-	// °øÁö»çÇ×
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/eventBoard")
-	public String getEventBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request) {
-		List<EventVO> list = eventService.getEventBoardList();
+	public String getEventBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo,
+			HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
+		// í˜ì´ì§•ì²˜ë¦¬
+		int NpageNo = 0;
+		if (pageNo == 1) {
+			pageNo = 1;
+		} else {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		int count =eventService.getCountEvent();
 		
-		if(list != null) {
+		List<EventVO> list = eventService.getEventBoardList(NpageNo);
+		if (list != null) {
 			model.addAttribute("rank", list);
 		}
-		
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("pagecount", count);
 		return "nav/eventBoard";
 	}
-	
-	// °øÁö»çÇ× »ó¼¼
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping("/detailEventForm")
-	public String detailEventForm(@RequestParam("noticeNo")int noticeNo, HttpServletRequest request) {
-		EventVO vo = eventService.getEvent(noticeNo);
-		
+	public String detailEventForm(@RequestParam("eventNo") int eventNo, HttpServletRequest request) {
+		EventVO vo = eventService.getEvent(eventNo);
+
 		request.setAttribute("vo", vo);
-		
-		eventService.countEvent(vo.getNoticeNo()); // Á¶È¸¼ö
-		
+
+		eventService.countEvent(vo.getEventNo()); // ï¿½ï¿½È¸ï¿½ï¿½
+
 		return "nav/detailEventForm";
 	}
-	
-	
-	// °øÁö»çÇ× ±Û¾²±â
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½
 	@RequestMapping("/writeEventForm")
 	public String writeEvent() {
 		return "nav/writeEventForm";
 	}
-	
-	
-	// °øÁö»çÇ× µî·Ï
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping("/insertEvent")
 	public String insertEvent(HttpSession session, EventVO vo, MemberVO mvo) {
-		
-		MemberVO m = (MemberVO)session.getAttribute("member");
-		vo.setMemberId(m.getMemberId());
-		
-//		vo.setMemberId(mvo.getMemberId());
-		
+
+		MemberVO m = (MemberVO) session.getAttribute("member");
+		vo.setMemId(m.getMemberId());
+		System.out.println(vo.getEventTitle());
+		// vo.setMemberId(mvo.getMemberId());
+
 		eventService.insertEvent(vo);
-		return "redirect:/eventBoard";
+		return "redirect:/eventBoard?pageNo=1";
 	}
 
-	
-	// °øÁö»çÇ× ¼öÁ¤ Æû
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	@RequestMapping("/updateEventForm")
-	public String updateEventForm(HttpServletRequest request, @RequestParam("noticeNo")int noticeNo) {
-		EventVO vo = eventService.getEvent(noticeNo);
+	public String updateEventForm(HttpServletRequest request, @RequestParam("eventNo") int eventNo) {
+		EventVO vo = eventService.getEvent(eventNo);
 		request.setAttribute("event", vo);
 		return "nav/updateEventForm";
 	}
-	
-	
-	// °øÁö»çÇ× ¼öÁ¤
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/updateEvent")
 	public String updateEvent(EventVO vo) {
 		eventService.updateEvent(vo);
-		
+
 		System.out.println("update Controller");
-		return "redirect:/eventBoard";
+		return "redirect:/eventBoard?pageNo=1";
 	}
-	
-	
-	// °øÁö»çÇ× »èÁ¦
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/deleteEvent")
 	public String deleteEvent(EventVO vo) {
 		eventService.deleteEvent(vo);
-		
-		return "redirect:/eventBoard";
+
+		return "redirect:/eventBoard?pageNo=1";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

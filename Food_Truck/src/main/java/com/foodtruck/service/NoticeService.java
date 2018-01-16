@@ -16,9 +16,9 @@ public class NoticeService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-	public List<NoticeVO> getNoticeBoardList() {
+	public List<NoticeVO> getNoticeBoardList(int pageNo) {
 		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
-		return dao.getNoticeBoardList();
+		return dao.getNoticeBoardList(pageNo);
 	}
 	
 	
@@ -47,6 +47,10 @@ public class NoticeService {
 	public int deleteNotice(NoticeVO vo) {
 		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
 		return dao.deleteNotice(vo);
+	}
+	public int getCountNotice() throws Exception {
+		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
+		return dao.getCountNotice();
 	}
 
 }
