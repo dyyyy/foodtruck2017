@@ -24,7 +24,7 @@ public class LoginController {
 	@Autowired
 	MemberService memberService;
 
-	// ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping("/loginform")
 	public String loginform() {
 		System.out.println("loginform");
@@ -32,7 +32,7 @@ public class LoginController {
 		return "sign/login";
 	}
 
-	// ·Î±×ÀÎ ÇßÀ»¶§
+	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -43,33 +43,37 @@ public class LoginController {
 			if (mvo.getMemberPw().equals(pw)) {
 				session.setAttribute("member", mvo);
 				session.setAttribute("memberId", mvo.getMemberName());
-				System.out.println("·Î±×ÀÎ¼º°ø");
+				if(mvo.getMemberAuth().equals("1")) {
+					session.setAttribute("memberGubun","1");
+				} else if(mvo.getMemberAuth().equals("2")) {
+					session.setAttribute("memberGubun","2");
+				}
 				return "redirect:/";
 			} else {
-				request.setAttribute("msg", "ºñ¹Ð¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+				request.setAttribute("msg", "ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
 				return "comm/msg";
 			}
 		} else {
 
-			request.setAttribute("msg", "È¸¿øÁ¤º¸°¡ ¾ø°Å³ª ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+			request.setAttribute("msg", "È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½Ô·Âµï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
 			return "comm/msg";
 		}
 	}
 
-	// ·Î±×¾Æ¿ô ÇßÀ»¶§
+	// ï¿½Î±×¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	// È¸¿ø°¡ÀÔÆäÀÌÁö
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/joinform")
 	public String joinFormPage() {
 		return "sign/joinform";
 	}
 
-	// È¸¿ø °¡ÀÔ
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/join")
 	public String insertMember(HttpServletRequest request, MemberVO vo) {
 
@@ -88,7 +92,7 @@ public class LoginController {
 		return "home";
 	}
 
-	// ID Áßº¹Ã¼Å©
+	// ID ï¿½ßºï¿½Ã¼Å©
 	@ResponseBody
 	@RequestMapping("/idCheck")
 	public MemberVO memberIdCheck(HttpServletRequest request) {

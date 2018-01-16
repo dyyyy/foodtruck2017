@@ -1,3 +1,4 @@
+<%@page import="com.foodtruck.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,7 +37,20 @@
 				<a class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="#">Admin Page</a>
+				</a>
+				<%
+					MemberVO mvo = (MemberVO) session.getAttribute("member");
+					
+					if(mvo.getMemberAuth().equals("1")) {
+				%>
+					<a class="brand" href="#">Admin Page</a>
+				<%
+					} else if(mvo.getMemberAuth().equals("2")) {
+				%>
+					<a class="brand" href="#">Seller Page</a>
+				<%
+					}
+				%>				
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
 						<li class="dropdown"><a href="#" role="button"
