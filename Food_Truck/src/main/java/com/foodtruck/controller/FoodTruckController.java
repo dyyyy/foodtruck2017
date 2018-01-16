@@ -51,17 +51,17 @@ public class FoodTruckController {
 		} else {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);// rownumï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownumµÈ ÇªµåÆ®·° ¸®½ºÆ®
 		;
-		int pagecount = fservice.getCountTruck();// ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£" + pageNo);
+		int pagecount = fservice.getCountTruck();// //ÃÑ ÇªµåÆ®·° °³¼ö
+		System.out.println("ÆäÀÌÁö ¹øÈ£" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		request.setAttribute("pagecount", pagecount);//ÃÑ ÆäÀÌÁö ¼ö
 		return "foodtruck/menuBoard";
 	}
 
-	// FoodTruck ï¿½Ùµï¿½ï¿½ï¿½ List
+	// FoodTruck List2
 	@RequestMapping("/menuBoard2")
 	public String menuBoardPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request)throws Exception {
 		int NpageNo=0;
@@ -70,64 +70,87 @@ public class FoodTruckController {
 		}else {
 			NpageNo=(pageNo-1)*10+1;
 		}
-		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownumï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownumµÈ ÇªµåÆ®·° ¸®½ºÆ®
 		;
-		 int pagecount=fservice.getCountTruck();//ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-		 System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£"+pageNo);
+		 int pagecount=fservice.getCountTruck();//ÃÑ ÇªµåÆ®·° °³¼ö
+		 System.out.println("ÆäÀÌÁö ¹øÈ£"+pageNo);
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
-	     request.setAttribute("pagecount", pagecount);//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+	     request.setAttribute("pagecount", pagecount);//ÃÑ ÆäÀÌÁö ¼ö
 	     
 		return "foodtruck/menuBoard2";
 	}
 	
 	// CategoryFood
 	@RequestMapping("/CategoryFood")
-	public String korFoodPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request,
-			@RequestParam("category") int category) throws Exception {
-		PageVO vo = new PageVO();
+	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-			vo.setPageNo(pageNo);
-		} else {
-			NpageNo = (pageNo - 1) * 10 + 1;
-			vo.setPageNo(NpageNo);
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
 		}
-
-		List<FoodTruckVO> list = fservice.getCategoryList(vo);
-		int pagecount = fservice.getCategoryCountTruck(category);// ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-		request.setAttribute("pageNo", pageNo);
-		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);
-		request.setAttribute("categoryno", category);
+		System.out.println(category);
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		int pagecount=fservice.getCategoryCountTruck(category);//ÃÑ ÇªµåÆ®·° °³¼ö
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
 		return "foodtruck/CategoryFood";
 	}
 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// CategoryFood2
+	@RequestMapping("/CategoryFood2")
+	public String korFoodPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request, @RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
+		vo.setCategory(category);
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
+		}
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		int pagecount=fservice.getCategoryCountTruck(category);//ÃÑ ÇªµåÆ®·° °³¼ö
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+		 request.setAttribute("babo",list);
+	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
+	     
+		return "foodtruck/CategoryFood2";
+	}	
+	
+	// »ó¼¼Á¤º¸
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Õ°ï¿½
-		double count = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-		double total = 0; // Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
-		if (vo.getFtruckAddr() == null) {
+		double pyengjum = 0;//¸®ºä ÆòÁ¡ ÇÕ°è
+		double count = 0; //¸®ºä ¼ö
+		double total = 0; //ÇªµåÆ®·° ÃÑ ÆòÁ¡
+		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//ÇªµåÆ®·° Á¤º¸ È£Ãâ
+		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-
-		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
-		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
-		if (Rlist.size() != 0) {
+		
+		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ¸®ºä Á¤º¸ È£Ãâ
+		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// »óÇ° Á¤º¸ È£Ãâ
+		if(Rlist.size()!=0) {
 			for (int i = 0; i < Rlist.size(); i++) {
 				double score = Rlist.get(i).getGrade();
 				pyengjum += score;
 				count = Rlist.size();
 				total = pyengjum / count;
-				total = Double.parseDouble(String.format("%.2f", total));
-			}
-		} else {
-			total = 0;
+				total = Double.parseDouble(String.format("%.2f",total));
+			}	
+		}else {
+			total=0;		
 		}
 		vo.setFtruckGrade(total);
 		request.setAttribute("vo", vo);
@@ -158,7 +181,7 @@ public class FoodTruckController {
 				PrintWriter out = response.getWriter();
 				Date date = new Date();
 				SimpleDateFormat sdformat = new SimpleDateFormat("YYYYMMdd");
-				String today = sdformat.format(date);// ï¿½ì½ï¿½ì˜±ï¿½ê¶‡ï§žï¿½
+				String today = sdformat.format(date);
 				// PrintWriter out = new PrintWriter(new OutputStream
 				// Writer(response.getOutputStream(),"KSC5601"));
 				// ServletOutputStream out = response.getOutputStream();
@@ -224,7 +247,7 @@ public class FoodTruckController {
 
 				}
 			} catch (Exception e) {
-				System.out.println("ì¶•ì œì •ë³´ì—†ìŒ");
+				System.out.println("");
 			}
 		}
 		for (int j = 0; j < list.size(); j++) {
