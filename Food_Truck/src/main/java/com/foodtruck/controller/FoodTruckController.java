@@ -29,7 +29,7 @@ import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
 import com.foodtruck.dao.FestivalDAO;
-import com.foodtruck.service.ApiService;
+
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
@@ -148,7 +148,9 @@ public class FoodTruckController {
 		}
 		
 		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ���� ���� ȣ��
+		System.out.println("진입전");
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ��ǰ ���� ȣ��
+		System.out.println("진입후");
 		if(Rlist.size()!=0) {
 			for (int i = 0; i < Rlist.size(); i++) {
 				double score = Rlist.get(i).getGrade();

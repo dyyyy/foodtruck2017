@@ -21,7 +21,7 @@ public class ProductController {
 	@Autowired
 	private MemberService memberService;
 	
-	// Á¦Ç° µî·Ï ÇÏ´Â ÆûÀ¸·Î ÀÌµ¿
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping("/insertProductForm")
 	public String insertProductForm(Model model, HttpSession session) {
 		
@@ -29,19 +29,19 @@ public class ProductController {
 		
 		String selId = mvo.getMemberId(); 
 		
-		// »ç¾÷ÀÚ ¹øÈ£ 
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ 
 		model.addAttribute("list", memberService.getLicenseNo(selId));
 		
 		return "nav/productInsert";
 	}
 	
-	// Á¦Ç° µî·Ï
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping("/insertProduct")
 	public String insertProduct(ProductVO vo) {
 		
 		productService.insertProduct(vo);
-		System.out.println("Á¦Ç° µî·Ï ¼º°ø!");
-		System.out.println(vo.getftruckNo());
+		System.out.println("ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!");
+		System.out.println(vo.getFtruckNo());
 		return "home";
 	}
 }
