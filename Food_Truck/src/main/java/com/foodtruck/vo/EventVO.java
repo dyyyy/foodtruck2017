@@ -1,6 +1,6 @@
 package com.foodtruck.vo;
 
-public class NoticeVO {
+public class EventVO {
 	private int noticeNo;
 	private String memberId;
 	private String noticeTitle;

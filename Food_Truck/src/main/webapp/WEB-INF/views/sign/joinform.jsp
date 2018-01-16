@@ -65,11 +65,11 @@
 						url : '/idCheck',
 						type : 'get',
 						data : memberId.serialize(),
-						success : function(test) {
+						success : function(getId) {
 							if (memberId.val() == ""
 									|| id.test(memberId.val()) != true) {
 								alert("아이디를 확인해 주세요.");
-							} else if ($.trim(test) == 0) {
+							} else if ($.trim(getId) == 0) {
 								alert("사용 가능한 아이디 입니다.");
 								$("#checkId").attr("result", "checked");
 								$("#checkId").css("display", "none");
@@ -80,6 +80,8 @@
 						},
 					});
 				});
+		
+		
 		//이메일 인증
 		//var finalnum;
 		$('#comform').click(function() {

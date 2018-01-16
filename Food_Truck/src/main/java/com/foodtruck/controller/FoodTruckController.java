@@ -59,19 +59,19 @@ public class FoodTruckController {
 		} else {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);// rownum�� Ǫ��Ʈ�� ����Ʈ
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
 		;
-		int pagecount = fservice.getCountTruck();// �� Ǫ��Ʈ�� ����
+		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);// �� ������ ��
+		request.setAttribute("pagecount", pagecount);//�� ������ ��
 		return "foodtruck/menuBoard";
 	}
 
-	// FoodTruck �ٵ��� List
+	// FoodTruck List2
 	@RequestMapping("/menuBoard2")
-	public String menuBoardPage2(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
+	public String menuBoarPage2(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
 			throws Exception {
 		int NpageNo = 0;
 		if (pageNo == 1) {
@@ -79,64 +79,86 @@ public class FoodTruckController {
 		} else {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);// rownum�� Ǫ��Ʈ�� ����Ʈ
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
 		;
-		int pagecount = fservice.getCountTruck();// �� Ǫ��Ʈ�� ����
+		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);// �� ������ ��
-
+		request.setAttribute("pagecount", pagecount);//�� ������ ��
 		return "foodtruck/menuBoard2";
 	}
 
 	// CategoryFood
 	@RequestMapping("/CategoryFood")
-	public String korFoodPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request,
-			@RequestParam("category") int category) throws Exception {
-		PageVO vo = new PageVO();
+	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-			vo.setPageNo(pageNo);
-		} else {
-			NpageNo = (pageNo - 1) * 10 + 1;
-			vo.setPageNo(NpageNo);
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
 		}
-
-		List<FoodTruckVO> list = fservice.getCategoryList(vo);
-		int pagecount = fservice.getCategoryCountTruck(category);// �� Ǫ��Ʈ�� ����
-		request.setAttribute("pageNo", pageNo);
-		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);
-		request.setAttribute("categoryno", category);
+		System.out.println(category);
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
 		return "foodtruck/CategoryFood";
 	}
 
+	// CategoryFood2
+	@RequestMapping("/CategoryFood2")
+	public String korFoodPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request, @RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
+		vo.setCategory(category);
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
+		}
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+		 request.setAttribute("babo",list);
+	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
+	     
+		return "foodtruck/CategoryFood2";
+	}	
+	
 	// ������
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;// ���� ���� �հ�
-		double count = 0; // ���� ��
-		double total = 0; // Ǫ��Ʈ�� �� ����
-		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);// Ǫ��Ʈ�� ���� ȣ��
-		if (vo.getFtruckAddr() == null) {
+		double pyengjum = 0;//���� ���� �հ�
+		double count = 0; //���� ��
+		double total = 0; //Ǫ��Ʈ�� �� ����
+		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//Ǫ��Ʈ�� ���� ȣ��
+		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-
+		
 		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ���� ���� ȣ��
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ��ǰ ���� ȣ��
-		if (Rlist.size() != 0) {
+		if(Rlist.size()!=0) {
 			for (int i = 0; i < Rlist.size(); i++) {
 				double score = Rlist.get(i).getGrade();
 				pyengjum += score;
 				count = Rlist.size();
 				total = pyengjum / count;
-				total = Double.parseDouble(String.format("%.2f", total));
-			}
-		} else {
-			total = 0;
+				total = Double.parseDouble(String.format("%.2f",total));
+			}	
+		}else {
+			total=0;		
 		}
 		vo.setFtruckGrade(total);
 		request.setAttribute("vo", vo);
@@ -174,7 +196,10 @@ public class FoodTruckController {
 				PrintWriter out = response.getWriter();
 				Date date = new Date();
 				SimpleDateFormat sdformat = new SimpleDateFormat("YYYYMMdd");
-				String today = sdformat.format(date);// �쁽�옱�궇吏�
+				String today = sdformat.format(date);
+				// PrintWriter out = new PrintWriter(new OutputStream
+				// Writer(response.getOutputStream(),"KSC5601"));
+				// ServletOutputStream out = response.getOutputStream();
 				parameter = parameter + "&" + "areaCode=" + code;
 				parameter = parameter + "&" + "cat1=A02";
 				parameter = parameter + "&" + "cat2=A0207";
@@ -246,7 +271,7 @@ public class FoodTruckController {
 					list.add(vo);
 				}
 			} catch (Exception e) {
-				System.out.println("축제정보없음");
+				System.out.println("");
 			}
 		}
 		//상세정보 가져오기 시작

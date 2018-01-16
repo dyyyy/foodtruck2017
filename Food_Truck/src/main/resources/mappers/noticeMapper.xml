@@ -7,39 +7,39 @@
 
 	<!-- 공지사항 정보 -->
 	<select id="getNotice" resultMap="NoticeMap">
-		select * from notice where notice_no=#{noticeNo}
+		select * from notice_bd where notice_no=#{noticeNo}
 	</select>
 
 
 	<!-- 공지사항 전체 리스트 -->
 	<select id="getNoticeBoardList" resultMap="NoticeMap">
-		SELECT * FROM notice order by notice_no desc
+		SELECT * FROM notice_bd order by notice_no desc
 	</select>
 	
 
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotice" parameterType="com.foodtruck.vo.NoticeVO">
-		insert into notice (notice_no, mem_id, notice_title, notice_writer, notice_content) 
-		values((select NVL(MAX(notice_no)+1, 1)FROM notice), #{memberId}, #{noticeTitle}, #{noticeWriter}, #{noticeContent})
+		insert into notice_bd (notice_no, mem_id, notice_title, notice_writer, notice_content) 
+		values((select NVL(MAX(notice_no)+1, 1)FROM notice_bd), #{memberId}, #{noticeTitle}, #{noticeWriter}, #{noticeContent})
 	</insert>
 
 
 	<!-- 공지사항 수정 -->	
 	<update id="updateNotice" parameterType="com.foodtruck.vo.NoticeVO">
-		update notice set notice_title=#{noticeTitle}, notice_content=#{noticeContent}, notice_writer=#{noticeWriter}
+		update notice_bd set notice_title=#{noticeTitle}, notice_content=#{noticeContent}, notice_writer=#{noticeWriter}
 		where notice_no=#{noticeNo}
 	</update>
 	
 	
 	<!-- 공지사항 조회수 -->
 	<update id="countNotice" parameterType="int">
- 		update notice set notice_cnt=notice_cnt+1 where notice_no=#{noticeNo}
+ 		update notice_bd set notice_cnt=notice_cnt+1 where notice_no=#{noticeNo}
  	</update>
  	
  	
  	<!-- 공지사항 삭제 -->
  	<delete id="deleteNotice" parameterType="com.foodtruck.vo.NoticeVO">
- 		delete from notice where notice_no=#{noticeNo}
+ 		delete from notice_bd where notice_no=#{noticeNo}
  	</delete>
  	
  	
@@ -49,7 +49,7 @@
 		<result column="NOTICE_TITLE" property="noticeTitle"/>
 		<result column="NOTICE_WRITER" property="noticeWriter"/>
 		<result column="NOTICE_CONTENT" property="noticeContent"/>
-		<result column="NOTICE_REGDATE" property="regDate"/>
+		<result column="NOTICE_REG" property="noticeReg"/>
 		<result column="NOTICE_CNT" property="noticeCnt"/>
 	
 	</resultMap>

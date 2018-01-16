@@ -43,6 +43,7 @@ public class NoticeController {
 	public String detailNoticeForm(@RequestParam("noticeNo")int noticeNo, HttpServletRequest request) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
 		
+		
 		request.setAttribute("vo", vo);
 		
 		noticeService.countNotice(vo.getNoticeNo()); // Á¶È¸¼ö
