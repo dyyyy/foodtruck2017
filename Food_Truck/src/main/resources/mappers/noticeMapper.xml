@@ -13,7 +13,13 @@
 
 	<!-- 공지사항 전체 리스트 -->
 	<select id="getNoticeBoardList" resultMap="NoticeMap">
-		SELECT * FROM notice_bd order by notice_no desc
+		<!-- SELECT * FROM notice_bd order by notice_no desc -->
+		select nttt.* from
+      (select ntt.*from
+      (select rownum as
+      rnum, nt.*
+      from(SELECT * FROM notice_bd order by notice_no desc) nt)ntt where
+      rownum&lt;=1+9)nttt where rnum>=1
 	</select>
 	
 
