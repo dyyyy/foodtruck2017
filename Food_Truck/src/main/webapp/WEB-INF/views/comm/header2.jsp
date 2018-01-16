@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="/resources/admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/resources/admin/vendors/fullcalendar/fullcalendar.css" rel="stylesheet" media="screen">
-<link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
+<link href="/resources/admin/vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
 <link href="/resources/admin/assets/styles.css" rel="stylesheet" media="screen">
 <script src="/resources/admin/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 <script src="/resources/admin/vendors/jquery-1.9.1.min.js"></script>
@@ -18,7 +18,7 @@
 <script src="/resources/admin/vendors/fullcalendar/gcal.js"></script>
 <script src="/resources/admin/assets/scripts.js"></script>
 <script src="/resources/admin/assets/test.js"></script>
-<link rel="stylesheet" href="vendors/morris/morris.css">
+<link rel="stylesheet" href="/resources/admin/vendors/morris/morris.css">
 <script src="/resources/admin/vendors/jquery.knob.js"></script>
 <script src="/resources/admin/vendors/raphael-min.js"></script>
 <script src="/resources/admin/vendors/morris/morris.min.js"></script>
@@ -28,7 +28,7 @@
 <script src="/resources/admin/vendors/flot/jquery.flot.time.js"></script>
 <script src="/resources/admin/vendors/flot/jquery.flot.stack.js"></script>
 <script src="/resources/admin/vendors/flot/jquery.flot.resize.js"></script>
-<script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+<script src="/resources/admin/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
