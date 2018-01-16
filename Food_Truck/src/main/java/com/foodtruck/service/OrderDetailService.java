@@ -14,32 +14,32 @@ public class OrderDetailService {
    @Autowired
    private SqlSessionTemplate sessionTemplate;
 
-   // ÁÖ¹®»ó¼¼ Á¤º¸
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    public OrderDetailVO getOrderDetail(int ordNo) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.getOrderDetail(ordNo);
    }
 
-   // ÁÖ¹®»ó¼¼ ¸®½ºÆ®
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
    public List<OrderDetailVO> getOrderDetailList(String selId) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.getOrderDetailList(selId);
    }
    
-   // ÁÖ¹®»ó¼¼ ÀÔ·Â
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
    public int insertOrderDetail(OrderDetailVO vo) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.insertOrderDetail(vo);
    }
 
-   // ÁÖ¹®»ó¼¼ ¼öÁ¤
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    public int updateOrderDetail(OrderDetailVO vo) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.updateOrderDetail(vo);
    }
 
-   // ÁÖ¹®»ó¼¼ »èÁ¦
-   public int deleteOrderDetail(int ordNo) {
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+   public int deleteOrderDetail(int ordNo) throws Exception {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.deleteOrderDetail(ordNo);
    }

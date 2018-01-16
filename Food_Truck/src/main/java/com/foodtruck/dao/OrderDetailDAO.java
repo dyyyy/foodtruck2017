@@ -6,18 +6,18 @@ import com.foodtruck.vo.OrderDetailVO;
 
 public interface OrderDetailDAO {
 
-   // ÁÖ¹®»ó¼¼ Á¤º¸
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    public OrderDetailVO getOrderDetail(int ordNo);
 
-   // ÁÖ¹®»ó¼¼ ¸®½ºÆ®
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
    public List<OrderDetailVO> getOrderDetailList(String selId);
 
-   // ÁÖ¹®»ó¼¼ µî·Ï
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
    public int insertOrderDetail(OrderDetailVO vo);
 
-   // ÁÖ¹®»ó¼¼ ¼öÁ¤
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    public int updateOrderDetail(OrderDetailVO vo);
 
-   // ÁÖ¹®»ó¼¼ »èÁ¦
-   public int deleteOrderDetail(int ordNo);
+   // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+   public int deleteOrderDetail(int ordNo) throws Exception;;
 }
