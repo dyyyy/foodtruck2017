@@ -42,6 +42,7 @@ public class LoginController {
 		if (mvo != null) {
 			if (mvo.getMemberPw().equals(pw)) {
 				session.setAttribute("member", mvo);
+				session.setAttribute("memberId", mvo.getMemberName());
 				System.out.println("로그인성공");
 				return "redirect:/";
 			} else {

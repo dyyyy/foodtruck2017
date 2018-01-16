@@ -76,7 +76,7 @@
 									<li><a href="/insertProductForm">제품 등록</a></li>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
-									<li><a href="/sellerSetting">판매자 설정</a></li>
+									<li><a href="/sellerCalendar">판매자 설정</a></li>
 								</ul></li>
 							<%
 								break;
@@ -87,7 +87,7 @@
 								<ul>
 									<li><a href="/adminMember">회원 관리</a></li>
 									<li><a href="/adminSeller">판매자 관리</a></li>
-									<li><a href="/adminFoodTruck">푸드트럭 관리</a></li>
+									<li><a href="/adminCalendar">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;
