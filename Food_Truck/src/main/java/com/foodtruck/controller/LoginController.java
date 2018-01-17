@@ -50,12 +50,14 @@ public class LoginController {
 				}
 				return "redirect:/";
 			} else {
-				request.setAttribute("msg", "��й�ȣ�� ���� �ʽ��ϴ�.");
+				request.setAttribute("msg", "비밀번호가 틀립니다.");
+				request.setAttribute("addr", "loginform");
 				return "comm/msg";
 			}
 		} else {
 
-			request.setAttribute("msg", "ȸ�������� ���ų� �Էµ��� �ʾҽ��ϴ�.");
+			request.setAttribute("msg", "아이디와 비밀번호를 입력해주세요");
+			request.setAttribute("addr", "loginform");
 			return "comm/msg";
 		}
 	}

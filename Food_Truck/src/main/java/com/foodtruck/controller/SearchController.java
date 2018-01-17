@@ -104,27 +104,36 @@ public class SearchController {
 	public String search(@RequestParam("pageNo") int pageNo, @RequestParam("search") String searchStr, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		SearchPageVO vo = new SearchPageVO();
-		vo.setSearchStr(searchStr);
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-			vo.setPageNo(pageNo);
-		} else {
-			NpageNo = (pageNo - 1) * 10 + 1;
-			vo.setPageNo(NpageNo);
+		if(searchStr != "" && searchStr != null) {
+			SearchPageVO vo = new SearchPageVO();
+			vo.setSearchStr(searchStr);
+			int NpageNo = 0;
+			if (pageNo == 1) {
+				pageNo = 1;
+				vo.setPageNo(pageNo);
+			} else {
+				NpageNo = (pageNo - 1) * 10 + 1;
+				vo.setPageNo(NpageNo);
+			}
+			
+			List<FoodTruckVO> list = searchService.getFoodTruckList(vo);
+
+			int pagecount = searchService.getCategoryCountTruck(searchStr);
+			
+			request.setAttribute("pageNo", pageNo);
+			request.setAttribute("list", list);
+			request.setAttribute("pagecount", pagecount);
+			request.setAttribute("search", searchStr);
+			
+			return "foodtruck/searchBoard";
+		}else {
+			request.setAttribute("msg", "검색할 단어를 입력해주세요.");
+			request.setAttribute("addr", "");
+			return "comm/msg";
 		}
 		
-		List<FoodTruckVO> list = searchService.getFoodTruckList(vo);
-
-		int pagecount = searchService.getCategoryCountTruck(searchStr);
 		
-		request.setAttribute("pageNo", pageNo);
-		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);
-		request.setAttribute("search", searchStr);
 		
-		return "foodtruck/searchBoard";
 
 	}
 
