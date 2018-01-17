@@ -1,59 +1,57 @@
 package com.foodtruck.vo;
 
 public class EventVO {
-	private int noticeNo;
-	private String memberId;
-	private String noticeTitle;
-	private String noticeWriter;	
-	private String noticeContent;	
-	private String noticeReg;
-	private int noticeCnt;
-	
-	
-	public int getNoticeNo() {
-		return noticeNo;
-	}
-	public void setNoticeNo(int noticeNo) {
-		this.noticeNo = noticeNo;
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-	public String getNoticeTitle() {
-		return noticeTitle;
-	}
-	public void setNoticeTitle(String noticeTitle) {
-		this.noticeTitle = noticeTitle;
-	}
-	public String getNoticeWriter() {
-		return noticeWriter;
-	}
-	public void setNoticeWriter(String noticeWriter) {
-		this.noticeWriter = noticeWriter;
-	}
-	public String getNoticeContent() {
-		return noticeContent;
-	}
-	public void setNoticeContent(String noticeContent) {
-		this.noticeContent = noticeContent;
-	}
-	public int getNoticeCnt() {
-		return noticeCnt;
-	}
-	public void setNoticeCnt(int noticeCnt) {
-		this.noticeCnt = noticeCnt;
-	}
-	public String getNoticeReg() {
-		return noticeReg;
-	}
-	public void setNoticeReg(String noticeReg) {
-		this.noticeReg = noticeReg;
-	}
+	private int eventNo;
+	private String memId;
+	private String eventTitle;
+	private String eventWriter;
+	private String eventContent;
+	private String eventReg;
+	private int eventCnt;
 	
 	
 	
+	public int getEventNo() {
+		return eventNo;
+	}
+	public void setEventNo(int eventNo) {
+		this.eventNo = eventNo;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getEventTitle() {
+		return eventTitle;
+	}
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+	public String getEventWriter() {
+		return eventWriter;
+	}
+	public void setEventWriter(String eventWriter) {
+		this.eventWriter = eventWriter;
+	}
+	public String getEventContent() {
+		return eventContent;
+	}
+	public void setEventContent(String eventContent) {
+		this.eventContent = eventContent;
+	}
+	public String getEventReg() {
+		return eventReg;
+	}
+	public void setEventReg(String eventReg) {
+		this.eventReg = eventReg;
+	}
+	public int getEventCnt() {
+		return eventCnt;
+	}
+	public void setEventCnt(int eventCnt) {
+		this.eventCnt = eventCnt;
+	}
 	
 }

@@ -19,8 +19,8 @@
 					<!-- Shop Tool Bar -->
 					<div class="shop-tool-bar col-sm-12 fix">
 						<div class="view-mode">
-							<a href="shop-list.html"><i class="fa fa-th"></i></a>
-							<a href="shop-list.html" class="active"><i class="fa fa-th-list"></i></a>
+							<a href="/CategoryFood2?pageNo=1&category=${categoryno}"><i class="fa fa-th"></i></a>
+							<a href="/CategoryFood?pageNo=1&category=${categoryno}" class="active"><i class="fa fa-th-list"></i></a>
 						</div>
 						<div class="sort-by">
 							<span>Sort By</span>

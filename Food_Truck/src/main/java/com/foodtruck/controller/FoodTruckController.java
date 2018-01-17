@@ -3,6 +3,8 @@ package com.foodtruck.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,14 +24,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
+import com.foodtruck.dao.FestivalDAO;
+
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
+import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 @Controller
 public class FoodTruckController {
@@ -40,6 +46,8 @@ public class FoodTruckController {
 	private ReviewService rservice;
 	@Autowired
 	private ProductService pservice;
+	@Autowired
+	private FestivalService feservice;
 
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
@@ -51,83 +59,108 @@ public class FoodTruckController {
 		} else {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);// rownum�� Ǫ��Ʈ�� ����Ʈ
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
 		;
-		int pagecount = fservice.getCountTruck();// �� Ǫ��Ʈ�� ����
+		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);// �� ������ ��
+		request.setAttribute("pagecount", pagecount);//�� ������ ��
 		return "foodtruck/menuBoard";
 	}
 
-	// FoodTruck �ٵ��� List
+	// FoodTruck List2
 	@RequestMapping("/menuBoard2")
-	public String menuBoardPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request)throws Exception {
-		int NpageNo=0;
-		if(pageNo==1) {
-			pageNo=1;
-		}else {
-			NpageNo=(pageNo-1)*10+1;
-		}
-		List<FoodTruckVO> list =fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
-		;
-		 int pagecount=fservice.getCountTruck();//�� Ǫ��Ʈ�� ����
-		 System.out.println("������ ��ȣ"+pageNo);
-		 request.setAttribute("pageNo", pageNo);
-		 request.setAttribute("list",list);
-	     request.setAttribute("pagecount", pagecount);//�� ������ ��
-	     
-		return "foodtruck/menuBoard2";
-	}
-	
-	// CategoryFood
-	@RequestMapping("/CategoryFood")
-	public String korFoodPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request,
-			@RequestParam("category") int category) throws Exception {
-		PageVO vo = new PageVO();
-		vo.setCategory(category);
+	public String menuBoarPage2(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
+			throws Exception {
 		int NpageNo = 0;
 		if (pageNo == 1) {
 			pageNo = 1;
-			vo.setPageNo(pageNo);
 		} else {
 			NpageNo = (pageNo - 1) * 10 + 1;
-			vo.setPageNo(NpageNo);
 		}
-
-		List<FoodTruckVO> list = fservice.getCategoryList(vo);
-		int pagecount = fservice.getCategoryCountTruck(category);// �� Ǫ��Ʈ�� ����
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
+		;
+		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
+		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);
-		request.setAttribute("categoryno", category);
+		request.setAttribute("pagecount", pagecount);//�� ������ ��
+		return "foodtruck/menuBoard2";
+	}
+
+	// CategoryFood
+	@RequestMapping("/CategoryFood")
+	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
+		vo.setCategory(category);
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
+		}
+		System.out.println(category);
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
 		return "foodtruck/CategoryFood";
 	}
 
+	// CategoryFood2
+	@RequestMapping("/CategoryFood2")
+	public String korFoodPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request, @RequestParam("category") int category) throws Exception {
+		PageVO vo =new PageVO();
+		vo.setCategory(category);
+		int NpageNo=0;
+		if(pageNo==1) {
+			pageNo=1;
+			vo.setPageNo(pageNo);	
+		}else {
+			NpageNo=(pageNo-1)*10+1;
+			vo.setPageNo(NpageNo);	
+		}
+		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
+		 request.setAttribute("pageNo", pageNo);
+		 request.setAttribute("list",list);
+		 request.setAttribute("babo",list);
+	     request.setAttribute("pagecount", pagecount);
+	     request.setAttribute("categoryno", category);
+	     
+		return "foodtruck/CategoryFood2";
+	}	
+	
 	// ������
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;// ���� ���� �հ�
-		double count = 0; // ���� ��
-		double total = 0; // Ǫ��Ʈ�� �� ����
-		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);// Ǫ��Ʈ�� ���� ȣ��
-		if (vo.getFtruckAddr() == null) {
+		double pyengjum = 0;//���� ���� �հ�
+		double count = 0; //���� ��
+		double total = 0; //Ǫ��Ʈ�� �� ����
+		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//Ǫ��Ʈ�� ���� ȣ��
+		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-
+		
 		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ���� ���� ȣ��
+		System.out.println("진입전");
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ��ǰ ���� ȣ��
-		if (Rlist.size() != 0) {
+		System.out.println("진입후");
+		if(Rlist.size()!=0) {
 			for (int i = 0; i < Rlist.size(); i++) {
 				double score = Rlist.get(i).getGrade();
 				pyengjum += score;
 				count = Rlist.size();
 				total = pyengjum / count;
-				total = Double.parseDouble(String.format("%.2f", total));
-			}
-		} else {
-			total = 0;
+				total = Double.parseDouble(String.format("%.2f",total));
+			}	
+		}else {
+			total=0;		
 		}
 		vo.setFtruckGrade(total);
 		request.setAttribute("vo", vo);
@@ -136,9 +169,16 @@ public class FoodTruckController {
 		return "foodtruck/detail";
 	}
 
+	// api를 이용하야 행사정보 가져오기
 	@RequestMapping("/api")
 	public String inputAddr(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// logger.info("PublicData2");
+		// 테이블정보를 불러온다
+		List<FestivalVO> list2 = feservice.getFestivalList();
+		if (list2.size() != 0) {
+			feservice.deleteFestival();
+			System.out.println("데이터 지워짐");
+		}
+		//축제정보 가져오기 시작
 		List<FestivalVO> list = new ArrayList<FestivalVO>();
 		int num[] = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32 };
 
@@ -158,7 +198,7 @@ public class FoodTruckController {
 				PrintWriter out = response.getWriter();
 				Date date = new Date();
 				SimpleDateFormat sdformat = new SimpleDateFormat("YYYYMMdd");
-				String today = sdformat.format(date);// �쁽�옱�궇吏�
+				String today = sdformat.format(date);
 				// PrintWriter out = new PrintWriter(new OutputStream
 				// Writer(response.getOutputStream(),"KSC5601"));
 				// ServletOutputStream out = response.getOutputStream();
@@ -181,10 +221,10 @@ public class FoodTruckController {
 
 				// BufferedReader in = new BufferedReader(new
 				// InputStreamReader(url.openStream(), "UTF-8"));
-
 				InputStream in = url.openStream();
 				// CachedOutputStream bos = new CachedOutputStream();
 				ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+
 				IOUtils.copy(in, bos1);
 				in.close();
 				bos1.close();
@@ -196,13 +236,13 @@ public class FoodTruckController {
 				out.println(s);
 
 				/* json parsing */
-				System.out.println(s);
+				System.out.println("s=" + s);
 				JSONParser parser = new JSONParser();
 				Object obj = parser.parse(s);
 				JSONObject json = (JSONObject) obj;
 
 				// json.put("data", data);
-
+				// 지역별 행사정보 가져오기
 				JSONObject js = (JSONObject) json.get("response");
 				JSONObject jj = (JSONObject) js.get("body");
 				JSONObject items = (JSONObject) jj.get("items");
@@ -211,35 +251,93 @@ public class FoodTruckController {
 				for (int j = 0; j < jArray.size(); j++) {
 					JSONObject a = (JSONObject) jArray.get(j);
 					FestivalVO vo = new FestivalVO();
-					vo.setAddr1(a.get("addr1").toString());
-					vo.setTitle(a.get("title").toString());
-					vo.setMapx(a.get("mapx").toString());
-					vo.setMapy(a.get("mapy").toString());
-					vo.setEventstartdate(a.get("eventstartdate").toString());
-					vo.setEventenddate(a.get("eventenddate").toString());
-					vo.setTel(a.get("tel").toString());
-					vo.setFirstimage((String) a.get("firstimage"));
-					vo.setFirstimage2((String) a.get("firstimage2"));
+					vo.setFesAddr(a.get("addr1").toString());
+					vo.setFesName(a.get("title").toString());
+					vo.setFesLatitude(a.get("mapx").toString());
+					vo.setFesLongitude(a.get("mapy").toString());
+					vo.setFesSdate(a.get("eventstartdate").toString());
+					vo.setFesEdate(a.get("eventenddate").toString());
+					vo.setFesTel(a.get("tel").toString());
+					if ((String) a.get("firstimage") == null) {
+						vo.setFesImg("empty");
+					} else {
+						vo.setFesImg((String) a.get("firstimage"));
+					}
+					if ((String) a.get("firstimage2") == null) {
+						vo.setFesImg2("empty");
+					} else {
+						vo.setFesImg2((String) a.get("firstimage2"));
+					}
+					vo.setFesId(a.get("contentid").toString());
+					vo.setFesContent("empty");
 					list.add(vo);
-
 				}
 			} catch (Exception e) {
-				System.out.println("축제정보없음");
+				System.out.println("");
 			}
 		}
-		for (int j = 0; j < list.size(); j++) {
+		//상세정보 가져오기 시작
+		for (int h = 0; h < list.size(); h++) {
+			Thread.sleep(300);
+            // 테이블이 비어있을때 insert실행
+            request.setCharacterEncoding("utf-8");
+            response.setContentType("text/html; charset=utf-8");
 
-			System.out.println(list.get(j).getAddr1());
-			System.out.println(list.get(j).getTitle());
-			System.out.println(list.get(j).getEventenddate());
-			System.out.println(list.get(j).getEventstartdate());
-			System.out.println(list.get(j).getMapx());
-			System.out.println(list.get(j).getMapy());
-			System.out.println(list.get(j).getTel());
-			System.out.println(list.get(j).getFirstimage());
-			System.out.println(list.get(j).getFirstimage2());
+            String addr2 = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+            String serviceKey = "H%2F5lCacGTb8Gu0hK0t%2FZ%2BR04rZ7FtCgprC9i3gXHYFbGvnPOF1UikRkxLw07AXydV%2BN7SBJCExRUanyQ2DRgVQ%3D%3D";
 
+            String parameter2 = "";
+
+            PrintWriter out = response.getWriter();
+
+            parameter2 = parameter2 + "&" + "MobileOS=ETC";
+            parameter2 = parameter2 + "&" + "defaultYN=N";
+            parameter2 = parameter2 + "&" + "addrinfoYN=N";
+            parameter2 = parameter2 + "&" + "MobileApp=aa";
+            parameter2 = parameter2 + "&" + "overviewYN=Y";
+            parameter2 = parameter2 + "&" + "contentId=" + list.get(h).getFesId();
+            parameter2 = parameter2 + "&" + "_type=json";
+            addr2 = addr2 + serviceKey + parameter2;
+            URL url = new URL(addr2);
+
+            System.out.println(addr2);
+
+            // BufferedReader in = new BufferedReader(new
+            // InputStreamReader(url.openStream(), "UTF-8"));
+
+            InputStream in2 = url.openStream();
+            // CachedOutputStream bos = new CachedOutputStream();
+            ByteArrayOutputStream bos2 = new ByteArrayOutputStream();
+            IOUtils.copy(in2, bos2);
+            //in2.close();
+            //bos2.close();
+
+            String mbos2 = bos2.toString("UTF-8");
+
+            byte[] b = mbos2.getBytes("UTF-8");
+            String s2 = new String(b, "UTF-8");
+            out.println(s2);
+
+            /* json parsing */
+            System.out.println("s=" + s2);
+            JSONParser parser = new JSONParser();
+            Object obj2 = parser.parse(s2);
+            JSONObject json2 = (JSONObject) obj2;
+
+            // json.put("data", data);
+            // 지역별 행사정보 가져오기
+            JSONObject js2 = (JSONObject) json2.get("response");
+            JSONObject jj2 = (JSONObject) js2.get("body");
+            JSONObject items2 = (JSONObject) jj2.get("items");
+            JSONObject items3 = (JSONObject) items2.get("item"); 
+            String item4=   (String) items3.get("overview");
+            list.get(h).setFesContent(item4);
+         
+         }     		
+		for (int i = 0; i < list.size(); i++) {
+			feservice.IntsertFestival(list.get(i));
 		}
+		System.out.println("축제정보 insert완료");
 
 		return "nav/recommend";
 

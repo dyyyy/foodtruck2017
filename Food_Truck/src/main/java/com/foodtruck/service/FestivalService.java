@@ -14,17 +14,21 @@ public class FestivalService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-	public List<FestivalDAO> getFestivalList() throws Exception{
+	public List<FestivalVO> getFestivalList() throws Exception{
 		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
 		return dao.getFestivalList();
 	}
-	public int getIntsertFestival(FestivalDAO vo) throws Exception{
+	public int IntsertFestival(FestivalVO festivalVO) throws Exception{
 		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
-		return dao.getIntsertFestival(vo);
+		return dao.IntsertFestival(festivalVO);
 	}
-	public int getgetUpdateFestival(FestivalDAO vo) throws Exception{
+	public int getUpdateFestival(FestivalDAO vo) throws Exception{
 		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
-		return dao.getUpdateFestival(vo);
+		return dao.UpdateFestival(vo);
+	}
+	public int deleteFestival() throws Exception{
+		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
+		return dao.deleteFestival();
 	}
 	
 }
