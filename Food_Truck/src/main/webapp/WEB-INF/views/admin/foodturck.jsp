@@ -14,16 +14,16 @@
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
 					<li><a href="/admin"><i class="icon-chevron-right"></i>메인</a>
 					</li>
-					<li ><a href="/stute"><i
+					<li><a href="/stute"><i
 							class="icon-chevron-right"></i>푸드트럭 현황&상태</a></li>
 					<li><a href="/sellerQnA"><i class="icon-chevron-right"></i>판매자
 							게시판</a></li>
 					<li><a href="/memberQnA"><i class="icon-chevron-right"></i>Q&A</a>
 					</li>
-					<li class="active"> <a href="/festival"><i class="icon-chevron-right"></i>축제관리</a>
+					<li><a href="/festival"><i class="icon-chevron-right"></i>축제관리</a>
 					</li>
-					<li><a href="/foodtruck"><i class="icon-chevron-right"></i>푸드트럭 관리</a>
-					</li>
+					<li class="active"><a href="/foodtruck"><i
+							class="icon-chevron-right"></i>푸드트럭 관리</a></li>
 				</ul>
 			</div>
 			<!--/span-->

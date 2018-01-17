@@ -33,6 +33,8 @@
                         <li>
                             <a href="/festival"><i class="icon-chevron-right"></i>축제관리</a>
                         </li>
+                        <li><a href="/foodtruck"><i class="icon-chevron-right"></i>푸드트럭 관리</a>
+					</li>
                     </ul>
                 </div>
                 
