@@ -6,31 +6,33 @@ import com.foodtruck.vo.PageVO;
 
 public interface FoodTruckDAO {
 	
-	// ÇªµåÆ®·° Á¤º¸
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public FoodTruckVO getFoodTruck(String ftruckNo)throws Exception;
 
-	// ÇªµåÆ®·° ¸®½ºÆ®
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<FoodTruckVO> getFoodTruckList(int pageNo)throws Exception;
 	
-	// Ä«Å×°í¸®º° ¸®½ºÆ®
+	// Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<FoodTruckVO> getCategoryList(PageVO vo)throws Exception;
 	
-	// ÇªµåÆ®·° À§Å¬¸® ·©Å·
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½ï¿½Å·
 	public List<FoodTruckVO> getFoodTruckRank();
 
-	// ÇªµåÆ®·° µî·Ï
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int insertFoodTruck(FoodTruckVO vo)throws Exception;
 
-	// ÇªµåÆ®·° ¼öÁ¤
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateTruck(FoodTruckVO vo)throws Exception;
 
-	// ÇªµåÆ®·° »èÁ¦
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteTruck(String ftruckNo)throws Exception;
 	
-	//ÇªµåÆ®·° ÀüÃ¼count(ÆäÀÌÂ¡Ã³¸®)
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼count(ï¿½ï¿½ï¿½ï¿½Â¡Ã³ï¿½ï¿½)
 	public int getCountTruck()throws Exception;
 	
-	//ÇªµåÆ®·° Ä«Å×°í¸®º° count(ÆäÀÌÂ¡Ã³¸®)
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ Ä«ï¿½×°ï¿½ï¿½ï¿½ count(ï¿½ï¿½ï¿½ï¿½Â¡Ã³ï¿½ï¿½)
 	public int getCategoryCountTruck(int category)throws Exception;
+	//ì˜ì—…ì•ˆí•˜ëŠ” í‘¸ë“œíŠ¸ëŸ­ê°€ì ¸ì˜¤ê¸°
+	public List<FoodTruckVO> getFoodTruckList2(int PageNo) throws Exception;
 	
 }

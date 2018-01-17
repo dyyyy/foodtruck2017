@@ -184,6 +184,7 @@ public class FoodTruckController {
 
 		for (int q = 0; q < num.length; q++) {
 			try {
+				Thread.sleep(300);
 				int code = num[q];
 				System.out.println(code);
 				request.setCharacterEncoding("utf-8");
@@ -217,7 +218,7 @@ public class FoodTruckController {
 				addr = addr + serviceKey + parameter;
 				URL url = new URL(addr);
 
-				System.out.println(addr);
+				//System.out.println(addr);
 
 				// BufferedReader in = new BufferedReader(new
 				// InputStreamReader(url.openStream(), "UTF-8"));

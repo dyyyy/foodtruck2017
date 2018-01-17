@@ -22,18 +22,18 @@
                             <a href="/admin"><i class="icon-chevron-right"></i>메인</a>
                         </li>
                         <li>
-                            <a href="/stute"><i class="icon-chevron-right"></i>푸드트럭 현황&상태</a>
+                            <a href="/stute?pageNo=1"><i class="icon-chevron-right"></i>푸드트럭 현황&상태</a>
                         </li>
                         <li>
-                            <a href="/sellerQnA"><i class="icon-chevron-right"></i>판매자 게시판</a>
+                            <a href="/sellerQnA?pageNo=1"><i class="icon-chevron-right"></i>판매자 게시판</a>
                         </li>
                         <li>
-                            <a href="/memberQnA"><i class="icon-chevron-right"></i>Q&A</a>
+                            <a href="/memberQnA?pageNo=1"><i class="icon-chevron-right"></i>Q&A</a>
                         </li>
                         <li>
-                            <a href="/festival"><i class="icon-chevron-right"></i>축제관리</a>
+                            <a href="/festival?pageNo=1"><i class="icon-chevron-right"></i>축제관리</a>
                         </li>
-                        <li><a href="/foodtruck"><i class="icon-chevron-right"></i>푸드트럭 관리</a>
+                        <li><a href="/foodtruck?pageNo=1"><i class="icon-chevron-right"></i>푸드트럭 관리</a>
 					</li>
                     </ul>
                 </div>
