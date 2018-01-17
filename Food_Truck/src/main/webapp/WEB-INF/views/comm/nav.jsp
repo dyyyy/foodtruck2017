@@ -34,15 +34,14 @@
 							%>
 							<li><a href="/loginform">로그인</a></li>
 							<li><a href="/joinform">회원가입</a></li>
-							
+
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard">공지사항</a></li>
 									<li><a href="/eventBoard">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
-								</ul>
-							</li>
-							
+								</ul></li>
+
 							<%
 								} else {
 							%>
@@ -92,10 +91,10 @@
 							<%
 								break;
 									default:
-										%>
-										<li>로그인되지 않았습니다.</li>
-										<%
-										break;
+							%>
+							<li>로그인되지 않았습니다.</li>
+							<%
+								break;
 									}
 							%>
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
@@ -103,8 +102,7 @@
 									<li><a href="/noticeBoard">공지사항</a></li>
 									<li><a href="/eventBoard">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
-								</ul>
-							</li>
+								</ul></li>
 							<%
 								}
 							%>
@@ -155,11 +153,38 @@
 					<!-- 						</div> -->
 					<!-- 					</div> -->
 					<!-- 				</div> -->
+
+
+
+
 					<div class="search float-right">
-						<input type="text" value="" placeholder="Search Here...." />
-						<button class="submit">
-							<i class="fa fa-search"></i>
-						</button>
+							<div id="search1">
+								<button onclick="getLocation()" id="getLocation" class="ico-loc">
+								</button>
+							</div>
+							
+							<form action="/search" method="get">
+							
+							<div id="search2">
+							<input type="hidden" name="pageNo" value="1">
+								<input type="text" id="search" name="search"
+									placeholder="예) 강남구, 서초구" value=""/>
+									
+							</div>
+							<div id="search3">
+							<!-- 
+							<input type="image" id="locbtn" class="submit">
+							-->
+							<button class="submit" id="locbtn"> <i
+									class="fa fa-search"></i>
+								</button>
+								 
+							</div>	
+							</form>
+								
+
+
+
 					</div>
 				</div>
 			</div>
