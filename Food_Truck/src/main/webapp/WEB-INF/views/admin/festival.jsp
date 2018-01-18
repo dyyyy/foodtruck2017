@@ -7,58 +7,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function($)
-{
-    // 페이지가 로딩될 때 'Loading 이미지'를 숨긴다.
-    $('#viewLoading').hide();
- 
-    // ajax 실행 및 완료시 'Loading 이미지'의 동작을 컨트롤하자.
-    $('#viewLoading')
-    .ajaxStart(function()
-    {
-        // 로딩이미지의 위치 및 크기조절    
-        $('#viewLoading').css('position', 'absolute');
-        $('#viewLoading').css('left', $('#loadData').offset().left);
-        $('#viewLoading').css('top', $('#loadData').offset().top);
-        $('#viewLoading').css('width', $('#loadData').css('width'));
-        $('#viewLoading').css('height', $('#loadData').css('height'));
- 
-        //$(this).show();
-        $(this).fadeIn(500);
-    })
-    .ajaxStop(function()
-    {
-        //$(this).hide();
-        $(this).fadeOut(500);
-    });
-});
-
-</script>
 <style>
-div#viewLoading {
-	text-align: center;
-	padding-top: 70px;
-	background: #FFFFF0;
-	filter: alpha(opacity = 60);
-	opacity: alpha*0.6;
+.wrap-loading { /*화면 전체를 어둡게 합니다.*/
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.2); /*not in ie */
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',
+		endColorstr='#20000000'); /* ie */
+}
+
+.wrap-loading div { /*로딩 이미지*/
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -21px;
+	margin-top: -21px;
+}
+
+.display-none { /*감추기*/
+	display: none;
 }
 </style>
-
 <!-- 에헤 -->
 <script type="text/javascript">
 	$(function() {
 		$("#re").click(function() {
 			alert("약 30초 정도 소요가 됩니다.");
-			
 			$.ajax({
 				url : "/api",
 				success : function(data) {
 					alert("축제 정보 받아오기 완료!");
-					location.reload(); 
+					location.reload();
 				},
 				error : function(data) {
 					alert("축제정보 받아오기 실패!");
+				},
+				beforeSend : function() {
+					$('.wrap-loading').removeClass('display-none');
+				},
+				complete : function() {
+					$('.wrap-loading').addClass('display-none');
+
 				}
 			})
 		})
@@ -120,9 +112,16 @@ div#viewLoading {
 									</tbody>
 								</table>
 							</div>
-							<div id="viewLoading" style="display: none;">
-								<img src="resources/img/viewLoading.gif" />
+							<div class="wrap-loading display-none">
+
+								<div>
+									<img src="/resources/img/viewLoading.gif" />
+								</div>
+
 							</div>
+
+
+
 							<div class="pagination" align="center">
 								<ul>
 									<%
@@ -171,13 +170,12 @@ div#viewLoading {
 										} else {
 									%>
 									<li><a href="festival?pageNo=<%=iCount%>"><%=iCount%></a>
-										<li>
+									<li>
 										<%
 											}
 											}
 											if (currentPage < totalPage) {
 										%>
-									
 									
 									<li><a href="festival?pageNo=<%=currentPage + 1%>"><i
 											class="fa fa-angle-right"></i>></a></li>
@@ -203,7 +201,8 @@ div#viewLoading {
 			<!--/.fluid-container-->
 
 			<script src="vendors/jquery-1.9.1.js">
-</script> <script src="bootstrap/js/bootstrap.min.js"></script>
+</script>
+			<script src="bootstrap/js/bootstrap.min.js"></script>
 			<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
 
 
@@ -214,6 +213,5 @@ div#viewLoading {
 
 				});
 			</script>
-
-									</body>
+</body>
 </html>
