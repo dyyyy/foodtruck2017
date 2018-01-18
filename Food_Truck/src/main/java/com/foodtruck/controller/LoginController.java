@@ -1,6 +1,9 @@
 
 package com.foodtruck.controller;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,7 +39,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
-
+		
 		MemberVO mvo = memberService.getMember(id);
 
 		if (mvo != null) {

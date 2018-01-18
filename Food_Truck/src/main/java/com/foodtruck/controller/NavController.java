@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class NavController {
 	
 /*
-	// °øÁö»çÇ×
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/noticeBoard")
 	public String noticeBoardPage() {
 		return "nav/noticeBoard";
@@ -16,7 +16,7 @@ public class NavController {
 
 	
 /*	
-	// ÀÌº¥Æ®
+	// ï¿½Ìºï¿½Æ®
 	@RequestMapping("/eventBoard")
 	public String eventBoardPage() {
 		return "nav/eventBoard";
@@ -24,55 +24,55 @@ public class NavController {
 */
 	
 	
-	// 1:1 ¹®ÀÇ
+	// 1:1 ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/inquiry")
 	public String inquiryPage() {
-		return "nav/inquiry";
+		return "sign/login";
 	}
 
-	// °ü¸®ÀÚ ¸Þ´º - È¸¿ø°ü¸®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/adminMember")
 	public String adminMemberPage() {
 		return "nav/adminMember";
 	}
 
-	// °ü¸®ÀÚ ¸Þ´º - ÆÇ¸ÅÀÚ °ü¸®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/adminSeller")
 	public String adminSellerPage() {
 		return "nav/adminSeller";
 	}
 
-	// ÆÇ¸ÅÀÚ ¸Þ´º - Á¦Ç° µî·Ï
+	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping("/productInsert")
 	public String productInsertPage() {
 		return "nav/productInsert";
 	}
 
-	// ÆÇ¸ÅÀÚ ¸Þ´º - ¹è´Þ ³»¿ª
+	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/deliveryDetails")
 	public String deliveryDetailsPage() {
 		return "nav/deliveryDetails";
 	}
 
-	// ±¸¸ÅÀÚ ¸Þ´º - ÀüÃ¼ ÁÖ¹® ³»¿ª
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½Ã¼ ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/orderList")
 	public String orderListPage() {
 		return "nav/orderList";
 	}
 
-	// ±¸¸ÅÀÚ ¸Þ´º - °ü½É ÇªµåÆ®·°
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½
 	@RequestMapping("/favoritFoodtruck")
 	public String favoritFoodtruckPage() {
 		return "nav/favoritFoodtruck";
 	}
 
-	// ±¸¸ÅÀÚ ¸Þ´º - ³»°¡ ¾´±Û
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/myWriting")
 	public String myWritingPage() {
 		return "nav/myWriting";
 	}
 
-	// ±¸¸ÅÀÚ ¸Þ´º - ³ªÀÇ ¼³Á¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/mySetting")
 	public String mySettingPage() {
 		return "nav/mySetting";

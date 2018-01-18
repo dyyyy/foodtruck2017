@@ -117,7 +117,12 @@ public class SearchController {
 			}
 			
 			List<FoodTruckVO> list = searchService.getFoodTruckList(vo);
-
+			for(int i=0;i<list.size();i++) {
+				if(list.get(i).getFtruckAddr()==null) {
+					String addr=list.get(i).getFtruckAddr2();
+					list.get(i).setFtruckAddr(addr);			
+				}
+			}
 			int pagecount = searchService.getCategoryCountTruck(searchStr);
 			
 			request.setAttribute("pageNo", pageNo);

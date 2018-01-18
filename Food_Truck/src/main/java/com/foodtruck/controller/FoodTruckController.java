@@ -3,8 +3,6 @@ package com.foodtruck.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,14 +26,12 @@ import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
-import com.foodtruck.dao.FestivalDAO;
 
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
-import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 @Controller
 public class FoodTruckController {
@@ -343,4 +339,5 @@ public class FoodTruckController {
 		return "nav/recommend";
 
 	}
+	
 }
