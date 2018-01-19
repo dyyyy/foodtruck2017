@@ -1,27 +1,34 @@
 package com.foodtruck.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 public interface MemberDAO {
 	
-	// È¸¿ø Á¤º¸
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public MemberVO getMember(String memberId);
 
-	// È¸¿ø ¸®½ºÆ®
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<MemberVO> getMemberList();
 
-	// È¸¿ø µî·Ï
+	//ID ì°¾ê¸°
+	public MemberVO getId(String memberTel);
+	
+	//PW ì°¾ê¸°
+	public MemberVO getPw(Map<String,Object> map);
+	
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int insertMember(MemberVO vo);
 
-	// È¸¿ø ¼öÁ¤
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateMember(MemberVO vo);
 
-	// È¸¿ø »èÁ¦
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteMember(String memberId);
 	
-	//ÆÇ¸ÅÀÚÀÇ ¶óÀÌ¼¾½º¹øÈ£
+	//ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½È£
 	public List<LicenseVO> getLicenseNo(String selId);
 }

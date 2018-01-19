@@ -16,7 +16,18 @@
 	<select id="getMemberList" resultMap="memberMap">
 
 		SELECT * FROM MEMBER
-
+	</select>
+	
+		<!-- ID 찾기 -->
+	<select id="getId" resultMap="memberMap">
+		SELECT * FROM MEMBER
+		<where> MEM_TEL = #{memberTel}</where>
+	</select>
+	
+		<!-- PW 찾기 -->
+	<select id="getPw" resultMap="memberMap" parameterType="map">
+		SELECT * FROM MEMBER
+		<where> MEM_TEL = #{memberTel} and MEM_ID = #{memberId} </where>
 	</select>
 	
 	<!-- 회원 등록 -->

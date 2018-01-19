@@ -1,6 +1,7 @@
 package com.foodtruck.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,37 +16,47 @@ public class MemberService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// È¸¿ø Á¤º¸
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public MemberVO getMember(String memberId) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.getMember(memberId);
 	}
 
-	// È¸¿ø ¸®½ºÆ®
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<MemberVO> getMemberList() {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.getMemberList();
 	}
 
-	// È¸¿ø ÀÔ·Â
+	public MemberVO getId(String memberTel) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getId(memberTel);
+	}
+	
+	public MemberVO getPw(Map<String,Object> map) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getPw(map);
+	}
+	
+	// È¸ï¿½ï¿½ ï¿½Ô·ï¿½
 	public int insertMember(MemberVO vo) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.insertMember(vo);
 	}
 
-	// È¸¿ø ¼öÁ¤
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateMember(MemberVO vo) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.updateMember(vo);
 	}
 
-	// È¸¿ø »èÁ¦
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteMember(String memberId) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.deleteMember(memberId);
 	}
 
-	//ÆÇ¸ÅÀÚÀÇ ¶óÀÌ¼¾½º¹øÈ£
+	//ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½È£
 	public List<LicenseVO> getLicenseNo(String selId) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.getLicenseNo(selId);

@@ -29,7 +29,7 @@
 						<div class="remember">
 							<input type="checkbox" />
 							<p>Remember me!</p>
-							<a href="#">Forgot Your Password ?</a>
+							<a href="/findAccount">Forgot Your Password ?</a>
 						</div>
 						<p><input type="submit" value="login" /></p>
 					</form>

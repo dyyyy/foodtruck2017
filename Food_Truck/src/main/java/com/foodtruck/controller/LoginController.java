@@ -3,6 +3,8 @@ package com.foodtruck.controller;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -104,6 +106,38 @@ public class LoginController {
 		String memberId = request.getParameter("memberId");
 
 		return memberService.getMember(memberId);
+	}
+	
+	// 로그인 페이지에서 ID/PW 찾기 페이지로 이동
+	@RequestMapping("/findAccount")
+	public String accountFind(HttpServletRequest request)throws Exception {
+		
+		request.setAttribute("id", memberService.getMemberList());
+		return "sign/findAccount";
+		
+	}
+	
+	//ID 찾기
+	@ResponseBody
+	@RequestMapping("/findId")
+	public MemberVO findId(HttpServletRequest request){
+		String memberTel = request.getParameter("memberTel");
+		System.out.println(memberTel);
+		return memberService.getId(memberTel);
+	}
+	
+	//PW 찾기
+	@ResponseBody
+	@RequestMapping("/findPw")
+	public MemberVO findPw(HttpServletRequest request){
+		String memberTel = request.getParameter("memberTel2");
+		String memberId = request.getParameter("memberId");
+		System.out.println(memberTel);
+		System.out.println(memberId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberTel", memberTel);
+		map.put("memberId", memberId);
+		return memberService.getPw(map);
 	}
 }
 
