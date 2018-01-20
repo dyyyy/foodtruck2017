@@ -30,7 +30,7 @@
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="/read?licenseNo=${rank.licenseNo }" class="pro-image fix"><img src="resources/img/foodtruck/${rank.ftruckImg}" alt="featured" /></a>
+								<a href="/read?ftruckNo=${rank.ftruckNo}" class="pro-image fix"><img src="resources/img/foodtruck/${rank.ftruckImg}" alt="featured" /></a>
 								<!-- Product action Btn -->
 								<div class="product-action-btn">
 									<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
@@ -41,7 +41,7 @@
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
-									<a href="/read?licenseNo=${rank.licenseNo }">${rank.ftruckName }</a>
+									<a href="/read?ftruckNo=${rank.ftruckNo }">${rank.ftruckNo }</a>
 								</div>
 								<!-- Product Ratting -->
 								<div class="pro-ratting">
