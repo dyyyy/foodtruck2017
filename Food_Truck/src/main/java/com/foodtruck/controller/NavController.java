@@ -27,8 +27,13 @@ public class NavController {
 	// 1:1 ����
 	@RequestMapping("/inquiry")
 	public String inquiryPage() {
-		return "sign/login";
+		return "nav/inquiry";
 	}
+	@RequestMapping("/inquiry2")
+	public String inquiryPage2() {
+		return "nav/inquiry2";
+	}
+	
 
 	// ������ �޴� - ȸ������
 	@RequestMapping("/adminMember")

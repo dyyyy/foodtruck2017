@@ -77,17 +77,12 @@ public class AdminController {
 		System.out.println("진입");
 		return "admin/foodturck";
 	}
-	@RequestMapping("/list")
-	public String list(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
-			NpageNo = (pageNo - 1) * 10 + 1;
-		}
+	@RequestMapping("/QnA")
+	public String list(HttpServletRequest request) throws Exception {
 		
 		
-		return null;
+		
+		return "Chat/QnA";
 	}
 	
 }

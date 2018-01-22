@@ -39,7 +39,7 @@
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/inquiry">1:1 문의</a></li>
+									<li><a href="/loginform">1:1 문의</a></li>
 								</ul></li>
 
 							<%
@@ -58,11 +58,10 @@
 									case "3":
 							%>
 							<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
-								<ul>
+								<ul style="width: 120px; ">
 									<li><a href="/orderList">전체 주문 내역</a></li>
 									<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
-									<li><a href="/myWriting">내가 쓴글</a></li>
-									<li><a href="/mySetting">나의 설정</a></li>
+									<li ><a href="/mySetting">나의 설정</a></li>
 								</ul></li>
 							<%
 								break;
@@ -97,12 +96,28 @@
 								break;
 									}
 							%>
+							<%switch (mvo.getMemberAuth()) { 
+								//일반회원
+								case "3":
+							%>
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
 								</ul></li>
+							<%break;
+								//판매자회원
+								case "2":%>
+								<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
+								<ul>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
+									<li><a href="/inquiry2">1:1 문의</a></li>
+								</ul></li>
+								<%break;
+								}%>
+					
 							<%
 								}
 							%>
