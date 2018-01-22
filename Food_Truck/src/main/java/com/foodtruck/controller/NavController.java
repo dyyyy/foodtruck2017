@@ -24,14 +24,15 @@ public class NavController {
 */
 	
 	
-	// 1:1 ����
+	// 1:1 일반회원 문의
 	@RequestMapping("/inquiry")
 	public String inquiryPage() {
-		return "nav/inquiry";
+		return "nav/memberinquiry";
 	}
+	//1:1 판매자회원 문의
 	@RequestMapping("/inquiry2")
 	public String inquiryPage2() {
-		return "nav/inquiry2";
+		return "nav/sellerinquiry";
 	}
 	
 
