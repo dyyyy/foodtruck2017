@@ -24,7 +24,7 @@
 	<select id="getNonmemberInfo" resultMap="OrderMap" parameterType="map">
 	
 		SELECT O.*,D.*,P.* FROM ORDERS O,ORDERDETAIL D,PRODUCT P
-		<where>P.PROD_NO = D.PROD_NO AND O.ORD_NO = D.ORD_NO AND O.ORD_NO = #{ordNo}</where>
+		<where>P.PROD_NO = D.PROD_NO AND O.ORD_NO = D.ORD_NO AND O.ORD_NO = #{ordNo} AND O.ORD_TEL = #{ordTel} </where>
 		
 	</select>	
 
