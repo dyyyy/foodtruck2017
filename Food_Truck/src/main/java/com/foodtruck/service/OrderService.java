@@ -1,6 +1,7 @@
 package com.foodtruck.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,34 +15,39 @@ public class OrderService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// È¸¿ø Á¤º¸
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public OrderVO getOrder(int ordNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.getOrder(ordNo);
 	}
 
-	// È¸¿ø ¸®½ºÆ®
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<OrderVO> getOrderList() {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.getOrderList();
 	}
 
-	// È¸¿ø ÀÔ·Â
+	// È¸ï¿½ï¿½ ï¿½Ô·ï¿½
 	public int insertOrder(OrderVO vo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.insertOrder(vo);
 	}
 
-	// È¸¿ø ¼öÁ¤
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateOrder(OrderVO vo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.updateOrder(vo);
 	}
 
-	// È¸¿ø »èÁ¦
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteOrder(int ordNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.deleteOrder(ordNo);
 	}
 
+	// ë¹„íšŒì›ì´ ì£¼ë¬¸ë²ˆí˜¸ & ì „í™”ë²ˆí˜¸ë¡œ ì£¼ë¬¸ë‚´ì—­ ì¡°íšŒ
+	   public List<OrderVO> getNonmemberInfo(Map<String,Object> map) {
+		  OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		  return dao.getNonmemberInfo(map);
+	   }
 }
