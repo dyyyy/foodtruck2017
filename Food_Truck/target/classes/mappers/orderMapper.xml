@@ -19,17 +19,29 @@
 		SELECT * FROM ORDERS
 	
 	</select>
+	
+	<!-- 비회원 주문번호로 주문내역보기 -->
+	<select id="getNonmemberInfo" resultMap="OrderMap" parameterType="map">
+	
+		SELECT O.*,D.*,P.* FROM ORDERS O,ORDERDETAIL D,PRODUCT P
+		<where>P.PROD_NO = D.PROD_NO AND O.ORD_NO = D.ORD_NO AND O.ORD_NO = #{ordNo}</where>
+		
+	</select>	
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
-		<result column="ORDER_NO" property="ordNo"/>
+		<result column="ORD_NO" property="ordNo"/>
 		<result column="ORD_NAME" property="ordName"/>
 		<result column="ORD_TEL" property="ordTel"/>
 		<result column="ORD_DATE" property="ordDate"/>
 		<result column="ORD_RSV_DATE" property="ordRsvDate"/>
 		<result column="ORD_DLV_YN" property="ordDlyYn"/>
+		<result column="ORD_REQ" property="ordReq"/>
+		<result column="SUM_PRICE" property="sumPrice"/>
+		<result column="ORD_QTY" property="ordQty" />
+		<result column="ORD_PRICE" property="ordPrice" />
 		<result column="MEM_ID" property="memId"/>
-	
+		<result column="PROD_NAME" property="prodName" />
 	</resultMap>
 
 

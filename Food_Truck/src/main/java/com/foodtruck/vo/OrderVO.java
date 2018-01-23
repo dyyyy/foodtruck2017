@@ -2,17 +2,25 @@ package com.foodtruck.vo;
 
 public class OrderVO {
 	
-	private String ordNo;			// �ֹ� ��ȣ
-	private String ordName;		// �̸�
-	private String ordTel;		// ��ȭ ��ȣ
-	private String ordDate;		// �ֹ� �ð�
-	private String ordRsvDate;	// ���� �Ͻ�
-	private String ordDlyYn;	// ��� ����(Y/N)
-	private int ordStat;
-	private int cookStat;
-	private String memId;		// ȸ�� ���̵�
-	private String licenseNo;
+	private String ordNo;		// 주문번호
+	private String ordName;		// 이름
+	private String ordTel;		// 전화번호
+	private String ordDate;		// 주문일
+	private String ordRsvDate;	// 예약시간
+	private String ordDlyYn;	// 배달 여부(Y/N)
+	private int ordStat;		// 주문 상태
+	private int cookStat;		// 조리 상태
+	private String memId;		// 회원 아이디
+	private String licenseNo;	// 판매자 사업자번호
+	private int ordQty;			// 수량
+	private int ordPrice;		// 제품가격
+	private int sumPrice;		// 총 합계
+	private String ordReq;		// 요구사항
+	private String prodName;	// 제품이름
+	
+	
 	// getter & setter
+
 	public String getOrdNo() {
 		return ordNo;
 	}
@@ -73,6 +81,34 @@ public class OrderVO {
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
-	
-	
+	public int getOrdQty() {
+		return ordQty;
+	}
+	public void setOrdQty(int ordQty) {
+		this.ordQty = ordQty;
+	}
+	public int getOrdPrice() {
+		return ordPrice;
+	}
+	public void setOrdPrice(int ordPrice) {
+		this.ordPrice = ordPrice;
+	}
+	public int getSumPrice() {
+		return sumPrice;
+	}
+	public void setSumPrice(int sumPrice) {
+		this.sumPrice = sumPrice;
+	}
+	public String getOrdReq() {
+		return ordReq;
+	}
+	public void setOrdReq(String ordReq) {
+		this.ordReq = ordReq;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
 }
