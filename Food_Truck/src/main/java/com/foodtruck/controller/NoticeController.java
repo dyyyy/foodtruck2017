@@ -30,10 +30,8 @@ public class NoticeController {
 	@RequestMapping("/noticeBoard")
 	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request,@RequestParam("pageNo") int pageNo) throws Exception {
 		//페이징처리
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<NoticeVO> list = noticeService.getNoticeBoardList(NpageNo);

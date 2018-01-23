@@ -1,7 +1,12 @@
 package com.foodtruck.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.foodtruck.vo.MemberVO;
 
 @Controller
 public class NavController {
@@ -26,9 +31,13 @@ public class NavController {
 	
 	// 1:1 일반회원 문의
 	@RequestMapping("/inquiry")
-	public String inquiryPage() {
+	public String inquiryPage(HttpSession session,HttpServletRequest request) {
+		MemberVO m = (MemberVO)session.getAttribute("member");
+		String id=m.getMemberId();
+		request.setAttribute("id", id);
 		return "nav/memberinquiry";
 	}
+	
 	//1:1 판매자회원 문의
 	@RequestMapping("/inquiry2")
 	public String inquiryPage2() {

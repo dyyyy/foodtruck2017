@@ -68,6 +68,13 @@
 		<where> MEMBER.MEM_ID=#{selId} </where>
 		
 	</select>
+	<!-- 1:1 insert -->
+	<insert id="insertInquiry">
+	INSERT INTO QA_SC 
+	(QA_SC_NO,MEM_ID,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL,QA_SC_STAT)
+	VALUES
+	(QA_SC_SEQ.NEXTVAL,#{memId},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
+	</insert>
 
 	<resultMap type="com.foodtruck.vo.MemberVO" id="memberMap">
 		<result column="MEM_ID" property="memberId" />
@@ -76,7 +83,22 @@
 		<result column="MEM_TEL" property="memberTel" />
 		<result column="MEM_AUTH" property="memberAuth" />
 	</resultMap>
+	
+	
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="licenseMap">
 		<result column="LICENSE_NO" property="licenseNo"/>
+	</resultMap>
+	
+	
+	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
+	<result column="QA_SC_NO" property="qaScNo" />
+	<result column="MEM_ID" property="memId" />
+	<result column="QA_SC_TITLE" property="qaScTitle" />
+	<result column="QA_SC_CONTENT" property="qaScContent" />
+	<result column="QA_SC_REG" property="qaScReg" />
+	<result column="QA_SC_CATEGORY1" property="qaScCategory1" />
+	<result column="QA_SC_CATEGORY2" property="qaScCategory2" />
+	<result column="QA_SC_TEL" property="qaScTel" />
+	<result column="QA_SC_STAT" property="qaScStat" />
 	</resultMap>
 </mapper>

@@ -107,11 +107,9 @@ public class SearchController {
 		if(searchStr != "" && searchStr != null) {
 			SearchPageVO vo = new SearchPageVO();
 			vo.setSearchStr(searchStr);
-			int NpageNo = 0;
-			if (pageNo == 1) {
-				pageNo = 1;
-				vo.setPageNo(pageNo);
-			} else {
+			int NpageNo = 1;
+			vo.setPageNo(pageNo);
+			if (pageNo != 1) {
 				NpageNo = (pageNo - 1) * 10 + 1;
 				vo.setPageNo(NpageNo);
 			}

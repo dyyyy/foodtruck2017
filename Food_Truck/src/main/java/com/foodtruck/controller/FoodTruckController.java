@@ -49,14 +49,15 @@ public class FoodTruckController {
 	@RequestMapping("/menuBoard")
 	public String menuBoarPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
 			throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
-		;
+		System.out.println("dfsdfs"+list.size());
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).getFtruckName());
+		}
 		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
@@ -69,10 +70,8 @@ public class FoodTruckController {
 	@RequestMapping("/menuBoard2")
 	public String menuBoarPage2(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
 			throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ

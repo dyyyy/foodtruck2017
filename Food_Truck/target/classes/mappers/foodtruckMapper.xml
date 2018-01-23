@@ -35,7 +35,7 @@
 		from (select foodtruck.* from
 		foodtruck order by FTRUCK_REG)
 		ft)fft
-		where rownum&lt;=#{pageNo}+9)ffft
+		where rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
 		where rnum>=#{pageNo}
 	</select>
 

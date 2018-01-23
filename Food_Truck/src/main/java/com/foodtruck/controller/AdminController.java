@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
+import com.foodtruck.service.MemberService;
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.MInquiryVO;
 
 @Controller
 public class AdminController {
@@ -20,13 +22,13 @@ public class AdminController {
 	private FoodTruckService fservice;
 	@Autowired
 	private FestivalService feservice;
+	@Autowired
+	private MemberService mservice;
 	// ������ �޴� - ��������
 	@RequestMapping("/stute")
 	public String stute(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		
@@ -47,7 +49,9 @@ public class AdminController {
 
 	// ������ �޴� - ��� ?
 	@RequestMapping("/memberQnA")
-	public String memberQnA() {
+	public String memberQnA(HttpServletRequest request,@RequestParam("pageNo") int pageNo) {
+		List<MInquiryVO> list= mservice.getMinquiryList();
+		request.setAttribute("list", list);
 		return "admin/memberQnA";
 	}
 

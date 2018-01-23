@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.MemberDAO;
 import com.foodtruck.vo.LicenseVO;
+import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 
 @Service
@@ -61,6 +62,15 @@ public class MemberService {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.getLicenseNo(selId);
 	}
-
+	//1:1 insert하기
+	public int insertInquiry(MInquiryVO vo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.insertInquiry(vo);
+	}
+	//1:1 문의사항 list가져오기
+	public List<MInquiryVO> getMinquiryList(){
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMinquiryList();
+	}
 
 }

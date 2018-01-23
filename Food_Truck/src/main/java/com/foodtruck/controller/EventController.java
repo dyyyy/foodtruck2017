@@ -31,10 +31,8 @@ public class EventController {
 	public String getEventBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo,
 			HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
 		// 페이징처리
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		int count =eventService.getCountEvent();

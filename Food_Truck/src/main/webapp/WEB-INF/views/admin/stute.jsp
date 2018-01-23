@@ -33,9 +33,9 @@ function change(abc){
 					<li class="active"><a href="/stute?pageNo=1"><i
 							class="icon-chevron-right"></i>푸드트럭 현황&상태</a></li>
 					<li><a href="/sellerQnA?pageNo=1"><i
-							class="icon-chevron-right"></i>판매자 게시판</a></li>
-					<li><a href="/memberQnA??pageNo=1"><i
-							class="icon-chevron-right"></i>Q&A</a></li>
+							class="icon-chevron-right"></i>판매자 Q&A</a></li>
+					<li><a href="/memberQnA?pageNo=1"><i
+							class="icon-chevron-right"></i>일반회원 Q&A</a></li>
 					<li><a href="/festival?pageNo=1"><i
 							class="icon-chevron-right"></i>축제관리</a></li>
 					<li><a href="/foodtruck?pageNo=1"><i
@@ -48,12 +48,12 @@ function change(abc){
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-						<form name="ck">
-							<div class="muted pull-left">
-								푸드트럭 현황 <select id="state" onchange="change(this)"><option>운영중</option>
-									<option>마감</option>
-									<option>전체보기</option></select>
-							</div>
+							<form name="ck">
+								<div class="muted pull-left">
+									푸드트럭 현황 <select id="state" onchange="change(this)"><option>운영중</option>
+										<option>마감</option>
+										<option>전체보기</option></select>
+								</div>
 							</form>
 						</div>
 						<div class="block-content collapse in">

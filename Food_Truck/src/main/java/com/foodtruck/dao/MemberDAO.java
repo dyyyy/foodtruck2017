@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.foodtruck.vo.LicenseVO;
+import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 
 public interface MemberDAO {
@@ -31,4 +32,10 @@ public interface MemberDAO {
 	
 	//�Ǹ����� ���̼�����ȣ
 	public List<LicenseVO> getLicenseNo(String selId);
+	
+	//1:1문의 insert하기
+	public int insertInquiry(MInquiryVO vo);
+	
+	//1:1문의 list가져오기
+	public List<MInquiryVO> getMinquiryList();
 }
