@@ -66,5 +66,11 @@ public class OrderService {
 	public List<OrderVO> getMemberOrderList(String memberId) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.getMemberOrderList(memberId);
-	}	   
+	}
+	
+	// 주문
+	public int insertOrder(Map<String, Object> map) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.insertOrder(map);
+	}
 }

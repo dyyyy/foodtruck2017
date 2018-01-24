@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.foodtruck.service.OrderDetailService;
 import com.foodtruck.service.OrderService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.OrderDetailVO;
 import com.foodtruck.vo.OrderVO;
 import com.foodtruck.vo.ProductVO;
 
@@ -25,7 +27,10 @@ public class OrderController {
 	ProductService Pservice;
 	
 	@Autowired
-	OrderService Oservice;	
+	OrderService Oservice;
+	
+	@Autowired
+	OrderDetailService orderdetailService;
 	
 	@RequestMapping("/order")
 	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request) {
@@ -65,11 +70,68 @@ public class OrderController {
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		List<OrderVO> list = Oservice.getMemberOrderList(vo.getMemberId());
 		request.setAttribute("list", list);
-//		request.setAttribute("ftruckName", list.get(0).getFtruckName());
-//		request.setAttribute("ordNo", list.get(0).getOrdNo());
-//		request.setAttribute("sumPrcie",list.get(0).getSumPrice());
-//		request.setAttribute("ordDate", list.get(0).getOrdDate());
 		
 		return "member/memberOrderInfo";
-	}	
+	}
+	
+	
+	@RequestMapping("/orderRegit")
+	public String wishInsert(HttpSession session, HttpServletRequest request,
+										@RequestParam("ordName") String ordName, 
+										@RequestParam("ordTel") String ordTel, 
+										@RequestParam("ordReq") String ordReq, 
+										@RequestParam("ftruckNo") String ftruckNo, 
+										@RequestParam("licenseNo") String licenseNo, 
+										@RequestParam("prodNo") List<String> prodNo, 
+										@RequestParam("prodName") List<String> prodName,
+										@RequestParam("ordQty") List<Integer> ordQty,
+										@RequestParam("ordPrice") List<Integer> ordPrice,
+										@RequestParam("sumPrice") int sumPrice) {
+		
+
+		System.out.println("주문할 거 디비에 넣자!");
+		Map<String,Object> orderMap = new HashMap<String, Object>();
+		Map<String,Object> orderdetailMap = new HashMap<String, Object>();
+		Map<String,Object> orderInfoList = new HashMap<String, Object>();
+		
+		// order 테이블에 들어갈껑!
+		if(ordName != null) {
+			orderMap.put("ordName", ordName);
+			orderMap.put("ordTel", ordTel);
+			orderMap.put("ordReq", ordReq);
+			orderMap.put("licenseNo", licenseNo);
+			orderMap.put("sumPrice", sumPrice);
+		}
+		
+		Oservice.insertOrder(orderMap); 
+		String ordNo = String.valueOf(orderMap.get("ordNo"));
+		
+		for(int i = 0 ; i < prodNo.size() ; i++) {
+			// orderdetail 테이블
+			orderdetailMap.put("prodNo", prodNo.get(i));
+			orderdetailMap.put("ordQty", ordQty.get(i));
+			orderdetailMap.put("ordPrice", ordPrice.get(i));
+			
+			if(ordQty.get(i) != 0) {
+				System.out.println(ordNo);
+				orderdetailMap.put("ordNo", ordNo);
+				orderdetailService.insertOrderDetail(orderdetailMap);
+			}
+		}
+		
+		orderInfoList.put("ordNo", ordNo);
+		orderInfoList.put("licenseNo", licenseNo);
+		List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
+		
+		request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
+		request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
+		request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
+		request.setAttribute("ordDate", orderInfolist.get(0).getOrdDate());
+		request.setAttribute("ordReq", orderInfolist.get(0).getOrdReq());
+		request.setAttribute("sumPrice", orderInfolist.get(0).getSumPrice());
+		
+		// 다수의 값들
+		request.setAttribute("orderInfolist", orderInfolist);
+		return "nav/orderChk";
+	}
 }

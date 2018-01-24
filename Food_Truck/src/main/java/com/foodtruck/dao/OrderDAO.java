@@ -32,4 +32,7 @@ public interface OrderDAO {
 	
 	//사용자 이용내역
 	public List<OrderVO> getMemberOrderList(String memberId);
+	
+	//주문
+	public int insertOrder(Map<String, Object> map);
 }

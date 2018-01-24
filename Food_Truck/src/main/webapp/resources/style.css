@@ -3030,7 +3030,7 @@ h4.heading {
 	-webkit-justify-content: center;
 }
 
-.login h2, .product h2, .join h2 {
+.login h2, .product h2, .join h2, .orderForm h2 {
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 30px;
@@ -3038,7 +3038,7 @@ h4.heading {
 	text-align: center;
 }
 
-.login p, .product p, .join p {
+.login p, .product p, .join p, .orderForm p {
 	font-size: 13px;
 	font-weight: 400;
 	text-align: center;
@@ -3068,7 +3068,7 @@ h4.heading {
 	margin-right: 15px;
 }
 
-.login label, .product label, .join label {
+.login label, .product label, .join label, .orderForm label {
 	font-size: 13px;
 	font-weight: 400;
 	margin-bottom: 5px;
@@ -3117,7 +3117,7 @@ h4.heading {
 	width: 20px;
 }
 
-.product input {
+.product input, .orderForm input {
 	background: #ebebeb none repeat scroll 0 0;
 	border: 1px solid #ccc;
 	color: #3e3f3f;
@@ -3126,7 +3126,7 @@ h4.heading {
 	width: 100%;
 }
 
-.product textarea {
+.product textarea, .orderForm textarea {
 	background: #ebebeb none repeat scroll 0 0;
 	font-size: 13px;
 	border: 1px solid #ccc;
@@ -3194,7 +3194,7 @@ h4.heading {
 	margin: 0 5px 0 0;
 }
 
-.login input[type="submit"], .product input[type="submit"], .join input[type="submit"]
+.login input[type="submit"], .product input[type="submit"], .join input[type="submit"], .orderForm input[type="submit"]
 	{
 	background: #f58d8d none repeat scroll 0 0;
 	border: medium none;
@@ -3209,7 +3209,7 @@ h4.heading {
 	width: auto;
 }
 
-.login input[type="reset"], .product input[type="reset"], .join input[type="reset"]
+.login input[type="reset"], .product input[type="reset"], .join input[type="reset"], .orderForm input[type="reset"]
 	{
 	background: #f58d8d none repeat scroll 0 0;
 	border: medium none;
@@ -3225,12 +3225,12 @@ h4.heading {
 }
 
 .login input[type="reset"]:hover, .product input[type="reset"]:hover,
-	.join input[type="reset"]:hover {
+	.join input[type="reset"]:hover, .orderForm input[type="reset"]:hover {
 	background: #555555 none repeat scroll 0 0;
 }
 
 .login input[type="submit"]:hover, .product input[type="submit"]:hover,
-	.join input[type="submit"]:hover {
+	.join input[type="submit"]:hover, .orderForm input[type="submit"]:hover {
 	background: #555555 none repeat scroll 0 0;
 }
 
@@ -4530,62 +4530,4 @@ h4.heading {
 	border: 1px solid #ddd;
 	color: #888;
 	overflow: hidden;
-}
-
-.notice-content {
-	height:100px;
-}
-	height:400px;
-}x
-
-.table th {
-	background-color: #D5D5D5;
-	width:60px;
-	text-align:center;   
-}
-
-<<<<<<< HEAD
-.notice-title {
-	font-size:20px;
-	text-align:left;
-	width:300px;
-	display: table-cell;
-    vertical-align: inherit;
-}
-
-.notice-btn {
-	background: #b10505 none repeat scroll 0 0;
-	border: medium none;
-	color: #fff;
-	display: inline-block;
-	font-size: 12px;
-	font-weight: 350;
-	padding: 7px 15px;
-	text-decoration: none;
-	text-transform: uppercase;
-	width: auto;
-}
-
-#getLocation {
-	background: url('/resources/Images/ioc_loc.png') no-repeat;
-    background-size: 30px;
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    border: none;
-    
-}
-#search1 {
-	float: left;	
-}
-#search2 {
-	display: inline-block;
-}
-#search3 {
-	display: inline-block;	
-}
-#locbtn{
-	background: transparent ;
-	border: none ;
-	outline: 0 ;
 }

@@ -6,18 +6,18 @@ import com.foodtruck.vo.ProductVO;
 
 public interface ProductDAO {
 
-	// Á¦Ç° Á¤º¸
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	public ProductVO getProduct(int prodNo);
 
-	// Á¦Ç° ¸®½ºÆ®
-	public List<ProductVO> getProductList(String ftruckNo);
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®
+	public List<ProductVO> getProductList(String licenseNo);
 
-	// Á¦Ç° µî·Ï
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	public int insertProduct(ProductVO vo);
 
-	// Á¦Ç° ¼öÁ¤
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	public int updateProduct(ProductVO vo);
 
-	// Á¦Ç° »èÁ¦
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	public int deleteProduct(int prodNo);
 }
