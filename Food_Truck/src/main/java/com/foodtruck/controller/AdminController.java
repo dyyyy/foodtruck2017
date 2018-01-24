@@ -116,7 +116,7 @@ public class AdminController {
 		map.put("qno", qno);
 		return map;
 	}
-
+	//ㅇㅇ
 	// 1:1 일반회원 댓글달기
 	@RequestMapping("/MinquryReply")
 	@ResponseBody
