@@ -86,5 +86,10 @@ public class MemberService {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.updateMinquiry(qno);
 	}
+	//1:1 insert 하기
+	public int insertInquiry2(MInquiryVO vo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.insertInquiry2(vo);
+	}
 
 }

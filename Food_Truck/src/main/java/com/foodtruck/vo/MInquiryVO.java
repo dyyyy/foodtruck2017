@@ -10,6 +10,7 @@ public class MInquiryVO {
 	private String qaScCategory2;//카테고리2
 	private String qaScTel;//전화번호
 	private String qaScStat;//y&n flag
+	private String licenseNo;
 	
 	//getter,setter
 	public int getQaScNo() {
@@ -65,6 +66,12 @@ public class MInquiryVO {
 	}
 	public void setQaScStat(String qaScStat) {
 		this.qaScStat = qaScStat;
+	}
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
 	}
 	
 	

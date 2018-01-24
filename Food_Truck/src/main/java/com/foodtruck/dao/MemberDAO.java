@@ -47,4 +47,7 @@ public interface MemberDAO {
 	
 	//1:1문의 update
 	public int updateMinquiry(int qno);
+	
+	//1:1문의 insert하기(판매자)
+	public int insertInquiry2(MInquiryVO vo);
 }
