@@ -28,6 +28,15 @@
 		
 	</select>	
 
+	<select id="getMemberOrderList" resultMap="OrderMap">
+		SELECT O.*,D.*,P.PROD_NAME,F.FTRUCK_NAME
+		FROM ORDERS O,ORDERDETAIL D,PRODUCT P,FOODTRUCK F
+		WHERE O.ORD_NO = D.ORD_NO
+		AND D.PROD_NO = P.PROD_NO
+		AND P.FTRUCK_NO = F.FTRUCK_NO
+		AND O.MEM_ID = #{memId}
+	</select>
+
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
 		<result column="ORD_NO" property="ordNo"/>
@@ -42,6 +51,7 @@
 		<result column="ORD_PRICE" property="ordPrice" />
 		<result column="MEM_ID" property="memId"/>
 		<result column="PROD_NAME" property="prodName" />
+		<result column="FTRUCK_NAME" property="ftruckName" />
 	</resultMap>
 
 

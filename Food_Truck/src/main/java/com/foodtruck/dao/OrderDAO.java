@@ -23,5 +23,8 @@ public interface OrderDAO {
 	public int deleteOrder(int ordNo);
 	
 	// 비회원이 주문번호 & 전화번호로 주문내역 조회
-	public List<OrderVO> getNonmemberInfo(Map<String,Object> map);	
+	public List<OrderVO> getNonmemberInfo(Map<String,Object> map);
+	
+	//사용자 이용내역
+	public List<OrderVO> getMemberOrderList(String memberId);
 }

@@ -17,6 +17,7 @@ public class OrderVO {
 	private int sumPrice;		// 총 합계
 	private String ordReq;		// 요구사항
 	private String prodName;	// 제품이름
+	private String ftruckName;	// 푸드트럭 이름
 	
 	
 	// getter & setter
@@ -110,5 +111,11 @@ public class OrderVO {
 	}
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
+	}
+	public String getFtruckName() {
+		return ftruckName;
+	}
+	public void setFtruckName(String ftruckName) {
+		this.ftruckName = ftruckName;
 	}
 }

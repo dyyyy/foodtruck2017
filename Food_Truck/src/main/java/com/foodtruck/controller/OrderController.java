@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.OrderService;
 import com.foodtruck.service.ProductService;
+import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.OrderVO;
 import com.foodtruck.vo.ProductVO;
 
@@ -56,5 +57,19 @@ public class OrderController {
 		request.setAttribute("sumPrice", list.get(0).getSumPrice());
 		
 		return "nav/nonMemberOrderDetail";
-	}		
+	}
+	
+	// 사용자 주문내역 조회
+	@RequestMapping("/memberOrderInfo")
+	public String memberOrderInfo(HttpSession session,HttpServletRequest request) {
+		MemberVO vo = (MemberVO)session.getAttribute("member");
+		List<OrderVO> list = Oservice.getMemberOrderList(vo.getMemberId());
+		request.setAttribute("list", list);
+//		request.setAttribute("ftruckName", list.get(0).getFtruckName());
+//		request.setAttribute("ordNo", list.get(0).getOrdNo());
+//		request.setAttribute("sumPrcie",list.get(0).getSumPrice());
+//		request.setAttribute("ordDate", list.get(0).getOrdDate());
+		
+		return "member/memberOrderInfo";
+	}	
 }
