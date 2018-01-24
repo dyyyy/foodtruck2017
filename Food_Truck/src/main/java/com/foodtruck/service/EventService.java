@@ -18,9 +18,9 @@ public class EventService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-	public List<EventVO> getEventBoardList() {
+	public List<EventVO> getEventBoardList(int NpageNo) {
 		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);
-		return dao.getEventBoardList();
+		return dao.getEventBoardList(NpageNo);
 	}
 	
 	
@@ -49,6 +49,10 @@ public class EventService {
 	public int deleteEvent(EventVO vo) {
 		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);
 		return dao.deleteEvent(vo);
+	}
+	public int getCountEvent() {
+		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);
+		return dao.getCountEvent();
 	}
 
 }

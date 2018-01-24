@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.OrderDAO;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.OrderVO;
 
 @Service
@@ -21,9 +22,9 @@ public class OrderService {
 	}
 
 	// 회원 리스트
-	public List<OrderVO> getOrderList() {
+	public List<OrderVO> getOrderList(String licenseNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
-		return dao.getOrderList();
+		return dao.getOrderList(licenseNo);
 	}
 
 	// 회원 입력
@@ -42,6 +43,16 @@ public class OrderService {
 	public int deleteOrder(int ordNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.deleteOrder(ordNo);
+	}
+	
+	public List<OrderVO> getLicense(String memberId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.getLicense(memberId);
+	}
+	
+	public List<OrderVO> getLicense2(String licenseNo) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.getLicense(licenseNo);
 	}
 
 }

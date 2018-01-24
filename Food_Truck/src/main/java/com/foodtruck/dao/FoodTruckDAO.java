@@ -33,4 +33,7 @@ public interface FoodTruckDAO {
 	//푸드트럭 카테고리별 count(페이징처리)
 	public int getCategoryCountTruck(int category)throws Exception;
 	
+	// 푸드트럭 사업자번호 리스트
+	public List<FoodTruckVO> getLicense()throws Exception;
+	
 }

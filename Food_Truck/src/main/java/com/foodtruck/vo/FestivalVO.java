@@ -1,72 +1,93 @@
 package com.foodtruck.vo;
 
 public class FestivalVO {
+	private String fesNo;//축제 번호
+	private String fesAddr;//주소
+	private String fesName;//제목
+	private String fesTel;//전화번호
+	private String fesSdate;//시작일
+	private String fesEdate;//종료일
+	private String fesImg2;//썸네일 이미지
+	private String fesImg;//대표 이미지
+	private String fesLatitude;//위도
+	private String fesLongitude;//경도
+	private String fesId;//콘텐츠ID (상세정보조회 필수)
+	private String fesContent;//축제 내용
 	
-	private String addr1;//주소
-	private String title;//제목
-	private String tel;//전화번호
-	private String eventstartdate;//시작일
-	private String eventenddate;//종료일
-	private String firstimage2;//썸네일 이미지
-	private String firstimage;//대표 이미지
-	private String mapx;//위도
-	private String mapy;//경도
+	public String getFesNo() {
+		return fesNo;
+	}
+	public void setFesNo(String fesNo) {
+		this.fesNo = fesNo;
+	}
+	public String getFesAddr() {
+		return fesAddr;
+	}
+	public void setFesAddr(String fesAddr) {
+		this.fesAddr = fesAddr;
+	}
+	public String getFesName() {
+		return fesName;
+	}
+	public void setFesName(String fesName) {
+		this.fesName = fesName;
+	}
+	public String getFesTel() {
+		return fesTel;
+	}
+	public void setFesTel(String fesTel) {
+		this.fesTel = fesTel;
+	}
+	public String getFesSdate() {
+		return fesSdate;
+	}
+	public void setFesSdate(String fesSdate) {
+		this.fesSdate = fesSdate;
+	}
+	public String getFesEdate() {
+		return fesEdate;
+	}
+	public void setFesEdate(String fesEdate) {
+		this.fesEdate = fesEdate;
+	}
+	public String getFesImg2() {
+		return fesImg2;
+	}
+	public void setFesImg2(String fesImg2) {
+		this.fesImg2 = fesImg2;
+	}
+	public String getFesImg() {
+		return fesImg;
+	}
+	public void setFesImg(String fesImg) {
+		this.fesImg = fesImg;
+	}
+	public String getFesLatitude() {
+		return fesLatitude;
+	}
+	public void setFesLatitude(String fesLatitude) {
+		this.fesLatitude = fesLatitude;
+	}
+	public String getFesLongitude() {
+		return fesLongitude;
+	}
+	public void setFesLongitude(String fesLongitude) {
+		this.fesLongitude = fesLongitude;
+	}
+	public String getFesId() {
+		return fesId;
+	}
+	public void setFesId(String fesId) {
+		this.fesId = fesId;
+	}
+	public String getFesContent() {
+		return fesContent;
+	}
+	public void setFesContent(String fesContent) {
+		this.fesContent = fesContent;
+	}
 	
 	
-	public String getFirstimage() {
-		return firstimage;
-	}
-	public void setFirstimage(String firstimage) {
-		this.firstimage = firstimage;
-	}
-	public String getAddr1() {
-		return addr1;
-	}
-	public void setAddr1(String addr1) {
-		this.addr1 = addr1;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	public String getEventstartdate() {
-		return eventstartdate;
-	}
-	public void setEventstartdate(String eventstartdate) {
-		this.eventstartdate = eventstartdate;
-	}
-	public String getEventenddate() {
-		return eventenddate;
-	}
-	public void setEventenddate(String eventenddate) {
-		this.eventenddate = eventenddate;
-	}
-	public String getFirstimage2() {
-		return firstimage2;
-	}
-	public void setFirstimage2(String firstimage2) {
-		this.firstimage2 = firstimage2;
-	}
-	public String getMapx() {
-		return mapx;
-	}
-	public void setMapx(String mapx) {
-		this.mapx = mapx;
-	}
-	public String getMapy() {
-		return mapy;
-	}
-	public void setMapy(String mapy) {
-		this.mapy = mapy;
-	}
 	
 	
 }

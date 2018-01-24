@@ -84,6 +84,7 @@
 		select count(*)
 		from foodtruck where category=#{category}
 	</select>
+	
 
 	<resultMap type="FoodTruckVO" id="FoodTruckMap">
 		<result column="FTRUCK_NO" property="ftruckNo" />
@@ -100,4 +101,5 @@
 		<result column="FTRUCK_INTRO" property="ftruckIntro" />
 		<result column="FTRUCK_REG" property="ftruckReg" />
 	</resultMap>
+	
 </mapper>

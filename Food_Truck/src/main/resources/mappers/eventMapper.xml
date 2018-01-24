@@ -7,52 +7,66 @@
 
 	<!-- 이벤트 정보 -->
 	<select id="getEvent" resultMap="EventMap">
-		select * from event_bd where notice_no=#{noticeNo}
+		select * from event_bd where
+		event_no=#{eventNo}
 	</select>
 
 
 	<!-- 이벤트 전체 리스트 -->
 	<select id="getEventBoardList" resultMap="EventMap">
-		SELECT * FROM event_bd order by notice_no desc
+		select nttt.* from
+		(select ntt.*from
+		(select rownum as
+		rnum, nt.*
+		from(SELECT * FROM EVENT_BD order by event_no desc) nt)ntt where rownum&lt;=#{pageNo}+9)nttt
+		where rnum>=#{pageNo}
 	</select>
-	
+
 
 	<!-- 이벤트 등록 -->
 	<insert id="insertEvent" parameterType="com.foodtruck.vo.EventVO">
-		insert into event_bd (notice_no, mem_id, notice_title, notice_writer, notice_content) 
-		values((select NVL(MAX(notice_no)+1, 1)FROM event_bd), #{memberId}, #{noticeTitle}, #{noticeWriter}, #{noticeContent})
+		insert into event_bd
+		(EVENT_NO, MEM_ID, EVENT_TITLE, EVENT_CONTENT)
+		values((select NVL(MAX(event_No)+1, 1)FROM event_bd), #{memId},
+		#{eventTitle}, #{eventContent})
 	</insert>
 
 
-	<!-- 이벤트 수정 -->	
+	<!-- 이벤트 수정 -->
 	<update id="updateEvent" parameterType="com.foodtruck.vo.EventVO">
-		update event_bd set notice_title=#{noticeTitle}, notice_content=#{noticeContent}, notice_writer=#{noticeWriter}
-		where notice_no=#{noticeNo}
+		update event_bd set
+		EVENT_TITLE=#{eventTitle}, EVENT_CONTENT=#{eventContent}
+		where EVENT_NO=#{eventNo}
 	</update>
-	
-	
+
+
 	<!-- 이벤트 조회수 -->
 	<update id="countEvent" parameterType="int">
- 		update event_bd set notice_cnt=notice_cnt+1 where notice_no=#{noticeNo}
- 	</update>
- 	
- 	
- 	<!-- 이벤트 삭제 -->
- 	<delete id="deleteEvent" parameterType="com.foodtruck.vo.EventVO">
- 		delete from event_bd where notice_no=#{noticeNo}
- 	</delete>
- 	
- 	
- 	<!-- resultMap -->
+		update event_bd set EVENT_CNT=EVENT_CNT+1 where EVENT_NO=#{eventNo}
+	</update>
+
+
+	<!-- 이벤트 삭제 -->
+	<delete id="deleteEvent" parameterType="com.foodtruck.vo.EventVO">
+		delete from event_bd where EVENT_NO=#{eventNo}
+	</delete>
+
+	<select id="getCountEvent" resultType="int">
+	select count(*) from
+		event_bd
+	</select>
+	
+	
+	<!-- resultMap -->
 	<resultMap type="EventVO" id="EventMap">
-		<result column="NOTICE_NO" property="noticeNo"/>
-		<result column="NOTICE_TITLE" property="noticeTitle"/>
-		<result column="NOTICE_WRITER" property="noticeWriter"/>
-		<result column="NOTICE_CONTENT" property="noticeContent"/>
-		<result column="NOTICE_REG" property="noticeReg"/>
-		<result column="NOTICE_CNT" property="noticeCnt"/>
-	
+		<result column="EVENT_NO" property="eventNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="EVENT_TITLE" property="eventTitle" />
+		<result column="EVENT_CONTENT" property="eventContent" />
+		<result column="EVENT_REG" property="eventReg" />
+		<result column="EVENT_CNT" property="eventCnt" />
+
 	</resultMap>
-	
-	
+
+
 </mapper>

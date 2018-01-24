@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 @Controller
@@ -23,8 +24,9 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
+	
 
-	// ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+	// å ì‹¸ê¹ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì‹±ë“¸ì˜™
 	@RequestMapping("/loginform")
 	public String loginform() {
 		System.out.println("loginform");
@@ -32,7 +34,7 @@ public class LoginController {
 		return "sign/login";
 	}
 
-	// ·Î±×ÀÎ ÇßÀ»¶§
+	// å ì‹¸ê¹ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -42,33 +44,38 @@ public class LoginController {
 		if (mvo != null) {
 			if (mvo.getMemberPw().equals(pw)) {
 				session.setAttribute("member", mvo);
-				System.out.println("·Î±×ÀÎ¼º°ø");
+				session.setAttribute("memberId", mvo.getMemberName());
+				if(mvo.getMemberAuth().equals("1")) {
+					session.setAttribute("memberGubun","1");
+				} else if(mvo.getMemberAuth().equals("2")) {
+					session.setAttribute("memberGubun","2");
+				}
 				return "redirect:/";
 			} else {
-				request.setAttribute("msg", "ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+				request.setAttribute("msg", "å ì™ì˜™æ©˜å ì‹«ï½ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™ å ì‹­ì™ì˜™å ì‹¹ëŒì˜™.");
 				return "comm/msg";
 			}
 		} else {
 
-			request.setAttribute("msg", "È¸¿øÁ¤º¸°¡ ¾ø°Å³ª ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+			request.setAttribute("msg", "íšŒå ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì‹ ë†‚ì˜™ å ìŒ‰ë ¥ë“¸ì˜™å ì™ì˜™ å ì‹­ì•˜ì™ì˜™å ì‹¹ëŒì˜™.");
 			return "comm/msg";
 		}
 	}
 
-	// ·Î±×¾Æ¿ô ÇßÀ»¶§
+	// å ì‹¸ê·¸ì•„ìš¸ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	// È¸¿ø°¡ÀÔÆäÀÌÁö
+	// íšŒå ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/joinform")
 	public String joinFormPage() {
 		return "sign/joinform";
 	}
 
-	// È¸¿ø °¡ÀÔ
+	// íšŒå ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/join")
 	public String insertMember(HttpServletRequest request, MemberVO vo) {
 
@@ -87,7 +94,7 @@ public class LoginController {
 		return "home";
 	}
 
-	// ID Áßº¹Ã¼Å©
+	// ID å ìŒ©ë¸ì˜™ì²´í¬
 	@ResponseBody
 	@RequestMapping("/idCheck")
 	public MemberVO memberIdCheck(HttpServletRequest request) {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodtruck.dao.FestivalDAO">
+
+	<insert id="IntsertFestival" >
+		insert into
+		festival(FES_NO,FES_NAME,FES_ID,FES_CONTENT,FES_TEL,FES_ADDR,FES_SDATE,FES_EDATE,FES_IMG,FES_IMG2,FES_LATITUDE,FES_LONGITUDE)
+		values
+		(FES_SEQ.nextval,#{fesName},#{fesId},#{fesContent},#{fesTel},#{fesAddr},#{fesSdate},#{fesEdate},#{fesImg},#{fesImg2},#{fesLatitude},#{fesLongitude})
+	</insert>
+	<select id="getFestivalList" resultMap="FestivalMap">
+		select * from FESTIVAl
+	</select>
+	<delete id="deleteFestival">
+		truncate table festival
+	</delete>
+	
+	
+	<resultMap type="FestivalVO" id="FestivalMap">
+		<result column="FES_NO" property="fesNo" />
+		<result column="FES_ADDR" property="fesAddr" />
+		<result column="FES_NAME" property="fesName" />
+		<result column="FES_TEL" property="fesTel" />
+		<result column="FES_SDATE" property="fesSdate" />
+		<result column="FES_EDATE" property="fesEdate" />
+		<result column="FES_IMG2" property="fesImg2" />
+		<result column="FES_IMG" property="fesImg" />
+		<result column="FES_LATITUDE" property="fesLatitude" />
+		<result column="FES_LONGITUDE" property="fesLongitude" />
+		<result column="FES_ID" property="fesId" />
+		<result column="FES_CONTENT" property="fesContent" />
+	</resultMap>
+</mapper>

@@ -37,8 +37,8 @@
 							
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="/noticeBoard">공지사항</a></li>
-									<li><a href="/eventBoard">이벤트</a></li>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
 								</ul>
 							</li>
@@ -76,7 +76,7 @@
 									<li><a href="/insertProductForm">제품 등록</a></li>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
-									<li><a href="/sellerSetting">판매자 설정</a></li>
+									<li><a href="/sellerCalendar">판매자 설정</a></li>
 								</ul></li>
 							<%
 								break;
@@ -87,7 +87,7 @@
 								<ul>
 									<li><a href="/adminMember">회원 관리</a></li>
 									<li><a href="/adminSeller">판매자 관리</a></li>
-									<li><a href="/adminFoodTruck">푸드트럭 관리</a></li>
+									<li><a href="/adminCalendar">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;
@@ -100,8 +100,8 @@
 							%>
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<li><a href="/noticeBoard">공지사항</a></li>
-									<li><a href="/eventBoard">이벤트</a></li>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
 								</ul>
 							</li>

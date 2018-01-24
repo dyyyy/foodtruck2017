@@ -3,23 +3,23 @@ package com.foodtruck.vo;
 
 public class ProductVO {
 	
-	private String prodNo;				// Á¦Ç° ¹øÈ£
-	private String prodName;		// Á¦Ç° ÀÌ¸§
-	private String prodContent;		// Á¦Ç° ³»¿ë
-	private String prodImg;			// Á¦Ç° ÀÌ¹ÌÁö
-	private int prodPrice;			// ±Ý¾×
-	private String ftruckNo;		// »ç¾÷ÀÚ ¹øÈ£
+	private String prodNo;				// ï¿½ï¿½Ç° ï¿½ï¿½È£
+	private String prodName;		// ï¿½ï¿½Ç° ï¿½Ì¸ï¿½
+	private String prodContent;		// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
+	private String prodImg;			// ï¿½ï¿½Ç° ï¿½Ì¹ï¿½ï¿½ï¿½
+	private int prodPrice;			// ï¿½Ý¾ï¿½
+	private String ftruckNo;		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private String licenseNo;
 	
 	// getter & setter
-	
-	public String getProdName() {
-		return prodName;
-	}
 	public String getProdNo() {
 		return prodNo;
 	}
 	public void setProdNo(String prodNo) {
 		this.prodNo = prodNo;
+	}
+	public String getProdName() {
+		return prodName;
 	}
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
@@ -42,11 +42,20 @@ public class ProductVO {
 	public void setProdPrice(int prodPrice) {
 		this.prodPrice = prodPrice;
 	}
-	public String getftruckNo() {
+	public String getFtruckNo() {
 		return ftruckNo;
 	}
-	public void setftruckNo(String ftruckNo) {
+	public void setFtruckNo(String ftruckNo) {
 		this.ftruckNo = ftruckNo;
 	}
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
+	}
+	
+	
+	
 }
 

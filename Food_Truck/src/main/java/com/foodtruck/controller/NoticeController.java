@@ -26,19 +26,30 @@ public class NoticeController {
 	@Autowired
 	MemberService memberService;
 	
-	// °øÁö»çÇ×
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/noticeBoard")
-	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request) {
-		List<NoticeVO> list = noticeService.getNoticeBoardList();
-		
+	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request,@RequestParam("pageNo") int pageNo) throws Exception {
+		//ï¿½ëŸ¹ï¿½ì” ï§ëº¤ì¿‚ç”±ï¿½
+		int NpageNo = 0;
+		if (pageNo == 1) {
+			pageNo = 1;
+		} else {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		List<NoticeVO> list = noticeService.getNoticeBoardList(NpageNo);
+		System.out.println(list.size());
 		if(list != null) {
 			model.addAttribute("rank", list);
 		}
+		int count=noticeService.getCountNotice();
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("pagecount", count);
+		
 		
 		return "nav/noticeBoard";
 	}
 	
-	// °øÁö»çÇ× »ó¼¼
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™
 	@RequestMapping("/detailNoticeForm")
 	public String detailNoticeForm(@RequestParam("noticeNo")int noticeNo, HttpServletRequest request) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
@@ -46,34 +57,37 @@ public class NoticeController {
 		
 		request.setAttribute("vo", vo);
 		
-		noticeService.countNotice(vo.getNoticeNo()); // Á¶È¸¼ö
+		noticeService.countNotice(vo.getNoticeNo()); // å ì™ì˜™íšŒå ì™ì˜™
 		
 		return "nav/detailNoticeForm";
 	}
 	
 	
-	// °øÁö»çÇ× ±Û¾²±â
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒœì–µì˜™å ì™ì˜™
 	@RequestMapping("/writeNoticeForm")
-	public String writeNotice() {
+	public String writeNotice(HttpSession session, HttpServletRequest request) {
+//		MemberVO vo = (MemberVO)session.getAttribute("member");
+//		request.setAttribute("vo", vo);
+		
 		return "nav/writeNoticeForm";
 	}
 	
 	
-	// °øÁö»çÇ× µî·Ï
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½
 	@RequestMapping("/insertNotice")
 	public String insertNotice(HttpSession session, NoticeVO vo, MemberVO mvo) {
 		
 		MemberVO m = (MemberVO)session.getAttribute("member");
-		vo.setMemberId(m.getMemberId());
+		vo.setMemId(m.getMemberId());
 		
 //		vo.setMemberId(mvo.getMemberId());
 		
 		noticeService.insertNotice(vo);
-		return "redirect:/noticeBoard";
+		return "redirect:/noticeBoard?pageNo=1";
 	}
 
 	
-	// °øÁö»çÇ× ¼öÁ¤ Æû
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™
 	@RequestMapping("/updateNoticeForm")
 	public String updateNoticeForm(HttpServletRequest request, @RequestParam("noticeNo")int noticeNo) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
@@ -82,22 +96,22 @@ public class NoticeController {
 	}
 	
 	
-	// °øÁö»çÇ× ¼öÁ¤
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/updateNotice")
 	public String updateNotice(NoticeVO vo) {
 		noticeService.updateNotice(vo);
 		
 		System.out.println("update Controller");
-		return "redirect:/noticeBoard";
+		return "redirect:/noticeBoard?pageNo=1";
 	}
 	
 	
-	// °øÁö»çÇ× »èÁ¦
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeVO vo) {
 		noticeService.deleteNotice(vo);
 		
-		return "redirect:/noticeBoard";
+		return "redirect:/noticeBoard?pageNo=1";
 	}
 	
 	

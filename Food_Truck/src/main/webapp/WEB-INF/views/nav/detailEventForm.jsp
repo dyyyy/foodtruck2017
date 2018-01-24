@@ -32,25 +32,25 @@
 			<table class="table">
 				<tr>
 					<th>제목</th>
-					<td colspan=3>${vo.noticeTitle}</td>
+					<td colspan=3>${vo.eventTitle}</td>
 				</tr>
 				<tr>
 					<th>등록일</th>
-					<td>${vo.noticeReg}</td>
+					<td>${vo.eventReg}</td>
 					<th>조회수</th>
-					<td>${vo.noticeCnt}</td>
+					<td>${vo.eventCnt}</td>
 				</tr>
 				<tr>
-					<td colspan=2 class="notice-content">${vo.noticeContent}</td>
+					<td colspan=2 class="notice-content">${vo.eventContent}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${vo.noticeWriter}</td>
+					<td>${vo.memId}</td>
 				</tr>
 			</table>
-			<button onclick="location.href='/updateEventForm?noticeNo=${vo.noticeNo}'">수정</button>
-			<button id=delete onclick="location.href='/deleteEvent?noticeNo=${vo.noticeNo}'">삭제</button>
-			<button onclick="location.href='/eventBoard'">목록</button>
+			<button onclick="location.href='/updateEventForm?eventNo=${vo.eventNo}'">수정</button>
+			<button id=delete onclick="location.href='/deleteEvent?eventNo=${vo.eventNo}'">삭제</button>
+			<button onclick="location.href='/eventBoard?pageNo=1'">목록</button>
 			
 			
 		</div>

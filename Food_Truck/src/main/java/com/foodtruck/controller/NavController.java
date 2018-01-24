@@ -42,34 +42,16 @@ public class NavController {
 		return "nav/adminSeller";
 	}
 
-	// 관리자 메뉴 - 푸드트럭 관리
-	@RequestMapping("/adminFoodTruck")
-	public String adminFoodTruckPage() {
-		return "nav/adminFoodTruck";
-	}
-
 	// 판매자 메뉴 - 제품 등록
 	@RequestMapping("/productInsert")
 	public String productInsertPage() {
 		return "nav/productInsert";
 	}
 
-	// 판매자 메뉴 - 예약 내역 -> orderDetailController로 이동
-	// @RequestMapping("/orderDetail")
-	// public String orderDetailPage() {
-	// return "nav/orderDetail";
-	// }
-
 	// 판매자 메뉴 - 배달 내역
 	@RequestMapping("/deliveryDetails")
 	public String deliveryDetailsPage() {
 		return "nav/deliveryDetails";
-	}
-
-	// 판매자 메뉴 - 판매자 설정
-	@RequestMapping("/sellerSetting")
-	public String sellerSettingPage() {
-		return "nav/sellerSetting";
 	}
 
 	// 구매자 메뉴 - 전체 주문 내역

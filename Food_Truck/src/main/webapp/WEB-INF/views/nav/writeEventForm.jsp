@@ -72,16 +72,16 @@
 				<table class="table">
 				<tr>
 					<th>제목</th>
-					<td><input type=text name=noticeTitle></td>
+					<td><input type=text name=eventTitle></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type=text name=noticeWriter></td>
+					<td><input type=text name=memId></td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="noticeContent" id="editor" style="width: 610px ; height: 220px;" rows="10" cols="30"></textarea>
+						<textarea name="eventContent" id="editor" style="width: 610px ; height: 220px;" rows="10" cols="30"></textarea>
 					</td>
 				</tr>
 

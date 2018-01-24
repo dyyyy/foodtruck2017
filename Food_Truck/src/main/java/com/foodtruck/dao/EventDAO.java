@@ -7,7 +7,7 @@ import com.foodtruck.vo.NoticeVO;
 
 public interface EventDAO {
 	
-	public List<EventVO> getEventBoardList();
+	public List<EventVO> getEventBoardList(int NpageNo);
 	
 	public EventVO getEvent(int noticeNo);
 	
@@ -18,6 +18,8 @@ public interface EventDAO {
 	public int countEvent(int noticeNo);
 	
 	public int deleteEvent(EventVO vo);
+	
+	public int getCountEvent();
 	
 
 }

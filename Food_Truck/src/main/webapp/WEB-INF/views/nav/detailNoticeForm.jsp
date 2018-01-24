@@ -6,6 +6,7 @@
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/style.css" />
 <script src="//code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script>
 	$(function() {
@@ -45,13 +46,21 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${vo.noticeWriter}</td>
+					<td>${vo.memId}</td>
 				</tr>
 			</table>
-			<button onclick="location.href='/updateNoticeForm?noticeNo=${vo.noticeNo}'">수정</button>
-			<button id=delete onclick="location.href='/deleteNotice?noticeNo=${vo.noticeNo}'">삭제</button>
-			<button onclick="location.href='/noticeBoard'">목록</button>
-			
+			<%
+				//로그인 체크!
+				if (mvo != null) {
+					isLogin = true;
+					if(mvo.getMemberAuth().equals("1")) {
+			%>
+				<div>
+					<button class="notice-btn" onclick="location.href='/updateNoticeForm?noticeNo=${vo.noticeNo}'">수정</button>
+					<button class="notice-btn" id=delete onclick="location.href='/deleteNotice?noticeNo=${vo.noticeNo}'">삭제</button>
+					<button class="notice-btn" onclick="location.href='/noticeBoard?pageNo=1'">목록</button>
+				</div>
+			<% }} %>
 			
 		</div>
 	</div>

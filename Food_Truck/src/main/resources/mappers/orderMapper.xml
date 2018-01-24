@@ -9,27 +9,81 @@
 	<select id="getOrder" resultMap="OrderMap">
 		
 		SELECT * FROM ORDERS
-		<where> order_no=#{ordNo} </where>
+		<where> ord_no=#{ordNo} </where>
 	
 	</select>
 	
-	<!-- 주문 리스트 -->
+	<select id="getLicense" resultMap="OrderMap" >
+<!-- 	
+		SELECT LICENSE.LICENSE_NO || '(' || FOODTRUCK.FTRUCK_NAME || ')' AS LICENSE_NO
+		FROM MEMBER
+		INNER JOIN LICENSE
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+		INNER JOIN FOODTRUCK
+		ON FOODTRUCK.LICENSE_NO = LICENSE.LICENSE_NO
+		<where> MEMBER.MEM_ID=#{memberId} </where>
+ -->		
+ 
+ 		SELECT LICENSE.LICENSE_NO AS LICENSE_NO
+		FROM MEMBER
+		INNER JOIN LICENSE
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+ 		<where> MEMBER.MEM_ID=#{memberId} </where>
+	</select>
+	
+<!-- 	
+	주문 리스트
 	<select id="getOrderList" resultMap="OrderMap">
 		
 		SELECT * FROM ORDERS
 	
 	</select>
+ -->
+ 	
+	<!-- 주문 리스트 -->
+	<select id="getOrderList" resultMap="OrderMap" >
+ <!-- 		
+		SELECT * 
+		FROM MEMBER
+		INNER JOIN LICENSE
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+		INNER JOIN ORDERS
+		ON ORDERS.LICENSE_NO = LICENSE.LICENSE_NO
+		<where>
+		MEMBER.MEM_ID = #{memberId}
+		and ORDERS.LICENSE_NO = #{licenseNo}
+		</where>
+  -->
+  
+  		select * from orders, product, license
+  		where orders.license_no = product.license_no
+  		and product.license_no = license.license_no
+  		and license.license_no=#{licenseNo}
+<!-- 		
+		select * from orders a, license b, member c
+		where a.license_no = b.license_no
+		and b.mem_id = c.mem_id
+		and c.mem_id=#{memberId}
+		and a.license_no=#{licenseNo};
+ -->	
+	</select>
+	
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
-		<result column="ORDER_NO" property="ordNo"/>
+		<result column="ORD_NO" property="ordNo"/>
 		<result column="ORD_NAME" property="ordName"/>
 		<result column="ORD_TEL" property="ordTel"/>
 		<result column="ORD_DATE" property="ordDate"/>
 		<result column="ORD_RSV_DATE" property="ordRsvDate"/>
 		<result column="ORD_DLV_YN" property="ordDlyYn"/>
 		<result column="MEM_ID" property="memId"/>
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="PROD_NAME" property="prodName"/>
+	</resultMap>
 	
+	<resultMap type="LicenseVO" id="LicenseMap">
+		<result column="LICENSE_NO" property="licenseNo"/>
 	</resultMap>
 
 
