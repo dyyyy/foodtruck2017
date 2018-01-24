@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodtruck.dao.AdminDao">
+	<insert id="insertMinquryReply">
+		insert into reply_sc
+		(REPLY_SC_NO,MEM_ID,QA_SC_NO,REPLY_SC_CONTENT,REPLY_SC_REG)
+		values(REP_SC_SEQ.nextval,#{memId},#{qaScNo},#{replyScContent},SYSDATE)
+	</insert>
+
+
+	<resultMap type="MinquiryReplyVO" id="MinquiryReplyMap">
+		<result column="REPLY_SC_NO" property="replyScNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="QA_SC_NO" property="qaScNo" />
+		<result column="REPLY_SC_CONTENT" property="replyScContent" />
+		<result column="REPLY_SC_REG" property="replyScReg" />
+	</resultMap>
+</mapper>
