@@ -9,7 +9,7 @@
 
 		SELECT * FROM MEMBER
 		<where> MEM_ID=#{memberId} </where>
-	
+
 	</select>
 
 	<!-- 회원 리스트 -->
@@ -17,26 +17,28 @@
 
 		SELECT * FROM MEMBER
 	</select>
-	
-		<!-- ID 찾기 -->
+
+	<!-- ID 찾기 -->
 	<select id="getId" resultMap="memberMap">
 		SELECT * FROM MEMBER
 		<where> MEM_TEL = #{memberTel}</where>
 	</select>
-	
-		<!-- PW 찾기 -->
+
+	<!-- PW 찾기 -->
 	<select id="getPw" resultMap="memberMap" parameterType="map">
 		SELECT * FROM MEMBER
 		<where> MEM_TEL = #{memberTel} and MEM_ID = #{memberId} </where>
 	</select>
-	
+
 	<!-- 회원 등록 -->
 	<insert id="insertMember">
 
 		INSERT INTO MEMBER
-		(MEM_ID, MEM_PW, MEM_NAME, MEM_TEL, MEM_AUTH)
+		(MEM_ID, MEM_PW, MEM_NAME, MEM_TEL,
+		MEM_AUTH)
 		VALUES
-		(#{memberId}, #{memberPw}, #{memberName}, #{memberTel}, #{memberAuth})
+		(#{memberId}, #{memberPw}, #{memberName}, #{memberTel},
+		#{memberAuth})
 
 	</insert>
 
@@ -57,24 +59,48 @@
 		<where> MEM_ID=#{memberId}</where>
 
 	</delete>
-	
+
 	<!-- 사업자 번호 -->
-	<select id="getLicenseNo" resultMap="licenseMap" >
-		
+	<select id="getLicenseNo" resultMap="licenseMap">
+
 		SELECT LICENSE.LICENSE_NO AS LICENSE_NO
 		FROM MEMBER
 		INNER JOIN LICENSE
 		ON MEMBER.MEM_ID = LICENSE.MEM_ID
 		<where> MEMBER.MEM_ID=#{selId} </where>
-		
+
 	</select>
 	<!-- 1:1 insert -->
 	<insert id="insertInquiry">
-	INSERT INTO QA_SC 
-	(QA_SC_NO,MEM_ID,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL,QA_SC_STAT)
-	VALUES
-	(QA_SC_SEQ.NEXTVAL,#{memId},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
+		INSERT INTO QA_SC
+		(QA_SC_NO,MEM_ID,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL,QA_SC_STAT)
+		VALUES
+		(QA_SC_SEQ.NEXTVAL,#{memId},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
 	</insert>
+	<select id="getMinquiryList" resultMap="InquiryMap">
+		select ffft.* from
+		(select fft.*from
+		(select rownum as
+		rnum, ft.*
+		from (
+		select
+		* from qa_sc where qa_sc_stat='N' order by QA_SC_NO asc)
+		ft)fft
+		where
+		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
+		where rnum>=#{pageNo}
+	</select>
+
+	<select id="getMinquiryListcount" resultType="int">
+		select count(*)from qa_sc where QA_SC_STAT='N'
+	</select>
+
+	<select id="getinfo" resultMap="InquiryMap">
+		select * from qa_sc where QA_SC_NO=#{qno}
+	</select>
+	<update id="updateMinquiry">
+		update qa_sc set QA_SC_STAT='Y' where QA_SC_NO=#{qno}
+	</update>
 
 	<resultMap type="com.foodtruck.vo.MemberVO" id="memberMap">
 		<result column="MEM_ID" property="memberId" />
@@ -83,22 +109,22 @@
 		<result column="MEM_TEL" property="memberTel" />
 		<result column="MEM_AUTH" property="memberAuth" />
 	</resultMap>
-	
-	
+
+
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="licenseMap">
-		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="LICENSE_NO" property="licenseNo" />
 	</resultMap>
-	
-	
+
+
 	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
-	<result column="QA_SC_NO" property="qaScNo" />
-	<result column="MEM_ID" property="memId" />
-	<result column="QA_SC_TITLE" property="qaScTitle" />
-	<result column="QA_SC_CONTENT" property="qaScContent" />
-	<result column="QA_SC_REG" property="qaScReg" />
-	<result column="QA_SC_CATEGORY1" property="qaScCategory1" />
-	<result column="QA_SC_CATEGORY2" property="qaScCategory2" />
-	<result column="QA_SC_TEL" property="qaScTel" />
-	<result column="QA_SC_STAT" property="qaScStat" />
+		<result column="QA_SC_NO" property="qaScNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="QA_SC_TITLE" property="qaScTitle" />
+		<result column="QA_SC_CONTENT" property="qaScContent" />
+		<result column="QA_SC_REG" property="qaScReg" />
+		<result column="QA_SC_CATEGORY1" property="qaScCategory1" />
+		<result column="QA_SC_CATEGORY2" property="qaScCategory2" />
+		<result column="QA_SC_TEL" property="qaScTel" />
+		<result column="QA_SC_STAT" property="qaScStat" />
 	</resultMap>
 </mapper>

@@ -37,5 +37,14 @@ public interface MemberDAO {
 	public int insertInquiry(MInquiryVO vo);
 	
 	//1:1문의 list가져오기
-	public List<MInquiryVO> getMinquiryList();
+	public List<MInquiryVO> getMinquiryList(int NpageNo);
+	
+	//1:1문의 total count가져오기
+	public int getMinquiryListcount();
+	
+	//1:1문의 select
+	public MInquiryVO getinfo(int qno);
+	
+	//1:1문의 update
+	public int updateMinquiry(int qno);
 }

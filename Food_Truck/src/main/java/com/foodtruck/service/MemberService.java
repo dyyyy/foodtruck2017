@@ -68,9 +68,23 @@ public class MemberService {
 		return dao.insertInquiry(vo);
 	}
 	//1:1 문의사항 list가져오기
-	public List<MInquiryVO> getMinquiryList(){
+	public List<MInquiryVO> getMinquiryList(int NpageNo){
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
-		return dao.getMinquiryList();
+		return dao.getMinquiryList(NpageNo);
+	}
+	//1:1문의사항 count 가져오기
+	public int getMinquiryListcount() {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMinquiryListcount();
+	}
+	//1:1 문의사항 select
+	public MInquiryVO getinfo(int qno) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getinfo(qno);
+	}
+	public int updateMinquiry(int qno) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.updateMinquiry(qno);
 	}
 
 }

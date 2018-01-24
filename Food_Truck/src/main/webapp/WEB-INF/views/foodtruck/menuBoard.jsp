@@ -135,6 +135,8 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
 	<!-- Shop Product Area End -->
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
