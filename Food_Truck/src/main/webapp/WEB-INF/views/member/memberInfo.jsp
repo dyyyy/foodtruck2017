@@ -18,6 +18,7 @@ $(function() {
 			frm.method = "POST"
 			frm.submit()
 		}else{
+			alert("정보가 틀렸습니다.")
 			return false;
 		}
 		

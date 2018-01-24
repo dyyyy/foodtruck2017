@@ -36,7 +36,7 @@
 								<c:forEach items='${list}' var="MemberInfo">
 									<tr class="table-info">
 										<!-- 푸드트럭 이름 -->
-										<td class="unit">${MemberInfo.ftruckName}
+										<td class="unit">${MemberInfo.ftruckName}</td>
 										<!-- 주문일 -->
 										<td class="unit">${MemberInfo.ordDate}</td>		
 										<!-- 상품명 -->
