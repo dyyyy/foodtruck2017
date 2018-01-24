@@ -30,5 +30,13 @@ public class FestivalService {
 		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
 		return dao.deleteFestival();
 	}
+	public List<FestivalVO> getFestivalList2(int npageNo) throws Exception{
+		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
+		return dao.getFestivalList2(npageNo);
+	}
+	public int getcountFestival()throws Exception {
+		FestivalDAO dao=sessionTemplate.getMapper(FestivalDAO.class);
+		return dao.getcountFestival();
+	}
 	
 }

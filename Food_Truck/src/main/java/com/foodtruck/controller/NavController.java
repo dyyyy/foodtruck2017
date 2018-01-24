@@ -1,13 +1,18 @@
 package com.foodtruck.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.foodtruck.vo.MemberVO;
 
 @Controller
 public class NavController {
 	
 /*
-	// °øÁö»çÇ×
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/noticeBoard")
 	public String noticeBoardPage() {
 		return "nav/noticeBoard";
@@ -16,7 +21,7 @@ public class NavController {
 
 	
 /*	
-	// ÀÌº¥Æ®
+	// ï¿½Ìºï¿½Æ®
 	@RequestMapping("/eventBoard")
 	public String eventBoardPage() {
 		return "nav/eventBoard";
@@ -24,55 +29,65 @@ public class NavController {
 */
 	
 	
-	// 1:1 ¹®ÀÇ
+	// 1:1 ì¼ë°˜íšŒì› ë¬¸ì˜
 	@RequestMapping("/inquiry")
-	public String inquiryPage() {
-		return "nav/inquiry";
+	public String inquiryPage(HttpSession session,HttpServletRequest request) {
+		MemberVO m = (MemberVO)session.getAttribute("member");
+		String id=m.getMemberId();
+		request.setAttribute("id", id);
+		return "nav/memberinquiry";
 	}
+	
+	//1:1 íŒë§¤ìíšŒì› ë¬¸ì˜
+	@RequestMapping("/inquiry2")
+	public String inquiryPage2() {
+		return "nav/sellerinquiry";
+	}
+	
 
-	// °ü¸®ÀÚ ¸Ş´º - È¸¿ø°ü¸®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/adminMember")
 	public String adminMemberPage() {
 		return "nav/adminMember";
 	}
 
-	// °ü¸®ÀÚ ¸Ş´º - ÆÇ¸ÅÀÚ °ü¸®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/adminSeller")
 	public String adminSellerPage() {
 		return "nav/adminSeller";
 	}
 
-	// ÆÇ¸ÅÀÚ ¸Ş´º - Á¦Ç° µî·Ï
+	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 	@RequestMapping("/productInsert")
 	public String productInsertPage() {
 		return "nav/productInsert";
 	}
 
-	// ÆÇ¸ÅÀÚ ¸Ş´º - ¹è´Ş ³»¿ª
+	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/deliveryDetails")
 	public String deliveryDetailsPage() {
 		return "nav/deliveryDetails";
 	}
 
-	// ±¸¸ÅÀÚ ¸Ş´º - ÀüÃ¼ ÁÖ¹® ³»¿ª
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½Ã¼ ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/orderList")
 	public String orderListPage() {
 		return "nav/orderList";
 	}
 
-	// ±¸¸ÅÀÚ ¸Ş´º - °ü½É ÇªµåÆ®·°
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½ï¿½ï¿½ Çªï¿½ï¿½Æ®ï¿½ï¿½
 	@RequestMapping("/favoritFoodtruck")
 	public String favoritFoodtruckPage() {
 		return "nav/favoritFoodtruck";
 	}
 
-	// ±¸¸ÅÀÚ ¸Ş´º - ³»°¡ ¾´±Û
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/myWriting")
 	public String myWritingPage() {
 		return "nav/myWriting";
 	}
 
-	// ±¸¸ÅÀÚ ¸Ş´º - ³ªÀÇ ¼³Á¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/mySetting")
 	public String mySettingPage() {
 		return "nav/mySetting";

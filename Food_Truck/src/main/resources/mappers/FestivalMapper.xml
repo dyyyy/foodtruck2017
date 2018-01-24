@@ -15,8 +15,20 @@
 	<delete id="deleteFestival">
 		truncate table festival
 	</delete>
-	
-	
+	<select id="getFestivalList2" resultMap="FestivalMap">
+	select ffft.* from
+		(select fft.*from
+		(select rownum as rnum, ft.*
+		from (select festival.*
+		from
+		festival order by fes_no) ft)fft
+		where rownum &lt;=#{pageNo}+9)ffft
+		where rnum >=#{pageNo}
+	</select>
+	<select id="getcountFestival" resultType="int">
+	select count(*) from
+		festival
+	</select>
 	<resultMap type="FestivalVO" id="FestivalMap">
 		<result column="FES_NO" property="fesNo" />
 		<result column="FES_ADDR" property="fesAddr" />

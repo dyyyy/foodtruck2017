@@ -14,4 +14,8 @@ public interface FestivalDAO {
 	public int UpdateFestival(FestivalDAO vo) throws Exception;
 	//축제정보 삭제하기
 	public int deleteFestival() throws Exception;
+	//축제정보 count
+	public int getcountFestival() throws Exception;
+	//축제정보 10개씩 가져오기
+	public List<FestivalVO> getFestivalList2(int npageNo) throws Exception;
 }

@@ -1,24 +1,25 @@
 package com.foodtruck.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.foodtruck.vo.OrderVO;
 
 public interface OrderDAO {
 
-	// ÁÖ¹® Á¤º¸
+	// ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public OrderVO getOrder(int ordNo);
 
-	// ÁÖ¹® ¸®½ºÆ®
-	public List<OrderVO> getOrderList(String licenseNo);
-	
-	// ÁÖ¹® µî·Ï
+	// ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+	public List<OrderVO> getOrderList();
+
+	// ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½
 	public int insertOrder(OrderVO vo);
 
-	// ÁÖ¹® ¼öÁ¤
+	// ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateOrder(OrderVO vo);
 
-	// ÁÖ¹® »èÁ¦
+	// ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteOrder(int ordNo);
 	
 	public List<OrderVO> getLicense(String memberId);
@@ -26,4 +27,9 @@ public interface OrderDAO {
 	public List<OrderVO> getLicense2(String licenseNo);
 	
 	
+	// ë¹„íšŒì›ì´ ì£¼ë¬¸ë²ˆí˜¸ & ì „í™”ë²ˆí˜¸ë¡œ ì£¼ë¬¸ë‚´ì—­ ì¡°íšŒ
+	public List<OrderVO> getNonmemberInfo(Map<String,Object> map);
+	
+	//ì‚¬ìš©ì ì´ìš©ë‚´ì—­
+	public List<OrderVO> getMemberOrderList(String memberId);
 }

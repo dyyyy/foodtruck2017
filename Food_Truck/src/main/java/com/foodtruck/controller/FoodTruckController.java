@@ -3,8 +3,6 @@ package com.foodtruck.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,14 +26,12 @@ import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
-import com.foodtruck.dao.FestivalDAO;
 
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.ReviewVO;
-import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 @Controller
 public class FoodTruckController {
@@ -53,14 +49,15 @@ public class FoodTruckController {
 	@RequestMapping("/menuBoard")
 	public String menuBoarPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
 			throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
-		;
+		System.out.println("dfsdfs"+list.size());
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).getFtruckName());
+		}
 		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
@@ -73,10 +70,8 @@ public class FoodTruckController {
 	@RequestMapping("/menuBoard2")
 	public String menuBoarPage2(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
 			throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
@@ -184,6 +179,7 @@ public class FoodTruckController {
 
 		for (int q = 0; q < num.length; q++) {
 			try {
+				Thread.sleep(300);
 				int code = num[q];
 				System.out.println(code);
 				request.setCharacterEncoding("utf-8");
@@ -217,7 +213,7 @@ public class FoodTruckController {
 				addr = addr + serviceKey + parameter;
 				URL url = new URL(addr);
 
-				System.out.println(addr);
+				//System.out.println(addr);
 
 				// BufferedReader in = new BufferedReader(new
 				// InputStreamReader(url.openStream(), "UTF-8"));
@@ -342,4 +338,5 @@ public class FoodTruckController {
 		return "nav/recommend";
 
 	}
+	
 }

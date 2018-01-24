@@ -34,15 +34,14 @@
 							%>
 							<li><a href="/loginform">로그인</a></li>
 							<li><a href="/joinform">회원가입</a></li>
-							
+
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/inquiry">1:1 문의</a></li>
-								</ul>
-							</li>
-							
+									<li><a href="/loginform">1:1 문의</a></li>
+								</ul></li>
+
 							<%
 								} else {
 							%>
@@ -59,11 +58,10 @@
 									case "3":
 							%>
 							<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
-								<ul>
+								<ul style="width: 120px; ">
 									<li><a href="/orderList">전체 주문 내역</a></li>
 									<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
-									<li><a href="/myWriting">내가 쓴글</a></li>
-									<li><a href="/mySetting">나의 설정</a></li>
+									<li ><a href="/memberInfo">나의 설정</a></li>
 								</ul></li>
 							<%
 								break;
@@ -86,25 +84,39 @@
 							<li><a href="#">관리자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/adminMember">회원 관리</a></li>
-									<li><a href="/adminSeller">판매자 관리</a></li>
-									<li><a href="/adminCalendar">푸드트럭 관리</a></li>
+									<li><a href="/admin">관리자페이지</a></li>
 								</ul></li>
 							<%
 								break;
 									default:
-										%>
-										<li>로그인되지 않았습니다.</li>
-										<%
-										break;
+							%>
+							<li>로그인되지 않았습니다.</li>
+							<%
+								break;
 									}
+							%>
+							<%switch (mvo.getMemberAuth()) { 
+								//일반회원
+								case "3":
 							%>
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry">1:1 문의</a></li>
-								</ul>
-							</li>
+								</ul></li>
+							<%break;
+								//판매자회원
+								case "2":%>
+								<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
+								<ul>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
+									<li><a href="/inquiry2">1:1 문의</a></li>
+								</ul></li>
+								<%break;
+								}%>
+					
 							<%
 								}
 							%>
@@ -155,11 +167,38 @@
 					<!-- 						</div> -->
 					<!-- 					</div> -->
 					<!-- 				</div> -->
+
+
+
+
 					<div class="search float-right">
-						<input type="text" value="" placeholder="Search Here...." />
-						<button class="submit">
-							<i class="fa fa-search"></i>
-						</button>
+							<div id="search1">
+								<button onclick="getLocation()" id="getLocation" class="ico-loc">
+								</button>
+							</div>
+							
+							<form action="/search" method="get">
+							
+							<div id="search2">
+							<input type="hidden" name="pageNo" value="1">
+								<input type="text" id="search" name="search"
+									placeholder="예) 강남구, 서초구" value=""/>
+									
+							</div>
+							<div id="search3">
+							<!-- 
+							<input type="image" id="locbtn" class="submit">
+							-->
+							<button class="submit" id="locbtn"> <i
+									class="fa fa-search"></i>
+								</button>
+								 
+							</div>	
+							</form>
+								
+
+
+
 					</div>
 				</div>
 			</div>

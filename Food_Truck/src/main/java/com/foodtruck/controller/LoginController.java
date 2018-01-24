@@ -1,6 +1,11 @@
 
 package com.foodtruck.controller;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,7 +43,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
-
+		
 		MemberVO mvo = memberService.getMember(id);
 
 		if (mvo != null) {
@@ -53,11 +58,12 @@ public class LoginController {
 				return "redirect:/";
 			} else {
 				request.setAttribute("msg", "占쏙옙橘占싫ｏ옙占� 占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
+				request.setAttribute("msg", "비밀번호가 틀립니다.");
+				request.setAttribute("addr", "loginform");
 				return "comm/msg";
 			}
 		} else {
 
-			request.setAttribute("msg", "회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占신놂옙 占쌉력듸옙占쏙옙 占십았쏙옙占싹댐옙.");
 			return "comm/msg";
 		}
 	}
@@ -101,6 +107,38 @@ public class LoginController {
 		String memberId = request.getParameter("memberId");
 
 		return memberService.getMember(memberId);
+	}
+	
+	// 로그인 페이지에서 ID/PW 찾기 페이지로 이동
+	@RequestMapping("/findAccount")
+	public String accountFind(HttpServletRequest request)throws Exception {
+		
+		request.setAttribute("id", memberService.getMemberList());
+		return "sign/findAccount";
+		
+	}
+	
+	//ID 찾기
+	@ResponseBody
+	@RequestMapping("/findId")
+	public MemberVO findId(HttpServletRequest request){
+		String memberTel = request.getParameter("memberTel");
+		System.out.println(memberTel);
+		return memberService.getId(memberTel);
+	}
+	
+	//PW 찾기
+	@ResponseBody
+	@RequestMapping("/findPw")
+	public MemberVO findPw(HttpServletRequest request){
+		String memberTel = request.getParameter("memberTel2");
+		String memberId = request.getParameter("memberId");
+		System.out.println(memberTel);
+		System.out.println(memberId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("memberTel", memberTel);
+		map.put("memberId", memberId);
+		return memberService.getPw(map);
 	}
 }
 

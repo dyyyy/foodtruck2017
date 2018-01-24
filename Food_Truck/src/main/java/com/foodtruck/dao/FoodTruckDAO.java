@@ -6,34 +6,33 @@ import com.foodtruck.vo.PageVO;
 
 public interface FoodTruckDAO {
 	
-	// Ǫ��Ʈ�� ����
+	// 푸占쏙옙트占쏙옙 占쏙옙占쏙옙
 	public FoodTruckVO getFoodTruck(String ftruckNo)throws Exception;
 
-	// Ǫ��Ʈ�� ����Ʈ
+	// 푸占쏙옙트占쏙옙 占쏙옙占쏙옙트
 	public List<FoodTruckVO> getFoodTruckList(int pageNo)throws Exception;
 	
-	// ī�װ����� ����Ʈ
+	// 카占쌓곤옙占쏙옙 占쏙옙占쏙옙트
 	public List<FoodTruckVO> getCategoryList(PageVO vo)throws Exception;
 	
-	// Ǫ��Ʈ�� ��Ŭ�� ��ŷ
+	// 푸占쏙옙트占쏙옙 占쏙옙클占쏙옙 占쏙옙킹
 	public List<FoodTruckVO> getFoodTruckRank();
 
-	// Ǫ��Ʈ�� ���
+	// 푸占쏙옙트占쏙옙 占쏙옙占�
 	public int insertFoodTruck(FoodTruckVO vo)throws Exception;
 
-	// Ǫ��Ʈ�� ����
+	// 푸占쏙옙트占쏙옙 占쏙옙占쏙옙
 	public int updateTruck(FoodTruckVO vo)throws Exception;
 
-	// Ǫ��Ʈ�� ����
+	// 푸占쏙옙트占쏙옙 占쏙옙占쏙옙
 	public int deleteTruck(String ftruckNo)throws Exception;
 	
-	//Ǫ��Ʈ�� ��ücount(����¡ó��)
+	//푸占쏙옙트占쏙옙 占쏙옙체count(占쏙옙占쏙옙징처占쏙옙)
 	public int getCountTruck()throws Exception;
 	
-	//Ǫ��Ʈ�� ī�װ����� count(����¡ó��)
+	//푸占쏙옙트占쏙옙 카占쌓곤옙占쏙옙 count(占쏙옙占쏙옙징처占쏙옙)
 	public int getCategoryCountTruck(int category)throws Exception;
-	
-	// Ǫ��Ʈ�� ����ڹ�ȣ ����Ʈ
-	public List<FoodTruckVO> getLicense()throws Exception;
+	//�쁺�뾽�븞�븯�뒗 �뫖�뱶�듃�윮媛��졇�삤湲�
+	public List<FoodTruckVO> getFoodTruckList2(int PageNo) throws Exception;
 	
 }

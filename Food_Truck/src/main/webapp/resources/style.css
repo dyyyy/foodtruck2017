@@ -3011,7 +3011,7 @@ h4.heading {
 	text-transform: uppercase;
 }
 /*-----------------------
-	10. Login / Register / ProductInsert(h2, p, label, input, textarea, button Ãß°¡)
+	10. Login / Register / ProductInsert(h2, p, label, input, textarea, button ï¿½ß°ï¿½)
 -------------------------*/
 .login-page page fix {
 	position: absolute;
@@ -4451,7 +4451,7 @@ h4.heading {
 	text-align: left;
 	overflow: hidden;
 	font-size: 12px;
-	font-family: 'Malgun Gothic', dotum, 'µ¸¿ò', sans-serif;
+	font-family: 'Malgun Gothic', dotum, 'ï¿½ï¿½ï¿½ï¿½', sans-serif;
 	line-height: 1.5;
 }
 
@@ -4535,6 +4535,8 @@ h4.heading {
 .notice-content {
 	height:100px;
 }
+	height:400px;
+}x
 
 .table th {
 	background-color: #D5D5D5;
@@ -4542,6 +4544,7 @@ h4.heading {
 	text-align:center;   
 }
 
+<<<<<<< HEAD
 .notice-title {
 	font-size:20px;
 	text-align:left;
@@ -4561,4 +4564,28 @@ h4.heading {
 	text-decoration: none;
 	text-transform: uppercase;
 	width: auto;
+}
+
+#getLocation {
+	background: url('/resources/Images/ioc_loc.png') no-repeat;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+    
+}
+#search1 {
+	float: left;	
+}
+#search2 {
+	display: inline-block;
+}
+#search3 {
+	display: inline-block;	
+}
+#locbtn{
+	background: transparent ;
+	border: none ;
+	outline: 0 ;
 }

@@ -14,23 +14,24 @@ import com.foodtruck.vo.PageVO;
 public class FoodTruckService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
-	//ÇªµåÆ®·° Á¤º¸
+
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public FoodTruckVO getFoodTruck(String ftruckNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruck(ftruckNo);
 	}
-	//ÇªµåÆ®·° ¸®½ºÆ®
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<FoodTruckVO> getFoodTruckList(int pageNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList(pageNo);
 	}
 	
-	//Ä«Å×°í¸®º° ¸®½ºÆ®
+	//Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<FoodTruckVO> getCategoryList(PageVO vo)   {
 		
-		System.out.println("ÁøÀÔ2");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½2");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		System.out.println("ÁøÀÔ3");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½3");
 		try
 		{
 		return dao.getCategoryList(vo);
@@ -44,42 +45,42 @@ public class FoodTruckService {
 		return null;
 	}
 	
-	// ÇªµåÆ®·° À§Å¬¸® ·©Å·
+	// Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½ï¿½Å·
 	public List<FoodTruckVO> getFoodTruckRank() {
+		System.out.println("11111");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		System.out.println(dao.getFoodTruckRank());
 		return dao.getFoodTruckRank();
 	}
 
-	//ÇªµåÆ®·° ÀÔ·Â
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ô·ï¿½
 	public int insertFoodTruck(FoodTruckVO vo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.insertFoodTruck(vo);
 	}
-	//ÇªµåÆ®·° ¼öÁ¤
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int updateFoodTruck(FoodTruckVO vo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.updateTruck(vo);
 	}
-	//ÇªµåÆ®·° »èÁ¦
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public int deleteFoodTruck(String licenseNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.deleteTruck(licenseNo);
 	}
-	//ÇªµåÆ®·° ÀüÃ¼ ¸®½ºÆ® count
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½Æ® count
 	public int getCountTruck() throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getCountTruck();
 	}
-	//ÇªµåÆ®·° Ä«Å×°í¸®º° ¸®½ºÆ® count
+	//Çªï¿½ï¿½Æ®ï¿½ï¿½ Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® count
 	public int getCategoryCountTruck(int category) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getCategoryCountTruck(category);
 	}
-	
-	//ÇªµåÆ®·° ¸®½ºÆ®
-	public List<FoodTruckVO> getLicense() throws Exception{
+	public List<FoodTruckVO>  getFoodTruckList2(int PageNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		return dao.getLicense();
+		return dao.getFoodTruckList2(PageNo);
 	}
 
 }
