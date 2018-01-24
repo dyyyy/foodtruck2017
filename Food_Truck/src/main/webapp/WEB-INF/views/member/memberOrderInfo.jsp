@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<style>
+	.table-responsive, .unit, .table-info{
+		border: hidden;
+	}
+</style>
 <jsp:include page="../comm/header.jsp"></jsp:include>
 <body>
 
