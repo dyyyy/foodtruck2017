@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="../comm/header.jsp"></jsp:include>
+<style>
+	.table-responsive, .unit, .table-info{
+		border: hidden;
+	}
+	
+	
+</style>
 <body>
 
 	<%@include file="../comm/nav.jsp"%>
@@ -14,7 +21,16 @@
 		<!--Start Cart Area-->
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-sm-4 col-md-3">
+					<div class="single-sidebar">
+						<h2>내 정보</h2>
+						<ul align="center">
+							<li><a href="/memberInfo">회원 정보</a></li>
+							<li><a href="/memberOrderInfo">주문 내역</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-8 col-md-9">
 					<div class="table-responsive">
 						<table class="table cart-table">		
 							<thead class="table-title">				
@@ -41,7 +57,7 @@
 										<!-- 제품 가격 -->
 										<td class="unit">${MemberInfo.ordPrice}원</td>
 									</tr>
-										<c:set var="sum" value="${sum+MemberInfo.ordPrice}"></c:set>
+										<c:set var="sum" value="${sum+MemberInfo.ordPrice}" />
 								</c:forEach>
 							</tbody>
 						</table>
@@ -52,7 +68,7 @@
 						<div class="proceed fix">
 							<div class="total">
 								<h6>
-									총 금액 <span class="totalPriceTest"><c:out value="${sum}" /></span>
+									총 금액 <span class="totalPriceTest"><c:out value="${sum}" />원</span>
 								</h6>
 							</div>
 						</div>
