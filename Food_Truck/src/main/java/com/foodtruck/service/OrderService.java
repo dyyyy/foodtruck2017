@@ -50,4 +50,10 @@ public class OrderService {
 		  OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		  return dao.getNonmemberInfo(map);
 	   }
+	   
+		// 사용자 이용내역
+		public List<OrderVO> getMemberOrderList(String memberId) {
+			OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+			return dao.getMemberOrderList(memberId);
+		}	   
 }

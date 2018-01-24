@@ -33,7 +33,7 @@
             <div class="login">
                <form name="login_form" method="post" action="/login">
                   <div class="join" align="center">
-                        <label><input type="radio" name="gubun" id="memberY" value="1" onclick ="memberCheck(1)">회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label><input type="radio" name="gubun" id="memberY" value="1" onclick ="memberCheck(1)" checked>회원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="gubun" id="memberN" value="2" onclick ="memberCheck(2)">비회원</label>
                   </div><br><br>
                   <div id="mem_login" style="display:block">

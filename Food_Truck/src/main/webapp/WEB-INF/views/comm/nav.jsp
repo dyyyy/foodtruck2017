@@ -61,7 +61,7 @@
 								<ul style="width: 120px; ">
 									<li><a href="/orderList">전체 주문 내역</a></li>
 									<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
-									<li ><a href="/mySetting">나의 설정</a></li>
+									<li ><a href="/memberInfo">나의 설정</a></li>
 								</ul></li>
 							<%
 								break;
