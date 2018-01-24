@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 @Controller
@@ -28,8 +29,9 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
+	
 
-	// �α��� ������ �̵�
+	// 占싸깍옙占쏙옙 占쏙옙占쏙옙占쏙옙 占싱듸옙
 	@RequestMapping("/loginform")
 	public String loginform() {
 		System.out.println("loginform");
@@ -37,7 +39,7 @@ public class LoginController {
 		return "sign/login";
 	}
 
-	// �α��� ������
+	// 占싸깍옙占쏙옙 占쏙옙占쏙옙占쏙옙
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -55,32 +57,31 @@ public class LoginController {
 				}
 				return "redirect:/";
 			} else {
+				request.setAttribute("msg", "占쏙옙橘占싫ｏ옙占� 占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
 				request.setAttribute("msg", "비밀번호가 틀립니다.");
 				request.setAttribute("addr", "loginform");
 				return "comm/msg";
 			}
 		} else {
 
-			request.setAttribute("msg", "아이디와 비밀번호를 입력해주세요");
-			request.setAttribute("addr", "loginform");
 			return "comm/msg";
 		}
 	}
 
-	// �α׾ƿ� ������
+	// 占싸그아울옙 占쏙옙占쏙옙占쏙옙
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	// ȸ������������
+	// 회占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 	@RequestMapping("/joinform")
 	public String joinFormPage() {
 		return "sign/joinform";
 	}
 
-	// ȸ�� ����
+	// 회占쏙옙 占쏙옙占쏙옙
 	@RequestMapping("/join")
 	public String insertMember(HttpServletRequest request, MemberVO vo) {
 
@@ -99,7 +100,7 @@ public class LoginController {
 		return "home";
 	}
 
-	// ID �ߺ�üũ
+	// ID 占쌩븝옙체크
 	@ResponseBody
 	@RequestMapping("/idCheck")
 	public MemberVO memberIdCheck(HttpServletRequest request) {

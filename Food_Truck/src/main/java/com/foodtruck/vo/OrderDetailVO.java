@@ -1,61 +1,58 @@
 package com.foodtruck.vo;
 
-public class OrderDetailVO {
+public class OrderDetailVO extends OrderVO {
 
-	private String prodNo; 	 // Á¦Ç° ¹øÈ£
-	private String ordNo; 		 // ÁÖ¹® ¹øÈ£
-	private String prodName; // Á¦Ç° ÀÌ¸§
-	private int ordQty; 	 // ¼ö·®
-	private int ordPrice; 	 // ÁÖ¹®°¡°İ
-	private String memId; 	 // ÆÇ¸ÅÀÚ ¾ÆÀÌµğ
-
+	private String prodNo; 	 // ì œí’ˆ ë²ˆí˜¸
+	private String ordNo; 	 // ì£¼ë¬¸ ë²ˆí˜¸
+	private String prodName; // ì œí’ˆ ì´ë¦„
+	private String ordReq;	 // ì£¼ë¬¸ ìš”ì²­ì‚¬í•­
+	private int ordQty; 	 // ìˆ˜ëŸ‰
+	private int ordPrice; 	 // ê¸ˆì•¡
+	private String memId; 	 // íšŒì› ì•„ì´ë””
+	
 	// getter & setter
-	public String getProdName() {
-		return prodName;
-	}
-
+	
 	public String getProdNo() {
 		return prodNo;
 	}
-
 	public void setProdNo(String prodNo) {
 		this.prodNo = prodNo;
 	}
-
 	public String getOrdNo() {
 		return ordNo;
 	}
-
 	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
-
+	public String getProdName() {
+		return prodName;
+	}
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
-
+	public String getOrdReq() {
+		return ordReq;
+	}
+	public void setOrdReq(String ordReq) {
+		this.ordReq = ordReq;
+	}
 	public int getOrdQty() {
 		return ordQty;
 	}
-
 	public void setOrdQty(int ordQty) {
 		this.ordQty = ordQty;
 	}
-
 	public int getOrdPrice() {
 		return ordPrice;
 	}
-
 	public void setOrdPrice(int ordPrice) {
 		this.ordPrice = ordPrice;
 	}
-
 	public String getMemId() {
 		return memId;
 	}
-
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	
+
 }

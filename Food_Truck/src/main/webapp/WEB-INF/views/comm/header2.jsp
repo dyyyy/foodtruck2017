@@ -41,6 +41,7 @@
 				<%
 					MemberVO mvo = (MemberVO) session.getAttribute("member");
 					
+					
 					if(mvo.getMemberAuth().equals("1")) {
 				%>
 					<a class="brand" href="/admin">관리자</a>

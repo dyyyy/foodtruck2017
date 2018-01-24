@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${vo.eventWriter}</td>
+					<td>${vo.memId}</td>
 				</tr>
 			</table>
 			<button onclick="location.href='/updateEventForm?eventNo=${vo.eventNo}'">수정</button>

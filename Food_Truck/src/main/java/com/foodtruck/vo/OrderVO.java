@@ -1,23 +1,24 @@
+
 package com.foodtruck.vo;
 
 public class OrderVO {
 	
-	private String ordNo;		// 주문번호
-	private String ordName;		// 이름
-	private String ordTel;		// 전화번호
-	private String ordDate;		// 주문일
-	private String ordRsvDate;	// 예약시간
-	private String ordDlyYn;	// 배달 여부(Y/N)
-	private int ordStat;		// 주문 상태
-	private int cookStat;		// 조리 상태
-	private String memId;		// 회원 아이디
-	private String licenseNo;	// 판매자 사업자번호
-	private int ordQty;			// 수량
-	private int ordPrice;		// 제품가격
-	private int sumPrice;		// 총 합계
-	private String ordReq;		// 요구사항
-	private String prodName;	// 제품이름
-	private String ftruckName;	// 푸드트럭 이름
+	private String ordNo;		// 二쇰Ц踰덊샇
+	private String ordName;		// �씠由�
+	private String ordTel;		// �쟾�솕踰덊샇
+	private String ordDate;		// 二쇰Ц�씪
+	private String ordRsvDate;	// �삁�빟�떆媛�
+	private String ordDlyYn;	// 諛곕떖 �뿬遺�(Y/N)
+	private int ordStat;		// 二쇰Ц �긽�깭
+	private int cookStat;		// 議곕━ �긽�깭
+	private String memId;		// �쉶�썝 �븘�씠�뵒
+	private String licenseNo;	// �뙋留ㅼ옄 �궗�뾽�옄踰덊샇
+	private int ordQty;			// �닔�웾
+	private int ordPrice;		// �젣�뭹媛�寃�
+	private int sumPrice;		// 珥� �빀怨�
+	private String ordReq;		// �슂援ъ궗�빆
+	private String prodName;	// �젣�뭹�씠由�
+	private String ftruckName;	// �뫖�뱶�듃�윮 �씠由�
 	
 	
 	// getter & setter

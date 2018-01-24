@@ -14,6 +14,7 @@ import com.foodtruck.vo.PageVO;
 public class FoodTruckService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
+
 	//Ǫ��Ʈ�� ����
 	public FoodTruckVO getFoodTruck(String ftruckNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);

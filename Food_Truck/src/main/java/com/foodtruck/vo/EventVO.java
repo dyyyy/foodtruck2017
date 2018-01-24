@@ -4,7 +4,6 @@ public class EventVO {
 	private int eventNo;
 	private String memId;
 	private String eventTitle;
-	private String eventWriter;
 	private String eventContent;
 	private String eventReg;
 	private int eventCnt;
@@ -28,12 +27,6 @@ public class EventVO {
 	}
 	public void setEventTitle(String eventTitle) {
 		this.eventTitle = eventTitle;
-	}
-	public String getEventWriter() {
-		return eventWriter;
-	}
-	public void setEventWriter(String eventWriter) {
-		this.eventWriter = eventWriter;
 	}
 	public String getEventContent() {
 		return eventContent;

@@ -26,15 +26,17 @@ public class NoticeController {
 	@Autowired
 	MemberService memberService;
 	
-	// ��������
+	// 占쏙옙占쏙옙占쏙옙占쏙옙
 	@RequestMapping("/noticeBoard")
 	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request,@RequestParam("pageNo") int pageNo) throws Exception {
+
 		//페이징처리
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<NoticeVO> list = noticeService.getNoticeBoardList(NpageNo);
+		System.out.println(list.size());
 		if(list != null) {
 			model.addAttribute("rank", list);
 		}
@@ -46,7 +48,7 @@ public class NoticeController {
 		return "nav/noticeBoard";
 	}
 	
-	// �������� ��
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙
 	@RequestMapping("/detailNoticeForm")
 	public String detailNoticeForm(@RequestParam("noticeNo")int noticeNo, HttpServletRequest request) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
@@ -54,25 +56,28 @@ public class NoticeController {
 		
 		request.setAttribute("vo", vo);
 		
-		noticeService.countNotice(vo.getNoticeNo()); // ��ȸ��
+		noticeService.countNotice(vo.getNoticeNo()); // 占쏙옙회占쏙옙
 		
 		return "nav/detailNoticeForm";
 	}
 	
 	
-	// �������� �۾���
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쌜억옙占쏙옙
 	@RequestMapping("/writeNoticeForm")
-	public String writeNotice() {
+	public String writeNotice(HttpSession session, HttpServletRequest request) {
+//		MemberVO vo = (MemberVO)session.getAttribute("member");
+//		request.setAttribute("vo", vo);
+		
 		return "nav/writeNoticeForm";
 	}
 	
 	
-	// �������� ���
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占�
 	@RequestMapping("/insertNotice")
 	public String insertNotice(HttpSession session, NoticeVO vo, MemberVO mvo) {
 		
 		MemberVO m = (MemberVO)session.getAttribute("member");
-		vo.setMemberId(m.getMemberId());
+		vo.setMemId(m.getMemberId());
 		
 //		vo.setMemberId(mvo.getMemberId());
 		
@@ -81,7 +86,7 @@ public class NoticeController {
 	}
 
 	
-	// �������� ���� ��
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙
 	@RequestMapping("/updateNoticeForm")
 	public String updateNoticeForm(HttpServletRequest request, @RequestParam("noticeNo")int noticeNo) {
 		NoticeVO vo = noticeService.getNotice(noticeNo);
@@ -90,7 +95,7 @@ public class NoticeController {
 	}
 	
 	
-	// �������� ����
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 	@RequestMapping("/updateNotice")
 	public String updateNotice(NoticeVO vo) {
 		noticeService.updateNotice(vo);
@@ -100,7 +105,7 @@ public class NoticeController {
 	}
 	
 	
-	// �������� ����
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeVO vo) {
 		noticeService.deleteNotice(vo);

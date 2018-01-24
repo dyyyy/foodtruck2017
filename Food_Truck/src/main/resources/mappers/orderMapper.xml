@@ -9,16 +9,31 @@
 	<select id="getOrder" resultMap="OrderMap">
 		
 		SELECT * FROM ORDERS
-		<where> order_no=#{ordNo} </where>
+		<where> ord_no=#{ordNo} </where>
 	
 	</select>
 	
+	<select id="getLicense" resultMap="OrderMap" >
+
+ 		SELECT LICENSE.LICENSE_NO AS LICENSE_NO
+		FROM MEMBER
+		INNER JOIN LICENSE
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+ 		<where> MEMBER.MEM_ID=#{memberId} </where>
+	</select>
+	
+ 	
 	<!-- 주문 리스트 -->
-	<select id="getOrderList" resultMap="OrderMap">
-		
-		SELECT * FROM ORDERS
-	
+	<select id="getOrderList" resultMap="OrderMap" >
+ 
+  
+  		select * from orders, product, license
+  		where orders.license_no = product.license_no
+  		and product.license_no = license.license_no
+  		and license.license_no=#{licenseNo}
+
 	</select>
+	
 	
 	<!-- 비회원 주문번호로 주문내역보기 -->
 	<select id="getNonmemberInfo" resultMap="OrderMap" parameterType="map">
@@ -28,6 +43,7 @@
 		
 	</select>	
 
+	<!-- 사용자 주문내역  -->
 	<select id="getMemberOrderList" resultMap="OrderMap">
 		SELECT O.*,D.*,P.PROD_NAME,F.FTRUCK_NAME
 		FROM ORDERS O,ORDERDETAIL D,PRODUCT P,FOODTRUCK F
@@ -36,6 +52,27 @@
 		AND P.FTRUCK_NO = F.FTRUCK_NO
 		AND O.MEM_ID = #{memId}
 	</select>
+
+	<!-- 주문 등록  -->
+	<insert id="insertOrder" parameterType="map">
+		
+		INSERT INTO ORDERS
+		(ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, LICENSE_NO, SUM_PRICE)
+		VALUES
+		(TO_CHAR(SYSDATE,'YYMMDD')||LPAD(ORD_SEQ.NEXTVAL,5,0), #{ordName}, #{ordTel}, #{ordReq}, #{licenseNo}, #{sumPrice})
+		
+		<selectKey keyProperty="ordNo" resultType="String">
+			
+			 <![CDATA[
+			 	SELECT ORD_NO FROM ORDERS
+				WHERE ROWNUM < 2
+				ORDER BY ORD_NO DESC
+			 ]]>
+				
+		</selectKey>
+		
+	</insert>
+
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
@@ -50,6 +87,12 @@
 		<result column="ORD_QTY" property="ordQty" />
 		<result column="ORD_PRICE" property="ordPrice" />
 		<result column="MEM_ID" property="memId"/>
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="PROD_NAME" property="prodName"/>
+	</resultMap>
+	
+	<resultMap type="LicenseVO" id="LicenseMap">
+		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="PROD_NAME" property="prodName" />
 		<result column="FTRUCK_NAME" property="ftruckName" />
 	</resultMap>

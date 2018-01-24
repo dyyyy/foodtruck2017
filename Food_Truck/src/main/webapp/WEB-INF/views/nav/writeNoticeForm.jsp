@@ -67,7 +67,7 @@
 				<div class="underline" style="margin: 0px; width: 200px;"></div>
 			</div>
 
-			<form id="frm" action="/insertNotice" method="get">
+			<form id="frm" action="/insertNotice" method="post">
 
 				<table class="table">
 				<tr>
@@ -76,7 +76,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type=text name=noticeWriter></td>
+					<td>${member.memberName}</td>
 				</tr>
 				<tr>
 					<th>내용</th>

@@ -77,7 +77,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type=text name=noticeWriter value="${event.noticeWriter}"></td>
+					<td><input type=text name=memId value="${event.memId}"></td>
 				</tr>
 				<tr>
 					<th>내용</th>

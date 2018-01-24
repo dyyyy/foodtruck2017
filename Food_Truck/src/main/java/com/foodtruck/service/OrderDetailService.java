@@ -1,6 +1,7 @@
 package com.foodtruck.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,16 @@ public class OrderDetailService {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.deleteOrderDetail(ordNo);
    }
+   
+   public int insertOrderDetail(Map<String, Object> map) {
+	   OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
+	   return dao.insertOrderDetail(map);
+   }
+   
+	// 주문하고 주문 리스트 보여주는 거(영수증 역할) -> 비회원
+	public List<OrderDetailVO> getOrderInfoList(String ordNo) {
+		OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
+		return dao.getOrderInfoList(ordNo);
+	}
 
 }

@@ -26,17 +26,16 @@
 	<!-- 이벤트 등록 -->
 	<insert id="insertEvent" parameterType="com.foodtruck.vo.EventVO">
 		insert into event_bd
-		(EVENT_NO, MEM_ID, EVENT_TITLE, EVENT_WRITER, EVENT_CONTENT)
+		(EVENT_NO, MEM_ID, EVENT_TITLE, EVENT_CONTENT)
 		values((select NVL(MAX(event_No)+1, 1)FROM event_bd), #{memId},
-		#{eventTitle}, #{eventWriter}, #{eventContent})
+		#{eventTitle}, #{eventContent})
 	</insert>
 
 
 	<!-- 이벤트 수정 -->
 	<update id="updateEvent" parameterType="com.foodtruck.vo.EventVO">
 		update event_bd set
-		EVENT_TITLE=#{eventTitle}, EVENT_CONTENT=#{eventContent},
-		EVENT_WRITER=#{eventWriter}
+		EVENT_TITLE=#{eventTitle}, EVENT_CONTENT=#{eventContent}
 		where EVENT_NO=#{eventNo}
 	</update>
 
@@ -63,7 +62,6 @@
 		<result column="EVENT_NO" property="eventNo" />
 		<result column="MEM_ID" property="memId" />
 		<result column="EVENT_TITLE" property="eventTitle" />
-		<result column="EVENT_WRITER" property="eventWriter" />
 		<result column="EVENT_CONTENT" property="eventContent" />
 		<result column="EVENT_REG" property="eventReg" />
 		<result column="EVENT_CNT" property="eventCnt" />

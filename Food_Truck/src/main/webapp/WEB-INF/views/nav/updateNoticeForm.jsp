@@ -44,7 +44,7 @@
         // 취소버튼 눌렀을 때
         $("#cancel").click(function() {
         	if(confirm("취소하시겠습니까?") == true) {
-        		location.href="/noticeBoard";
+        		location.href="/noticeBoard?pageNo=1";
         	} 
         })
     });
@@ -77,7 +77,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type=text name=noticeWriter value="${notice.noticeWriter}"></td>
+					<td><input type=text name=memId value="${notice.memId}"></td>
 				</tr>
 				<tr>
 					<th>내용</th>

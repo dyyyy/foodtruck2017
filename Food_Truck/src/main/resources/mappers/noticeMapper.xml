@@ -14,29 +14,30 @@
 
 	<!-- 공지사항 전체 리스트 -->
 	<select id="getNoticeBoardList" resultMap="NoticeMap">
+
 		select nttt.* from
 		(select ntt.*from
 		(select rownum as
 		rnum, nt.*
 		from(SELECT * FROM notice_bd order by notice_no desc) nt)ntt where
-		rownum&lt;=#{pageNo}+9)nttt where rnum>=#{pageNo}
+		rownum&lt;=(#{pageNo}+10))nttt where rnum>=#{pageNo}
+
 	</select>
 
 
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotice" parameterType="com.foodtruck.vo.NoticeVO">
 		insert into notice_bd
-		(notice_no, mem_id, notice_title, notice_writer, notice_content)
-		values((select NVL(MAX(notice_no)+1, 1)FROM notice_bd), #{memberId},
-		#{noticeTitle}, #{noticeWriter}, #{noticeContent})
+		(notice_no, mem_id, notice_title, notice_content)
+		values((select NVL(MAX(notice_no)+1, 1)FROM notice_bd), #{memId},
+		#{noticeTitle}, #{noticeContent})
 	</insert>
 
 
 	<!-- 공지사항 수정 -->
 	<update id="updateNotice" parameterType="com.foodtruck.vo.NoticeVO">
 		update notice_bd set
-		notice_title=#{noticeTitle}, notice_content=#{noticeContent},
-		notice_writer=#{noticeWriter}
+		notice_title=#{noticeTitle}, notice_content=#{noticeContent}
 		where notice_no=#{noticeNo}
 	</update>
 
@@ -60,8 +61,8 @@
 	<!-- resultMap -->
 	<resultMap type="NoticeVO" id="NoticeMap">
 		<result column="NOTICE_NO" property="noticeNo" />
+		<result column="MEM_ID" property="memId" />
 		<result column="NOTICE_TITLE" property="noticeTitle" />
-		<result column="NOTICE_WRITER" property="noticeWriter" />
 		<result column="NOTICE_CONTENT" property="noticeContent" />
 		<result column="NOTICE_REG" property="noticeReg" />
 		<result column="NOTICE_CNT" property="noticeCnt" />

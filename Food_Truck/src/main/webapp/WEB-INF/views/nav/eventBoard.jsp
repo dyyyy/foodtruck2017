@@ -30,17 +30,17 @@
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>조회수</th>
 					<th>등록일</th>
+					<th>조회수</th>
+					<th>작성자</th>
 				</tr>
 				<c:forEach var="rank" items="${rank}">
-					<tr>
+					<tr align="center">
 						<td>${rank.eventNo }</td>
-						<td><a href="/detailEventForm?eventNo=${rank.eventNo}">${rank.eventTitle}</a></td>
-						<td>${rank.eventWriter}</td>
-						<td>${rank.eventContent}</td>
-						<td>${rank.eventReg}</td>
+						<td style="width:300px;text-align:left"><a href="/detailEventForm?eventNo=${rank.eventNo}">${rank.eventTitle}</a></td>
+						<td >${rank.eventReg}</td>
+						<td>${rank.eventCnt}</td>
+						<td>${rank.memId}</td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -1,10 +1,98 @@
+<%@page import="com.foodtruck.vo.OrderDetailVO"%>
+<%@page import="com.foodtruck.vo.OrderVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+::-webkit-scrollbar {
+	width: 8px; 
+	height: 8px; 
+	border: 3px solid #fff; 
+}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
+	display: block; 
+	height: 10px; 
+	background: #efefef
+}
+::-webkit-scrollbar-track {
+	background: #efefef; 
+	-webkit-border-radius: 10px; 
+	border-radius:10px; 
+	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)
+}
+::-webkit-scrollbar-thumb {
+	height: 50px; 
+	width: 50px; 
+	background: rgba(0,0,0,.2); 
+	-webkit-border-radius: 8px; 
+	border-radius: 8px; 
+	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)
+}
+
+.collapse.in.ins{
+	height:150px;
+	overflow-y:scroll;
+}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+	$(function() {
+/* 
+		$("select").change(function() {
+				var str = "";
+			//$("select option:selected").each(function () {
+				str += "<c:forEach var='order2' items='${order2}'>";
+				str +=	"<tr>";
+				str +=	"<td>1</td>";
+				str +=	"<td>${order2.ordDate}</td>";
+				str +=	"<td>${order2.ordName}</td>";
+				str +=	"<td>${order2.ordNo}</td>";
+				str +=	"</tr>";
+				str +=	"</c:forEach>";
+				 
+			//});
+			$("#test").html("<c:forEach var='order2' items='${order2}'>" + 
+	                "<tr>" + 
+	                "<td>"+1+"</td>" +
+	                
+	                "<td>${order2.ordDate}</td>" +
+	                "<td>${order2.ordName}</td>" +
+	                "<td>${order2.ordNo}</td>" +
+	            "</tr>" +
+	   		"</c:forEach>"	);
+				
+			});
+ */
+ /* 
+ 			$("select").change(function() {
+ 				$("#test").text($("select").val());
+ 			});
+ 
+ */ 			
+ 			
+// 			location.href="sellerMain?licenseNo="+$("select").val();
+ 			$("select").change(function() {
+ 				location.href="sellerMain?licenseNo="+$("select").val();
+ 			})
+	 
+	 		
+		});
+	
+	
+	
+	
+</script>
+
 </head>
 <%@include file="../comm/header2.jsp" %>
 <body>
@@ -13,7 +101,7 @@
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                         <li class="active">
-                            <a href="/sellerMain"><i class="icon-chevron-right"></i> Dashboard</a>
+                            <a href="/sellerMain?licenseNo=<%=request.getParameter("licenseNo") %>"><i class="icon-chevron-right"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="/sellerCalendar"><i class="icon-chevron-right"></i> Calendar</a>
@@ -85,51 +173,53 @@
                         </div>
                         <!-- /block -->
                     </div>
+                    <form action="/sellerMain" method=post>
+                    <select name="licenseNo">
+                    	<c:forEach var="order1" items="${order1}">
+                    		<option value="${order1.licenseNo}">${order1.licenseNo}</option>
+                    	</c:forEach>
+                    </select>
+                    </form>
                     <div class="row-fluid">
+                    
+                    
                         <div class="span6">
                             <!-- block -->
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
-                                    <div class="muted pull-left">Users</div>
-                                    <div class="pull-right"><span class="badge badge-info">1,234</span>
-
+                                    <div class="muted pull-left">Total</div>
+                                    <div class="pull-right">
+                                    	<span class="badge badge-info"></span>
                                     </div>
                                 </div>
-                                <div class="block-content collapse in">
+                                <div class="block-content collapse in ins">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
+                                                <th>Date</th>
+                                                <th>Name</th>
+                                                <th>Food</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Vincent</td>
-                                                <td>Gabriel</td>
-                                                <td>@gabrielva</td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody id="test">
+	                                        <c:forEach var="order2" items="${order2}">
+	                                            <tr>
+	                                                <td>1</td>
+	                                                <td>${order2.ordDate}</td>
+	                                                <td>${order2.ordName}</td>
+	                                                <td>${order2.prodName}</td>
+	                                            </tr>
+	                                            
+                                       		</c:forEach>
+	                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                             <!-- /block -->
                         </div>
+                        
+                        
                         <div class="span6">
                             <!-- block -->
                             <div class="block">
@@ -139,7 +229,7 @@
 
                                     </div>
                                 </div>
-                                <div class="block-content collapse in">
+                                <div class="block-content collapse in ins">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -185,7 +275,7 @@
 
                                     </div>
                                 </div>
-                                <div class="block-content collapse in">
+                                <div class="block-content collapse in ins">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -229,7 +319,7 @@
 
                                     </div>
                                 </div>
-                                <div class="block-content collapse in">
+                                <div class="block-content collapse in ins">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -346,7 +436,8 @@
                 </div>
             </div>
         </div>
-
+        
+		<%=request.getParameter("licenseNo") %>
 
 </body>
         <script>

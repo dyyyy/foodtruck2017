@@ -15,31 +15,31 @@ public class ProductService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// »óÇ° Á¤º¸
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	public ProductVO getProduct(int prodNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.getProduct(prodNo);
 	}
 
-	// »óÇ° ¸®½ºÆ®
-	public List<ProductVO> getProductList(String ftruckNo) {
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®
+	public List<ProductVO> getProductList(String licenseNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
-		return dao.getProductList(ftruckNo);
+		return dao.getProductList(licenseNo);
 	}
 
-	// »óÇ° ÀÔ·Â
+	// ï¿½ï¿½Ç° ï¿½Ô·ï¿½
 	public int insertProduct(ProductVO vo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.insertProduct(vo);
 	}
 
-	// »óÇ° ¼öÁ¤
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	public int updateProduct(ProductVO vo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.updateProduct(vo);
 	}
 
-	// »óÇ° »èÁ¦
+	// ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½
 	public int deleteProduct(int prodNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.deleteProduct(prodNo);

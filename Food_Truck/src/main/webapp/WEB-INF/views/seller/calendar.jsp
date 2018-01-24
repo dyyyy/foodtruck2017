@@ -14,7 +14,7 @@
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
                         <li>
-                            <a href="/sellerMain"><i class="icon-chevron-right"></i> Dashboard</a>
+                            <a href="/sellerMain?licenseNo=${licenseNo}"><i class="icon-chevron-right"></i> Dashboard</a>
                         </li>
                         <li class="active">
                             <a href="/sellerCalendar"><i class="icon-chevron-right"></i> Calendar</a>

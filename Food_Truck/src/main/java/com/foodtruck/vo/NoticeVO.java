@@ -2,9 +2,8 @@ package com.foodtruck.vo;
 
 public class NoticeVO {
 	private int noticeNo;
-	private String memberId;
+	private String memId;
 	private String noticeTitle;
-	private String noticeWriter;	
 	private String noticeContent;	
 	private String noticeReg;
 	private int noticeCnt;
@@ -16,11 +15,11 @@ public class NoticeVO {
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
 	}
-	public String getMemberId() {
-		return memberId;
+	public String getMemId() {
+		return memId;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 	public String getNoticeTitle() {
 		return noticeTitle;
@@ -28,12 +27,7 @@ public class NoticeVO {
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
-	public String getNoticeWriter() {
-		return noticeWriter;
-	}
-	public void setNoticeWriter(String noticeWriter) {
-		this.noticeWriter = noticeWriter;
-	}
+	
 	public String getNoticeContent() {
 		return noticeContent;
 	}

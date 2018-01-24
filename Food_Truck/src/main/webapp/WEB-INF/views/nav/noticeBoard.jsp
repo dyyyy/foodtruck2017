@@ -8,6 +8,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/style.css" />
 </head>
 
 <jsp:include page="../comm/header.jsp"></jsp:include>
@@ -30,17 +31,17 @@
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>조회수</th>
 					<th>등록일</th>
+					<th>조회수</th>
+					<th>작성자</th>
 				</tr>
 				<c:forEach var="rank" items="${rank}">
 					<tr align="center">
-						<td>${rank.noticeNo }</td>
-						<td><a href="/detailNoticeForm?noticeNo=${rank.noticeNo}">${rank.noticeTitle}</a></td>
-						<td>${rank.noticeWriter}</td>
-						<td>${rank.noticeCnt}</td>
+						<td>${rank.noticeNo}</td>
+						<td style="width:300px;text-align:left"><a href="/detailNoticeForm?noticeNo=${rank.noticeNo}">${rank.noticeTitle}</a></td>
 						<td>${rank.noticeReg}</td>
+						<td>${rank.noticeCnt}</td>
+						<td>운영자</td>
 					</tr>
 				</c:forEach>
 			</table>
