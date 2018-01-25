@@ -15,6 +15,7 @@ import com.foodtruck.service.AdminService;
 import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
+import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.MInquiryVO;
@@ -31,6 +32,9 @@ public class AdminController {
 	private MemberService mservice;
 	@Autowired
 	private AdminService aservice;
+	@Autowired
+	private SellerService sservice;
+
 	// ������ �޴� - ��������
 	@RequestMapping("/stute")
 	public String stute(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
@@ -38,31 +42,38 @@ public class AdminController {
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		
-		
-		List<FoodTruckVO> list=fservice.getFoodTruckList(NpageNo);
-		int count=fservice.getCountTruck();
+
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);
+		int count = fservice.getCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", count);//�� ������ ��
+		request.setAttribute("pagecount", count);// �� ������ ��
 		return "admin/stute";
 	}
 
-	// ������ �޴� - ��Ʈ
+	// 판매자 Q&A
 	@RequestMapping("/sellerQnA")
-	public String sellerQnA() {
-		return "admin/index";
-	}
-
-	// ������ �޴� - ��� ?
-	@RequestMapping("/memberQnA")
-	public String memberQnA(HttpServletRequest request,@RequestParam("pageNo") int pageNo) {
+	public String sellerQnA(HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<MInquiryVO> list= mservice.getMinquiryList(NpageNo);
-		int count=mservice.getMinquiryListcount();
+		List<MInquiryVO> list = sservice.getSinquiryList(NpageNo);
+		int count = sservice.getSinquiryListcount();
+		request.setAttribute("pagecount", count);
+		request.setAttribute("list", list);
+		return "admin/sellerQnA";
+	}
+
+	// 일반회원 Q&A
+	@RequestMapping("/memberQnA")
+	public String memberQnA(HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
+		int NpageNo = 1;
+		if (pageNo != 1) {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		List<MInquiryVO> list = mservice.getMinquiryList(NpageNo);
+		int count = mservice.getMinquiryListcount();
 		request.setAttribute("pagecount", count);
 		request.setAttribute("list", list);
 		return "admin/memberQnA";
@@ -70,17 +81,15 @@ public class AdminController {
 
 	@RequestMapping("/festival")
 	public String festival(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
-		int NpageNo = 0;
-		if (pageNo == 1) {
-			pageNo = 1;
-		} else {
+		int NpageNo = 1;
+		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FestivalVO> list=feservice.getFestivalList2(NpageNo);
-		int count=feservice.getcountFestival();
+		List<FestivalVO> list = feservice.getFestivalList2(NpageNo);
+		int count = feservice.getcountFestival();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", count);//�� ������ ��
+		request.setAttribute("pagecount", count);// �� ������ ��
 		return "admin/festival";
 	}
 
@@ -94,11 +103,8 @@ public class AdminController {
 		System.out.println("진입");
 		return "admin/foodturck";
 	}
-	@RequestMapping("/QnA")
-	public String list(HttpServletRequest request) throws Exception {
 
-		return "Chat/QnA";
-	}
+
 	@RequestMapping("/MQnAdetail")
 	@ResponseBody
 	public HashMap MQnAdetail(@RequestParam("qno") int qno) {
@@ -110,22 +116,21 @@ public class AdminController {
 		map.put("qno", qno);
 		return map;
 	}
-	//1:1 일반회원 댓글달기
+	//ㅇㅇ
+	// 1:1 일반회원 댓글달기
 	@RequestMapping("/MinquryReply")
 	@ResponseBody
-	public int MinquryReply(@RequestParam("email") String email,@RequestParam("reply") String reply,@RequestParam("qno") int qno) throws InterruptedException {
-		int finish=0;
-		MinquiryReplyVO vo= new MinquiryReplyVO();
+	public int MinquryReply(@RequestParam("email") String email, @RequestParam("reply") String reply,
+			@RequestParam("qno") int qno) throws InterruptedException {
+		int finish = 0;
+		MinquiryReplyVO vo = new MinquiryReplyVO();
 		vo.setMemId(email);
 		vo.setReplyScContent(reply);
 		vo.setQaScNo(qno);
 		aservice.insertMinquryReply(vo);
-		System.out.println("진입");
-		
-		finish=mservice.updateMinquiry(qno);
-		System.out.println("작업끝");
+		finish = mservice.updateMinquiry(qno);
 		return finish;
-		
+
 	}
-	
+
 }

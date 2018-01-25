@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.FoodTruckService;
+import com.foodtruck.service.MemberService;
 import com.foodtruck.service.OrderService;
+import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.OrderVO;
 
@@ -24,20 +27,23 @@ public class SellerController {
 	@Autowired
 	FoodTruckService foodTruckService;
 	
+	@Autowired
+	MemberService mservice;
 	
-	// °ü¸®ÀÚ ¸Ş´º - ÆÇ¸ÅÀÚ  ÀÏÁ¤°ü¸®
+	
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½Ç¸ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/sellerCalendar")
 	public String sellerCalendar() {
 		return "seller/calendar";
 	}
 	
-	// °ü¸®ÀÚ ¸Ş´º - Â÷Æ®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½ï¿½Æ®
 	@RequestMapping("/sellerChart")
 	public String sellerChart() {
 		return "seller/chart";
 	}
 	
-	// ÆÇ¸ÅÀÚ ¸Ş´º - ÆÇ¸ÅÀÚ Åë°è ?
+	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Ş´ï¿½ - ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ?
 	@RequestMapping("/sellerMain")
 	public String sellerMain(@RequestParam("licenseNo")String licenseNo,HttpServletRequest request, Model model, HttpSession session) {
 		
@@ -54,5 +60,14 @@ public class SellerController {
 		System.out.println(request.getParameter("licenseNo"));
 		
 		return "seller/main";
+	}
+	//íŒë§¤ì 1:1ë¬¸ì˜
+	@RequestMapping("sellerinquriy")
+	public String sellerinquriy(MInquiryVO vo) {	
+		String result="N";
+		vo.setQaScStat(result);
+		System.out.println(vo.getLicenseNo());
+		mservice.insertInquiry2(vo);
+		return "home";
 	}
 }
