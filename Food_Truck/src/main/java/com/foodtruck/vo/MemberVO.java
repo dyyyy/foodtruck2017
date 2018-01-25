@@ -1,12 +1,12 @@
 package com.foodtruck.vo;
 
-public class MemberVO {
-	
-	private String memberId;	// È¸¿ø ¾ÆÀÌµð
-	private String memberName;	// È¸¿ø ÀÌ¸§
-	private String memberPw;	// È¸¿ø ºñ¹Ð¹øÈ£
-	private String memberTel;	// È¸¿ø ÀüÈ­¹øÈ£
-	private String memberAuth;		// È¸¿ø ±ÇÇÑ
+public class MemberVO extends LicenseVO{
+	//private String licenseNo;
+	private String memberId;	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+	private String memberName;	// È¸ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private String memberPw;	// È¸ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
+	private String memberTel;	// È¸ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+	private String memberAuth;		// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	// getter & setter
 	public String getMemberId() {
@@ -39,6 +39,7 @@ public class MemberVO {
 	public void setMemberAuth(String memberAuth) {
 		this.memberAuth = memberAuth;
 	}
+	
 	
 
 }

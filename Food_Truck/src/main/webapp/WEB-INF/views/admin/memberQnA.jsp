@@ -8,10 +8,8 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"
 	type="text/javascript"></script>
-<style type="text/css">
-</style>
-<script type="text/javascript">
 
+<script type="text/javascript">
 	function modal(e) {
 		var qno = e.getAttribute("data-id");
 		$.ajax({
@@ -199,30 +197,32 @@
 									</button>
 									<h4 class="modal-title" id="myModalLabel">일반 회원 Q&A 답글달기</h4>
 								</div>
-
-								<div class="modal-body">
-									<table>
-										<tr>
-											<td class="c"></td>
-										</tr>
-										<tr>
-											<td class="b"><input type="hidden" id="email" value="a"></td>
-										</tr>
-										<tr>
-											<td width="520px"><h4>내용</h4></td>
-										</tr>
-										<tr>
-											<td id="content" class="a"></td>
-										</tr>
-										<tr>
-											<td><h4>답변</h4></td>
-										</tr>
-										<tr>
-											<td><textarea style="width: 100%; height: 100%;"
-													id="reply"></textarea></td>
-										</tr>
-									</table>
-								</div>
+								
+									<div class="modal-body">
+										<table>
+											<tr>
+												<td class="c"></td>
+											</tr>
+											<tr>
+												<td class="b"><input type="hidden" id="email" value="a"></td>
+											</tr>
+											<tr>
+												<td width="520px"><h4>내용</h4></td>
+											</tr>
+											<tr>
+												<td id="content" class="a"></td>
+											</tr>
+											<tr>
+												<td><h4>답변</h4></td>
+											</tr>
+											<tr>
+												<td><textarea style="width: 100%; height: 100%;" rows="6"
+														id="reply"></textarea></td>
+											</tr>
+											<tr></tr>
+										</table>
+									</div>
+								
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" onclick="reply()">댓글
 										저장</button>

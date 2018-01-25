@@ -18,6 +18,7 @@ import com.foodtruck.service.MemberService;
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MinquiryReplyVO;
 import com.sun.javafx.collections.MappingChange.Map;
@@ -99,8 +100,15 @@ public class AdminController {
 	}
 
 	@RequestMapping("/foodtruck")
-	public String foodtruck() {
-		System.out.println("진입");
+	public String foodtruck(HttpServletRequest request,@RequestParam("pageNo") int pageNo) {
+		int NpageNo = 1;
+		if (pageNo != 1) {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		List<LicenseVO> list=aservice.getRequestList(NpageNo);
+		int count = aservice.getRequestCount();
+		request.setAttribute("list", list);
+		request.setAttribute("pagecount", count);
 		return "admin/foodturck";
 	}
 
