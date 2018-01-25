@@ -4531,3 +4531,48 @@ h4.heading {
 	color: #888;
 	overflow: hidden;
 }
+
+.notice-title {
+   font-size:20px;
+   text-align:left;
+   width:300px;
+   display: table-cell;
+    vertical-align: inherit;
+}
+
+.notice-btn {
+   background: #b10505 none repeat scroll 0 0;
+   border: medium none;
+   color: #fff;
+   display: inline-block;
+   font-size: 12px;
+   font-weight: 350;
+   padding: 7px 15px;
+   text-decoration: none;
+   text-transform: uppercase;
+   width: auto;
+}
+
+#getLocation {
+   background: url('/resources/Images/ioc_loc.png') no-repeat;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+    
+}
+#search1 {
+   float: left;   
+}
+#search2 {
+   display: inline-block;
+}
+#search3 {
+   display: inline-block;   
+}
+#locbtn{
+   background: transparent ;
+   border: none ;
+   outline: 0 ;
+}
