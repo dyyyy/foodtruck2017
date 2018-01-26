@@ -6,6 +6,7 @@ import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 
 public interface SellerDAO {
+	
 	// id로 라이센스 번호 가져오기
 	public List<LicenseVO> getInfo(LicenseVO vo);
 

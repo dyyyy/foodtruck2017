@@ -9,12 +9,15 @@
 		values
 		(FES_SEQ.nextval,#{fesName},#{fesId},#{fesContent},#{fesTel},#{fesAddr},#{fesSdate},#{fesEdate},#{fesImg},#{fesImg2},#{fesLatitude},#{fesLongitude})
 	</insert>
+	
 	<select id="getFestivalList" resultMap="FestivalMap">
 		select * from FESTIVAl
 	</select>
+	
 	<delete id="deleteFestival">
 		truncate table festival
 	</delete>
+	
 	<select id="getFestivalList2" resultMap="FestivalMap">
 	select ffft.* from
 		(select fft.*from
@@ -25,10 +28,13 @@
 		where rownum &lt;=#{pageNo}+9)ffft
 		where rnum >=#{pageNo}
 	</select>
+	
 	<select id="getcountFestival" resultType="int">
 	select count(*) from
 		festival
 	</select>
+	
+	
 	<resultMap type="FestivalVO" id="FestivalMap">
 		<result column="FES_NO" property="fesNo" />
 		<result column="FES_ADDR" property="fesAddr" />

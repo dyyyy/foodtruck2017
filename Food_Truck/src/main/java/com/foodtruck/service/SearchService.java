@@ -12,6 +12,7 @@ import com.foodtruck.vo.SearchPageVO;
 
 @Service
 public class SearchService {
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 

@@ -1,18 +1,21 @@
 package com.foodtruck.vo;
 
 public class FestivalVO {
-	private String fesNo;//축제 번호
-	private String fesAddr;//주소
-	private String fesName;//제목
-	private String fesTel;//전화번호
-	private String fesSdate;//시작일
-	private String fesEdate;//종료일
-	private String fesImg2;//썸네일 이미지
-	private String fesImg;//대표 이미지
-	private String fesLatitude;//위도
-	private String fesLongitude;//경도
-	private String fesId;//콘텐츠ID (상세정보조회 필수)
-	private String fesContent;//축제 내용
+	
+	private String fesNo;			//축제 번호
+	private String fesAddr;			//주소
+	private String fesName;			//제목
+	private String fesTel;			//전화번호
+	private String fesSdate;		//시작일
+	private String fesEdate;		//종료일
+	private String fesImg2;			//썸네일 이미지
+	private String fesImg;			//대표 이미지
+	private String fesLatitude;		//위도
+	private String fesLongitude;	//경도
+	private String fesId;			//콘텐츠ID (상세정보조회 필수)
+	private String fesContent;		//축제 내용
+	
+	// getter & setter
 	
 	public String getFesNo() {
 		return fesNo;
@@ -86,8 +89,4 @@ public class FestivalVO {
 	public void setFesContent(String fesContent) {
 		this.fesContent = fesContent;
 	}
-	
-	
-	
-	
 }

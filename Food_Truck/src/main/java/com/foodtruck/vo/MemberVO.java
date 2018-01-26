@@ -2,13 +2,14 @@ package com.foodtruck.vo;
 
 public class MemberVO {
 	
-	private String memberId;	// È¸¿ø ¾ÆÀÌµğ
-	private String memberName;	// È¸¿ø ÀÌ¸§
-	private String memberPw;	// È¸¿ø ºñ¹Ğ¹øÈ£
-	private String memberTel;	// È¸¿ø ÀüÈ­¹øÈ£
-	private String memberAuth;		// È¸¿ø ±ÇÇÑ
+	private String memberId;		// íšŒì› ì•„ì´ë””
+	private String memberName;		// íšŒì› ì´ë¦„
+	private String memberPw;		// íšŒì› ë¹„ë°€ë²ˆí˜¸
+	private String memberTel;		// íšŒì› ì „í™”ë²ˆí˜¸
+	private String memberAuth;		// íšŒì› êµ¬ë¶„ (1 = ìœ¤ì˜ì  , 2 = íŒë§¤ì , 3 = ì¼ë°˜íšŒì› )
 	
 	// getter & setter
+	
 	public String getMemberId() {
 		return memberId;
 	}

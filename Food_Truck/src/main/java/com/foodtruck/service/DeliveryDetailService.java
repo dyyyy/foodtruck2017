@@ -14,32 +14,32 @@ public class DeliveryDetailService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// ¹è´Ş»ó¼¼ Á¤º¸
-	public DeliveryDetailVO getDeliveryDetail(int ordNo) {
+	// ë°°ë‹¬ ìƒì„¸ ì •ë³´
+	public DeliveryDetailVO getDeliveryDetail(String ordNo) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
 		return dao.getDeliveryDetail(ordNo);
 	}
 
-	// ¹è´Ş»ó¼¼ ¸®½ºÆ®
-	public List<DeliveryDetailVO> getDeliveryDetailList() {
+	// ë°°ë‹¬ ìƒì„¸ ë¦¬ìŠ¤íŠ¸Æ®
+	public List<DeliveryDetailVO> getDeliveryDetailList(String memId) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
-		return dao.getDeliveryDetailList();
+		return dao.getDeliveryDetailList(memId);
 	}
 
-	// ¹è´Ş»ó¼¼ ÀÔ·Â
+	// ë°°ë‹¬ ìƒì„¸ ë“±ë¡
 	public int insertDeliveryDetail(DeliveryDetailVO vo) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
 		return dao.insertDeliveryDetail(vo);
 	}
 
-	// ¹è´Ş»ó¼¼ ¼öÁ¤
+	// ë°°ë‹¬ ìƒì„¸ ìˆ˜ì •
 	public int updateDeliveryDetail(DeliveryDetailVO vo) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
 		return dao.updateDeliveryDetail(vo);
 	}
 
-	// ¹è´Ş»ó¼¼ »èÁ¦
-	public int deleteDeliveryDetail(int ordNo) {
+	// ë°°ë‹¬ ìƒì„¸ ì‚­ì œ
+	public int deleteDeliveryDetail(String ordNo) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
 		return dao.deleteDeliveryDetail(ordNo);
 	}

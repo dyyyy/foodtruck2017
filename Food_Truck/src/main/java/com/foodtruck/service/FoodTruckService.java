@@ -12,21 +12,23 @@ import com.foodtruck.vo.PageVO;
 
 @Service
 public class FoodTruckService {
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	//Ǫ��Ʈ�� ����
+	//푸드트럭 정보
 	public FoodTruckVO getFoodTruck(String ftruckNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruck(ftruckNo);
 	}
-	//Ǫ��Ʈ�� ����Ʈ
+	
+	//푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList(int pageNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList(pageNo);
 	}
 	
-	//ī�װ��� ����Ʈ
+	//카테고리별 리스트
 	public List<FoodTruckVO> getCategoryList(PageVO vo)   {
 		
 		System.out.println("����2");
@@ -45,7 +47,7 @@ public class FoodTruckService {
 		return null;
 	}
 	
-	// Ǫ��Ʈ�� ��Ŭ�� ��ŷ
+	//푸드트럭 위클리 랭킹
 	public List<FoodTruckVO> getFoodTruckRank() {
 		System.out.println("11111");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
@@ -53,31 +55,36 @@ public class FoodTruckService {
 		return dao.getFoodTruckRank();
 	}
 
-	//Ǫ��Ʈ�� �Է�
+	//푸드트럭 등록
 	public int insertFoodTruck(FoodTruckVO vo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.insertFoodTruck(vo);
 	}
-	//Ǫ��Ʈ�� ����
+	
+	//푸드트럭 수정
 	public int updateFoodTruck(FoodTruckVO vo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.updateTruck(vo);
 	}
-	//Ǫ��Ʈ�� ����
+	
+	//푸드트럭 삭제
 	public int deleteFoodTruck(String licenseNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.deleteTruck(licenseNo);
 	}
-	//Ǫ��Ʈ�� ��ü ����Ʈ count
+	
+	//푸드트럭 전체 Count(페이징처리)
 	public int getCountTruck() throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getCountTruck();
 	}
-	//Ǫ��Ʈ�� ī�װ��� ����Ʈ count
+	
+	//푸드트럭 카테고리별 Count(페이징처리)
 	public int getCategoryCountTruck(int category) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getCategoryCountTruck(category);
 	}
+	
 	public List<FoodTruckVO>  getFoodTruckList2(int PageNo) throws Exception{
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList2(PageNo);

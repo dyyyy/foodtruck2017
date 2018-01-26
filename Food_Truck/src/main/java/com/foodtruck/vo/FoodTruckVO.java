@@ -1,23 +1,27 @@
 package com.foodtruck.vo;
 
 public class FoodTruckVO {
-	private String ftruckNo; // »ç¾÷ÀÚ ¹øÈ£
-	private String ftruckName; // Çªµå Æ®·° ÀÌ¸§(»óÈ£¸í)
-	private String ftruckTel; // Çªµå Æ®·° ÀüÈ­¹øÈ£
-	private String ftruckAddr; // Çªµå Æ®·° ÁÖ¼Ò
-	private String ftruckAddr2; // Çªµå Æ®·° ÁÖ¼Ò
-	private String ftruckIntro; // ÇªµåÆ®·° ¼Ò°³
-	private String ftruckReg; // ÇªµåÆ®·° µî·ÏÀÏÀÚ
-	private String ftruckDlvYn; // ¹è´Ş ¿©ºÎ(Y/N)
-	private String ftruckRsvYn; // ¿¹¾à ¿©ºÎ(Y/N)
-	private String ftruckState; // ¿µ¾÷ »óÅÂ(Y/N)
-	private double ftruckGrade; // ÇªµåÆ®·° ÆòÁ¡
-	private String ftruckImg; // ÇªµåÆ®·° ÀÌ¹ÌÁö
-	private String latitude; // À§µµ
-	private String longitude; // °æµµ
-	private int category; // Ä«Å×°í¸®¹øÈ£
-	private String licenseNo; // »ç¾÷ÀÚ ¹øÈ£
+	
+	private String ftruckNo; 		// í‘¸ë“œíŠ¸ëŸ­ ë²ˆí˜¸
+	private String ftruckName;  	// í‘¸ë“œíŠ¸ëŸ­ ì´ë¦„
+	private String ftruckTel; 		// í‘¸ë“œíŠ¸ëŸ­ ì „í™”ë²ˆí˜¸
+	private String ftruckAddr; 		// í‘¸ë“œíŠ¸ëŸ­ ì£¼ì†Œ1
+	private String ftruckAddr2; 	// í‘¸ë“œíŠ¸ëŸ­ ì£¼ì†Œ2
+	private String ftruckIntro; 	// í‘¸ë“œíŠ¸ëŸ­ ì†Œê°œ
+	private String ftruckReg; 		// í‘¸ë“œíŠ¸ëŸ­ ë“±ë¡ì¼
+	private String ftruckDlvYn; 	// ë°°ë‹¬ì—¬ë¶€(Y/N)
+	private String ftruckRsvYn; 	// ì—ì•½ì—¬ë¶€(Y/N)
+	private String ftruckState; 	// ì˜ì—…ìƒíƒœ(Y/N)
+	private double ftruckGrade; 	// í‘¸ë“œíŠ¸ëŸ­ í‰ì 
+	private String ftruckImg; 		// í‘¸ë“œíŠ¸ëŸ­ ì´ë¯¸ì§€
+	private String latitude; 		// í‘¸ë“œíŠ¸ëŸ­ ìœ„ë„
+	private String longitude; 		// í‘¸ë“œíŠ¸ëŸ­ ê²½ë„
+	private int category; 			// í‘¸ë“œíŠ¸ëŸ­ ì¹´í…Œê³ ë¦¬
+	private String licenseNo; 		// ì‚¬ì—…ì ë²ˆí˜¸
+	
+	
 	// getter & setter
+	
 	public String getFtruckNo() {
 		return ftruckNo;
 	}

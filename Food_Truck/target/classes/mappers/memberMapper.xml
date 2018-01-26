@@ -70,6 +70,7 @@
 		<where> MEMBER.MEM_ID=#{selId} </where>
 
 	</select>
+	
 	<!-- 1:1 insert -->
 	<insert id="insertInquiry">
 		INSERT INTO QA_SC
@@ -77,6 +78,7 @@
 		VALUES
 		(QA_SC_SEQ.NEXTVAL,#{memId},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
 	</insert>
+	
 	<!-- 1:1 insert 판매자 -->
 	<insert id="insertInquiry2">
 		INSERT INTO QA_SC
@@ -84,6 +86,7 @@
 		VALUES
 		(QA_SC_SEQ.NEXTVAL,#{memId},#{licenseNo},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
 	</insert>
+	
 	<select id="getMinquiryList" resultMap="InquiryMap">
 		select ffft.* from
 		(select fft.*from
