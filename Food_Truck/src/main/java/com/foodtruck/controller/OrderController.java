@@ -31,7 +31,7 @@ public class OrderController {
 	
 	@Autowired
 	OrderDetailService orderdetailService;
-	
+	 
 	@RequestMapping("/order")
 	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request) {
 		System.out.println("����");

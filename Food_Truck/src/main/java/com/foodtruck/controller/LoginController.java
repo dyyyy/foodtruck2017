@@ -1,8 +1,6 @@
 
 package com.foodtruck.controller;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
-import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 @Controller
@@ -29,7 +26,7 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
-	
+	 
 
 	// 로그인 폼으로 이동
 	@RequestMapping("/loginform")

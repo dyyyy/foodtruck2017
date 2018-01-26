@@ -27,7 +27,7 @@ public class MemberController {
 	@RequestMapping("/memberInfo")
 	public String memberInfo(HttpSession session,HttpServletRequest request) {
 		MemberVO vo = (MemberVO)session.getAttribute("member");
-		MemberVO vo2 = mservice.getMember(vo.getMemberId());
+		MemberVO vo2 = mservice.getMember(vo.getMemberId()); 
 		request.setAttribute("memberInfo", vo2);
 		return "member/memberInfo";
 	}

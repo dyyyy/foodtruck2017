@@ -19,7 +19,7 @@ public class OrderDetailController {
 	/*예약내역 이름변경하기*/
 	@RequestMapping("/orderDetail")
 	public String orderDetailPage(Model model, HttpSession session) {
-
+ 
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		
 		

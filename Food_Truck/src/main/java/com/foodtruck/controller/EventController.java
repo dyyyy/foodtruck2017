@@ -69,7 +69,7 @@ public class EventController {
 	public String insertEvent(HttpSession session, EventVO vo, MemberVO mvo) {
 
 		MemberVO m = (MemberVO) session.getAttribute("member");
-		vo.setMemId(m.getMemberId());
+		vo.setMemId(m.getMemberId()); 
 		System.out.println(vo.getEventTitle());
 		// vo.setMemberId(mvo.getMemberId());
 
