@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.MemberDAO;
 import com.foodtruck.dao.SellerDAO;
+import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 
@@ -33,5 +34,10 @@ public class SellerService {
 	public int getSinquiryListcount() {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
 		return dao.getSinquiryListcount();
+	}
+	//lisenceNo로 푸드트럭 정보가져오기
+	public FoodTruckVO getFoodtruckDtail(String licenseNo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getFoodtruckDtail(licenseNo);
 	}
 }

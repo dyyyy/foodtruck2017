@@ -26,6 +26,11 @@
 		select count(*)from
 		qa_sc where QA_SC_STAT='N' and LICENSE_NO is not null
 	</select>
+	
+	<select id="getFoodtruckDtail" resultMap="FoodTruckMap">
+	
+	select * from foodtruck where license_No=#{licenseNo}
+	</select>
 
 	<resultMap type="LicenseVO" id="LicenseMap">
 		<result column="LICENSE_NO" property="licenseNo" />
@@ -44,5 +49,21 @@
 		<result column="QA_SC_TEL" property="qaScTel" />
 		<result column="QA_SC_STAT" property="qaScStat" />
 		<result column="LICENSE_NO" property="licenseNo" />
+	</resultMap>
+	
+	<resultMap type="FoodTruckVO" id="FoodTruckMap">
+		<result column="FTRUCK_NO" property="ftruckNo" />
+		<result column="LICENSE_NO" property="licenseNo" />
+		<result column="FTRUCK_NAME" property="ftruckName" />
+		<result column="FTRUCK_TEL" property="ftruckTel" />
+		<result column="FTRUCK_ADDR" property="ftruckAddr" />
+		<result column="FTRUCK_ADDR2" property="ftruckAddr2" />
+		<result column="FTRUCK_DLV_YN" property="ftruckDlvYn" />
+		<result column="FTRUCK_RSV_YN" property="ftruckRsvYn" />
+		<result column="FTRUCK_GRADE" property="ftruckGrade" />
+		<result column="FTRUCK_STATE" property="ftruckState" />
+		<result column="FTRUCK_IMG" property="ftruckImg" />
+		<result column="FTRUCK_INTRO" property="ftruckIntro" />
+		<result column="FTRUCK_REG" property="ftruckReg" />
 	</resultMap>
 </mapper>

@@ -10,5 +10,7 @@ public interface SearchDAO {
 	public List<FoodTruckVO> getFoodTruckList(SearchPageVO vo) throws Exception;
 
 	public int getCategoryCountTruck(String searchStr) throws Exception;
+	
+	
 
 }

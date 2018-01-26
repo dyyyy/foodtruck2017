@@ -2,6 +2,7 @@ package com.foodtruck.dao;
 
 import java.util.List;
 
+import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 
@@ -18,4 +19,7 @@ public interface SellerDAO {
 
 	// 1:1문의 total count가져오기
 	public int getSinquiryListcount();
+	
+	//lisenceNo로 푸드트럭 정보가져오기
+	public FoodTruckVO getFoodtruckDtail(String licenseNo);
 }
