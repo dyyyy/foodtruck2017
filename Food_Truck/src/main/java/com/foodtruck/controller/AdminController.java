@@ -38,17 +38,73 @@ public class AdminController {
 	// ������ �޴� - ��������
 	@RequestMapping("/stute")
 	public String stute(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
+		System.out.println("진입");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);
+		String stat="운영중";
+		String stat2="마감";
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getFtruckState().equals("Y")) {
+				list.get(i).setFtruckState(stat);
+			}else {
+				list.get(i).setFtruckState(stat2);
+			}
+		}
 		int count = fservice.getCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);// �� ������ ��
 		return "admin/stute";
+	}
+	//운영중 푸드트럭
+	@RequestMapping("/run")
+	public String run(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
+		int NpageNo = 1;
+		if (pageNo != 1) {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		List<FoodTruckVO> list=fservice.getRunFoodTruckList(NpageNo);
+		String stat="운영중";
+		String stat2="마감";
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getFtruckState().equals("Y")) {
+				list.get(i).setFtruckState(stat);
+			}else {
+				list.get(i).setFtruckState(stat2);
+			}
+		}
+		int count=fservice.getRunCountTruck();
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("list", list);
+		request.setAttribute("pagecount", count);
+		return "admin/runstute";
+	}
+	//마감중 푸드트럭
+	@RequestMapping("/end")
+	public String end(@RequestParam("pageNo") int pageNo, HttpServletRequest request)throws Exception{
+		int NpageNo = 1;
+		if (pageNo != 1) {
+			NpageNo = (pageNo - 1) * 10 + 1;
+		}
+		List<FoodTruckVO> list=fservice.getEndFoodTruckList(NpageNo);
+		String stat="운영중";
+		String stat2="마감";
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getFtruckState().equals("Y")) {
+				list.get(i).setFtruckState(stat);
+			}else {
+				list.get(i).setFtruckState(stat2);
+			}
+		}
+		int count=fservice.getEndCountTruck();
+		request.setAttribute("pageNo", pageNo);
+		request.setAttribute("list", list);
+		request.setAttribute("pagecount", count);
+		return"admin/endstute";
 	}
 
 	// 판매자 Q&A
@@ -60,6 +116,7 @@ public class AdminController {
 		}
 		List<MInquiryVO> list = sservice.getSinquiryList(NpageNo);
 		int count = sservice.getSinquiryListcount();
+		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("pagecount", count);
 		request.setAttribute("list", list);
 		return "admin/sellerQnA";
@@ -74,6 +131,7 @@ public class AdminController {
 		}
 		List<MInquiryVO> list = mservice.getMinquiryList(NpageNo);
 		int count = mservice.getMinquiryListcount();
+		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("pagecount", count);
 		request.setAttribute("list", list);
 		return "admin/memberQnA";
@@ -108,6 +166,7 @@ public class AdminController {
 		int count = aservice.getRequestCount();
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);
+		request.setAttribute("pageNo", pageNo);
 		return "admin/foodturck";
 	}
 
@@ -236,5 +295,7 @@ public class AdminController {
 		num=aservice.appFoodtruck(vo);
 		return num;
 	}
+	
+	
 
 }

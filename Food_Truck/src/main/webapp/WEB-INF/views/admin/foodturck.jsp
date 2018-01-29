@@ -140,8 +140,8 @@
 										}
 										if (currentPage > 1) {
 									%>
-									<li><a href="foodtruck?pageNo=<%=currentPage - 1%>"><i
-											class="fa fa-angle-left"></i></a></li>
+									<li><a href="foodtruck?pageNo=<%=currentPage - 1%>">
+									<i class="fa fa-angle-left"></i></a></li>
 									<%
 										}
 										for (int iCount = startPage; iCount <= endPage; iCount++) {
@@ -159,8 +159,8 @@
 											if (currentPage < totalPage) {
 										%>
 									
-									<li><a href="foodtruck?pageNo=<%=currentPage + 1%>"><i
-											class="fa fa-angle-right"></i></a></li>
+									<li><a href="foodtruck?pageNo=<%=currentPage + 1%>">
+									<i class="fa fa-angle-right"></i></a></li>
 									<%
 										}
 										if (endPage < totalPage) {

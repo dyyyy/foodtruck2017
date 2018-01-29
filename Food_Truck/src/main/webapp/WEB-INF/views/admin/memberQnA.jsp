@@ -234,7 +234,7 @@
 					</div>
 					<!-- 모달 전체 윈도우 -->
 				</div>
-				<img  src="/resources/img/">
+				
 			</div>
 			<hr>
 		</div>

@@ -9,12 +9,12 @@
 <script type="text/javascript">
 	function change(abc) {
 		var option = document.getElementById("state").value;
-		if (option == "운영중") {
+		if (option == "마감") {
 			ck.action = "/run?pageNo=1"
 			ck.method = "post"
 			ck.submit();
-		} else if (option == "마감") {
-			ck.action = "/end?pageNo=1"
+		} else if (option == "운영중") {
+			ck.action = "/run?pageNo=1"
 			ck.method = "post"
 			ck.submit();
 		} else if (option == "전체보기") {
@@ -117,12 +117,12 @@
 								}
 								if (startPage > 1) {
 							%>
-							<li><a href="stute?pageNo=1">처음</a></li>
+							<li><a href="end?pageNo=1">처음</a></li>
 							<%
 								}
 								if (currentPage > 1) {
 							%>
-							<li><a href="stute?pageNo=<%=currentPage - 1%>"><i
+							<li><a href="end?pageNo=<%=currentPage - 1%>"><i
 									class="fa fa-angle-left"></i><</a></li>
 							<%
 								}
@@ -133,7 +133,7 @@
 							<%
 								} else {
 							%>
-							<li><a href="stute?pageNo=<%=iCount%>"><%=iCount%></a>
+							<li><a href="end?pageNo=<%=iCount%>"><%=iCount%></a>
 							<li>
 								<%
 									}
@@ -141,13 +141,13 @@
 									if (currentPage < totalPage) {
 								%>
 							
-							<li><a href="stute?pageNo=<%=currentPage + 1%>"><i
+							<li><a href="end?pageNo=<%=currentPage + 1%>"><i
 									class="fa fa-angle-right"></i>></a></li>
 							<%
 								}
 								if (endPage < totalPage) {
 							%>
-							<li><a href="stute?pageNo=<%=totalPage%>">끝</a></li>
+							<li><a href="end?pageNo=<%=totalPage%>">끝</a></li>
 							<%
 								}
 							%>
