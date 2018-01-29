@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.FoodTruckDAO;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.PageVO;
 
 @Service
@@ -19,6 +20,11 @@ public class FoodTruckService {
 	public FoodTruckVO getFoodTruck(String ftruckNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruck(ftruckNo);
+	}
+	//라이센스번호로 푸드트럭 정보 가져오기
+	public FoodTruckVO getFoodTruck2(String licenseNo)throws Exception{
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getFoodTruck2(licenseNo);
 	}
 	//Ǫ��Ʈ�� ����Ʈ
 	public List<FoodTruckVO> getFoodTruckList(int pageNo) throws Exception{
@@ -82,5 +88,6 @@ public class FoodTruckService {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList2(PageNo);
 	}
+	
 
 }

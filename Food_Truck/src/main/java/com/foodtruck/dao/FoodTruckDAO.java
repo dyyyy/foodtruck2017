@@ -2,6 +2,7 @@ package com.foodtruck.dao;
 
 import java.util.List;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.PageVO;
 
 public interface FoodTruckDAO {
@@ -34,5 +35,8 @@ public interface FoodTruckDAO {
 	public int getCategoryCountTruck(int category)throws Exception;
 	//�쁺�뾽�븞�븯�뒗 �뫖�뱶�듃�윮媛��졇�삤湲�
 	public List<FoodTruckVO> getFoodTruckList2(int PageNo) throws Exception;
+	//라이센스번호로 푸드트럭 정보가져오기
+	public FoodTruckVO getFoodTruck2(String licenseNo)throws Exception;
+	
 	
 }

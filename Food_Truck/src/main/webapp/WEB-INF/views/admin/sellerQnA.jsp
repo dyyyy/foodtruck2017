@@ -220,7 +220,7 @@
 											<td><h4>답변</h4></td>
 										</tr>
 										<tr>
-											<td><textarea style="width: 100%; height: 100%;"
+											<td><textarea style="width: 100%; height: 100%;"rows="5"
 													id="reply"></textarea></td>
 										</tr>
 									</table>

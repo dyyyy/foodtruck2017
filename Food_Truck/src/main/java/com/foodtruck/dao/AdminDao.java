@@ -12,4 +12,6 @@ public interface AdminDao {
 	public List<LicenseVO> getRequestList(int NpageNo);
 	//푸드트럭 신청 count
 	public int getRequestCount();
+	//푸드트럭 등록 최종 승인 업데이트
+	public int appFoodtruck(LicenseVO vo)throws Exception;
 }

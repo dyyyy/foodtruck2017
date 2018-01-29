@@ -28,4 +28,8 @@ public class AdminService {
 		AdminDao dao=sessionTemplate.getMapper(AdminDao.class);
 		return dao.getRequestCount();
 	}
+	public int appFoodtruck(LicenseVO vo) throws Exception {
+		AdminDao dao=sessionTemplate.getMapper(AdminDao.class);
+		return dao.appFoodtruck(vo);
+	}
 }

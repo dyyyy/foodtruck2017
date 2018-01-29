@@ -25,6 +25,11 @@
 	<select id="getRequestCount" resultType="int">
 	select count(*) from license where app_stat='N'
 	</select>
+	<!-- 푸드트럭 최종 승인 -->
+	<update id="appFoodtruck">
+	update license set app_stat='Y' where license_no=#{licenseNo}
+	
+	</update>
 
 	<resultMap type="MinquiryReplyVO" id="MinquiryReplyMap">
 		<result column="REPLY_SC_NO" property="replyScNo" />

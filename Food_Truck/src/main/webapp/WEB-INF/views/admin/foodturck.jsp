@@ -1,29 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.foodtruck.vo.FoodTruckVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="js/jquery-3.1.1.min.js"></script>
-<!-- Bpopup -->
-<script src="js/plugins/bpopup/jquery.bpopup.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"
+	type="text/javascript"></script>
 <script type="text/javascript">
 	function modal(e) {
 		var licenseNo = e.getAttribute("data-id");
-		 $('#popup').bPopup();   
-
-		
+		$.ajax({
+			url : "/approvalList",
+			data : {
+				"licenseNo" : licenseNo
+			},
+			type : "post",
+			dataType : "json",
+			success : function(data) {
+				$(".set").html(data.content);
+				$(".table12").html(data.table);
+				$(".num").html('<input type="hidden" value="' + data.licenseNo + '" id="licenseNo">');
+			}
+		})
 	}
-
-	function c() {
+	function cl() {
 		location.reload();
+	}
+	function approval(){
+		var licenseNo=document.getElementById("licenseNo").value;
+		
+		$.ajax({
+			url:"/approval",
+			data: {"licenseNo" : licenseNo
+			},
+			type: "post",
+			success : function(data) {
+				alert("승인완료!");
+				location.reload();
+			}
+		})
 	}
 </script>
 </head>
 <%@include file="../comm/header2.jsp"%>
-
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
@@ -54,13 +77,14 @@
 						<div class="block-content collapse in">
 							<div class="span12">
 								<table cellpadding="0" cellspacing="0" border="0"
-									class="table table-striped table-bordered" id="example">
+									class="table table-striped table-bordered" id="example" align="center">
 									<thead>
-										<tr>
-											<th style="width: 200px;">회원 이메일</th>
+										<tr align="center" >
+											<th style="width: 200px; ">회원 이메일</th>
 											<th>회원이름</th>
 											<th>사업자번호</th>
 											<th>연락처</th>
+											<th style="width: 100px;"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -68,14 +92,18 @@
 											<tr class="odd gradeX" align="center">
 												<td>${all.memberId}</td>
 												<td>${all.memberName}</td>
-												<td><a href="#bpopup1" data-id="${all.licenseNo}"
-													onclick="modal(this)">${all.licenseNo}</a></td>
+												<td>${all.licenseNo}</td>
 												<td>${all.memberTel}</td>
+												<td><button type="button" class="btn btn-info btn-lg"
+														data-toggle="modal" data-target="#tutorialsplaneModal"
+														data-id="${all.licenseNo}" onclick="modal(this)">확인하기</button>
+												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
 							</div>
+							<div class="num"></div>
 							<div class="pagination" align="center">
 								<ul>
 									<%
@@ -147,11 +175,45 @@
 					</div>
 					<!-- /block -->
 				</div>
+
 				<hr>
 			</div>
-			<div id="popup"
-				style="display: none; background-color: white; width: 500px; height: 300px;">
-				<p>bpopup 호출</p>
+			<div id="tutorialsplaneModal" class="modal fade" role='dialog'>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">푸드트럭 정보</h4>
+						</div>
+						<div class="modal-body" style="margin-left: 10px;">
+						<div><h4>위치</h4></div>
+							<div id="map" style="width: 500px; height: 200px;"></div>
+
+							<script type="text/javascript"
+								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a898d01cf109199d2b5c34d8e1c5835&libraries=services,clusterer,drawing"></script>
+							<script type="text/javascript">
+								var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+									mapOption = {
+										center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+										level : 4 // 지도의 확대 레벨
+									};
+							
+								// 지도를 생성합니다    
+								var map = new daum.maps.Map(mapContainer, mapOption);
+							</script>
+							<div class="set"></div>
+							<br>
+							<br>
+							<div><h4>정보</h4></div>
+							<div class="table12" align="center"></div>
+							
+						</div>
+						<div class="modal-footer">
+						<button class="btn btn-default" onclick="approval()">승인하기</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" onclick="cl()">닫기</button>
+						</div>
+					</div>
+				</div>
 			</div>
 </body>
 </html>

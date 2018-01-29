@@ -197,37 +197,35 @@
 									</button>
 									<h4 class="modal-title" id="myModalLabel">일반 회원 Q&A 답글달기</h4>
 								</div>
-								
-									<div class="modal-body">
-										<table>
-											<tr>
-												<td class="c"></td>
-											</tr>
-											<tr>
-												<td class="b"><input type="hidden" id="email" value="a"></td>
-											</tr>
-											<tr>
-												<td width="520px"><h4>내용</h4></td>
-											</tr>
-											<tr>
-												<td id="content" class="a"></td>
-											</tr>
-											<tr>
-												<td><h4>답변</h4></td>
-											</tr>
-											<tr>
-												<td><textarea style="width: 100%; height: 100%;" rows="6"
-														id="reply"></textarea></td>
-											</tr>
-											<tr></tr>
-										</table>
-									</div>
-								
+
+								<div class="modal-body">
+									<table>
+										<tr>
+											<td class="c"></td>
+										</tr>
+										<tr>
+											<td class="b"><input type="hidden" id="email" value="a"></td>
+										</tr>
+										<tr>
+											<td width="520px"><h4>내용</h4></td>
+										</tr>
+										<tr>
+											<td id="content" class="a"></td>
+										</tr>
+										<tr>
+											<td><h4>답변</h4></td>
+										</tr>
+										<tr>
+											<td><textarea style="width: 100%; height: 100%;"
+													rows="5" id="reply"></textarea></td>
+										</tr>
+										<tr></tr>
+									</table>
+								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" onclick="reply()">댓글
 										저장</button>
 								</div>
-								<!-- data-dismiss="modal" : 모달을 닫는 기능을 갖고있다. -->
 
 							</div>
 							<!-- 모달 콘텐츠 -->
@@ -236,7 +234,7 @@
 					</div>
 					<!-- 모달 전체 윈도우 -->
 				</div>
-
+				<img  src="/resources/img/">
 			</div>
 			<hr>
 		</div>
