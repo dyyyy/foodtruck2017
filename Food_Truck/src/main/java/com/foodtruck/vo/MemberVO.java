@@ -1,14 +1,16 @@
 package com.foodtruck.vo;
-
+	
 public class MemberVO extends LicenseVO{
-	//private String licenseNo;
-	private String memberId;	// ȸ�� ���̵�
-	private String memberName;	// ȸ�� �̸�
-	private String memberPw;	// ȸ�� ��й�ȣ
-	private String memberTel;	// ȸ�� ��ȭ��ȣ
-	private String memberAuth;		// ȸ�� ����
+	
+	private String memberId;		// 회원 아이디
+	private String memberName;		// 회원 이름
+	private String memberPw;		// 회원 비밀번호
+	private String memberTel;		// 회원 전화번호
+	private String memberAuth;		// 회원 구분 (1 = 윤영자  , 2 = 판매자 , 3 = 일반회원 )
+	 
 	
 	// getter & setter
+	
 	public String getMemberId() {
 		return memberId;
 	}

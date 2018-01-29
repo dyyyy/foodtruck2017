@@ -3,12 +3,14 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.foodtruck.dao.ReviewDAO">
-<!-- 리뷰 리스트 -->
-<select id="getReviewList" resultMap="ReviewMap">
-SELECT * FROM REVIEW <where>FTRUCK_NO=#{ftruckNo}</where>
-
-</select>
+	<mapper namespace="com.foodtruck.dao.ReviewDAO">
+	
+	<!-- 리뷰 리스트 -->
+	<select id="getReviewList" resultMap="ReviewMap">
+	
+	SELECT * FROM REVIEW <where>FTRUCK_NO=#{ftruckNo}</where>
+	
+	</select>
 
 	<resultMap type="ReviewVO" id="ReviewMap">
 		<result column="FTRUCK_NO" property="ftruckNo"/>

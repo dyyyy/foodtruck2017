@@ -6,18 +6,18 @@ import com.foodtruck.vo.DeliveryDetailVO;
 
 public interface DeliveryDetailDAO {
 
-	// ¹è´Ş»ó¼¼ Á¤º¸
-	public DeliveryDetailVO getDeliveryDetail(int prodNo);
+   // ë°°ë‹¬ìƒì„¸ ì •ë³´
+   public DeliveryDetailVO getDeliveryDetail(String prodNo);
 
-	// ¹è´Ş»ó¼¼ ¸®½ºÆ®
-	public List<DeliveryDetailVO> getDeliveryDetailList();
+   // ë°°ë‹¬ìƒì„¸ ë¦¬ìŠ¤íŠ¸
+   public List<DeliveryDetailVO> getDeliveryDetailList(String memId);
 
-	// ¹è´Ş»ó¼¼ µî·Ï
-	public int insertDeliveryDetail(DeliveryDetailVO vo);
+   // ë°°ë‹¬ìƒì„¸ ë“±ë¡
+   public int insertDeliveryDetail(DeliveryDetailVO vo);
 
-	// ¹è´Ş»ó¼¼ ¼öÁ¤
-	public int updateDeliveryDetail(DeliveryDetailVO vo);
+   // ë°°ë‹¬ìƒì„¸ ìˆ˜ì •
+   public int updateDeliveryDetail(DeliveryDetailVO vo);
 
-	// ¹è´Ş»ó¼¼ »èÁ¦
-	public int deleteDeliveryDetail(int prodNo);
+   // ë°°ë‹¬ìƒì„¸ ì‚­ì œ
+   public int deleteDeliveryDetail(String prodNo);
 }

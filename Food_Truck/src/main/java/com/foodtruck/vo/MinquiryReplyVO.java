@@ -2,12 +2,14 @@ package com.foodtruck.vo;
 
 public class MinquiryReplyVO {
 	
-	private String replyScNo;
-	private String memId;
-	private int qaScNo;
-	private String replyScContent;
-	private String replyScReg;
+	private String replyScNo;			// 답글 번호
+	private String memId;				// 회원 아이디
+	private int qaScNo;					// 글 번호
+	private String replyScContent;		// 답글 내용
+	private String replyScReg;			// 등록일
 	
+	
+	// getter & setter
 	
 	public String getReplyScNo() {
 		return replyScNo;

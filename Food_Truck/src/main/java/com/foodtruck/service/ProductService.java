@@ -15,31 +15,31 @@ public class ProductService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// ��ǰ ����
+	// 제품 정보
 	public ProductVO getProduct(int prodNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.getProduct(prodNo);
 	}
 
-	// ��ǰ ����Ʈ
+	// 제품 리스트
 	public List<ProductVO> getProductList(String licenseNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.getProductList(licenseNo);
 	}
 
-	// ��ǰ �Է�
+	// 제품 등록
 	public int insertProduct(ProductVO vo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.insertProduct(vo);
 	}
 
-	// ��ǰ ����
+	// 제품 수정
 	public int updateProduct(ProductVO vo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.updateProduct(vo);
 	}
 
-	// ��ǰ ����
+	// 제품 삭제
 	public int deleteProduct(int prodNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.deleteProduct(prodNo);

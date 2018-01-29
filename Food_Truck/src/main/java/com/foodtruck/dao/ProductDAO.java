@@ -6,18 +6,18 @@ import com.foodtruck.vo.ProductVO;
 
 public interface ProductDAO {
 
-	// ��ǰ ����
+	// 제품 정보
 	public ProductVO getProduct(int prodNo);
 
-	// ��ǰ ����Ʈ
+	// 제품 리스트
 	public List<ProductVO> getProductList(String licenseNo);
 
-	// ��ǰ ���
+	// 제품 등록
 	public int insertProduct(ProductVO vo);
 
-	// ��ǰ ����
+	// 제품 수정
 	public int updateProduct(ProductVO vo);
 
-	// ��ǰ ����
+	// 제품 삭제
 	public int deleteProduct(int prodNo);
 }

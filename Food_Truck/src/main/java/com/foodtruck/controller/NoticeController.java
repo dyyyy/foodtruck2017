@@ -27,7 +27,7 @@ public class NoticeController {
 	MemberService memberService;
 	
 	// 占쏙옙占쏙옙占쏙옙占쏙옙
-	@RequestMapping("/noticeBoard")
+	@RequestMapping("/noticeBoard") 
 	public String getNoticeBoardList(Model model, HttpServletResponse response, HttpSession session, MemberVO mvo, HttpServletRequest request,@RequestParam("pageNo") int pageNo) throws Exception {
 
 		//페이징처리

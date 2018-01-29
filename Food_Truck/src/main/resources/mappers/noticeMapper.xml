@@ -52,6 +52,7 @@
 	<delete id="deleteNotice" parameterType="com.foodtruck.vo.NoticeVO">
 		delete from notice_bd where notice_no=#{noticeNo}
 	</delete>
+	
 	<!-- 공지사항게시물 count가져오기 -->
 	<select id="getCountNotice" resultType="int">
 		select count(*) from

@@ -15,36 +15,31 @@ public class OrderDetailService {
    @Autowired
    private SqlSessionTemplate sessionTemplate;
 
-   // �ֹ��� ����
+   //주문 상세
    public OrderDetailVO getOrderDetail(int ordNo) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.getOrderDetail(ordNo);
    }
 
-   // �ֹ��� ����Ʈ
+   //판매자 입장에서 주문 내역 리스트
    public List<OrderDetailVO> getOrderDetailList(String selId) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.getOrderDetailList(selId);
    }
    
-   // �ֹ��� �Է�
-   public int insertOrderDetail(OrderDetailVO vo) {
-      OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
-      return dao.insertOrderDetail(vo);
-   }
-
-   // �ֹ��� ����
+   //주문 상세 수정
    public int updateOrderDetail(OrderDetailVO vo) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.updateOrderDetail(vo);
    }
 
-   // �ֹ��� ����
+   // 주문 상세 삭제
    public int deleteOrderDetail(int ordNo) throws Exception {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.deleteOrderDetail(ordNo);
    }
    
+   // 주문 상세 등록
    public int insertOrderDetail(Map<String, Object> map) {
 	   OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
 	   return dao.insertOrderDetail(map);

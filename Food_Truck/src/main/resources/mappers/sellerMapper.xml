@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.foodtruck.dao.SellerDAO">
+
 	<select id="getInfo" resultMap="LicenseMap">
 		select * from license where mem_id='${memId}'
 	</select>
+	
 	<select id="getSinquiryList" resultMap="InquiryMap">
 		select ffft.* from
 		(select fft.*from

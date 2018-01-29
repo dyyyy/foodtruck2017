@@ -22,7 +22,7 @@ public class ProductController {
 	private MemberService memberService;
 	
 	// ��ǰ ��� �ϴ� ������ �̵�
-	@RequestMapping("/insertProductForm")
+	@RequestMapping("/insertProductForm") 
 	public String insertProductForm(Model model, HttpSession session) {
 		
 		MemberVO mvo = (MemberVO)session.getAttribute("member");

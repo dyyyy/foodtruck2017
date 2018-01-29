@@ -21,7 +21,6 @@ import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MinquiryReplyVO;
-import com.sun.javafx.collections.MappingChange.Map;
 
 @Controller
 public class AdminController {

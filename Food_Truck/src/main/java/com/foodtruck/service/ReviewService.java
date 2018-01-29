@@ -13,30 +13,31 @@ import com.foodtruck.vo.ReviewVO;
 
 @Service
 public class ReviewService {
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-		// ∏Æ∫‰ ∏ÆΩ∫∆Æ
-		public List<ReviewVO> getReviewList(String ftruckNo) {
-			ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
-			return dao.getReviewList(ftruckNo);
-		}
+	// Î¶¨Î∑∞ Î¶¨Ïä§Ìä∏
+	public List<ReviewVO> getReviewList(String ftruckNo) {
+		ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
+		return dao.getReviewList(ftruckNo);
+	}
 
-		// ∏Æ∫‰ ¿‘∑¬
-		public int insertReview(ReviewVO vo) {
-			ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
-			return dao.insertReview(vo);
-		}
+	// Î¶¨Î∑∞ Îì±Î°ù
+	public int insertReview(ReviewVO vo) {
+		ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
+		return dao.insertReview(vo);
+	}
 
-		// ∏Æ∫‰ ºˆ¡§
-		public int updateReview(ReviewVO vo) {
-			ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
-			return dao.updateReview(vo);
-		}
+	// Î¶¨Î∑∞ ÏàòÏ†ï
+	public int updateReview(ReviewVO vo) {
+		ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
+		return dao.updateReview(vo);
+	}
 
-		// ∏Æ∫‰ ªË¡¶
-		public int deleteReview(int revSeq) {
-			ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
-			return dao.deleteReview(revSeq);
-		}
+	// Î¶¨Î∑∞ ÏÇ≠Ï†ú
+	public int deleteReview(int revSeq) {
+		ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
+		return dao.deleteReview(revSeq);
+	}
 }

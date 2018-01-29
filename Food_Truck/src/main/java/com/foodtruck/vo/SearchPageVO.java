@@ -1,8 +1,11 @@
 package com.foodtruck.vo;
 
 public class SearchPageVO {
+	
 	private int pageNo;
 	private String searchStr;
+	
+	
 	public int getPageNo() {
 		return pageNo;
 	}

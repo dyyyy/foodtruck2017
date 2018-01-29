@@ -14,6 +14,7 @@ import com.foodtruck.vo.MInquiryVO;
 
 @Service
 public class SellerService {
+	
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.foodtruck.vo.NoticeVO;
 
 public interface NoticeDAO {
+	
 	//공시지사항 게시물가져오기
 	public List<NoticeVO> getNoticeBoardList(int pageNo);
 	

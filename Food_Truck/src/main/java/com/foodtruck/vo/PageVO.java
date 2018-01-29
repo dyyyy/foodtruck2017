@@ -1,9 +1,9 @@
 package com.foodtruck.vo;
 
 public class PageVO {
+	
 	private int pageNo;
 	private int category;
-	
 	
 	
 	public int getPageNo() {

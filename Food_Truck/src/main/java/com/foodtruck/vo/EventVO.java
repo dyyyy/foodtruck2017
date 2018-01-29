@@ -1,14 +1,15 @@
 package com.foodtruck.vo;
 
 public class EventVO {
-	private int eventNo;
-	private String memId;
-	private String eventTitle;
-	private String eventContent;
-	private String eventReg;
-	private int eventCnt;
 	
+	private int eventNo;			// 글번호
+	private String memId;			// 회원 아이디
+	private String eventTitle;		// 제목
+	private String eventContent;	// 내용
+	private String eventReg;		// 등록일
+	private int eventCnt;			// 조회수
 	
+	// getter & setter
 	
 	public int getEventNo() {
 		return eventNo;

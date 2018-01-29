@@ -16,10 +16,10 @@ public class OrderDetailController {
 	@Autowired
 	private OrderDetailService orderDetailService;
 	
-	/*¿¹¾à³»¿ª ÀÌ¸§º¯°æÇÏ±â*/
+	/*ì˜ˆì•½ë‚´ì—­ ì´ë¦„ë³€ê²½í•˜ê¸°*/
 	@RequestMapping("/orderDetail")
 	public String orderDetailPage(Model model, HttpSession session) {
-
+ 
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		
 		
@@ -29,7 +29,7 @@ public class OrderDetailController {
 			return "home";
 			
 		}
-		// ÁÖ¹® »ó¼¼ ¸®½ºÆ®
+		// ì£¼ë¬¸ ìƒì„¸ ë¦¬ìŠ¤íŠ¸
 		
 		
 		return "nav/orderDetail";

@@ -1,13 +1,15 @@
 package com.foodtruck.vo;
 
 public class NoticeVO {
-	private int noticeNo;
-	private String memId;
-	private String noticeTitle;
-	private String noticeContent;	
-	private String noticeReg;
-	private int noticeCnt;
 	
+	private int noticeNo;			// 글번호
+	private String memId;			// 회원 아이디
+	private String noticeTitle;		// 제목
+	private String noticeContent;	// 내용
+	private String noticeReg;		// 등록일
+	private int noticeCnt;			// 조회수
+	
+	// getter & setter
 	
 	public int getNoticeNo() {
 		return noticeNo;
