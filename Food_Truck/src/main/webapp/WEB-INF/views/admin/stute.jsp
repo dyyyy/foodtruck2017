@@ -23,6 +23,27 @@
 			ck.submit();
 		}
 	}
+	function modal(e) {
+		var ftruckNo = e.getAttribute("data-id");
+		$.ajax({
+			url : "/getTruck",
+			data : {
+				"ftruckNo" : ftruckNo
+			},
+			type : "post",
+			dataType : "json",
+			success : function(data) {
+				$(".set").html(data.content);
+				$(".table12").html(data.table);
+				
+			}
+		})
+	}
+	function cl() {
+		location.reload();
+	}
+	
+	
 </script>
 </head>
 <%@include file="../comm/header2.jsp"%>
@@ -52,7 +73,7 @@
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
 							<form name="ck">
-								<div class="muted pull-left">
+								<div class="muted pull-right">
 									푸드트럭 현황 <select id="state" onchange="change(this)"><option>전체보기</option>
 										<option>운영중</option>
 										<option>마감</option></select>
@@ -69,6 +90,7 @@
 											<th>연락처</th>
 											<th>현재위치</th>
 											<th>현재 상태</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -77,7 +99,8 @@
 												<td>${all.ftruckName}</td>
 												<td>${all.ftruckTel}</td>
 												<td>${all.ftruckAddr}</td>
-												<td class="center">${all.ftruckState}</td>
+												<td class="center" style="width: 70px;">${all.ftruckState}</td>
+												<td align="center" style="width: 100px;"><button class="btn" data-id="${all.ftruckNo}"  data-toggle="modal" data-target="#tutorialsplaneModal" onclick="modal(this)">상세보기</button></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -154,6 +177,42 @@
 						</ul>
 					</div>
 				</div>
+				<div id="tutorialsplaneModal" class="modal fade" role='dialog'>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">푸드트럭 정보</h4>
+						</div>
+						<div class="modal-body" style="margin-left: 10px;">
+						<div><h4>현재위치</h4></div>
+							<div id="map" style="width: 500px; height: 200px;"></div>
+
+							<script type="text/javascript"
+								src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a898d01cf109199d2b5c34d8e1c5835&libraries=services,clusterer,drawing"></script>
+							<script type="text/javascript">
+								var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+									mapOption = {
+										center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+										level : 4 // 지도의 확대 레벨
+									};
+							
+								// 지도를 생성합니다    
+								var map = new daum.maps.Map(mapContainer, mapOption);
+							</script>
+							<div class="set"></div>
+							<br>
+							<br>
+							<div><h4>정보</h4></div>
+							<div class="table12" align="center"></div>
+							
+						</div>
+						<div class="modal-footer">					
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" onclick="cl()">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
 				<hr>
 				<footer>
 				<p>&copy; Vincent Gabriel 2013</p>
@@ -161,15 +220,6 @@
 			</div>
 			<!--/.fluid-container-->
 
-			<script src="vendors/jquery-1.9.1.js"></script>
-			<script src="bootstrap/js/bootstrap.min.js"></script>
-			<script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
-
-
-			<script src="assets/scripts.js"></script>
-			<script src="assets/DT_bootstrap.js"></script>
-			<script>
-				$(function() {});
-			</script>
+			
 </body>
 </html>

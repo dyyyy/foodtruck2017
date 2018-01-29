@@ -53,6 +53,12 @@ public class AdminController {
 			}else {
 				list.get(i).setFtruckState(stat2);
 			}
+			
+			if(list.get(i).getFtruckAddr()==null) {
+				list.get(i).setFtruckAddr(list.get(i).getFtruckAddr2());
+			}
+			
+			
 		}
 		int count = fservice.getCountTruck();
 		request.setAttribute("pageNo", pageNo);
@@ -169,6 +175,90 @@ public class AdminController {
 		request.setAttribute("pageNo", pageNo);
 		return "admin/foodturck";
 	}
+	@RequestMapping("/getTruck")
+	@ResponseBody
+	public HashMap getTruck(@RequestParam("ftruckNo") String ftruckNo) throws Exception {
+		HashMap map = new HashMap();
+		FoodTruckVO vo= fservice.getFoodTruck(ftruckNo);
+		if(vo.getFtruckAddr()==null) {
+			vo.setFtruckAddr(vo.getFtruckAddr2());
+		}
+		String category="";
+		if (vo.getCategory() == 1) {
+			category = "한식";
+		} else if (vo.getCategory() == 2) {
+			category = "중식";
+		} else if (vo.getCategory() == 3) {
+			category = "양식";
+		} else if (vo.getCategory() == 4) {
+			category = "일식";
+		}
+		String Content = "";
+		Content += "<script type=\"text/javascript\">"
+				+ "								var geocoder = new daum.maps.services.Geocoder();\r\n"
+				+ "								\r\n" + "								geocoder.addressSearch('"
+				+ vo.getFtruckAddr() + "', function(result, status) {\r\n" + "\r\n"
+				+ "								    // 정상적으로 검색이 완료됐으면 \r\n"
+				+ "								     if (status === daum.maps.services.Status.OK) {\r\n" + "\r\n"
+				+ "								        var coords = new daum.maps.LatLng(result[0].y, result[0].x);\r\n"
+				+ "\r\n" + "								        // 결과값으로 받은 위치를 마커로 표시합니다\r\n"
+				+ "								        var marker = new daum.maps.Marker({\r\n"
+				+ "								            map: map,\r\n"
+				+ "								            position: coords\r\n"
+				+ "								        });\r\n" + "\r\n"
+				+ "								        // 인포윈도우로 장소에 대한 설명을 표시합니다\r\n"
+				+ "								        var infowindow = new daum.maps.InfoWindow({\r\n"
+				+ "								            content: '<div style=\"width:150px;text-align:center;padding:6px 0;\">"
+				+ vo.getFtruckName() + "</div>'\r\n" + "								        });\r\n"
+				+ "								        infowindow.open(map, marker);\r\n" + "\r\n"
+				+ "								        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다\r\n"
+				+ "								        map.setCenter(coords);\r\n"
+				+ "								    } \r\n" + "								});\r\n"
+				+ "								\r\n" + "							</script>		";
+		String table = "";
+		table += "<table border=1 class=\"table table-striped table-bordered\">\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td rowspan=2 style=\"width: 100px;\">대표이미지</td>\r\n" + 
+				"						<td rowspan=2 colspan=3><img  src=\"/resources/img/"+vo.getFtruckImg()+"\" style=\"width: 420px;height: 200px;\"></td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr></tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td>상호명</td>\r\n" + 
+				"						<td colspan=3>"+vo.getFtruckName()+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td>사업자번호</td>\r\n" + 
+				"						<td colspan=3>"+vo.getLicenseNo()+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td>주소</td>\r\n" + 
+				"						<td colspan=3>"+vo.getFtruckAddr()+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td rowspan=3>소개글</td>\r\n" + 
+				"						<td rowspan=3 colspan=3>"+vo.getFtruckIntro()+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr></tr>\r\n" + 
+				"					<tr></tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td>카테고리</td>\r\n" + 
+				"						<td colspan=3>"+category+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td>예약</td>\r\n" + 
+				"						<td colspan=3>"+vo.getFtruckRsvYn()+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"					<tr>\r\n" + 
+				"						<td>배달</td>\r\n" + 
+				"						<td colspan=3>"+vo.getFtruckDlvYn()+"</td>\r\n" + 
+				"					</tr>\r\n" + 
+				"				</table>";
+		map.put("content", Content);
+		map.put("table", table);
+		return map;
+	}
+	
+	
 
 	@RequestMapping("/MQnAdetail")
 	@ResponseBody
@@ -203,7 +293,6 @@ public class AdminController {
 	@ResponseBody
 	public HashMap approvalList(@RequestParam("licenseNo") String licenseNo) throws Exception {
 		String category = "";
-		System.out.println("진입");
 		HashMap map = new HashMap();
 		FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
 		if (vo.getFtruckAddr() == null) {

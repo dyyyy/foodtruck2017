@@ -117,5 +117,6 @@ public class FoodTruckService {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getEndCountTruck();
 	}
+	
 
 }

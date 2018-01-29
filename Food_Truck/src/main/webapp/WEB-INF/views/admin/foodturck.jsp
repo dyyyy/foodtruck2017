@@ -94,9 +94,9 @@
 												<td>${all.memberName}</td>
 												<td>${all.licenseNo}</td>
 												<td>${all.memberTel}</td>
-												<td><button type="button" class="btn btn-info btn-lg"
+												<td><button type="button" class="btn"
 														data-toggle="modal" data-target="#tutorialsplaneModal"
-														data-id="${all.licenseNo}" onclick="modal(this)">확인하기</button>
+														data-id="${all.licenseNo}" onclick="modal(this)">상세정보</button>
 												</td>
 											</tr>
 										</c:forEach>

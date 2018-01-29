@@ -9,12 +9,19 @@ public interface FoodTruckDAO {
 	
 	// 푸드트럭 정보
 	public FoodTruckVO getFoodTruck(String ftruckNo)throws Exception;
-
+	
+	// 영업중 푸드트럭 정보
+	public FoodTruckVO getRunFoodTruck(String ftruckNo)throws Exception;
+	
+	//마감중 푸드트럭 정보
+	public FoodTruckVO getEndFoodTruck(String ftruckNo)throws Exception;
+	
 	// 푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList(int pageNo)throws Exception;
 	
 	//푸드트럭 리스트(운영중)
 	public List<FoodTruckVO> getRunFoodTruckList(int pageNo)throws Exception;
+	
 	//푸드트럭 리스트(마감)
 	public List<FoodTruckVO> getEndFoodTruckList(int pageNo)throws Exception;
 	
@@ -39,8 +46,9 @@ public interface FoodTruckDAO {
 	//푸드트럭 카테고리별 count(페이징처리)
 	public int getCategoryCountTruck(int category)throws Exception;
 	
-	//
+	//??
 	public List<FoodTruckVO> getFoodTruckList2(int PageNo) throws Exception;
+	
 	//라이센스번호로 푸드트럭 정보가져오기
 	public FoodTruckVO getFoodTruck2(String licenseNo)throws Exception;
 	//운영중인 푸드트럭 count
