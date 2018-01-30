@@ -41,7 +41,7 @@
 							<div class="pro-name-price-ratting">
 								<!-- Product Name -->
 								<div class="pro-name">
-									<a href="/read?ftruckNo=${rank.ftruckNo }">${rank.ftruckNo }</a>
+									<a href="/read?ftruckNo=${rank.ftruckNo }">${rank.ftruckName}</a>
 								</div>
 								<!-- Product Ratting -->
 								<div class="pro-ratting">
