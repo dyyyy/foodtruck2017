@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,19 +12,7 @@
 <body>
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span3" id="sidebar">
-                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li>
-                            <a href="/sellerMain?licenseNo=${licenseNo}"><i class="icon-chevron-right"></i> Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <a href="/sellerCalendar"><i class="icon-chevron-right"></i> Calendar</a>
-                        </li>
-                        <li>
-                            <a href="/sellerChart"><i class="icon-chevron-right"></i>Charts</a>
-                        </li>
-                    </ul>
-                </div>
+            
                 <!--/span-->
                 <div class="span9" id="content">
                     <div class="row-fluid">

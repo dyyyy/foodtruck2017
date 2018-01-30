@@ -18,4 +18,6 @@ public interface ReviewDAO {
 	// 리뷰 삭제
 	public int deleteReview(int revSeq);
 	
+	// 리뷰 쓸 때, 먹었던 해당  푸드트럭 이름 조회
+	public List<ReviewVO> getFoodTrcukName(String memId);	
 }

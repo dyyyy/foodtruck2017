@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.foodtruck.service.OrderDetailService;
 import com.foodtruck.service.OrderService;
 import com.foodtruck.service.ProductService;
+import com.foodtruck.service.ReviewService;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.OrderDetailVO;
 import com.foodtruck.vo.OrderVO;
 import com.foodtruck.vo.ProductVO;
+import com.foodtruck.vo.ReviewVO;
 
 
 @Controller
@@ -32,6 +34,9 @@ public class OrderController {
 	@Autowired
 	OrderDetailService orderdetailService;
 	 
+	@Autowired
+	ReviewService reviewService;
+	
 	@RequestMapping("/order")
 	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request) {
 		System.out.println("����");
@@ -63,13 +68,19 @@ public class OrderController {
 		
 		return "nav/nonMemberOrderDetail";
 	}
-	
+
 	// 사용자 주문내역 조회
 	@RequestMapping("/memberOrderInfo")
 	public String memberOrderInfo(HttpSession session,HttpServletRequest request) {
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		List<OrderVO> list = Oservice.getMemberOrderList(vo.getMemberId());
 		request.setAttribute("list", list);
+		
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		String memId = mvo.getMemberId(); 
+		
+		List<ReviewVO> reviewList = reviewService.getFoodTrcukName(memId);
+		request.setAttribute("reviewList", reviewList);
 		
 		return "member/memberOrderInfo";
 	}

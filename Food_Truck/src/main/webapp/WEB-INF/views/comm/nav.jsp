@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.foodtruck.vo.SellerVO"%>
 <%@page import="com.foodtruck.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -23,7 +25,9 @@
 							<%
 								boolean isLogin = false;
 								MemberVO mvo = null;
+								List<SellerVO> svo = null;
 								mvo = (MemberVO) session.getAttribute("member");
+								svo = (List<SellerVO>) session.getAttribute("licenseNo");
 								//로그인 체크!
 								if (mvo != null) {
 									isLogin = true;
