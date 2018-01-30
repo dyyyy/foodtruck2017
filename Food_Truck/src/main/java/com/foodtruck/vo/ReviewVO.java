@@ -2,13 +2,17 @@ package com.foodtruck.vo;
 
 public class ReviewVO {
 	
-	private int revSeq;
-	private String ftruckNo;
-	private String revContent;
-	private String revDtm;
-	private String revDelYn;
-	private double grade;
-	private String memId;
+	private int revSeq;				// 댓글 번호
+	private String ftruckNo;		// 푸드트럭 번호
+	private String revContent;		// 댓글 내용
+	private String revDtm;			// 댓글 등록일
+	private String revDelYn;		// 삭제 여부
+	private double grade;			// 평점
+	private String memId;			// 회원 아이디
+	
+	
+	// getter & setter
+	
 	public int getRevSeq() {
 		return revSeq;
 	}

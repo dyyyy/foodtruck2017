@@ -23,12 +23,10 @@ public class EventService {
 		return dao.getEventBoardList(NpageNo);
 	}
 	
-	
 	public EventVO getEvent(int noticeNo) {
 		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);
 		return dao.getEvent(noticeNo);
 	}
-	
 	
 	public int insertEvent(EventVO vo) {
 		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);

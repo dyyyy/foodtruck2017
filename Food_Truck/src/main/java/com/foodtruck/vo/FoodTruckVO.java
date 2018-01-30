@@ -17,7 +17,7 @@ public class FoodTruckVO {
 	private String longitude; // �浵
 	private int category; // ī�װ���ȣ
 	private String licenseNo; // ����� ��ȣ
-	private String memId;
+	
 	
 	// getter & setter
 	public String getFtruckNo() {
@@ -116,6 +116,5 @@ public class FoodTruckVO {
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
-	
 	
 }

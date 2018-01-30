@@ -21,16 +21,13 @@ public class NoticeService {
 		return dao.getNoticeBoardList(pageNo);
 	}
 	
-	
 	public NoticeVO getNotice(int noticeNo) {
 		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
 		return dao.getNotice(noticeNo);
 	}
 	
-	
 	public int insertNotice(NoticeVO vo) {
 		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
-		
 		return dao.insertNotice(vo);
 	}
 	
@@ -48,6 +45,7 @@ public class NoticeService {
 		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
 		return dao.deleteNotice(vo);
 	}
+	
 	public int getCountNotice() throws Exception {
 		NoticeDAO dao = sessionTemplate.getMapper(NoticeDAO.class);
 		return dao.getCountNotice();

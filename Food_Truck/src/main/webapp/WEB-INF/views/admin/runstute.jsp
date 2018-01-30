@@ -17,12 +17,13 @@
 			ck.action = "/end?pageNo=1"
 			ck.method = "post"
 			ck.submit();
-		} else if (option == "전체보기") {
+		} else if (option = "전체보기") {
 			ck.action = "/stute?pageNo=1"
 			ck.method = "post"
 			ck.submit();
 		}
 	}
+	
 	function modal(e) {
 		var ftruckNo = e.getAttribute("data-id");
 		$.ajax({
@@ -42,8 +43,6 @@
 	function cl() {
 		location.reload();
 	}
-	
-	
 </script>
 </head>
 <%@include file="../comm/header2.jsp"%>
@@ -74,9 +73,9 @@
 						<div class="navbar navbar-inner block-header">
 							<form name="ck">
 								<div class="muted pull-right">
-									푸드트럭 현황 <select id="state" onchange="change(this)"><option>전체보기</option>
-										<option>운영중</option>
-										<option>마감</option></select>
+									푸드트럭 현황 <select id="state" onchange="change(this)"><option>운영중</option>
+										<option>마감</option>
+										<option>전체보기</option></select>
 								</div>
 							</form>
 						</div>
@@ -99,7 +98,7 @@
 												<td>${all.ftruckName}</td>
 												<td>${all.ftruckTel}</td>
 												<td>${all.ftruckAddr}</td>
-												<td class="center" style="width: 70px;">${all.ftruckState}</td>
+												<td class="center">${all.ftruckState}</td>
 												<td align="center" style="width: 100px;"><button class="btn" data-id="${all.ftruckNo}"  data-toggle="modal" data-target="#tutorialsplaneModal" onclick="modal(this)">상세보기</button></td>
 											</tr>
 										</c:forEach>
@@ -140,12 +139,12 @@
 								}
 								if (startPage > 1) {
 							%>
-							<li><a href="stute?pageNo=1">처음</a></li>
+							<li><a href="run?pageNo=1">처음</a></li>
 							<%
 								}
 								if (currentPage > 1) {
 							%>
-							<li><a href="stute?pageNo=<%=currentPage - 1%>"><i
+							<li><a href="run?pageNo=<%=currentPage - 1%>"><i
 									class="fa fa-angle-left"></i><</a></li>
 							<%
 								}
@@ -156,7 +155,7 @@
 							<%
 								} else {
 							%>
-							<li><a href="stute?pageNo=<%=iCount%>"><%=iCount%></a>
+							<li><a href="run?pageNo=<%=iCount%>"><%=iCount%></a>
 							<li>
 								<%
 									}
@@ -164,13 +163,13 @@
 									if (currentPage < totalPage) {
 								%>
 							
-							<li><a href="stute?pageNo=<%=currentPage + 1%>"><i
+							<li><a href="run?pageNo=<%=currentPage + 1%>"><i
 									class="fa fa-angle-right"></i>></a></li>
 							<%
 								}
 								if (endPage < totalPage) {
 							%>
-							<li><a href="stute?pageNo=<%=totalPage%>">끝</a></li>
+							<li><a href="run?pageNo=<%=totalPage%>">끝</a></li>
 							<%
 								}
 							%>
@@ -218,8 +217,6 @@
 				<p>&copy; Vincent Gabriel 2013</p>
 				</footer>
 			</div>
-			<!--/.fluid-container-->
 
-			
 </body>
 </html>

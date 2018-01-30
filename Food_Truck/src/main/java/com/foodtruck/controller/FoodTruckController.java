@@ -53,16 +53,16 @@ public class FoodTruckController {
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);	//rownum된 푸드트럭 리스트
 		System.out.println("dfsdfs"+list.size());
 		for(int i=0;i<list.size();i++) {
 			System.out.println(list.get(i).getFtruckName());
 		}
-		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
+		int pagecount = fservice.getCountTruck();	//총 푸드트럭 개수
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);//�� ������ ��
+		request.setAttribute("pagecount", pagecount);	//총 페이지 수
 		return "foodtruck/menuBoard";
 	}
 
@@ -74,13 +74,13 @@ public class FoodTruckController {
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);//rownum�� Ǫ��Ʈ�� ����Ʈ
+		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);	//rownum된 푸드트럭 리스트
 		;
-		int pagecount = fservice.getCountTruck();// //�� Ǫ��Ʈ�� ����
+		int pagecount = fservice.getCountTruck();	//총 푸드트럭 개수
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", pagecount);//�� ������ ��
+		request.setAttribute("pagecount", pagecount);	//총 페이지 수
 		return "foodtruck/menuBoard2";
 	}
 
@@ -99,7 +99,7 @@ public class FoodTruckController {
 		}
 		System.out.println(category);
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
-		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
+		int pagecount=fservice.getCategoryCountTruck(category);	//총 푸드트럭 개수
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
 	     request.setAttribute("pagecount", pagecount);
@@ -121,7 +121,7 @@ public class FoodTruckController {
 			vo.setPageNo(NpageNo);	
 		}
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
-		int pagecount=fservice.getCategoryCountTruck(category);//�� Ǫ��Ʈ�� ����
+		int pagecount=fservice.getCategoryCountTruck(category);	//총 푸드트럭 개수
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
 		 request.setAttribute("babo",list);
@@ -134,17 +134,17 @@ public class FoodTruckController {
 	// ������
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-		double pyengjum = 0;//���� ���� �հ�
-		double count = 0; //���� ��
-		double total = 0; //Ǫ��Ʈ�� �� ����
-		FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//Ǫ��Ʈ�� ���� ȣ��
+	      double pyengjum = 0;//리뷰 평점 합계
+	      double count = 0; //리뷰 수
+	      double total = 0; //푸드트럭 총 평점
+	      FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//푸드트럭 정보 호출
 		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
 		
-		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);// ���� ���� ȣ��
+		List<ReviewVO> Rlist = rservice.getReviewList(ftruckNo);	// 리뷰 정보 호출
 		System.out.println("진입전");
-		List<ProductVO> Plist = pservice.getProductList(ftruckNo);// ��ǰ ���� ȣ��
+		List<ProductVO> Plist = pservice.getProductList(ftruckNo);	// 상품 정보 호출
 		System.out.println("진입후");
 		if(Rlist.size()!=0) {
 			for (int i = 0; i < Rlist.size(); i++) {

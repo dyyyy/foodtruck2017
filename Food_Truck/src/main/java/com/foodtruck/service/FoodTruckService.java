@@ -8,44 +8,50 @@ import org.springframework.stereotype.Service;
 
 import com.foodtruck.dao.FoodTruckDAO;
 import com.foodtruck.vo.FoodTruckVO;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.PageVO;
 
 @Service
 public class FoodTruckService {
+
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	//Ǫ��Ʈ�� ����
+	// 푸드트럭 정보
 	public FoodTruckVO getFoodTruck(String ftruckNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruck(ftruckNo);
 	}
-	//Ǫ��Ʈ�� ����Ʈ
-	public List<FoodTruckVO> getFoodTruckList(int pageNo) throws Exception{
+
+	// 라이센스번호로 푸드트럭 정보 가져오기
+	public FoodTruckVO getFoodTruck2(String licenseNo) throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getFoodTruck2(licenseNo);
+	}
+
+	// 푸드트럭 리스트 가져오기
+	public List<FoodTruckVO> getFoodTruckList(int pageNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList(pageNo);
 	}
-	
-	//ī�װ��� ����Ʈ
-	public List<FoodTruckVO> getCategoryList(PageVO vo)   {
-		
+
+	// 카테고리별 리스트
+	public List<FoodTruckVO> getCategoryList(PageVO vo) {
+
 		System.out.println("����2");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		System.out.println("����3");
-		try
-		{
-		return dao.getCategoryList(vo);
-	
-		}
-		catch(Exception e)
-		{
-			 System.out.println( "ERROR : " + e.getMessage()); 
+		try {
+			return dao.getCategoryList(vo);
+
+		} catch (Exception e) {
+			System.out.println("ERROR : " + e.getMessage());
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	// Ǫ��Ʈ�� ��Ŭ�� ��ŷ
+
+	// 푸드트럭 위클리 랭킹
 	public List<FoodTruckVO> getFoodTruckRank() {
 		System.out.println("11111");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
@@ -53,34 +59,64 @@ public class FoodTruckService {
 		return dao.getFoodTruckRank();
 	}
 
-	//Ǫ��Ʈ�� �Է�
-	public int insertFoodTruck(FoodTruckVO vo) throws Exception{
+	// 푸드트럭 등록
+	public int insertFoodTruck(FoodTruckVO vo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.insertFoodTruck(vo);
 	}
-	//Ǫ��Ʈ�� ����
+
+	// 푸드트럭 수정
 	public int updateFoodTruck(FoodTruckVO vo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.updateTruck(vo);
 	}
-	//Ǫ��Ʈ�� ����
-	public int deleteFoodTruck(String licenseNo) throws Exception{
+
+	// 푸드트럭 삭제
+	public int deleteFoodTruck(String licenseNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.deleteTruck(licenseNo);
 	}
-	//Ǫ��Ʈ�� ��ü ����Ʈ count
-	public int getCountTruck() throws Exception{
+
+	// 푸드트럭 전체 Count(페이징처리)
+	public int getCountTruck() throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getCountTruck();
 	}
-	//Ǫ��Ʈ�� ī�װ��� ����Ʈ count
-	public int getCategoryCountTruck(int category) throws Exception{
+
+	// 푸드트럭 카테고리별 Count(페이징처리)
+	public int getCategoryCountTruck(int category) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getCategoryCountTruck(category);
 	}
-	public List<FoodTruckVO>  getFoodTruckList2(int PageNo) throws Exception{
+
+	public List<FoodTruckVO> getFoodTruckList2(int PageNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getFoodTruckList2(PageNo);
 	}
+
+	// 운영중 푸드트럭 리스트 가져오기
+	public List<FoodTruckVO> getRunFoodTruckList(int pageNo) throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getRunFoodTruckList(pageNo);
+	}
+
+	// 마감된 푸드트럭 리스트 가져오기
+	public List<FoodTruckVO> getEndFoodTruckList(int pageNo) throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getEndFoodTruckList(pageNo);
+	}
+
+	// 운영중인푸드트럭 전체 Count(페이징처리)
+	public int getRunCountTruck() throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getRunCountTruck();
+	}
+
+	// 마감된 푸드트럭 전체 Count(페이징처리)
+	public int getEndCountTruck() throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getEndCountTruck();
+	}
+	
 
 }

@@ -6,15 +6,16 @@ import com.foodtruck.vo.ReviewVO;
 
 public interface ReviewDAO {
 
-		// ∏Æ∫‰ ∏ÆΩ∫∆Æ
-		public List<ReviewVO> getReviewList(String ftruckNo);
+	// Î¶¨Î∑∞ Î¶¨Ïä§Ìä∏
+	public List<ReviewVO> getReviewList(String ftruckNo);
 
-		// ∏Æ∫‰ µÓ∑œ
-		public int insertReview(ReviewVO vo);
+	// Î¶¨Î∑∞ Îì±Î°ù
+	public int insertReview(ReviewVO vo);
 
-		// ∏Æ∫‰ ºˆ¡§
-		public int updateReview(ReviewVO vo);
+	// Î¶¨Î∑∞ ÏàòÏ†ï
+	public int updateReview(ReviewVO vo);
 
-		// ∏Æ∫‰ ªË¡¶
-		public int deleteReview(int revSeq);
+	// Î¶¨Î∑∞ ÏÇ≠Ï†ú
+	public int deleteReview(int revSeq);
+	
 }

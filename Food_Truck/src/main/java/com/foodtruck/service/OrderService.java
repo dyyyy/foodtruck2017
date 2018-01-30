@@ -16,31 +16,25 @@ public class OrderService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// ȸ�� ����
+	// 주문 정보
 	public OrderVO getOrder(int ordNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.getOrder(ordNo);
 	}
 
-	// ȸ�� ����Ʈ
+	// 주문 리스트
 	public List<OrderVO> getOrderList() {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.getOrderList();
 	}
 
-	// ȸ�� �Է�
-	public int insertOrder(OrderVO vo) {
-		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
-		return dao.insertOrder(vo);
-	}
-
-	// ȸ�� ����
+	// 주문 수정
 	public int updateOrder(OrderVO vo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.updateOrder(vo);
 	}
 
-	// ȸ�� ����
+	// 주문 삭제
 	public int deleteOrder(int ordNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.deleteOrder(ordNo);

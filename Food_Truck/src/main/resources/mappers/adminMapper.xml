@@ -2,12 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.foodtruck.dao.AdminDao">
+
 	<insert id="insertMinquryReply">
 		insert into reply_sc
 		(REPLY_SC_NO,MEM_ID,QA_SC_NO,REPLY_SC_CONTENT,REPLY_SC_REG)
 		values(REP_SC_SEQ.nextval,#{memId},#{qaScNo},#{replyScContent},SYSDATE)
 	</insert>
 
+	<select id="getRequestList" resultMap="memberMap">
+		select ffft.* from
+		(select fft.*from
+		(select rownum as
+		rnum, ft.*
+		from
+		(select b.mem_id, b.mem_name, b.mem_tel,l.LICENSE_NO
+		from member b ,license l
+		where b.MEM_ID=l.MEM_ID
+		and app_stat='N' order by b.MEM_ID asc)
+		ft)fft
+		where rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
+		where rnum>=#{pageNo}
+	</select>
+	<select id="getRequestCount" resultType="int">
+	select count(*) from license where app_stat='N'
+	</select>
+	<!-- 푸드트럭 최종 승인 -->
+	<update id="appFoodtruck">
+	update license set app_stat='Y' where license_no=#{licenseNo}
+	
+	</update>
 
 	<resultMap type="MinquiryReplyVO" id="MinquiryReplyMap">
 		<result column="REPLY_SC_NO" property="replyScNo" />
@@ -16,4 +39,20 @@
 		<result column="REPLY_SC_CONTENT" property="replyScContent" />
 		<result column="REPLY_SC_REG" property="replyScReg" />
 	</resultMap>
+
+	<resultMap type="com.foodtruck.vo.MemberVO" id="memberMap"
+		extends="LicenseMap">
+		<result column="MEM_ID" property="memberId" />
+		<result column="MEM_PW" property="memberPw" />
+		<result column="MEM_NAME" property="memberName" />
+		<result column="MEM_TEL" property="memberTel" />
+		<result column="MEM_AUTH" property="memberAuth" />
+	</resultMap>
+
+	<resultMap type="com.foodtruck.vo.LicenseVO" id="LicenseMap">
+		<result column="LICENSE_NO" property="licenseNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="APP_STAT" property="appStat" />
+	</resultMap>
+
 </mapper>

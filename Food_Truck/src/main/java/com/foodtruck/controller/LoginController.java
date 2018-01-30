@@ -1,8 +1,6 @@
 
 package com.foodtruck.controller;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
+
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.LicenseVO;
+
 import com.foodtruck.vo.MemberVO;
 
 @Controller
@@ -30,12 +30,13 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	SellerService sellerService;
 	
 
-	// 占싸깍옙占쏙옙 占쏙옙占쏙옙占쏙옙 占싱듸옙
+
+	// 로그인 폼으로 이동
 	@RequestMapping("/loginform")
 	public String loginform() {
 		System.out.println("loginform");
@@ -43,7 +44,7 @@ public class LoginController {
 		return "sign/login";
 	}
 
-	// 占싸깍옙占쏙옙 占쏙옙占쏙옙占쏙옙
+	// 로그인 했을때
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -73,20 +74,20 @@ public class LoginController {
 		}
 	}
 
-	// 占싸그아울옙 占쏙옙占쏙옙占쏙옙
+	// 로그아웃 했을때
 	@RequestMapping("/logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
 		return "redirect:/";
 	}
 	
-	// 회占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
+	// 회원가입페이지
 	@RequestMapping("/joinform")
 	public String joinFormPage() {
 		return "sign/joinform";
 	}
 
-	// 회占쏙옙 占쏙옙占쏙옙
+	// 회원 가입
 	@RequestMapping("/join")
 	public String insertMember(HttpServletRequest request, MemberVO vo) {
 
@@ -105,7 +106,7 @@ public class LoginController {
 		return "home";
 	}
 
-	// ID 占쌩븝옙체크
+	// ID 중복체크
 	@ResponseBody
 	@RequestMapping("/idCheck")
 	public MemberVO memberIdCheck(HttpServletRequest request) {

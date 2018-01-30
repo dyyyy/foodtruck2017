@@ -113,7 +113,7 @@
 									}
 									if (endPage < totalPage) {
 								%>
-								<li><a href="CategoryFood?pageNo=<%=totalPage%>&category=<%=request.getAttribute("categoryno")%>">끝</a></li>
+								<li><a href="CategoryFood2?pageNo=<%=totalPage%>&category=<%=request.getAttribute("categoryno")%>">끝</a></li>
 								<%
 									}
 								%>

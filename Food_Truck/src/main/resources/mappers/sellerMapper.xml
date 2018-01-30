@@ -60,6 +60,47 @@
 			 VALUES(#{licenseNo}, #{memberId}, 'N')
 		SELECT * FROM DUAL	
 	</insert>
+	<select id="getInfo" resultMap="LicenseMap">
+		select * from license where mem_id='${memId}'
+	</select>
+	
+	<select id="getSinquiryList" resultMap="InquiryMap">
+		select ffft.* from
+		(select fft.*from
+		(select rownum as
+		rnum, ft.*
+		from (
+		select
+		* from qa_sc where qa_sc_stat='N' and license_no is not null order
+		by QA_SC_NO asc)
+		ft)fft
+		where
+		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
+		where rnum>=#{pageNo}
+	</select>
+
+	<select id="getSinquiryListcount" resultType="int">
+		select count(*)from
+		qa_sc where QA_SC_STAT='N' and LICENSE_NO is not null
+	</select>
+	
+	<select id="getFoodtruckDtail" resultMap="FoodTruckMap">
+	
+	select * from foodtruck where license_No=#{licenseNo}
+	</select>
+	
+	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
+		<result column="QA_SC_NO" property="qaScNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="QA_SC_TITLE" property="qaScTitle" />
+		<result column="QA_SC_CONTENT" property="qaScContent" />
+		<result column="QA_SC_REG" property="qaScReg" />
+		<result column="QA_SC_CATEGORY1" property="qaScCategory1" />
+		<result column="QA_SC_CATEGORY2" property="qaScCategory2" />
+		<result column="QA_SC_TEL" property="qaScTel" />
+		<result column="QA_SC_STAT" property="qaScStat" />
+		<result column="LICENSE_NO" property="licenseNo" />
+	</resultMap>
 	
 	<resultMap type="SellerVO" id="SellerMap">
 		<result column="ORD_NO" property="ordNo"/>
@@ -75,9 +116,9 @@
 	</resultMap>
 	
 	<resultMap type="LicenseVO" id="LicenseMap">
-		<result column="LICENSE_NO" property="licenseNo"/>
-		<result column="PROD_NAME" property="prodName" />
-		<result column="FTRUCK_NAME" property="ftruckName" />
+		<result column="LICENSE_NO" property="licenseNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="APP_STAT" property="appStat" />
 	</resultMap>
 	
 	<resultMap type="FoodTruckVO" id="FoodTruckMap">
@@ -97,5 +138,7 @@
 		<result column="LONGITUDE" property="longitude" />
 		<result column="CATEGORY" property="category" />
 		<result column="LICENSE_NO" property="licenseNo" />
-	</resultMap>
+</resultMap>
+	
+	
 </mapper>

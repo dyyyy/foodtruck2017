@@ -70,6 +70,7 @@
 		<where> MEMBER.MEM_ID=#{selId} </where>
 
 	</select>
+	
 	<!-- 1:1 insert -->
 	<insert id="insertInquiry">
 		INSERT INTO QA_SC
@@ -77,6 +78,15 @@
 		VALUES
 		(QA_SC_SEQ.NEXTVAL,#{memId},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
 	</insert>
+	
+	<!-- 1:1 insert 판매자 -->
+	<insert id="insertInquiry2">
+		INSERT INTO QA_SC
+		(QA_SC_NO,MEM_ID,LICENSE_NO,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL,QA_SC_STAT)
+		VALUES
+		(QA_SC_SEQ.NEXTVAL,#{memId},#{licenseNo},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
+	</insert>
+	
 	<select id="getMinquiryList" resultMap="InquiryMap">
 		select ffft.* from
 		(select fft.*from
@@ -84,7 +94,7 @@
 		rnum, ft.*
 		from (
 		select
-		* from qa_sc where qa_sc_stat='N' order by QA_SC_NO asc)
+		* from qa_sc where qa_sc_stat='N' and license_no is null order by QA_SC_NO asc)
 		ft)fft
 		where
 		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
@@ -92,7 +102,7 @@
 	</select>
 
 	<select id="getMinquiryListcount" resultType="int">
-		select count(*)from qa_sc where QA_SC_STAT='N'
+		select count(*)from qa_sc where QA_SC_STAT='N' and LICENSE_NO is null
 	</select>
 
 	<select id="getinfo" resultMap="InquiryMap">
@@ -126,5 +136,6 @@
 		<result column="QA_SC_CATEGORY2" property="qaScCategory2" />
 		<result column="QA_SC_TEL" property="qaScTel" />
 		<result column="QA_SC_STAT" property="qaScStat" />
+		<result column="LICENSE_NO" property="licenseNo" />
 	</resultMap>
 </mapper>

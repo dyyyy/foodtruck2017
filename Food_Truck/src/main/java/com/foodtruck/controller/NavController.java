@@ -1,11 +1,16 @@
 package com.foodtruck.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foodtruck.service.SellerService;
+import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
 @Controller
@@ -27,7 +32,8 @@ public class NavController {
 		return "nav/eventBoard";
 	}
 */
-	
+	@Autowired
+	SellerService sservice;
 	
 	// 1:1 일반회원 문의
 	@RequestMapping("/inquiry")
@@ -40,7 +46,14 @@ public class NavController {
 	
 	//1:1 판매자회원 문의
 	@RequestMapping("/inquiry2")
-	public String inquiryPage2() {
+	public String inquiryPage2(HttpSession session,HttpServletRequest request) {
+		MemberVO m = (MemberVO)session.getAttribute("member");
+		String id=m.getMemberId();
+		LicenseVO vo=new LicenseVO();
+		vo.setMemId(id);
+		List<LicenseVO> list=sservice.getInfo(vo);
+		request.setAttribute("id", id);
+		request.setAttribute("list", list);
 		return "nav/sellerinquiry";
 	}
 	

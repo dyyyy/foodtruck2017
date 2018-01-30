@@ -8,10 +8,8 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"
 	type="text/javascript"></script>
-<style type="text/css">
-</style>
-<script type="text/javascript">
 
+<script type="text/javascript">
 	function modal(e) {
 		var qno = e.getAttribute("data-id");
 		$.ajax({
@@ -219,15 +217,15 @@
 										</tr>
 										<tr>
 											<td><textarea style="width: 100%; height: 100%;"
-													id="reply"></textarea></td>
+													rows="5" id="reply"></textarea></td>
 										</tr>
+										<tr></tr>
 									</table>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" onclick="reply()">댓글
 										저장</button>
 								</div>
-								<!-- data-dismiss="modal" : 모달을 닫는 기능을 갖고있다. -->
 
 							</div>
 							<!-- 모달 콘텐츠 -->
@@ -236,7 +234,7 @@
 					</div>
 					<!-- 모달 전체 윈도우 -->
 				</div>
-
+				
 			</div>
 			<hr>
 		</div>

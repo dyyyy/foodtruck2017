@@ -3,13 +3,14 @@ package com.foodtruck.vo;
 
 public class ProductVO {
 	
-	private String prodNo;				// ��ǰ ��ȣ
-	private String prodName;		// ��ǰ �̸�
-	private String prodContent;		// ��ǰ ����
-	private String prodImg;			// ��ǰ �̹���
-	private int prodPrice;			// �ݾ�
-	private String ftruckNo;		// ����� ��ȣ
-	private String licenseNo;
+	private String prodNo;			// 상품 번호
+	private String prodName;		// 상품 이름
+	private String prodContent;		// 상품 내용
+	private String prodImg;			// 상품 이미지
+	private int prodPrice;			// 상품 가격 
+	private String ftruckNo;		// 푸드트럭 번호
+	private String licenseNo;		// 사업자 번호
+	
 	
 	// getter & setter
 	public String getProdNo() {
@@ -54,8 +55,5 @@ public class ProductVO {
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
-	
-	
-	
 }
 

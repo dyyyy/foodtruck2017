@@ -24,9 +24,9 @@ public class Emailcontroller {
 		int ran = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
         String joinCode = String.valueOf(ran);
         System.out.println(joinCode);
-        String subject = "È¸¿ø°¡ÀÔ ÀÎÁõ ÄÚµå ¹ß±Ş ¾È³» ÀÔ´Ï´Ù.";
+        String subject = "íšŒì›ê°€ì… ì¸ì¦ ì½”ë“œ ë°œê¸‰ ì•ˆë‚´ ì…ë‹ˆë‹¤.";
         StringBuilder sb = new StringBuilder();
-        sb.append("±ÍÇÏÀÇ ÀÎÁõ ÄÚµå´Â " + joinCode + " ÀÔ´Ï´Ù.");
+        sb.append("ê·€í•˜ì˜ ì¸ì¦ ì½”ë“œëŠ” " + joinCode + " ì…ë‹ˆë‹¤.");
         mailservice.send(subject, sb.toString(), "kazaana2010@gmail.com", memberId);
         
         return joinCode;

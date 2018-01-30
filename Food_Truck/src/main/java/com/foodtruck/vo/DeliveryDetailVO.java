@@ -2,16 +2,19 @@ package com.foodtruck.vo;
 
 public class DeliveryDetailVO {
 	
-	private int ordNo;			// ÁÖ¹® ¹øÈ£
-	private String dlvState;	// ¹è´Ş »óÅÂ
-	private String dlvAddr;		// ¹è´Ş ÁÖ¼Ò
-	private String dlvDate;		// ¹è´Ş ½Ã°£
+	private String ordNo;		// ì£¼ë¬¸ ë²ˆí˜¸
+	private String dlvState;	// ë°°ë‹¬ ìƒíƒœ
+	private String dlvAddr;		// ë°°ë‹¬ ì£¼ì†Œ
+	private String dlvDate;		// ë°°ë‹¬ ì‹œê°„
+	
+	
 	
 	// getter & setter
-	public int getOrdNo() {
+	
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(int ordNo) {
+	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
 	public String getDlvState() {

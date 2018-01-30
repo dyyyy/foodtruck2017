@@ -1,17 +1,20 @@
 package com.foodtruck.vo;
 
 public class MInquiryVO {
-	private int qaScNo;//qna 번호
-	private String memId;//이메일 아이디
-	private String qaScTitle;//제목
-	private String qaScContent;//내용
-	private String qaScReg;//등록일자
-	private String qaScCategory1;//카테고리1
-	private String qaScCategory2;//카테고리2
-	private String qaScTel;//전화번호
-	private String qaScStat;//y&n flag
+	
+	private int qaScNo;				//qna 번호
+	private String memId;			//이메일 아이디
+	private String qaScTitle;		//제목
+	private String qaScContent;		//내용
+	private String qaScReg;			//등록일자
+	private String qaScCategory1;	//카테고리1
+	private String qaScCategory2;	//카테고리2
+	private String qaScTel;			//전화번호
+	private String qaScStat;		//y&n flag
+	private String licenseNo;		//사업자 번호
 	
 	//getter,setter
+	
 	public int getQaScNo() {
 		return qaScNo;
 	}
@@ -65,6 +68,12 @@ public class MInquiryVO {
 	}
 	public void setQaScStat(String qaScStat) {
 		this.qaScStat = qaScStat;
+	}
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
 	}
 	
 	

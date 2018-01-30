@@ -7,19 +7,16 @@ import com.foodtruck.vo.OrderVO;
 
 public interface OrderDAO {
 
-	// �ֹ� ����
+	// 주문 정보
 	public OrderVO getOrder(int ordNo);
 
-	// �ֹ� ����Ʈ
+	// 주문 리스트
 	public List<OrderVO> getOrderList();
 
-	// �ֹ� ���
-	public int insertOrder(OrderVO vo);
-
-	// �ֹ� ����
+	// 주문 수정
 	public int updateOrder(OrderVO vo);
 
-	// �ֹ� ����
+	// 주문 삭제
 	public int deleteOrder(int ordNo);
 	
 	// 비회원이 주문번호 & 전화번호로 주문내역 조회

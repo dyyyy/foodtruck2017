@@ -63,7 +63,7 @@
 							%>
 							<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
 								<ul style="width: 120px; ">
-									<li><a href="/orderList">전체 주문 내역</a></li>
+									<li><a href="/memberOrderInfo">전체 주문 내역</a></li>
 									<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
 									<li ><a href="/memberInfo">나의 설정</a></li>
 								</ul></li>
