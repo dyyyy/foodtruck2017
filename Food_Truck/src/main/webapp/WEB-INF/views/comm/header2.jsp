@@ -103,26 +103,28 @@
 							</ul>
 						</li>
 						<li class="dropdown"><a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-						미정ddd <i class="caret"></i>
+						미정 <i class="caret"></i>
 
 						</a>
 							<ul class="dropdown-menu">
-							<%
-								List list = (List)session.getAttribute("licenseNo");
-								SellerVO ssvo = (SellerVO)list.get(0);
-								
-								List<SellerVO> svo = (List<SellerVO>) session.getAttribute("licenseNo");
-								for(SellerVO vo : svo) {
-							%>
-								<li><a tabindex="-1" href="/sellerMain?licenseNo=<%= vo.getLicenseNo() %>"><%= vo.getLicenseNo() %></a></li>
-							<% } %>
-							</ul></li>
+							
+								<li></li>
+							</ul>
+							</li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+	
+	<% 
+		if(mvo.getMemberAuth().equals("2")) { 
+			List list = (List)session.getAttribute("licenseNo");
+			SellerVO ssvo = (SellerVO)list.get(0);
+			
+			List<SellerVO> svo = (List<SellerVO>) session.getAttribute("licenseNo");
+	%>
 	<div class="span3" id="sidebar" style="margin-right:50px;margin-left:50px;">
 		<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
 			<li>
@@ -142,5 +144,7 @@
 			</li>
 		</ul>
 	</div>
+	
+	<% } %>
 </body>
 </html>
