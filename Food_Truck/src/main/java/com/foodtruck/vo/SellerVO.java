@@ -1,17 +1,19 @@
 package com.foodtruck.vo;
 
 public class SellerVO {
-	private String ordNo;			// 주문 번호
-	private String ordName;		// 이름
-	private String ordTel;		// 전화 번호
-	private String ordDate;		// 주문 시간
-	private String ordRsvDate;	// 예약 일시
-	private String ordDlyYn;	// 배달 여부(Y/N)
+	private String ordNo;			
+	private String ordName;		
+	private String ordTel;		
+	private String ordDate;		
+	private String ordRsvDate;	
+	private String ordDlyYn;	
 	private int ordStat;
 	private int cookStat;
-	private String memId;		// 회원 아이디
+	private String memId;		
 	private String licenseNo;
 	private String prodName;
+	private String ftruckName;
+	private String ordReq;
 	
 	public String getOrdNo() {
 		return ordNo;
@@ -79,11 +81,18 @@ public class SellerVO {
 	public void setProdName(String prodName) {
 		this.prodName = prodName;
 	}
-	
-	
-	
-	
-	
+	public String getFtruckName() {
+		return ftruckName;
+	}
+	public void setFtruckName(String ftruckName) {
+		this.ftruckName = ftruckName;
+	}
+	public String getOrdReq() {
+		return ordReq;
+	}
+	public void setOrdReq(String ordReq) {
+		this.ordReq = ordReq;
+	}
 	
 	
 	

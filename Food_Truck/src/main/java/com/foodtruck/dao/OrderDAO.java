@@ -22,11 +22,6 @@ public interface OrderDAO {
 	// �ֹ� ����
 	public int deleteOrder(int ordNo);
 	
-	public List<OrderVO> getLicense(String memberId);
-	
-	public List<OrderVO> getLicense2(String licenseNo);
-	
-	
 	// 비회원이 주문번호 & 전화번호로 주문내역 조회
 	public List<OrderVO> getNonmemberInfo(Map<String,Object> map);
 	

@@ -1,6 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="com.foodtruck.vo.SellerVO"%>
 <%@page import="com.foodtruck.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,7 +43,6 @@
 				</a>
 				<%
 					MemberVO mvo = (MemberVO) session.getAttribute("member");
-					
 					
 					if(mvo.getMemberAuth().equals("1")) {
 				%>
@@ -98,22 +100,47 @@
 								<li><a tabindex="-1" href="#">Calendar</a></li>
 								<li class="divider"></li>
 								<li><a tabindex="-1" href="#">FAQ</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown">미정 <i
-								class="caret"></i>
+							</ul>
+						</li>
+						<li class="dropdown"><a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+						미정ddd <i class="caret"></i>
 
 						</a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1" href="#">User List</a></li>
-								<li><a tabindex="-1" href="#">Search</a></li>
-								<li><a tabindex="-1" href="#">Permissions</a></li>
+							<%
+								List list = (List)session.getAttribute("licenseNo");
+								SellerVO ssvo = (SellerVO)list.get(0);
+								
+								List<SellerVO> svo = (List<SellerVO>) session.getAttribute("licenseNo");
+								for(SellerVO vo : svo) {
+							%>
+								<li><a tabindex="-1" href="/sellerMain?licenseNo=<%= vo.getLicenseNo() %>"><%= vo.getLicenseNo() %></a></li>
+							<% } %>
 							</ul></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
+	</div>
+	<div class="span3" id="sidebar" style="margin-right:50px;margin-left:50px;">
+		<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+			<li>
+				 <a href="/sellerMain?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>주문 및 예약·배달</a> 
+			</li>
+			<li class="active">
+				<a href="/sellerCalendar?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>매출 통계</a>
+			</li>
+			<li>
+				<a href="/sellerChart?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>차트</a>
+			</li>
+			<li>
+				<a href="/detailFoodTruckForm?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>푸드트럭 정보</a>
+			</li>
+			<li>
+				<a href="/insertFoodTruckForm"><i class="icon-chevron-right"></i>푸드트럭 등록</a>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>

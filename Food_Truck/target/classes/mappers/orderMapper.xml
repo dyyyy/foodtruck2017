@@ -13,24 +13,10 @@
 	
 	</select>
 	
-	<select id="getLicense" resultMap="OrderMap" >
-
- 		SELECT LICENSE.LICENSE_NO AS LICENSE_NO
-		FROM MEMBER
-		INNER JOIN LICENSE
-		ON MEMBER.MEM_ID = LICENSE.MEM_ID
- 		<where> MEMBER.MEM_ID=#{memberId} </where>
-	</select>
-	
  	
 	<!-- 주문 리스트 -->
 	<select id="getOrderList" resultMap="OrderMap" >
- 
-  
-  		select * from orders, product, license
-  		where orders.license_no = product.license_no
-  		and product.license_no = license.license_no
-  		and license.license_no=#{licenseNo}
+  		select * from orders
 
 	</select>
 	

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
+import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 
@@ -29,6 +30,9 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	SellerService sellerService;
 	
 
 	// 占싸깍옙占쏙옙 占쏙옙占쏙옙占쏙옙 占싱듸옙
@@ -54,6 +58,7 @@ public class LoginController {
 					session.setAttribute("memberGubun","1");
 				} else if(mvo.getMemberAuth().equals("2")) {
 					session.setAttribute("memberGubun","2");
+					session.setAttribute("licenseNo", sellerService.getLicense(mvo.getMemberId()));
 				}
 				return "redirect:/";
 			} else {
@@ -89,9 +94,9 @@ public class LoginController {
 
 		for (String g : gubun) {
 			if (g.equals("member")) {
-				vo.setMemberAuth("3");
+				vo.setMemberAuth("3"); // 일반회원
 			} else if (g.equals("seller")) {
-				vo.setMemberAuth("2");
+				vo.setMemberAuth("2"); // 판매자
 			}
 		}
 

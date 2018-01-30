@@ -1,22 +1,24 @@
 package com.foodtruck.vo;
 
 public class FoodTruckVO {
-	private String ftruckNo; // »ç¾÷ÀÚ ¹øÈ£
-	private String ftruckName; // Çªµå Æ®·° ÀÌ¸§(»óÈ£¸í)
-	private String ftruckTel; // Çªµå Æ®·° ÀüÈ­¹øÈ£
-	private String ftruckAddr; // Çªµå Æ®·° ÁÖ¼Ò
-	private String ftruckAddr2; // Çªµå Æ®·° ÁÖ¼Ò
-	private String ftruckIntro; // ÇªµåÆ®·° ¼Ò°³
-	private String ftruckReg; // ÇªµåÆ®·° µî·ÏÀÏÀÚ
-	private String ftruckDlvYn; // ¹è´Þ ¿©ºÎ(Y/N)
-	private String ftruckRsvYn; // ¿¹¾à ¿©ºÎ(Y/N)
-	private String ftruckState; // ¿µ¾÷ »óÅÂ(Y/N)
-	private double ftruckGrade; // ÇªµåÆ®·° ÆòÁ¡
-	private String ftruckImg; // ÇªµåÆ®·° ÀÌ¹ÌÁö
-	private String latitude; // À§µµ
-	private String longitude; // °æµµ
-	private int category; // Ä«Å×°í¸®¹øÈ£
-	private String licenseNo; // »ç¾÷ÀÚ ¹øÈ£
+	private String ftruckNo; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private String ftruckName; // Çªï¿½ï¿½ Æ®ï¿½ï¿½ ï¿½Ì¸ï¿½(ï¿½ï¿½È£ï¿½ï¿½)
+	private String ftruckTel; // Çªï¿½ï¿½ Æ®ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+	private String ftruckAddr; // Çªï¿½ï¿½ Æ®ï¿½ï¿½ ï¿½Ö¼ï¿½
+	private String ftruckAddr2; // Çªï¿½ï¿½ Æ®ï¿½ï¿½ ï¿½Ö¼ï¿½
+	private String ftruckIntro; // Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ò°ï¿½
+	private String ftruckReg; // Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String ftruckDlvYn; // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(Y/N)
+	private String ftruckRsvYn; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(Y/N)
+	private String ftruckState; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(Y/N)
+	private double ftruckGrade; // Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String ftruckImg; // Çªï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private String latitude; // ï¿½ï¿½ï¿½ï¿½
+	private String longitude; // ï¿½æµµ
+	private int category; // Ä«ï¿½×°ï¿½ï¿½ï¿½È£
+	private String licenseNo; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private String memId;
+	
 	// getter & setter
 	public String getFtruckNo() {
 		return ftruckNo;
@@ -114,5 +116,6 @@ public class FoodTruckVO {
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
+	
 	
 }

@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,19 +12,7 @@
 <body>
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span3" id="sidebar">
-                    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-                        <li>
-                            <a href="/sellerMain"><i class="icon-chevron-right"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="/sellerCalendar"><i class="icon-chevron-right"></i> Calendar</a>
-                        </li>
-                        <li class="active">
-                            <a href="/sellerChart"><i class="icon-chevron-right"></i> Charts</a>
-                        </li>
-                    </ul>
-                </div>
+            
                 <!--/span-->
                 <div class="span9" id="content">
                       <!-- morris stacked chart -->
@@ -32,13 +21,15 @@
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">Morris.js stacked</div>
-                                <div class="pull-right"><span class="badge badge-warning">View More</span>
-
-                                </div>
+                                
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span12">
-                                    <div id="hero-area" style="height: 250px;"></div>
+                                    <div id="hero-area" style="height: 250px;">
+                                    
+                                    
+                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>

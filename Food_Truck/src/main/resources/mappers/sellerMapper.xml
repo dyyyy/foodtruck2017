@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodtruck.dao.SellerDAO">
+
+	<!-- 푸드트럭 정보 -->
+	<select id="getFoodTruck" resultMap="FoodTruckMap">
+		select * from foodtruck where license_no=#{licenseNo}
+	</select>
+	
+	<!-- 오늘의 주문 내역 리스트 -->
+	<select id="getTodayOrderList" resultMap="SellerMap">
+	
+		SELECT ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, 
+			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName
+		FROM ORDERS, PRODUCT
+		WHERE ORDERS.LICENSE_NO = PRODUCT.LICENSE_NO
+		AND ORDERS.LICENSE_NO = #{licenseNo}
+		AND ORD_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
+ 	
+ 	</select>
+
+	<!-- 주문 리스트 -->
+	<select id="getOrderList" resultMap="SellerMap">
+
+ 		SELECT ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, 
+			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName
+		FROM ORDERS, PRODUCT
+		WHERE ORDERS.LICENSE_NO = PRODUCT.LICENSE_NO
+		AND ORDERS.LICENSE_NO = #{licenseNo}
+		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
+ 
+	</select>
+	
+	<!-- 판매자 사업자번호 리스트 -->
+	<select id="getLicense" resultMap="SellerMap">
+		SELECT LICENSE.LICENSE_NO AS LICENSE_NO
+		FROM MEMBER
+		INNER JOIN LICENSE
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+ 		WHERE MEMBER.MEM_ID=#{memberId} 
+		AND LICENSE.APP_STAT='Y'
+	</select>
+	
+	<select id="getFoodTruckList" resultMap="FoodTruckMap">
+		select * from foodtruck where license_no = #{licenseNo}
+	</select>
+	
+	<insert id="insertFoodTruck" parameterType="com.foodtruck.vo.FoodTruckVO">
+		INSERT ALL
+		INTO FOODTRUCK(FTRUCK_NO, FTRUCK_NAME, FTRUCK_TEL, FTRUCK_ADDR, FTRUCK_ADDR2,
+						FTRUCK_INTRO, FTRUCK_DLV_YN, FTRUCK_RSV_YN, FTRUCK_STATE,
+			 			FTRUCK_IMG, CATEGORY, LICENSE_NO)
+			 VALUES(FTRUCK_SEQ.NEXTVAL, #{ftruckName}, #{ftruckTel}, 
+			 		#{ftruckAddr}, #{ftruckAddr2}, #{ftruckIntro}, #{ftruckDlvYn}, #{ftruckRsvYn},
+			 		#{ftruckState}, #{ftruckImg}, #{category}, #{licenseNo})
+		INTO LICENSE_NO(LICENSE_NO, MEM_ID, APP_STAT)
+			 VALUES(#{licenseNo}, #{memberId}, 'N')
+		SELECT * FROM DUAL	
+	</insert>
+	
+	<resultMap type="SellerVO" id="SellerMap">
+		<result column="ORD_NO" property="ordNo"/>
+		<result column="ORD_NAME" property="ordName"/>
+		<result column="ORD_TEL" property="ordTel"/>
+		<result column="ORD_REQ" property="ordReq"/>
+		<result column="ORD_DATE" property="ordDate"/>
+		<result column="ORD_RSV_DATE" property="ordRsvDate"/>
+		<result column="ORD_DLV_YN" property="ordDlyYn"/>
+		<result column="MEM_ID" property="memId"/>
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="PROD_NAME" property="prodName"/>
+	</resultMap>
+	
+	<resultMap type="LicenseVO" id="LicenseMap">
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="PROD_NAME" property="prodName" />
+		<result column="FTRUCK_NAME" property="ftruckName" />
+	</resultMap>
+	
+	<resultMap type="FoodTruckVO" id="FoodTruckMap">
+		<result column="FTRUCK_NO" property="ftruckNo" />
+		<result column="FTRUCK_NAME" property="ftruckName" />
+		<result column="FTRUCK_TEL" property="ftruckTel" />
+		<result column="FTRUCK_ADDR" property="ftruckAddr" />
+		<result column="FTRUCK_ADDR2" property="ftruckAddr2" />
+		<result column="FTRUCK_INTRO" property="ftruckIntro" />
+		<result column="FTRUCK_REG" property="ftruckReg" />
+		<result column="FTRUCK_DLV_YN" property="ftruckDlvYn" />
+		<result column="FTRUCK_RSV_YN" property="ftruckRsvYn" />
+		<result column="FTRUCK_STATE" property="ftruckState" />
+		<result column="FTRUCK_GRADE" property="ftruckGrade" />
+		<result column="FTRUCK_IMG" property="ftruckImg" />
+		<result column="LATITUDE" property="latitude" />
+		<result column="LONGITUDE" property="longitude" />
+		<result column="CATEGORY" property="category" />
+		<result column="LICENSE_NO" property="licenseNo" />
+	</resultMap>
+</mapper>
