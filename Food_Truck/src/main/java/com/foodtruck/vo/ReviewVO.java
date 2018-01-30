@@ -9,12 +9,32 @@ public class ReviewVO {
 	private String revDelYn;		// 삭제 여부
 	private double grade;			// 평점
 	private String memId;			// 회원 아이디
-	
+	private int ordNo;				// 주문 번호
+	private String ftruckName;		// 푸드트럭 이름
+	private String licenseNo;		// 사업자 번호
 	
 	// getter & setter
 	
 	public int getRevSeq() {
 		return revSeq;
+	}
+	public int getOrdNo() {
+		return ordNo;
+	}
+	public void setOrdNo(int ordNo) {
+		this.ordNo = ordNo;
+	}
+	public String getFtruckName() {
+		return ftruckName;
+	}
+	public void setFtruckName(String ftruckName) {
+		this.ftruckName = ftruckName;
+	}
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
 	}
 	public void setRevSeq(int revSeq) {
 		this.revSeq = revSeq;

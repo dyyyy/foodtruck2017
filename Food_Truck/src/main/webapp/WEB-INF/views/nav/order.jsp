@@ -56,7 +56,23 @@
 		// 수량 - 
 		$(".qtydel").click(
 				function() {
-
+					i = $(".qtydel").index(this);
+					var qty = $(".qty:eq(" + i + ")").val();
+					console.log(qty)
+					if (qty > 0) {
+						qty = $(".qty:eq(" + i + ")").val(qty * 1 - 1).val()
+						var price = $(".price:eq(" + i + ")").val();
+						var sum = Number($(".sumResult:eq(" + i + ")").text());
+						sum -= price;
+						$(".sumResult:eq(" + i + ")").html(sum);
+						console.log("----------------------------인덱스" + i + "빼는중----------------------------");
+						console.log("인덱스번호" + i + " : " + "상품 갯수 " + " : " + qty + " 상품 가격 " + " : " + price + " = " + " 합계 " + " : " + sum);
+						link();
+					} else {
+						qty = Number(0)
+						$(".sumResult:eq(" + i + ")").html(0)
+						link();
+					}
 		});
 		
 		// 유효성 체크 부분(주문자 이름 / 주문자 연락처)
@@ -105,13 +121,10 @@
 				return false;
 			};
 		})
-		
-		
 	});
 	
-
 </script>
-<form action="/orderRegit" id="signup-form" onsubmit="return validateion();">
+<form action="/orderRegit" id="signup-form" onsubmit="return validation();">
 	<%
 		@SuppressWarnings("unchecked")
 		List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
