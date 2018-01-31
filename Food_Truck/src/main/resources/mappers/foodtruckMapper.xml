@@ -115,7 +115,7 @@
 	<!-- 푸드트럭 카운트(페이징처리) -->
 	<select id="getCountTruck" resultType="int">
 		select count(*) from
-		foodtruck
+		foodtruck f,license l where f.license_no = l.license_no and l.app_stat = 'Y'
 	</select>
 	
 	<!-- 운영중인 푸드트럭 카운트(페이징처리) -->
@@ -133,9 +133,8 @@
 	<!-- 푸드트럭 카테고리별 카운트(페이징처리) -->
 	<select id="getCategoryCountTruck" resultType="int">
 		select count(*)
-		from foodtruck where category=#{category}
+		from foodtruck f,license l where f.license_no = l.license_no and l.app_stat = 'Y' and category=#{category}
 	</select>
-
 
 	<resultMap type="FoodTruckVO" id="FoodTruckMap">
 		<result column="FTRUCK_NO" property="ftruckNo" />
