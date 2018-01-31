@@ -23,23 +23,22 @@
 		select ffft.* from
 		(select fft.*from
 		(select rownum as rnum, ft.*
-		from (select foodtruck.*
+		from (select f.*
 		from
-		foodtruck where category=#{category} order by FTRUCK_REG) ft)fft
+		foodtruck f,license l where category=#{category} and f.license_no = l.license_no order by l.app_stat desc,f.FTRUCK_REG) ft)fft
 		where rownum &lt;=#{pageNo}+9)ffft
 		where rnum >=#{pageNo}
 	</select>
 
 	<!-- 푸드트럭 전체 리스트 -->
-	<select id="getFoodTruckList" resultMap="FoodTruckMap"
-		parameterType="int">
+	<select id="getFoodTruckList" resultMap="FoodTruckMap" parameterType="int">
 		select ffft.* from
 		(select fft.*from
 		(select rownum as
 		rnum, ft.*
 		from
-		(select foodtruck.* from
-		foodtruck order by FTRUCK_REG)
+		(select f.*,l.app_stat from foodtruck f,license l where f.license_no =
+		l.license_no order by l.app_stat desc,f.ftruck_reg)
 		ft)fft
 		where
 		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
