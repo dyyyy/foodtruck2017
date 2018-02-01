@@ -22,13 +22,25 @@
 <head>
 <script type="text/javascript">
 	function goOrder() {
-		var licenseNo =
-<%=vo.getLicenseNo()%>
-	;
+		var licenseNo = <%=vo.getLicenseNo()%>;
 		order.action = "order?licenseNo=" + licenseNo
 		order.method = "post"
 		order.submit();
 	}
+	
+	$(function() {	
+		$("#cbtn").click(function() {
+			if($(this).val() == '혼잡') {
+				$(this).val('여유')
+				$(this).attr('src','/resources/img/happy.png')
+			}else{
+				$(this).val('혼잡')
+				$(this).attr('src','/resources/img/busy.png')
+			}
+		})
+	})	
+	
+	
 </script>
 <body onload="map()">
 
@@ -44,52 +56,12 @@
 						<div class="tab-content details-pro-tab-content">
 							<div class="tab-pane fade in active" id="image-1">
 								<div class="simpleLens-big-image-container">
-									<a class="simpleLens-lens-image"
-										data-lens-image="/resources/img/foodtruck/<%=vo.getFtruckImg()%>">
-										<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>"
-										alt="" class="simpleLens-big-image">
-									</a>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="image-2">
-								<div class="simpleLens-big-image-container">
-									<a class="simpleLens-lens-image"
-										data-lens-image="/resources/img/foodtruck/<%=vo.getFtruckImg()%>">
-										<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>"
-										alt="" class="simpleLens-big-image">
-									</a>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="image-3">
-								<div class="simpleLens-big-image-container">
-									<a class="simpleLens-lens-image"
-										data-lens-image="/resources/img/foodtruck/<%=vo.getFtruckImg()%>">
-										<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>"
-										alt="" class="simpleLens-big-image">
-									</a>
-								</div>
-							</div>
-							<div class="tab-pane fade" id="image-4">
-								<div class="simpleLens-big-image-container">
-									<a class="simpleLens-lens-image"
-										data-lens-image="/resources/img/foodtruck/<%=vo.getFtruckImg()%>">
-										<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>"
-										alt="" class="simpleLens-big-image">
-									</a>
+									<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" class="simpleLens-big-image">
 								</div>
 							</div>
 						</div>
+							<a href="#" style="padding-left: 20px"><img src="/resources/img/busy.png" id="cbtn"></a>
 						<!-- Nav tabs -->
-						<ul class="tabs-list details-pro-tab-list" role="tablist">
-							<li class="active"><a href="#image-1" data-toggle="tab"><img
-									src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" /></a></li>
-							<li><a href="#image-2" data-toggle="tab"><img
-									src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" /></a></li>
-							<li><a href="#image-3" data-toggle="tab"><img
-									src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" /></a></li>
-							<li><a href="#image-4" data-toggle="tab"><img
-									src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" /></a></li>
-						</ul>
 					</div>
 				</div>
 				<div class="col-sm-6">
