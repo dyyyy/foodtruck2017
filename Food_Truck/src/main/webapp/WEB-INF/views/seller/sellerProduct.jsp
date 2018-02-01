@@ -15,20 +15,20 @@
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
-function modal(e) {
-	var licenseNo = e.getAttribute("data-id");
-	$.ajax({
-		url : "/modal",
-		data : {
-			"licenseNo" : licenseNo
-		},
-		type : "post",
-		dataType : "json",
-		success : function(data) {		
-			$(".num").html('<input type="hidden" value="' + data.licenseNo + '" id="licenseNo">');
-		}
-	})
-}
+	function modal(e) {
+		var licenseNo = e.getAttribute("data-id");
+		$.ajax({
+			url : "/modal",
+			data : {
+				"licenseNo" : licenseNo
+			},
+			type : "post",
+			dataType : "json",
+			success : function(data) {
+				$(".num").html('<input type="hidden" value="' + data.licenseNo + '" id="licenseNo">');
+			}
+		})
+	}
 	function ch() {
 		var licenseNo = $("select").val();
 		$.ajax({
@@ -44,35 +44,35 @@ function modal(e) {
 		})
 		location.href = "sellerProduct?licenseNo=" + sel;
 	}
-	function add(){
-		var name =document.getElementById("pname").value;
-		var price =document.getElementById("pprice").value;
-		var content =document.getElementById("pcontent").value;
-		var img =document.getElementById("pimg").value;
-		var origin =document.getElementById("porigin").value;
-		var licenseNo =document.getElementById("licenseNo").value;
+	function add() {
+		var name = document.getElementById("pname").value;
+		var price = document.getElementById("pprice").value;
+		var content = document.getElementById("pcontent").value;
+		var img = document.getElementById("pimg").value;
+		var origin = document.getElementById("porigin").value;
+		var licenseNo = document.getElementById("licenseNo").value;
 		$.ajax({
-			url:"insertProduct",
-			data:{
-				"licenseNo":licenseNo,
-				"prodName":name,
-				"prodPrice":price,
-				"prodContent":content,
-				"img":img,
-				"prodOrgin":origin
+			url : "insertProduct",
+			data : {
+				"licenseNo" : licenseNo,
+				"prodName" : name,
+				"prodPrice" : price,
+				"prodContent" : content,
+				"img" : img,
+				"prodOrgin" : origin
 			},
 			type : "post",
 			dataType : "json",
 			success : function(data) {
-				if(data==1){
+				if (data == 1) {
 					alert("상품이 등록되었습니다")
-				}else{
+				} else {
 					alert("상품등록이 실패했습니다 관리자에게 문의해주세요!");
 				}
 				location.reload();
 			}
 		})
-		
+
 	}
 </script>
 <style>
@@ -100,6 +100,20 @@ function modal(e) {
 	%>
 	<div class="container-fluid">
 		<div class="row-fluid">
+			<div class="span3" id="sidebar">
+				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+					<li ><a
+						href="/sellerMain?licenseNo=${licenseNo}"> <i
+							class="icon-chevron-right"></i>주문 및 예약·배달
+					</a></li>
+					<li><a href="/sellerCalendar?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>매출 통계</a></li>
+					<li><a href="/sellerChart?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>차트</a></li>
+					<li class="active"><a href="/sellerProduct?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>내 푸드트럭 메뉴</a></li>
+				</ul>
+			</div>
 			<div class="span9" id="content">
 				<!-- morris stacked chart -->
 				<div class="row-fluid">
@@ -121,8 +135,8 @@ function modal(e) {
 							</div>
 							<div class="muted pull-right">
 								<button class="btn" style="margin-top: -5px;"
-									data-toggle="modal" data-target="#tutorialsplaneModal" data-id="${licenseNo}" onclick="modal(this)">상품
-									등록하기</button>
+									data-toggle="modal" data-target="#tutorialsplaneModal"
+									data-id="${licenseNo}" onclick="modal(this)">상품 등록하기</button>
 							</div>
 						</div>
 						<div class="block-content collapse in">
@@ -135,7 +149,7 @@ function modal(e) {
 											style="width: 260px; height: 180px;" src="${all.prodImg}">
 										</a>
 										<div align="center">
-											<table >
+											<table>
 												<tr>
 													<td><h5>${all.prodName}(&#8361;${all.prodPrice})</h5></td>
 												</tr>
@@ -158,35 +172,40 @@ function modal(e) {
 				</div>
 				<div class="modal-body" style="margin-left: 10px;">
 					<form class="form-horizontal" name="addProduct">
-						<table border=1 class="table table-striped table-bordered" >
+						<table border=1 class="table table-striped table-bordered">
 							<tr>
 								<td align="center" style="width: 100px;">상품이름</td>
-								<td colspan=3 ><input type="text" style="width: 350px;" id="pname"></td>
+								<td colspan=3><input type="text" style="width: 350px;"
+									id="pname"></td>
 							</tr>
 							<tr>
 								<td align="center">상품 가격</td>
-								<td colspan=3><input type="text" style="width: 350px;" id="pprice"></td>
+								<td colspan=3><input type="text" style="width: 350px;"
+									id="pprice"></td>
 							</tr>
 							<tr>
 								<td rowspan=3>상품 설명</td>
-								<td rowspan=3 colspan=3><textarea rows="5" cols="8" style="width: 350px;" id="pcontent"></textarea></td>
+								<td rowspan=3 colspan=3><textarea rows="5" cols="8"
+										style="width: 350px;" id="pcontent"></textarea></td>
 							</tr>
 							<tr></tr>
 							<tr></tr>
 							<tr>
 								<td>이미지 파일</td>
-								<td colspan=3><input type="file" style="width: 350px;" id="pimg" enctype="multipart/form-data"></td>
+								<td colspan=3><input type="file" style="width: 350px;"
+									id="pimg" enctype="multipart/form-data"></td>
 							</tr>
 							<tr>
 								<td rowspan=2>원산지</td>
-								<td rowspan=2 colspan=3><textarea rows="5" cols="5" style="width: 350px;" id="porigin"></textarea></td>
+								<td rowspan=2 colspan=3><textarea rows="5" cols="5"
+										style="width: 350px;" id="porigin"></textarea></td>
 							</tr>
 							<tr></tr>
 						</table>
 						<div class="num"></div>
 					</form>
 				</div>
-				
+
 				<div class="modal-footer">
 					<button class="btn btn-default" onclick="add()">등록하기</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"

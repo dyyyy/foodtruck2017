@@ -8,7 +8,7 @@
 
 <body>
 
-<%@include file="../comm/nav.jsp" %>
+ <%@include file="../comm/nav.jsp" %>
 
 <!-- Shop Product Area Start -->
 <div class="shop-product-area section fix">

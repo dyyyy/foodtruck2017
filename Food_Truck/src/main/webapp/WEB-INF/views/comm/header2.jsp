@@ -51,7 +51,6 @@
 				<%
 					} else if(mvo.getMemberAuth().equals("2")) {
 				%>
-
 					<a class="brand" href="#">내 푸드트럭 관리</a>
 				<%
 					}
@@ -119,33 +118,5 @@
 			</div>
 		</div>
 	</div>
-	
-	<% 
-		if(mvo.getMemberAuth().equals("2")) {
-			List list = (List)session.getAttribute("licenseNo");
-			SellerVO ssvo = null;
-			if(!list.isEmpty()) {
-				ssvo = (SellerVO)list.get(0);
-			}
-	%>
-	<div class="span3" id="sidebar" style="margin-right:50px;margin-left:50px;">
-		<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-			<li class="active">
-				 <a href="/sellerMain<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">
-				 <i class="icon-chevron-right"></i>주문 및 예약·배달</a> 
-			</li>
-			<li >
-				<a href="/sellerCalendar<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>매출 통계</a>
-			</li>
-			<li>
-				<a href="/sellerChart<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>차트</a>
-			</li>	
-			<li>
-				<a href="/sellerProduct?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>내 푸드트럭 메뉴</a>
-			</li>
-		</ul>
-	</div>
-	
-	<% }  %>
 </body>
 </html>

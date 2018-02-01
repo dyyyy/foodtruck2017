@@ -25,9 +25,9 @@
 							<%
 								boolean isLogin = false;
 								MemberVO mvo = null;
-								List<SellerVO> svo = null;
+								
 								mvo = (MemberVO) session.getAttribute("member");
-								svo = (List<SellerVO>) session.getAttribute("licenseNo");
+								
 								//로그인 체크!
 								if (mvo != null) {
 									isLogin = true;
@@ -71,18 +71,15 @@
                         break;
                            //판매자
                            case "2":
-                              List list = (List)session.getAttribute("licenseNo");
-                              SellerVO ssvo = null;
-                              if(!list.isEmpty()) {
-                                 ssvo = (SellerVO)list.get(0);
-                              }
+                              
+                           
                      %>
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
 									<li><a
-										href="/sellerMain<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
+										href="/sellerMain">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;

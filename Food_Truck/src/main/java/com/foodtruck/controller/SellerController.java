@@ -1,19 +1,7 @@
 package com.foodtruck.controller;
 
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.List;
@@ -28,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.rowset.ResultSetWrappingSqlRowSetMetaData;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,8 +24,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
@@ -76,9 +63,11 @@ public class SellerController {
 
 	// 판매자 캘린더
 	@RequestMapping("/sellerCalendar")
-	public String sellerCalendar(HttpSession session, HttpServletRequest request) {
+	public String sellerCalendar(HttpSession session, HttpServletRequest request,Model model,@RequestParam(value = "licenseNo" ,required =false)String licenseNo) {
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		if(!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
+			String num= licenseNo;
+			model.addAttribute("licenseNo", num);
 			return "seller/calendar";
 		} else {
 			return "seller/null";
@@ -87,9 +76,12 @@ public class SellerController {
 	
 	// 판매자 차트
 	@RequestMapping("/sellerChart")
-	public String sellerChart(HttpSession session) {
+	public String sellerChart(HttpSession session,Model model,@RequestParam(value = "licenseNo" ,required =false)String licenseNo) {
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		if(!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
+			
+			String num= licenseNo;
+			model.addAttribute("licenseNo", num);
 			return "seller/chart";
 		} else {
 			return "seller/null";
@@ -102,16 +94,17 @@ public class SellerController {
 
 
 	@RequestMapping("/sellerMain")
-	public String sellerMain(@RequestParam(value = "licenseNo")String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
+	public String sellerMain(HttpServletRequest request, Model model, HttpSession session,@RequestParam(value = "licenseNo" ,required =false)String licenseNo) {	
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
-		System.out.println("mmmmmmmmmmmmmmmmmmmmmm : " + sservice.getLicense(mvo.getMemberId()));
 		if(!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
-		
-			model.addAttribute("license", sservice.getLicense(mvo.getMemberId()));
-			model.addAttribute("todayOrder", sservice.getTodayOrderList(request.getParameter("licenseNo")));
-			model.addAttribute("todayDlv", sservice.getTodayDlvList(request.getParameter("licenseNo")));
-			model.addAttribute("order", sservice.getOrderList(request.getParameter("licenseNo")));
-			model.addAttribute("img", sservice.getFoodTruckList(request.getParameter("licenseNo")));
+			List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
+			String num= list.get(0).getLicenseNo();
+			model.addAttribute("licenseNo", num);
+			model.addAttribute("license",list);
+			model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
+			model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
+			model.addAttribute("order", sservice.getOrderList(num));
+			model.addAttribute("img", sservice.getFoodTruckList(num));
 		
 			return "seller/main";
 		} else {
@@ -143,7 +136,7 @@ public class SellerController {
 	public HashMap modal(@RequestParam("licenseNo") String licenseNo) {
 		HashMap map = new HashMap();
 		map.put("licenseNo", licenseNo);
-		System.out.println("ㄴㅇ"+licenseNo);
+		
 		return map;
 	}
 
