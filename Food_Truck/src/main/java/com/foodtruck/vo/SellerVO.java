@@ -14,6 +14,10 @@ public class SellerVO {
 	private String prodName;
 	private String ftruckName;
 	private String ordReq;
+	private String ftruckIntro;
+	private String ftruckGrade;
+	private String category;
+	private String ftruckReg;
 	
 	public String getOrdNo() {
 		return ordNo;
@@ -93,7 +97,30 @@ public class SellerVO {
 	public void setOrdReq(String ordReq) {
 		this.ordReq = ordReq;
 	}
-	
+	public String getFtruckIntro() {
+		return ftruckIntro;
+	}
+	public void setFtruckIntro(String ftruckIntro) {
+		this.ftruckIntro = ftruckIntro;
+	}
+	public String getFtruckGrade() {
+		return ftruckGrade;
+	}
+	public void setFtruckGrade(String ftruckGrade) {
+		this.ftruckGrade = ftruckGrade;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getFtruckReg() {
+		return ftruckReg;
+	}
+	public void setFtruckReg(String ftruckReg) {
+		this.ftruckReg = ftruckReg;
+	}
 	
 	
 

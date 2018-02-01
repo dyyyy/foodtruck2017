@@ -59,8 +59,6 @@
  				document.selected.value=sel;
  				$(sel).val().attr("selected", "selected");
  			});
-	 
-	 		
 		});
 	
 	
@@ -109,7 +107,7 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="span3">
-                                    <div class="chart" data-percent="73">73%</div>
+                                    <div class="chart" data-percent="30">73%</div>
                                     <div class="chart-bottom-heading"><span class="label label-info">Visitors</span>
 
                                     </div>
@@ -139,8 +137,8 @@
                     
 	                        <select name="licenseNo">
 	                        	<option>선택해주세요.</option>
-	                    	<c:forEach var="order1" items="${order1}">
-	                    		<option value="${order1.licenseNo}">${order1.licenseNo}</option>
+	                    	<c:forEach var="license" items="${license}">
+	                    		<option value="${license.licenseNo}">${license.ftruckName}</option>
 	                    	</c:forEach>
                     		</select>
                     <div class="row-fluid">
@@ -159,21 +157,19 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Name</th>
-                                                <th>Food</th>
-                                                <th>Req</th>
+                                                <th>주문 시간</th>
+                                                <th>주문자 명</th>
+                                                <th>음식</th>
+                                                <th>요청사항</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-	                                        <c:forEach var="order2" items="${order2}">
+	                                        <c:forEach var="todayOrder" items="${todayOrder}">
 	                                            <tr>
-	                                                <td>1</td>
-	                                                <td>${order2.ordDate}</td>
-	                                                <td>${order2.ordName}</td>
-	                                                <td>${order2.prodName}</td>
-	                                                <td>${order2.ordReq}</td>
+	                                                <td>${todayOrder.ordDate}</td>
+	                                                <td>${todayOrder.ordName}</td>
+	                                                <td>${todayOrder.prodName}</td>
+	                                                <td>${todayOrder.ordReq}</td>
 	                                            </tr>
                                        		</c:forEach>
 	                                        </tbody>
@@ -197,19 +193,19 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Name</th>
-                                                <th>Product</th>
+                                                <th>예약시간</th>
+                                                <th>주문자 명</th>
+                                                <th>음식</th>
+                                                <th>요청사항</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="order2" items="${order2}">
+                                            <c:forEach var="todayOrder" items="${todayOrder}">
 	                                            <tr>
-	                                                <td>1</td>
-	                                                <td>${order2.ordDate}</td>
-	                                                <td>${order2.ordName}</td>
-	                                                <td>${order2.prodName}</td>
+	                                                <td>${todayOrder.ordRcvDate}</td>
+	                                                <td>${todayOrder.ordName}</td>
+	                                                <td>${todayOrder.prodName}</td>
+	                                                <td>${todayOrder.ordReq}</td>
 	                                            </tr>
                                        		</c:forEach>
                                         </tbody>
@@ -233,19 +229,17 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Name</th>
-                                                <th>Product</th>
+                                                <th>날짜</th>
+                                                <th>주문자 명</th>
+                                                <th>음식</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="order2" items="${order2}">
+                                            <c:forEach var="todayDlv" items="${todayDlv}">
 	                                            <tr>
-	                                                <td>1</td>
-	                                                <td>${order2.ordDate}</td>
-	                                                <td>${order2.ordName}</td>
-	                                                <td>${order2.prodName}</td>
+	                                                <td>${todayDlv.ordDate}</td>
+	                                                <td>${todayDlv.ordName}</td>
+	                                                <td>${todayDlv.prodName}</td>
 	                                            </tr>
                                        		</c:forEach>
                                         </tbody>
@@ -267,19 +261,19 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>날짜</th>
                                                 <th>주문자명</th>
                                                 <th>음식</th>
+                                                <th>요청사항</th>
                                                 
                                             </tr>
                                         </thead>
-                                        <c:forEach var="order2" items="${order2}">
+                                        <c:forEach var="order" items="${order}">
 	                                    	<tr>
-	                                        	<td>1</td>
-	                                        	<td>${order2.ordDate}</td>
-	                                        	<td>${order2.ordName}</td>
-	                                        	<td>${order2.prodName}</td>
+	                                        	<td>${order.ordDate}</td>
+	                                        	<td>${order.ordName}</td>
+	                                        	<td>${order.prodName}</td>
+	                                        	<td>${order.ordReq}</td>
 	                                        </tr>
                                        	</c:forEach>
                                     </table>

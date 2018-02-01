@@ -1,3 +1,4 @@
+<%@page import="com.foodtruck.vo.FoodTruckVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.foodtruck.vo.SellerVO"%>
 <%@page import="com.foodtruck.vo.MemberVO"%>
@@ -50,7 +51,7 @@
 				<%
 					} else if(mvo.getMemberAuth().equals("2")) {
 				%>
-					<a class="brand" href="#">Seller Page</a>
+					<a class="brand" href="#">판매자</a>
 				<%
 					}
 				%>				
@@ -119,32 +120,34 @@
 	</div>
 	
 	<% 
-		if(mvo.getMemberAuth().equals("2")) { 
+		if(mvo.getMemberAuth().equals("2")) {
 			List list = (List)session.getAttribute("licenseNo");
-			SellerVO ssvo = (SellerVO)list.get(0);
-			
-			List<SellerVO> svo = (List<SellerVO>) session.getAttribute("licenseNo");
+			SellerVO ssvo = null;
+			if(!list.isEmpty()) {
+				ssvo = (SellerVO)list.get(0);
+			}
 	%>
 	<div class="span3" id="sidebar" style="margin-right:50px;margin-left:50px;">
 		<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
 			<li>
-				 <a href="/sellerMain?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>주문 및 예약·배달</a> 
+				 <a href="/sellerMain<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">
+				 <i class="icon-chevron-right"></i>주문 및 예약·배달</a> 
 			</li>
 			<li class="active">
-				<a href="/sellerCalendar?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>매출 통계</a>
+				<a href="/sellerCalendar<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>매출 통계</a>
 			</li>
 			<li>
-				<a href="/sellerChart?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>차트</a>
+				<a href="/sellerChart<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>차트</a>
 			</li>
 			<li>
-				<a href="/detailFoodTruckForm?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>푸드트럭 정보</a>
+				<a href="/foodTruckMng<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>내 푸드트럭</a>
 			</li>
 			<li>
-				<a href="/insertFoodTruckForm"><i class="icon-chevron-right"></i>푸드트럭 등록</a>
+				<a href="/productMng<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>상품관리</a>
 			</li>
 		</ul>
 	</div>
 	
-	<% } %>
+	<% }  %>
 </body>
 </html>
