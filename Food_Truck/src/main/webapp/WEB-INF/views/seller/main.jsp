@@ -40,30 +40,15 @@
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-
-	$(function() {
-			$.ajax({
-					url:'sellerMain?licenseNo='+$("select").val(),
- 					type: 'post',
- 					success:function(data){
- 						console.log(data);
- 					}
-			})
-			
- 			
+<script type="text/javascript">		
  			$("select").change(function() {
- 				var sel = $("select").val();
- 				
+ 				var sel = $("select").val();		
  				location.href="sellerMain?licenseNo="+sel;
  				document.selected.value=sel;
  				$(sel).val().attr("selected", "selected");
  			});
-		});
-	
-	
-	
-	
+
+		
 </script>
 
 </head>
@@ -293,13 +278,13 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div class="row-fluid padd-bottom">
+                                 <c:forEach var="img" items="${img}">
                                   <div class="span3">
                                       <a href="#" class="thumbnail">
-                                      <c:forEach var="img" items="${img}">
-                                        <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="${img.ftruckImg}">
-                                      </c:forEach>
+                                        <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="${img.ftruckImg}">                                  
                                       </a>
                                   </div>
+                                  </c:forEach>
 
                                 <div class="row-fluid padd-bottom">
                                   <div class="span3">
@@ -353,9 +338,6 @@
                 </div>
             </div>
         </div>
-        
-		<%=request.getParameter("licenseNo") %>
-
 </body>
         <script>
         $(function() {

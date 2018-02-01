@@ -8,9 +8,9 @@ public class ProductVO {
 	private String prodContent;		// 상품 내용
 	private String prodImg;			// 상품 이미지
 	private int prodPrice;			// 상품 가격 
-	private String ftruckNo;		// 푸드트럭 번호
-	private String licenseNo;		// 사업자 번호
 	
+	private String licenseNo;		// 사업자 번호
+	private String prodOrgin; //원산지
 	
 	// getter & setter
 	public String getProdNo() {
@@ -43,17 +43,19 @@ public class ProductVO {
 	public void setProdPrice(int prodPrice) {
 		this.prodPrice = prodPrice;
 	}
-	public String getFtruckNo() {
-		return ftruckNo;
-	}
-	public void setFtruckNo(String ftruckNo) {
-		this.ftruckNo = ftruckNo;
-	}
 	public String getLicenseNo() {
 		return licenseNo;
 	}
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
+	public String getProdOrgin() {
+		return prodOrgin;
+	}
+	public void setProdOrgin(String prodOrgin) {
+		this.prodOrgin = prodOrgin;
+	}
+	
+	
 }
 

@@ -1,5 +1,9 @@
 package com.foodtruck.controller;
 
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,11 +12,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import java.util.List;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,15 +41,25 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
+
+import com.foodtruck.service.OrderService;
+import com.foodtruck.service.ProductService;
+
+
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 
+import com.foodtruck.vo.OrderVO;
+import com.foodtruck.vo.ProductVO;
+import com.foodtruck.vo.SellerVO;
+
+
 @Controller
 public class SellerController {
-
+	//ArrayList<SellerVO> list = new ArrayList<SellerVO>();
 	@Autowired
 	FoodTruckService foodTruckService;
 	
@@ -50,6 +69,10 @@ public class SellerController {
 	@Autowired
 	SellerService sservice;
 	
+
+	@Autowired
+	private ProductService productService;
+
 
 	// 판매자 캘린더
 	@RequestMapping("/sellerCalendar")
@@ -73,10 +96,13 @@ public class SellerController {
 		}
 	}
 	
-	// 판매자 주문 관리
+
+	
+	// �Ǹ��� �޴� - �Ǹ��� ��� ?
+
+
 	@RequestMapping("/sellerMain")
-	public String sellerMain(HttpServletRequest request, Model model, HttpSession session) {
-		
+	public String sellerMain(@RequestParam(value = "licenseNo")String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		System.out.println("mmmmmmmmmmmmmmmmmmmmmm : " + sservice.getLicense(mvo.getMemberId()));
 		if(!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
@@ -94,8 +120,36 @@ public class SellerController {
 	}
 	
 	
+
+	@RequestMapping("/insertFoodTruckForm")
+	public String insertFoodTruckForm() {
+		return "seller/insertFoodTruck";
+	}
+	
+	@RequestMapping("/sellerProduct")
+	public String sellerProduct(@RequestParam(value = "licenseNo")String licenseNo,HttpServletRequest request,Model model,HttpSession session) {
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
+		List<ProductVO> list2 =productService.getProductList(licenseNo);
+		request.setAttribute("list", list);
+		request.setAttribute("licenseNo", licenseNo);
+		request.setAttribute("list2", list2);
+		
+		
+		return "seller/sellerProduct";
+	}
+	@RequestMapping("/modal")
+	@ResponseBody
+	public HashMap modal(@RequestParam("licenseNo") String licenseNo) {
+		HashMap map = new HashMap();
+		map.put("licenseNo", licenseNo);
+		System.out.println("ㄴㅇ"+licenseNo);
+		return map;
+	}
+
 	// 푸드트럭 등록
 	@ResponseBody
+
 	@RequestMapping("/insertFoodTruck")
 	public String insertFoodTruck(Model model, HttpSession session,  HttpServletRequest request, FoodTruckVO fvo, LicenseVO lvo) throws Exception, IOException {
 	    
@@ -188,11 +242,7 @@ public class SellerController {
 		
 	}
 	
-	@RequestMapping("/insertFoodTruckForm")
-	public String insertFoodTruckForm() {
-		return "seller/insertFoodTruck";
-	}
-	
+
 	//판매자 1:1문의
 	@RequestMapping("sellerinquriy")
 	public String sellerinquriy(MInquiryVO vo) {	

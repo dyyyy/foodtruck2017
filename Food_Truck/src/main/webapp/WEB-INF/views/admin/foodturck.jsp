@@ -21,9 +21,7 @@
 			type : "post",
 			dataType : "json",
 			success : function(data) {
-				$(".set").html(data.content);
-				$(".table12").html(data.table);
-				$(".num").html('<input type="hidden" value="' + data.licenseNo + '" id="licenseNo">');
+				
 			}
 		})
 	}
