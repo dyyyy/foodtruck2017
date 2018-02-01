@@ -10,6 +10,7 @@ import com.foodtruck.dao.SellerDAO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
+import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.SellerVO;
 
 @Service
@@ -30,11 +31,6 @@ public class SellerService {
 		return dao.getTodayOrderList(licenseNo);
 	}
 
-	// 오늘의 예약 내역 리스트
-	public List<SellerVO> getTodayRsvList(String licenseNo) {
-		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
-		return dao.getTodayRsvList(licenseNo);
-	}
 
 	// 오늘의 배달 내역 리스트
 	public List<SellerVO> getTodayDlvList(String licenseNo) {
@@ -51,6 +47,7 @@ public class SellerService {
 	// 판매자의 라이센스 번호 가져오기
 	public List<SellerVO> getLicense(String memberId) {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		System.out.println("mmmmmmmmmmmmmmmmmmmm" + dao.getLicense(memberId));
 		return dao.getLicense(memberId);
 	}
 
@@ -61,10 +58,18 @@ public class SellerService {
 	}
 
 	// 푸드트럭 등록
-	public FoodTruckVO insertFoodTruck(FoodTruckVO vo) {
+	public int insertFoodTruck(FoodTruckVO vo) {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
 		return dao.insertFoodTruck(vo);
 	}
+	
+	// 라이센스 등록
+	public int insertLicense(LicenseVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.insertLicense(vo);
+	}
+	
+	
 		// id로 라이센스 가져오기
 	public List<LicenseVO> getInfo(LicenseVO vo) {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
@@ -87,6 +92,13 @@ public class SellerService {
 	public FoodTruckVO getFoodtruckDtail(String licenseNo) {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
 		return dao.getFoodtruckDtail(licenseNo);
+
+	}
+	
+	// 푸드트럭별 상품 리스트
+	public List<ProductVO> getProductList(String licenseNo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getProductList(licenseNo);
 
 	}
 }

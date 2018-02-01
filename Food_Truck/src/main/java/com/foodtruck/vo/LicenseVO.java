@@ -8,7 +8,6 @@ public class LicenseVO {
 
 	// getter & setter
 	
-	
 	public String getLicenseNo() {
 		return licenseNo;
 	}

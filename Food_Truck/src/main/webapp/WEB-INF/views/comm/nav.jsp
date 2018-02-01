@@ -62,23 +62,27 @@
 									case "3":
 							%>
 							<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
-								<ul style="width: 120px; ">
+								<ul style="width: 120px;">
 									<li><a href="/memberOrderInfo">전체 주문 내역</a></li>
 									<li><a href="/favoritFoodtruck">관심 푸드트럭</a></li>
-									<li ><a href="/memberInfo">나의 설정</a></li>
+									<li><a href="/memberInfo">나의 설정</a></li>
 								</ul></li>
 							<%
-								break;
-									//판매자
-									case "2":
-							%>
+                        break;
+                           //판매자
+                           case "2":
+                              List list = (List)session.getAttribute("licenseNo");
+                              SellerVO ssvo = null;
+                              if(!list.isEmpty()) {
+                                 ssvo = (SellerVO)list.get(0);
+                              }
+                     %>
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
-									<!--<li><a href="/productInsert">제품 등록</a></li> -->
-									<li><a href="/insertProductForm">제품 등록</a></li>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
-									<li><a href="/sellerCalendar">판매자 설정</a></li>
+									<li><a
+										href="/sellerMain<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;
@@ -112,15 +116,15 @@
 							<%break;
 								//판매자회원
 								case "2":%>
-								<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
+							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
 									<li><a href="/inquiry2">1:1 문의</a></li>
 								</ul></li>
-								<%break;
+							<%break;
 								}%>
-					
+
 							<%
 								}
 							%>
@@ -176,30 +180,30 @@
 
 
 					<div class="search float-right">
-							<div id="search1">
-								<button onclick="getLocation()" id="getLocation" class="ico-loc">
-								</button>
-							</div>
-							
-							<form action="/search" method="get">
-							
+						<div id="search1">
+							<button onclick="getLocation()" id="getLocation" class="ico-loc">
+							</button>
+						</div>
+
+						<form action="/search" method="get">
+
 							<div id="search2">
-							<input type="hidden" name="pageNo" value="1">
-								<input type="text" id="search" name="search"
-									placeholder="예) 강남구, 서초구" value=""/>
-									
+								<input type="hidden" name="pageNo" value="1"> <input
+									type="text" id="search" name="search" placeholder="예) 강남구, 서초구"
+									value="" />
+
 							</div>
 							<div id="search3">
-							<!-- 
+								<!-- 
 							<input type="image" id="locbtn" class="submit">
 							-->
-							<button class="submit" id="locbtn"> <i
-									class="fa fa-search"></i>
+								<button class="submit" id="locbtn">
+									<i class="fa fa-search"></i>
 								</button>
-								 
-							</div>	
-							</form>
-								
+
+							</div>
+						</form>
+
 
 
 

@@ -4,25 +4,27 @@
 <html>
 
 <head>
-
+<%@include file="../comm/header2.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	jQuery(function($) {
 
 		// var id = /^[a-z0-9_-]{3,16}$/; // 아이디 검사식
-		var id = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+		var id = /^[a-z0-9_-]{3,16}$/;
 		var pw = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/; // 비밀번호 검사식
 		var tel = /^[0-9]{8,11}$/; // 전화번호 검사식
 
-		var form = $('.insertFoodTruck'), licenseNo = $('input[name="licenseNo"]'), ftruckName = $('input[name="ftruckName"]'), ftruckTel = $('input[name="ftruckTel"]');
+		var form = $('.insertFoodTruck'), 
+			licenseNo = $('input[name="licenseNo"]'), 
+			ftruckName = $('input[name="ftruckName"]'), 
+			ftruckTel = $('input[name="ftruckTel"]');
 		
 		$('#checkNo').after(
 				'<p></p>');
 
-		// 아이디 중복 체크
+		// 사업자번호 중복 체크
 		$("#checkNo").click(
 				function() {
 					$.ajax({
@@ -45,13 +47,71 @@
 					});
 				});
 		
+		// 사업자번호 체크
+		licenseNo.keyup(function() {
+			var s = $("#checkNo").next('p');
+			if (isNaN(licenseNo.val())) {
+				s.text("숫자만 입력 가능합니다.").css("color", "red");
+			} else if(licenseNo.toString().length != 10){
+				s.text("사업자 번호는 10자 입니다.").css("color", "red");
+			} else {
+				s.text(" ");
+			}
+		});
+		
 	});
+	
+	// 이미지 파일 첨부
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#ftruckImg').attr('src', e.target.result).css('width', '300px;').css('height', '200px');
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#fileImg").change(function(){
+        readURL(this);
+    });
+	
+	
 </script>
+
+<style>
+th {
+	margin:0px;
+	width:15%;
+	background-color: #fafafa;
+}
+
+td {
+	width:100% auto;
+}
+
+input[type=text] {
+	margin:0px;
+	width:300px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:1px solid #CCC;
+}
+textarea {
+	width:300px;
+	resize: none;
+}
+
+
+</style>
 </head>
 
 
 <body>
-<%@include file="../comm/header2.jsp" %>
+
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span9" id="content">
@@ -64,55 +124,82 @@
 						</div>
 						<div class="block-content collapse in ins">
 						<form id="signup-form" action="/insertFoodTruck" method="post" class="insertFoodTruck">
-							<!-- 사업자번호 -->
-							<label>사업자번호<span>*</span></label> 
-							<input type="text" name="licenseNo"> 
-							<input type="button" id="checkNo" value="중복확인" result="unchecked" style="display: inline;">
-							<!-- 푸드트럭 명 -->
-							<label>이름<span>*</span></label> 
-							<input type="text" name="ftruckName">
-							<!-- 휴대폰 번호  -->
-							<label>Phone Number<span>*</span></label> 
-							<input type="text" name="ftruckTel"> 
-							<input type="button" id="checkTel" value="인증하기">
-							<!-- 주소 -->
-							<label>주소<span>*</span></label>
-							<input type=text name=ftruckAddr readonly> <input type=button value="주소검색"><p>
-							<input type=text name=ftruckAddr2>
-							<p>
-							<br> <br>
-
-							<!-- 푸드트럭 소개 -->
-							<label>소개</label>
-							<textarea name=ftruckIntro rows="7"></textarea><p>
+							<table class="table">
+									<tr>
+										<th>사업자번호</th>
+										<td>
+											<input type="text" name="licenseNo" style="margin-bottom:0px">
+											<input class="btn btn-default" type="button" id="checkNo" value="중복확인" result="unchecked" style="display: inline;"> 
+										</td>
+									</tr>
+									<tr>
+										<th>푸드트럭 명</th>
+										<td><input type="text" name="ftruckName"></td>
+									</tr>
+									<tr>
+										<th>휴대폰 번호 </th>
+										<td>
+											<input type="text" name="ftruckTel"> 
+											<input type="button" class="btn btn-default" id="checkTel" value="인증하기">
+										</td>
+									</tr>
+									<tr>
+										<th>주소</th>
+										<td>
+											<input type=text name=ftruckAddr readonly> 
+											<input type=button class="btn btn-default" value="주소검색"><p>
+											<input type=text name=ftruckAddr2>
+										</td>
+									</tr>
+									<tr>
+										<th>푸드트럭 소개</th>
+										<td><textarea name=ftruckIntro rows="7"></textarea></td>
+									</tr>
+									<tr>
+										<th>배달여부</th>
+										<td>
+											<input type=radio name=ftruckDlvYn value="Y" checked>Y
+											<input type=radio name=ftruckDlvYn value="N">N
+										</td>
+									</tr>
+									<tr>
+										<th>예약여부</th>
+										<td>
+											<input type=radio name=ftruckRsvYn value="Y"checked>Y
+											<input type=radio name=ftruckRsvYn value="N">N
+										</td>
+									</tr>
+									<tr>
+										<th>운영여부</th>
+										<td>
+											<input type=radio name=ftruckState value="Y" checked>Y
+											<input type=radio name=ftruckState value="N">N
+										</td>
+									</tr>
+									<tr>
+										<th>카테고리</th>
+										<td>
+											<select name=category>
+												<option value="1">한식</option>
+												<option value="2">중식</option>
+												<option value="3">양식</option>
+												<option value="4">일식</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>파일첨부</th>
+										<td>
+											<input type=file name=ftruckImg id="fileImg">
+											<img id="ftruckImg" src="#"/>
+										
+										</td>
+									</tr>
+									
+							</table>
 							
-							<label>배달여부</label>
-							<input type=radio name=ftruckDlvYn value="Y" checked>Y
-							<input type=radio name=ftruckDlvYn value="N">N<p>
-							<label>예약여부</label>
-							<input type=radio name=ftruckRsvYn value="Y"checked>Y
-							<input type=radio name=ftruckRsvYn value="N">N<p>
-							<label>운영여부</label>
-							<input type=radio name=ftruckState value="Y" checked>Y
-							<input type=radio name=ftruckState value="N">N<p>
-							
-							<label>카테고리</label><p>
-							<select name=category>
-								<option value="1">한식</option>
-								<option value="2">중식</option>
-								<option value="3">양식</option>
-								<option value="4">일식</option>
-							</select>
-							
-							<label>파일첨부</label>
-							<input type=file name=ftruckImg>
-							
-							
-							
-							<p>
-								<input type="reset" value="Reset"> <input type="submit"
-									value="Sign up">
-							</p>
+							<input type="reset" class="btn btn-default" value="Reset"> 
+							<input type="submit" class="btn btn-default" value="Sign up">
 						</form>
 						</div>
 					</div>
@@ -120,43 +207,5 @@
 			</div>
 		</div>
 	</div>
-						
-						<!-- 
-						<div class="block-content collapse in ins">
-							사업자번호
-							<input type=text name=ftruckLicenseNo>
-							<input type=button value=중복확인>
-							푸드트럭 명
-							<input type=text name=ftruckName>
-							전화번호
-							<input type=text name=ftruckTel>
-							주소
-							<input type=text name=ftrudkAddress1>
-							<input type=text name=ftrudkAddress2>
-							소개
-							<textarea name=ftruckIntro></textarea>
-							배달여부
-							<input type=radio>Y
-							<input type=radio>N
-							예약여부
-							<input type=radio>Y
-							<input type=radio>N
-							운영여부
-							<input type=radio>Y
-							<input type=radio>N
-							카테고리
-							<select name=category>
-								<option>test1</option>
-								<option>test2</option>
-								<option>test3</option>
-							</select>
-							파일첨부
-							<input type=file name=ftrudkImg>
-						
-						</div>
-						 -->
-						
-
-
 </body>
 </html>

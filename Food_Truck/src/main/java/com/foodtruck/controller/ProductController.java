@@ -28,8 +28,7 @@ public class ProductController {
 	
 	@Autowired
 	private MemberService memberService;
-	@Resource(name="uploadPath")
-    String uploadPath;
+	
 	
 	// ��ǰ ��� �ϴ� ������ �̵�
 	@RequestMapping("/insertProductForm") 
@@ -49,12 +48,9 @@ public class ProductController {
 	// ��ǰ ���
 	@RequestMapping("/insertProduct")
 	@ResponseBody
-	public int insertProduct(ProductVO vo ,@RequestParam("img") MultipartFile file) throws IOException {
-		 String savedName = file.getOriginalFilename();
-		 File target = new File(uploadPath, savedName);
-		 FileCopyUtils.copy(file.getBytes(), target);
-		System.out.println(uploadPath);
-		vo.setProdImg(uploadPath);
+	public int insertProduct(ProductVO vo) throws IOException {
+		
+		vo.setProdImg("경로"); 
 		int num=productService.insertProduct(vo);
 		
 		return num;
