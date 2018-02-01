@@ -22,8 +22,8 @@
 	<!-- 제품 등록 -->
 	<insert id="insertProduct">
 		
-		INSERT INTO PRODUCT (PROD_NO, PROD_NAME, PROD_CONTENT, PROD_IMG, PROD_PRICE, FTRUCK_NO)
-		VALUES(#{prodNo}, #{prodName}, #{prodContent}, #{prodImg}, #{prodPrice}, #{ftruckNo})
+		INSERT INTO PRODUCT (PROD_NO, PROD_NAME, PROD_CONTENT, PROD_IMG, PROD_PRICE,PROD_ORIGIN,LICENSE_NO)
+		VALUES(PROD_SEQ.nextval, #{prodName}, #{prodContent}, #{prodImg},#{prodPrice},#{prodOrgin},#{licenseNo})
 	
 	</insert>
 	
@@ -45,7 +45,7 @@
 	</delete>
 	
 	<resultMap type="ProductVO" id="ProductMap">
-		<result column="FTRUCK_NO" property="ftruckNo"/>
+		
 		<result column="PROD_NO" property="prodNo"/>
 		<result column="PROD_NAME" property="prodName"/>
 		<result column="PROD_CONTENT" property="prodContent"/>

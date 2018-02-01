@@ -130,7 +130,7 @@
 		List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
 	%>
 	<input type="hidden" name="licenseNo" value="<%=list.get(0).getLicenseNo()%>">
-	<input type="hidden" name="ftruckNo" value="<%=list.get(0).getFtruckNo()%>">
+	
 	<section class="cart-page page fix">
 		<!--Start Cart Area-->
 		<div class="container">

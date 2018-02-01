@@ -1,11 +1,19 @@
 package com.foodtruck.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.ProductService;
@@ -20,6 +28,8 @@ public class ProductController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Resource(name="uploadPath")
+    String uploadPath;
 	
 	// ��ǰ ��� �ϴ� ������ �̵�
 	@RequestMapping("/insertProductForm") 
@@ -35,13 +45,18 @@ public class ProductController {
 		return "nav/productInsert";
 	}
 	
+	
 	// ��ǰ ���
 	@RequestMapping("/insertProduct")
-	public String insertProduct(ProductVO vo) {
+	@ResponseBody
+	public int insertProduct(ProductVO vo ,@RequestParam("img") MultipartFile file) throws IOException {
+		 String savedName = file.getOriginalFilename();
+		 File target = new File(uploadPath, savedName);
+		 FileCopyUtils.copy(file.getBytes(), target);
+		System.out.println(uploadPath);
+		vo.setProdImg(uploadPath);
+		int num=productService.insertProduct(vo);
 		
-		productService.insertProduct(vo);
-		System.out.println("��ǰ ��� ����!");
-		System.out.println(vo.getFtruckNo());
-		return "home";
+		return num;
 	}
 }

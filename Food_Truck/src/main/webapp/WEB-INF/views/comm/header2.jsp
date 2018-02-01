@@ -50,7 +50,7 @@
 				<%
 					} else if(mvo.getMemberAuth().equals("2")) {
 				%>
-					<a class="brand" href="#">Seller Page</a>
+					<a class="brand" href="#">내 푸드트럭 관리</a>
 				<%
 					}
 				%>				
@@ -141,6 +141,9 @@
 			</li>
 			<li>
 				<a href="/insertFoodTruckForm"><i class="icon-chevron-right"></i>푸드트럭 등록</a>
+			</li>
+			<li>
+				<a href="/sellerProduct?licenseNo=<%= ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>내 푸드트럭 메뉴</a>
 			</li>
 		</ul>
 	</div>

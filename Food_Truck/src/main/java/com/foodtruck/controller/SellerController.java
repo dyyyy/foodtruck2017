@@ -1,6 +1,10 @@
 package com.foodtruck.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,16 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.OrderService;
+import com.foodtruck.service.ProductService;
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.OrderVO;
+import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.SellerVO;
 
 @Controller
 public class SellerController {
-
+	//ArrayList<SellerVO> list = new ArrayList<SellerVO>();
 	@Autowired
 	FoodTruckService foodTruckService;
 	
@@ -33,6 +39,9 @@ public class SellerController {
 	MemberService mservice;
 	@Autowired
 	SellerService sservice;
+	
+	@Autowired
+	private ProductService productService;
 
 	// ������ �޴� - �Ǹ���  ��������
 	@RequestMapping("/sellerCalendar")
@@ -46,9 +55,10 @@ public class SellerController {
 		return "seller/chart";
 	}
 	
+	
 	// �Ǹ��� �޴� - �Ǹ��� ��� ?
 	@RequestMapping("/sellerMain")
-	public String sellerMain(@RequestParam(value = "licenseNo", required = false, defaultValue = "5165133515")String licenseNo,HttpServletRequest request, Model model, HttpSession session) {
+	public String sellerMain(@RequestParam(value = "licenseNo")String licenseNo,HttpServletRequest request, Model model, HttpSession session) {
 		
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 //		OrderVO ovo = (OrderVO) session.getAttribute("licenseNo");
@@ -66,7 +76,26 @@ public class SellerController {
 		return "seller/insertFoodTruck";
 	}
 	
-	
+	@RequestMapping("/sellerProduct")
+	public String sellerProduct(@RequestParam(value = "licenseNo")String licenseNo,HttpServletRequest request,Model model,HttpSession session) {
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
+		List<ProductVO> list2 =productService.getProductList(licenseNo);
+		request.setAttribute("list", list);
+		request.setAttribute("licenseNo", licenseNo);
+		request.setAttribute("list2", list2);
+		
+		
+		return "seller/sellerProduct";
+	}
+	@RequestMapping("/modal")
+	@ResponseBody
+	public HashMap modal(@RequestParam("licenseNo") String licenseNo) {
+		HashMap map = new HashMap();
+		map.put("licenseNo", licenseNo);
+		System.out.println("ㄴㅇ"+licenseNo);
+		return map;
+	}
 	@RequestMapping("/insertFoodTruck")
 	public String insertFoodTruck(HttpServletRequest request, FoodTruckVO vo) {
 		
