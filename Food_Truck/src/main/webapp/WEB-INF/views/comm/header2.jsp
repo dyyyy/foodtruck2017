@@ -68,51 +68,7 @@
 								<li><a tabindex="-1" href="/logout">Logout</a></li>
 							</ul></li>
 					</ul>
-					<ul class="nav">
-						<li class="active"><a href="#">미정</a></li>
-						<li class="dropdown"><a href="#" data-toggle="dropdown"
-							class="dropdown-toggle">미정 <b class="caret"></b>
-
-						</a>
-							<ul class="dropdown-menu" id="menu1">
-								<li><a href="#">Tools <i class="icon-arrow-right"></i>
-
-								</a>
-									<ul class="dropdown-menu sub-menu">
-										<li><a href="#">Reports</a></li>
-										<li><a href="#">Logs</a></li>
-										<li><a href="#">Errors</a></li>
-									</ul></li>
-								<li><a href="#">SEO Settings</a></li>
-								<li><a href="#">Other Link</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Other Link</a></li>
-								<li><a href="#">Other Link</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown">미정 <i
-								class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1" href="#">Blog</a></li>
-								<li><a tabindex="-1" href="#">News</a></li>
-								<li><a tabindex="-1" href="#">Custom Pages</a></li>
-								<li><a tabindex="-1" href="#">Calendar</a></li>
-								<li class="divider"></li>
-								<li><a tabindex="-1" href="#">FAQ</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-						미정 <i class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-							
-								<li></li>
-							</ul>
-							</li>
-					</ul>
+					
 				</div>
 				<!--/.nav-collapse -->
 			</div>
