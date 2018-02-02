@@ -286,6 +286,7 @@ $(function() {
 							</div>
 						</div>
 						<div class="block-content collapse in">
+<<<<<<< HEAD
 							<div class="row-fluid padd-bottom">
 								<c:forEach var="img" items="${img}">
 									<div class="span3">
@@ -344,6 +345,9 @@ $(function() {
 									</div>
 								</div>
 							</div>
+=======
+						
+>>>>>>> branch 'master' of https://github.com/dyyyy/foodtruck2017
 						</div>
 					</div>
 				</div>

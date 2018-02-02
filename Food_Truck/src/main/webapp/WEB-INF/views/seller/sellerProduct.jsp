@@ -6,11 +6,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.foodtruck.vo.SellerVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
 <title>상품</title>
+<script src="<c:url value="/resources/js/jquery.form.min.js"/>"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -48,7 +50,7 @@
 		var name = document.getElementById("pname").value;
 		var price = document.getElementById("pprice").value;
 		var content = document.getElementById("pcontent").value;
-		var img = document.getElementById("pimg").value;
+		var pimg = document.getElementById("pimg").value;
 		var origin = document.getElementById("porigin").value;
 		var licenseNo = document.getElementById("licenseNo").value;
 		$.ajax({
@@ -58,7 +60,7 @@
 				"prodName" : name,
 				"prodPrice" : price,
 				"prodContent" : content,
-				"img" : img,
+				"prodImg" : prodImg,
 				"prodOrgin" : origin
 			},
 			type : "post",
@@ -72,6 +74,23 @@
 				location.reload();
 			}
 		})
+	}
+	function mm() {
+		var formData = new FormData(document.getElementById("uploadForm"));
+		$.ajax({
+			url : "/imggo", //컨트롤러 URL
+			data : formData,
+			dataType : 'json',
+			processData : false,
+			contentType : false,
+			type : 'POST',
+			success : function(data) {
+				$('#mg').html(data.path);
+			},
+			error : function(jqXHR) {
+				alert(jqXHR.responseText);
+			}
+		});
 
 	}
 </script>
@@ -102,15 +121,15 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li ><a
-						href="/sellerMain?licenseNo=${licenseNo}"> <i
+					<li><a href="/sellerMain?licenseNo=${licenseNo}"> <i
 							class="icon-chevron-right"></i>주문 및 예약·배달
 					</a></li>
 					<li><a href="/sellerCalendar?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>매출 통계</a></li>
 					<li><a href="/sellerChart?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>차트</a></li>
-					<li class="active"><a href="/sellerProduct?licenseNo=${licenseNo}"><i
+					<li class="active"><a
+						href="/sellerProduct?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>내 푸드트럭 메뉴</a></li>
 				</ul>
 			</div>
@@ -171,38 +190,50 @@
 					<h4 class="modal-title">상품 등록하기</h4>
 				</div>
 				<div class="modal-body" style="margin-left: 10px;">
-					<form class="form-horizontal" name="addProduct">
+					<form class="form-horizontal" name="addProduct"
+						enctype="multipart/form-data" id="asd">
 						<table border=1 class="table table-striped table-bordered">
 							<tr>
 								<td align="center" style="width: 100px;">상품이름</td>
 								<td colspan=3><input type="text" style="width: 350px;"
-									id="pname"></td>
+									name="name"></td>
 							</tr>
 							<tr>
 								<td align="center">상품 가격</td>
 								<td colspan=3><input type="text" style="width: 350px;"
-									id="pprice"></td>
+									name="price"></td>
 							</tr>
 							<tr>
 								<td rowspan=3>상품 설명</td>
 								<td rowspan=3 colspan=3><textarea rows="5" cols="8"
-										style="width: 350px;" id="pcontent"></textarea></td>
+										style="width: 350px;" name="content"></textarea></td>
 							</tr>
 							<tr></tr>
 							<tr></tr>
 							<tr>
-								<td>이미지 파일</td>
-								<td colspan=3><input type="file" style="width: 350px;"
-									id="pimg" enctype="multipart/form-data"></td>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td rowspan=2>원산지</td>
 								<td rowspan=2 colspan=3><textarea rows="5" cols="5"
-										style="width: 350px;" id="porigin"></textarea></td>
+										style="width: 350px;" name="origin"></textarea></td>
 							</tr>
 							<tr></tr>
 						</table>
 						<div class="num"></div>
+					</form>
+					<form id="uploadForm">
+						<table border=1 class="table table-striped table-bordered">
+							<tr>
+								<td>이미지 파일</td>
+								<td colspan=3 id="mg" style="width: 100px;"><input
+									type="file" style="width: 350px;" name="img"
+									enctype="multipart/form-data"><input type="button"
+									value="미리보기" onclick="mm()"></td>
+							</tr>
+
+						</table>
 					</form>
 				</div>
 
