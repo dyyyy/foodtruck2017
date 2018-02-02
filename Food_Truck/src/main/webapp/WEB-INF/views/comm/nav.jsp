@@ -78,7 +78,7 @@
 									<li><a href="/insertProductForm">제품 등록</a></li>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
-									<li><a href="/sellerCalendar">판매자 설정</a></li>
+									<li><a href="/sellerMain">판매자 설정</a></li>
 								</ul></li>
 							<%
 								break;

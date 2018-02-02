@@ -71,32 +71,17 @@
 <body>
 	<div class="container-fluid">
             <div class="row-fluid">
-            
                 
                 <!--/span-->
                 <div class="span9" id="content">
-                    <div class="row-fluid">
-                        <div class="alert alert-success">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <h4>Success</h4>
-                        	The operation completed successfully</div>
-                        	<div class="navbar">
-                            	<div class="navbar-inner">
-	                                <ul class="breadcrumb">
-	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
-	                                    <li>
-	                                        <a href="#">주문 및 예약·배달</a> <span class="divider">/</span>	
-	                                    </li>
-	                                    <li>
-	                                        <a href="#">Settings</a> <span class="divider">/</span>	
-	                                    </li>
-	                                    <li class="active">Tools</li>
-	                                </ul>
-                            	</div>
-                        	</div>
-                    	</div>
-                    <div class="row-fluid">
+				<select name="licenseNo">
+					<option>선택해주세요.</option>
+					<c:forEach var="license" items="${license}">
+						<option value="${license.licenseNo}">${license.ftruckName}</option>
+					</c:forEach>
+				</select>
+
+				<div class="row-fluid">
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
@@ -135,12 +120,6 @@
                         <!-- /block -->
                     </div>
                     
-	                        <select name="licenseNo">
-	                        	<option>선택해주세요.</option>
-	                    	<c:forEach var="license" items="${license}">
-	                    		<option value="${license.licenseNo}">${license.ftruckName}</option>
-	                    	</c:forEach>
-                    		</select>
                     <div class="row-fluid">
                     
                         <div class="span6">

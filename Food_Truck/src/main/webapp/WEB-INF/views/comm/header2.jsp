@@ -33,6 +33,24 @@
 <script src="/resources/admin/vendors/flot/jquery.flot.stack.js"></script>
 <script src="/resources/admin/vendors/flot/jquery.flot.resize.js"></script>
 <script src="/resources/admin/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+		$(".bs-docs-sidenav").child("li").click(function() {
+			$(".bs-docs-sidenav").child("li").attr("class","active");
+		})
+	})
+
+
+
+
+</script>
+
+
+
+
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
@@ -129,11 +147,11 @@
 	%>
 	<div class="span3" id="sidebar" style="margin-right:50px;margin-left:50px;">
 		<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-			<li>
+			<li class="active">
 				 <a href="/sellerMain<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">
 				 <i class="icon-chevron-right"></i>주문 및 예약·배달</a> 
 			</li>
-			<li class="active">
+			<li>
 				<a href="/sellerCalendar<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>매출 통계</a>
 			</li>
 			<li>
