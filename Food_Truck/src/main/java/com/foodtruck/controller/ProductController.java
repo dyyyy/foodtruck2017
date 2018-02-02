@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -32,9 +34,9 @@ import com.foodtruck.vo.ProductVO;
 @Controller
 public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	private final String PATH = "..\\Food_Truck\\src\\main\\webapp\\resources\\img\\upload\\";
-
+	
+	
+	
 	@Autowired
 	MappingJackson2JsonView jsonView;
 
@@ -43,6 +45,9 @@ public class ProductController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired private ServletContext servletContext;
+
 
 	// ��ǰ ��� �ϴ� ������ �̵�
 	@RequestMapping("/insertProductForm")
@@ -70,19 +75,29 @@ public class ProductController {
 
 	@RequestMapping("/imggo")
 	@ResponseBody
-	public HashMap img(MultipartHttpServletRequest request) throws IllegalStateException, IOException {
+	public HashMap img(MultipartHttpServletRequest request,HttpServletRequest req) throws IllegalStateException, IOException {
+		String user=System.getProperty("user.dir");
+		String path1="";
+		path1 += user;
+		path1 += "\\food\\Food_Truck\\src\\main\\webapp\\resources\\img\\upload\\";		
 		ModelAndView model = new ModelAndView();
 		model.setView(jsonView);
-
+		
 		Iterator<String> itr = request.getFileNames();
 
 		if (itr.hasNext()) {
 			List<MultipartFile> mpf = request.getFiles(itr.next());
 			// 임시 파일을 복사한다.
 			for (int i = 0; i < mpf.size(); i++) {
+				
+				File file = new File(path1 + mpf.get(i).getOriginalFilename());				
+				
+				System.out.println("========");
+				System.out.println("dsff="+path1);
+				System.out.println("========");
+				logger.info(file.getCanonicalPath());
+				String root = request.getContextPath();
 
-				File file = new File(PATH + mpf.get(i).getOriginalFilename());
-				logger.info(file.getAbsolutePath());
 				mpf.get(i).transferTo(file);
 
 			}
@@ -91,7 +106,7 @@ public class ProductController {
 			json.put("code", "true");
 			model.addObject("result", json);
 			// model.addObject("path", PATH);
-			String pa=PATH + mpf.get(0).getOriginalFilename();
+			String pa=path1 + mpf.get(0).getOriginalFilename();
 			HashMap map = new HashMap();
 			map.put("path", pa);
 			return map;
@@ -102,7 +117,7 @@ public class ProductController {
 			model.addObject("result", json);
 			map.put("path", "실패");
 			return map;
-
+			
 		}
 
 	}
