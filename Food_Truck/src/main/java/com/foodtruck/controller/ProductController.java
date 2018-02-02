@@ -1,11 +1,19 @@
 package com.foodtruck.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.ProductService;
@@ -21,6 +29,7 @@ public class ProductController {
 	@Autowired
 	private MemberService memberService;
 	
+	
 	// ��ǰ ��� �ϴ� ������ �̵�
 	@RequestMapping("/insertProductForm") 
 	public String insertProductForm(Model model, HttpSession session) {
@@ -35,13 +44,15 @@ public class ProductController {
 		return "nav/productInsert";
 	}
 	
+	
 	// ��ǰ ���
 	@RequestMapping("/insertProduct")
-	public String insertProduct(ProductVO vo) {
+	@ResponseBody
+	public int insertProduct(ProductVO vo) throws IOException {
 		
-		productService.insertProduct(vo);
-		System.out.println("��ǰ ��� ����!");
-		System.out.println(vo.getFtruckNo());
-		return "home";
+		vo.setProdImg("경로"); 
+		int num=productService.insertProduct(vo);
+		
+		return num;
 	}
 }

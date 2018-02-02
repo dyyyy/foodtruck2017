@@ -114,6 +114,20 @@ textarea {
 
 	<div class="container-fluid">
 		<div class="row-fluid">
+		<div class="span3" id="sidebar">
+				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+					<li ><a
+						href="/sellerMain?licenseNo=${licenseNo}"> <i
+							class="icon-chevron-right"></i>주문 및 예약·배달
+					</a></li>
+					<li class="active"><a href="/sellerCalendar?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>매출 통계</a></li>
+					<li><a href="/sellerChart?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>차트</a></li>
+					<li><a href="/sellerProduct?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>내 푸드트럭 메뉴</a></li>
+				</ul>
+			</div> 
 			<div class="span9" id="content">
 				<!-- morris stacked chart -->
 				<div class="row-fluid">

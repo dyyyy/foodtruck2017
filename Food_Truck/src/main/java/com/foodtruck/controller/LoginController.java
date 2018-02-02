@@ -2,6 +2,7 @@
 package com.foodtruck.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.LicenseVO;
 
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.SellerVO;
 
 @Controller
 public class LoginController {
@@ -58,8 +60,10 @@ public class LoginController {
 				if(mvo.getMemberAuth().equals("1")) {
 					session.setAttribute("memberGubun","1");
 				} else if(mvo.getMemberAuth().equals("2")) {
-					session.setAttribute("memberGubun","2");
-					session.setAttribute("licenseNo", sellerService.getLicense(mvo.getMemberId()));
+					session.setAttribute("memberGubun","2");					
+					List<SellerVO> list=sellerService.getLicense(mvo.getMemberId());
+						session.setAttribute("licenseNo", list);
+					
 				}
 				return "redirect:/";
 			} else {

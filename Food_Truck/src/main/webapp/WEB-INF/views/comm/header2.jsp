@@ -37,15 +37,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
-	$(function() {
-		$(".bs-docs-sidenav").child("li").click(function() {
-			$(".bs-docs-sidenav").child("li").attr("class","active");
-		})
-	})
-
-
-
-
 </script>
 
 
@@ -68,8 +59,9 @@
 					<a class="brand" href="/admin">관리자</a>
 				<%
 					} else if(mvo.getMemberAuth().equals("2")) {
+						List list = (List)session.getAttribute("licenseNo");
 				%>
-					<a class="brand" href="#">판매자</a>
+					<a class="brand" href="#">내 푸드트럭 관리</a>
 				<%
 					}
 				%>				
@@ -86,86 +78,12 @@
 								<li><a tabindex="-1" href="/logout">Logout</a></li>
 							</ul></li>
 					</ul>
-					<ul class="nav">
-						<li class="active"><a href="#">미정</a></li>
-						<li class="dropdown"><a href="#" data-toggle="dropdown"
-							class="dropdown-toggle">미정 <b class="caret"></b>
-
-						</a>
-							<ul class="dropdown-menu" id="menu1">
-								<li><a href="#">Tools <i class="icon-arrow-right"></i>
-
-								</a>
-									<ul class="dropdown-menu sub-menu">
-										<li><a href="#">Reports</a></li>
-										<li><a href="#">Logs</a></li>
-										<li><a href="#">Errors</a></li>
-									</ul></li>
-								<li><a href="#">SEO Settings</a></li>
-								<li><a href="#">Other Link</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Other Link</a></li>
-								<li><a href="#">Other Link</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" role="button"
-							class="dropdown-toggle" data-toggle="dropdown">미정 <i
-								class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-								<li><a tabindex="-1" href="#">Blog</a></li>
-								<li><a tabindex="-1" href="#">News</a></li>
-								<li><a tabindex="-1" href="#">Custom Pages</a></li>
-								<li><a tabindex="-1" href="#">Calendar</a></li>
-								<li class="divider"></li>
-								<li><a tabindex="-1" href="#">FAQ</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-						미정 <i class="caret"></i>
-
-						</a>
-							<ul class="dropdown-menu">
-							
-								<li></li>
-							</ul>
-							</li>
-					</ul>
+					
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
-	
-	<% 
-		if(mvo.getMemberAuth().equals("2")) {
-			List list = (List)session.getAttribute("licenseNo");
-			SellerVO ssvo = null;
-			if(!list.isEmpty()) {
-				ssvo = (SellerVO)list.get(0);
-			}
-	%>
-	<div class="span3" id="sidebar" style="margin-right:50px;margin-left:50px;">
-		<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-			<li class="active">
-				 <a href="/sellerMain<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">
-				 <i class="icon-chevron-right"></i>주문 및 예약·배달</a> 
-			</li>
-			<li>
-				<a href="/sellerCalendar<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>매출 통계</a>
-			</li>
-			<li>
-				<a href="/sellerChart<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>차트</a>
-			</li>
-			<li>
-				<a href="/foodTruckMng<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>내 푸드트럭</a>
-			</li>
-			<li>
-				<a href="/productMng<%=list.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>"><i class="icon-chevron-right"></i>상품관리</a>
-			</li>
-		</ul>
-	</div>
-	
-	<% }  %>
+
 </body>
 </html>

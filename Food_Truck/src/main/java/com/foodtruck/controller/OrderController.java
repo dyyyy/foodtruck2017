@@ -91,7 +91,7 @@ public class OrderController {
 										@RequestParam("ordName") String ordName, 
 										@RequestParam("ordTel") String ordTel, 
 										@RequestParam("ordReq") String ordReq, 
-										@RequestParam("ftruckNo") String ftruckNo, 
+ 
 										@RequestParam("licenseNo") String licenseNo, 
 										@RequestParam("prodNo") List<String> prodNo, 
 										@RequestParam("prodName") List<String> prodName,
