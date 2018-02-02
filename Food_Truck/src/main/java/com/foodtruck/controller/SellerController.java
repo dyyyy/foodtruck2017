@@ -7,22 +7,24 @@ import java.util.HashMap;
 
 import java.util.List;
 
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +35,9 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 
+
 import com.foodtruck.service.OrderService;
+
 import com.foodtruck.service.ProductService;
 
 import com.foodtruck.service.SellerService;
@@ -42,7 +46,11 @@ import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 
+
+
+
 import com.foodtruck.vo.OrderVO;
+
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.SellerVO;
 
@@ -94,27 +102,34 @@ public class SellerController {
 
 	// �Ǹ��� �޴� - �Ǹ��� ��� ?
 
+
+
+
 	@RequestMapping("/sellerMain")
-	public String sellerMain(HttpServletRequest request, Model model, HttpSession session,
-			@RequestParam(value = "licenseNo", required = false) String licenseNo) {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
+	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		if(licenseNo==null) {
+			
 		
-		if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
-			List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
-			String num = list.get(0).getLicenseNo();
+			return "seller/null";
+		}else {
+			List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
+			String num= licenseNo;
+
 			model.addAttribute("licenseNo", num);
 			model.addAttribute("license", list);
+
 			model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
 			System.out.println(request.getParameter("licenseNo"));
 			
 			model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
 			model.addAttribute("order", sservice.getOrderList(num));
 			model.addAttribute("img", sservice.getFoodTruckList(num));
-
+		
 			return "seller/main";
-		} else {
-			return "seller/null";
 		}
+			
+		
 	}
 
 	@RequestMapping("/insertFoodTruckForm")

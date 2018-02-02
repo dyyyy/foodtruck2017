@@ -45,7 +45,7 @@
 <body onload="map()">
 
 
- <%@include file="../comm/nav.jsp"%>
+    <%@include file="../comm/nav.jsp"%>
 	<section class="product-page page fix">
 		<!--Start Product Details Area-->
 		<div class="container">

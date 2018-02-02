@@ -33,6 +33,15 @@
 <script src="/resources/admin/vendors/flot/jquery.flot.stack.js"></script>
 <script src="/resources/admin/vendors/flot/jquery.flot.resize.js"></script>
 <script src="/resources/admin/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+
+
+
 </head>
 <body>
 	<div class="navbar navbar-fixed-top">
@@ -50,6 +59,7 @@
 					<a class="brand" href="/admin">관리자</a>
 				<%
 					} else if(mvo.getMemberAuth().equals("2")) {
+						List list = (List)session.getAttribute("licenseNo");
 				%>
 					<a class="brand" href="#">내 푸드트럭 관리</a>
 				<%
@@ -74,5 +84,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

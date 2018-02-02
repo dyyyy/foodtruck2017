@@ -71,7 +71,11 @@
                         break;
                            //판매자
                            case "2":
-                              
+                        	   List<SellerVO> list3 = (List<SellerVO>)session.getAttribute("licenseNo");
+                               SellerVO ssvo = null;
+                               if(!list3.isEmpty()) {
+                                  ssvo = (SellerVO)list3.get(0);
+                               }  
                            
                      %>
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
@@ -79,7 +83,7 @@
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
 									<li><a
-										href="/sellerMain">푸드트럭 관리</a></li>
+										href="/sellerMain<%=list3.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;
@@ -112,7 +116,10 @@
 								</ul></li>
 							<%break;
 								//판매자회원
-								case "2":%>
+								case "2":		                    
+		                              
+
+								%>
 							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
