@@ -98,12 +98,15 @@ public class SellerController {
 	public String sellerMain(HttpServletRequest request, Model model, HttpSession session,
 			@RequestParam(value = "licenseNo", required = false) String licenseNo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		
 		if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
 			List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
 			String num = list.get(0).getLicenseNo();
 			model.addAttribute("licenseNo", num);
 			model.addAttribute("license", list);
 			model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
+			System.out.println(request.getParameter("licenseNo"));
+			
 			model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
 			model.addAttribute("order", sservice.getOrderList(num));
 			model.addAttribute("img", sservice.getFoodTruckList(num));
