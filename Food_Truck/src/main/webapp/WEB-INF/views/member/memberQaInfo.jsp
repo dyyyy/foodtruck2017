@@ -71,7 +71,10 @@
                      	</tr>
                   </table>
                </div>
+               	<c:set var="temp" value="${qaInfo.qaScStat}" />
+               	<c:if test="${temp eq 'Y'}">
                		<div class="reviewBtn"><input type="button" value="답변내용" id="reviewBtn" style="float: right"></div>
+               	</c:if>
                <br><br><br><br><br>
                <div class="table-responsive hihide">
                		<table class="table cart-table">
