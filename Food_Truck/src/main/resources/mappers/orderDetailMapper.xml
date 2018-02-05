@@ -13,27 +13,28 @@
 
 	</select>
 
-	<!-- 주문 상세 리스트 -->
-	<select id="getOrderDetailList" resultMap="OrderDetailMap">
-
-		<!-- SELECT O.PROD_NO,O.ORDER_NO,P.PROD_NAME,O.QTY,O.ORD_PRICE -->
-		<!-- FROM ORDERDETAIL O,PRODUCT P -->
-		<!-- <where> -->
-		<!-- O.PROD_NO = P.PROD_NO AND P.LICENSE_NO IN (SELECT L.LICENSE_NO FROM -->
-		<!-- LICENSE L -->
-		<!-- </where> -->
-		<!-- <where> L.SEL_ID = #{selId})</where> -->
-
-	
-		SELECT O.PROD_NO, O.ORD_NO, P.PROD_NAME, O.ORD_QTY, O.ORD_PRICE
-		FROM ORDERDETAIL O, PRODUCT P, ORDERS
-		<where>
-			O.ORD_NO = ORDERS.ORD_NO
-			AND P.PROD_NO = O.PROD_NO
-			AND ORDERS.LICENSE_NO IN (SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID=#{memId})
-		</where>
-
-	</select>
+   	<!-- 주문 상세 리스트 -->
+  	<select id="getOrderDetailList" resultMap="OrderDetailMap" parameterType="map">
+   
+   		SELECT D.LICENSE_NO, O.PROD_NO, O.ORD_NO, P.PROD_NAME, O.ORD_QTY, O.ORD_PRICE,D.COOK_STAT,D.ORD_DATE
+     	FROM ORDERDETAIL O, PRODUCT P, ORDERS D
+      	WHERE
+      	O.ORD_NO = D.ORD_NO
+      	AND P.PROD_NO = O.PROD_NO
+      	AND D.LICENSE_NO IN (SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
+      	<choose>
+      		<when test="ordDate != null and ordDate != '' and licenseNo != null and licenseNo != ''">
+      			AND D.ORD_DATE = #{ordDate} 
+      			AND D.LICENSE_NO=#{licenseNo}
+      			ORDER BY O.ORD_NO DESC,D.ORD_DATE DESC
+      		</when>
+      		<otherwise>
+        		AND D.ORD_DATE IN (SELECT TO_CHAR(SYSDATE,'YYMMDD')FROM DUAL)
+        		ORDER BY O.ORD_NO DESC, D.ORD_DATE DESC   
+        	</otherwise>
+        </choose>
+        
+   	</select>
 
 	<!-- 주문 등록  -->
 	<insert id="insertOrderDetail" parameterType="map">

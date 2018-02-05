@@ -27,4 +27,7 @@ public interface OrderDAO {
 	
 	//주문
 	public int insertOrder(Map<String, Object> map);
+	
+	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
+	public int cookStatChange(Map<String, Object> map);	
 }

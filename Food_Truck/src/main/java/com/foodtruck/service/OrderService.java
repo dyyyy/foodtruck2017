@@ -58,4 +58,10 @@ public class OrderService {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.insertOrder(map);
 	}
+	
+	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
+	public int cookSataChange(Map<String, Object> map) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.cookStatChange(map);
+	}	
 }
