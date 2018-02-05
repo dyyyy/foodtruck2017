@@ -45,11 +45,7 @@
 								</div>
 								<!-- Product Ratting -->
 								<div class="pro-ratting">
-									<i class="on fa fa-star"></i>
-									<i class="on fa fa-star-o"></i>
-									<i class="on fa fa-star-o"></i>
-									<i class="on fa fa-star-o"></i>
-									<i class="on fa fa-star-o"></i>
+									<span style="width: ${rank.ftruckGrade*20}%"></span>
 								</div>
 								<!-- Product Price -->
 								<div class="pro-price fix">

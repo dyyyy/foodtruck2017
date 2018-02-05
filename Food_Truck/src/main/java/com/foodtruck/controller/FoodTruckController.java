@@ -134,10 +134,24 @@ public class FoodTruckController {
 	// ������
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-	      double pyengjum = 0;//리뷰 평점 합계
-	      double count = 0; //리뷰 수
-	      double total = 0; //푸드트럭 총 평점
-	      FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//푸드트럭 정보 호출
+
+	    FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);		//푸드트럭 정보 호출
+		FoodTruckVO vo2 = fservice.getReviewCount(ftruckNo);	// 푸드트럭 전체 리뷰 갯수
+		FoodTruckVO vo3 = fservice.getReviewTotal(ftruckNo);	// 푸드트럭 전체 평점 합계
+		if(vo2 != null && vo3 != null) {
+			double count = vo2.getCount();	// 푸드트럭 총 댓글 갯수
+			double total = vo3.getTotal(); // 푸드트럭 평점 총합
+			double ftruckGrade = (total/count);
+			System.out.println("평점 총 합 " + total  + "총 갯수" + count);
+			System.out.println("평균" + ftruckGrade);
+			vo.setFtruckGrade(ftruckGrade);	// vo에 평점 set
+			int count2 = vo2.getCount();
+			int total2 = vo3.getTotal();
+			int ftruckGrade2 = (total2/count2);
+			request.setAttribute("grade", ftruckGrade2);
+		}
+		
+		
 		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
@@ -146,18 +160,7 @@ public class FoodTruckController {
 		System.out.println("진입전");
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);	// 상품 정보 호출
 		System.out.println("진입후");
-		if(Rlist.size()!=0) {
-			for (int i = 0; i < Rlist.size(); i++) {
-				double score = Rlist.get(i).getGrade();
-				pyengjum += score;
-				count = Rlist.size();
-				total = pyengjum / count;
-				total = Double.parseDouble(String.format("%.2f",total));
-			}	
-		}else {
-			total=0;		
-		}
-		vo.setFtruckGrade(total);
+
 		request.setAttribute("vo", vo);
 		request.setAttribute("review", Rlist);
 		request.setAttribute("product", Plist);

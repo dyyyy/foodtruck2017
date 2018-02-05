@@ -1,22 +1,25 @@
 package com.foodtruck.vo;
 
-public class FoodTruckVO {
-	private String ftruckNo; // ����� ��ȣ
-	private String ftruckName; // Ǫ�� Ʈ�� �̸�(��ȣ��)
-	private String ftruckTel; // Ǫ�� Ʈ�� ��ȭ��ȣ
-	private String ftruckAddr; // Ǫ�� Ʈ�� �ּ�
-	private String ftruckAddr2; // Ǫ�� Ʈ�� �ּ�
-	private String ftruckIntro; // Ǫ��Ʈ�� �Ұ�
-	private String ftruckReg; // Ǫ��Ʈ�� �������
-	private String ftruckDlvYn; // ��� ����(Y/N)
-	private String ftruckRsvYn; // ���� ����(Y/N)
-	private String ftruckState; // ���� ����(Y/N)
-	private double ftruckGrade; // Ǫ��Ʈ�� ����
-	private String ftruckImg; // Ǫ��Ʈ�� �̹���
-	private String latitude; // ����
-	private String longitude; // �浵
-	private int category; // ī�װ���ȣ
-	private String licenseNo; // ����� ��ȣ
+public class FoodTruckVO extends ReviewVO{
+	
+	private String ftruckNo; // 푸드트럭 번호
+	private String ftruckName; // 푸드트럭 이름
+	private String ftruckTel; // 푸드트럭 전화번호
+	private String ftruckAddr; // 푸드트럭 주소1
+	private String ftruckAddr2; // 푸드트럭 주소2
+	private String ftruckIntro; // 푸드트럭 소개
+	private String ftruckReg; // 푸드트럭 등록일
+	private String ftruckDlvYn; // 푸드트럭 배달여부(Y/N)
+	private String ftruckRsvYn; // 푸드트럭 예약여부(Y/N)
+	private String ftruckState; // 푸드트럭 운영여부(Y/N)
+	private double ftruckGrade; // 푸드트럭 평점
+	private String ftruckImg; // 푸드트럭 이미지
+	private String latitude; // 위도
+	private String longitude; // 경도
+	private int category; // 카테고리 번호
+	private String licenseNo; // 사업자 번호
+	private int count;	// 리뷰 총 갯수
+	private int total;	// 리뷰 평점 총 합 
 	
 	
 	// getter & setter
@@ -116,5 +119,16 @@ public class FoodTruckVO {
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
-	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 }

@@ -13,6 +13,28 @@
 		FTRUCK_NO = #{ftruckNo}
 	</select>
 
+	<!-- 푸드트럭에 달린 갯수 카운트 -->
+	<select id="getReviewCount" resultMap="FoodTruckMap">
+		select count(r.grade) as count
+		from review r,foodtruck f 
+		where f.ftruck_no = r.ftruck_no and f.ftruck_no = #{ftruckNo}
+	</select>
+	
+	<!-- 푸드트럭에 달린 리뷰 합계 -->
+	<select id="getReviewTotal" resultMap="FoodTruckMap">
+		select sum(r.grade) as total
+		from review r,foodtruck f 
+		where f.ftruck_no = r.ftruck_no and f.ftruck_no = #{ftruckNo}
+	</select>
+
+	<!-- 댓글 등록하고 평점 수정 -->
+	<update id="updateGrade">
+		update foodtruck 
+		set
+		FTRUCK_GRADE = #{ftruckGrade}
+		where FTRUCK_NO = #{ftruckNo}
+	</update>
+
 	<!-- 라이센스로 푸드트럭 정보 가져오기 -->
 	<select id="getFoodTruck2" resultMap="FoodTruckMap">
 		select * from foodtruck where license_no=#{licenseNo}
@@ -136,7 +158,7 @@
 		from foodtruck f,license l where f.license_no = l.license_no and l.app_stat = 'Y' and category=#{category}
 	</select>
 
-	<resultMap type="FoodTruckVO" id="FoodTruckMap">
+	<resultMap type="FoodTruckVO" id="FoodTruckMap" extends="ReviewMap">
 		<result column="FTRUCK_NO" property="ftruckNo" />
 		<result column="LICENSE_NO" property="licenseNo" />
 		<result column="FTRUCK_NAME" property="ftruckName" />
@@ -150,11 +172,19 @@
 		<result column="FTRUCK_IMG" property="ftruckImg" />
 		<result column="FTRUCK_INTRO" property="ftruckIntro" />
 		<result column="FTRUCK_REG" property="ftruckReg" />
+		<result column="COUNT" property="count" />
+		<result column="TOTAL" property="total" />		
 	</resultMap>
+	
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="LicenseMap">
 		<result column="LICENSE_NO" property="licenseNo" />
 		<result column="MEM_ID" property="memId" />
 		<result column="APP_STAT" property="appStat" />
+	</resultMap>
+	
+	<resultMap type="com.foodtruck.vo.ReviewVO" id="ReviewMap">
+		<result column="GRADE" property="grade" />
+		<result column="FTRUCK_NO" property="ftruckNo" />
 	</resultMap>
 
 </mapper>

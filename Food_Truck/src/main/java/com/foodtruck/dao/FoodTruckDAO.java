@@ -10,6 +10,15 @@ public interface FoodTruckDAO {
 	// 푸드트럭 정보
 	public FoodTruckVO getFoodTruck(String ftruckNo)throws Exception;
 	
+	// 푸드트럭 리뷰 합계 
+	public FoodTruckVO getReviewTotal(String ftruckNo)throws Exception;
+	
+	// 푸드트럭 리뷰 갯수
+	public FoodTruckVO getReviewCount(String ftruckNo)throws Exception;
+	
+	// 댓글달면 평점수정
+	public void updateGrade(FoodTruckVO vo)throws Exception;
+	
 	// 영업중 푸드트럭 정보
 	public FoodTruckVO getRunFoodTruck(String ftruckNo)throws Exception;
 	
