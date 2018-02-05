@@ -22,9 +22,9 @@ public class OrderDetailService {
    }
 
    //판매자 입장에서 주문 내역 리스트
-   public List<OrderDetailVO> getOrderDetailList(String selId) {
+   public List<OrderDetailVO> getOrderDetailList(Map<String, Object> map) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
-      return dao.getOrderDetailList(selId);
+      return dao.getOrderDetailList(map);
    }
    
    //주문 상세 수정

@@ -58,7 +58,15 @@
 		</selectKey>
 		
 	</insert>
-
+	
+	<!-- 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료) -->
+	<update id="cookStatChange">
+	
+		UPDATE ORDERS
+		SET COOK_STAT=#{cookStat}
+		<where> ORD_NO=#{ordNo} </where>
+	
+	</update>
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
@@ -76,6 +84,7 @@
 		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="PROD_NAME" property="prodName"/>
 		<result column="FTRUCK_NAME" property="ftruckName" />
+		<result column="COOK_STAT" property="cookStat" />
 	</resultMap>
 	
 	<resultMap type="LicenseVO" id="LicenseMap">

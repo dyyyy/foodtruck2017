@@ -11,7 +11,7 @@ public interface OrderDetailDAO {
    public OrderDetailVO getOrderDetail(int ordNo);
 
    // 판매자 입장에서 주문 내역 리스트
-   public List<OrderDetailVO> getOrderDetailList(String selId);
+   public List<OrderDetailVO> getOrderDetailList(Map<String, Object> map);
 
    // 주문 상세 등록
    public int insertOrderDetail(OrderDetailVO vo);
