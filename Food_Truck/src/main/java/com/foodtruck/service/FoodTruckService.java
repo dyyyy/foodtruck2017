@@ -23,6 +23,24 @@ public class FoodTruckService {
 		return dao.getFoodTruck(ftruckNo);
 	}
 
+	// 푸드트럭에 달린 리뷰 총 갯수
+	public FoodTruckVO getReviewCount(String ftruckNo)throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getReviewCount(ftruckNo);
+	}
+	
+	// 푸드트럭에 달린 리뷰 총 합계
+	public FoodTruckVO getReviewTotal(String ftruckNo)throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getReviewTotal(ftruckNo);
+	}
+	
+	// 댓글달면 평점수정
+	public void updateGrade(FoodTruckVO vo)throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		dao.updateGrade(vo);
+	}	
+	
 	// 라이센스번호로 푸드트럭 정보 가져오기
 	public FoodTruckVO getFoodTruck2(String licenseNo) throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);

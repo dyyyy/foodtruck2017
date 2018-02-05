@@ -4604,3 +4604,30 @@ star-input>.input.focus {
    text-align:right;
    vertical-align:middle;
 }
+
+.pro-ratting {
+   width: 80px;
+   height: 16px;
+   background: url('/resources/img/0151.jpg') no-repeat -80px 0;
+}
+
+.pro-ratting>span {
+   display: block;
+   height: 16px;
+   background: url('/resources/img/0151.jpg') no-repeat left top;
+   text-indent: -9999em;	
+	
+}
+
+.reply-ratting {
+   width: 80px;
+   height: 16px;
+   background: url('/resources/img/015.jpg') no-repeat -80px 0;
+}
+
+.reply-ratting>span {
+   display: block;
+   height: 16px;
+   background: url('/resources/img/015.jpg') no-repeat left top;
+   text-indent: -9999em;	
+}

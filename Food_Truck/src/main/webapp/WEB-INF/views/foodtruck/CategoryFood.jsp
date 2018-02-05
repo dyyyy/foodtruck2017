@@ -5,9 +5,7 @@
 <html>
 
 <jsp:include page="../comm/header.jsp"></jsp:include>
-
 <body>
-
  <%@include file="../comm/nav.jsp" %>
 
 <!-- Shop Product Area Start -->
@@ -19,8 +17,12 @@
 					<!-- Shop Tool Bar -->
 					<div class="shop-tool-bar col-sm-12 fix">
 						<div class="view-mode">
-							<a href="/CategoryFood2?pageNo=1&category=${categoryno}"><i class="fa fa-th"></i></a>
-							<a href="/CategoryFood?pageNo=1&category=${categoryno}" class="active"><i class="fa fa-th-list"></i></a>
+							<a href="/CategoryFood2?pageNo=1&category=${categoryno}">
+								<i class="fa fa-th"></i>
+							</a>
+							<a href="/CategoryFood?pageNo=1&category=${categoryno}" class="active">
+								<i class="fa fa-th-list"></i>
+							</a>
 						</div>
 						<div class="sort-by">
 							<span>Sort By</span>
@@ -56,14 +58,9 @@
 							<div class="list-pro-des fix">
 								<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
 								<div class="pro-ratting">
-									<i class="fa fa-star on"></i>
-									<i class="fa fa-star on"></i>
-									<i class="fa fa-star on"></i>
-									<i class="fa fa-star on"></i>
-									<i class="fa fa-star-half-o on"></i>
+									<span style="width: ${all.ftruckGrade*20}%"></span>
 								</div>
 								<p>${all.ftruckIntro}</p>
-								
 							</div>
 						</div>
 						</c:forEach>
@@ -129,7 +126,7 @@
 								<%
 									}
 								%>
-								</ul>
+							</ul>
 						</div>
 					</div>
 				</div>
