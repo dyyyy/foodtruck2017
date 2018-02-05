@@ -59,11 +59,7 @@ public class FoodTruckService {
 		return dao.getFoodTruckRank();
 	}
 
-	// 푸드트럭 등록
-	public int insertFoodTruck(FoodTruckVO vo) throws Exception {
-		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		return dao.insertFoodTruck(vo);
-	}
+	
 
 	// 푸드트럭 수정
 	public int updateFoodTruck(FoodTruckVO vo) throws Exception {

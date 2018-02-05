@@ -50,6 +50,11 @@ public class SellerService {
 		System.out.println("mmmmmmmmmmmmmmmmmmmm" + dao.getLicense(memberId));
 		return dao.getLicense(memberId);
 	}
+	// 판매자의 푸드트럭 승인 flg
+		public List<SellerVO> getLicense2(String memberId) {
+			SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+			return dao.getLicense2(memberId);
+		}
 
 	// 푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList(String licenseNo) {

@@ -56,11 +56,10 @@
 						<div class="tab-content details-pro-tab-content">
 							<div class="tab-pane fade in active" id="image-1">
 								<div class="simpleLens-big-image-container">
-									<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" class="simpleLens-big-image">
+									<img src="<%=vo.getFtruckImg()%>" alt="" class="simpleLens-big-image" style="width: 600px; height: 500px;">
 								</div>
 							</div>
-						</div>
-							<a href="#" style="padding-left: 20px"><img src="/resources/img/busy.png" id="cbtn"></a>
+						</div>							
 						<!-- Nav tabs -->
 					</div>
 				</div>

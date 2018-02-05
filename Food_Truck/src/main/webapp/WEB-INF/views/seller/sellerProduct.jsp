@@ -12,7 +12,7 @@
 
 <head>
 <title>상품</title>
-<script src="<c:url value="/resources/js/jquery.form.min.js"/>"></script>
+
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -47,11 +47,11 @@
 		location.href = "sellerProduct?licenseNo=" + sel;
 	}
 	function add() {
-		var name = document.getElementById("pname").value;
-		var price = document.getElementById("pprice").value;
+		var name = document.getElementById("name").value;
+		var price = document.getElementById("price").value;
 		var content = document.getElementById("pcontent").value;
-		var pimg = document.getElementById("pimg").value;
-		var origin = document.getElementById("porigin").value;
+		var pimg = document.getElementById("path").value;
+		var origin = document.getElementById("origin").value;
 		var licenseNo = document.getElementById("licenseNo").value;
 		$.ajax({
 			url : "insertProduct",
@@ -60,7 +60,7 @@
 				"prodName" : name,
 				"prodPrice" : price,
 				"prodContent" : content,
-				"prodImg" : prodImg,
+				"prodImg" : pimg,
 				"prodOrgin" : origin
 			},
 			type : "post",
@@ -85,7 +85,7 @@
 			contentType : false,
 			type : 'POST',
 			success : function(data) {
-				$('#mg').html(data.path);
+				$('.img2').html('<input type="hidden" value="' + data.path + '" id="path">');
 			},
 			error : function(jqXHR) {
 				alert(jqXHR.responseText);
@@ -163,9 +163,9 @@
 								<!-- 상품 리스트 뿌려주기  1행 MAX 4개 상품 -->
 								<c:forEach items="${list2}" var="all">
 									<div class="span3">
-										<a href="#" class="thumbnail"> <img
+										<a href="#tutorialsplaneModal2" class="thumbnail"> <img
 											data-src="holder.js/260x180" alt="260x180"
-											style="width: 260px; height: 180px;" src="${all.prodImg}">
+											style="width: 260px; height: 180px;" src="${all.prodImg}" data-toggle="modal">
 										</a>
 										<div align="center">
 											<table>
@@ -191,50 +191,44 @@
 				</div>
 				<div class="modal-body" style="margin-left: 10px;">
 					<form class="form-horizontal" name="addProduct"
-						enctype="multipart/form-data" id="asd">
+						enctype="multipart/form-data" id="uploadForm">
 						<table border=1 class="table table-striped table-bordered">
 							<tr>
 								<td align="center" style="width: 100px;">상품이름</td>
 								<td colspan=3><input type="text" style="width: 350px;"
-									name="name"></td>
+									id="name"></td>
 							</tr>
 							<tr>
 								<td align="center">상품 가격</td>
 								<td colspan=3><input type="text" style="width: 350px;"
-									name="price"></td>
+									id="price"></td>
 							</tr>
 							<tr>
 								<td rowspan=3>상품 설명</td>
 								<td rowspan=3 colspan=3><textarea rows="5" cols="8"
-										style="width: 350px;" name="content"></textarea></td>
+										style="width: 350px;" id="pcontent"></textarea></td>
 							</tr>
 							<tr></tr>
 							<tr></tr>
 							<tr>
-								<td></td>
-								<td></td>
+								<tr>
+								<td>이미지 파일</td>
+								<td colspan=3 id="mg" style="width: 100px;"><input
+									type="file" style="width: 350px;" name="img"
+									enctype="multipart/form-data" onchange="mm()"></td>
 							</tr>
+								
+							
 							<tr>
 								<td rowspan=2>원산지</td>
 								<td rowspan=2 colspan=3><textarea rows="5" cols="5"
-										style="width: 350px;" name="origin"></textarea></td>
+										style="width: 350px;" id="origin"></textarea></td>
 							</tr>
 							<tr></tr>
 						</table>
 						<div class="num"></div>
-					</form>
-					<form id="uploadForm">
-						<table border=1 class="table table-striped table-bordered">
-							<tr>
-								<td>이미지 파일</td>
-								<td colspan=3 id="mg" style="width: 100px;"><input
-									type="file" style="width: 350px;" name="img"
-									enctype="multipart/form-data"><input type="button"
-									value="미리보기" onclick="mm()"></td>
-							</tr>
-
-						</table>
-					</form>
+						<div class="img2"></div>
+					</form>					
 				</div>
 
 				<div class="modal-footer">

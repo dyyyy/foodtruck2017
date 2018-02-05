@@ -13,6 +13,7 @@
 <script type="text/javascript">
 	function modal(e) {
 		var licenseNo = e.getAttribute("data-id");
+		alert("진입");
 		$.ajax({
 			url : "/approvalList",
 			data : {
@@ -21,7 +22,9 @@
 			type : "post",
 			dataType : "json",
 			success : function(data) {
-				
+				$(".set").html(data.content);
+				$(".table12").html(data.table);
+				$(".asd").html('<input type="hidden" value="' + data.licenseNo + '" id="licenseNo">')
 			}
 		})
 	}
@@ -101,6 +104,7 @@
 									</tbody>
 								</table>
 							</div>
+							<img src="vo.getFtruckImg()">
 							<div class="num"></div>
 							<div class="pagination" align="center">
 								<ul>
@@ -203,7 +207,7 @@
 							<br>
 							<div><h4>정보</h4></div>
 							<div class="table12" align="center"></div>
-							
+							<div class="asd"></div>
 						</div>
 						<div class="modal-footer">
 						<button class="btn btn-default" onclick="approval()">승인하기</button>

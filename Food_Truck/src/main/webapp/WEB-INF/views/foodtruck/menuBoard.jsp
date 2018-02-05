@@ -43,16 +43,16 @@
 							</div>
 							<div class="pro-Showing">
 								<span>Showing 1 - 12 of 16 items</span>
+								<img src="/resources/img/">
 							</div>
 						</div>
+						
 						<div class="shop-products">
 							<!-- Single Product -->
 							<c:forEach items="${list}" var="all">
 								<div class="single-list-product col-sm-12">
 									<div class="list-pro-image">
-										<a href="/read?licenseNo=${all.licenseNo}"> <img
-											src="/resources/img/foodtruck/${all.ftruckImg}">
-										</a>
+										<img src="${all.ftruckImg}">
 									</div>
 									<div class="list-pro-des fix">
 										<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>

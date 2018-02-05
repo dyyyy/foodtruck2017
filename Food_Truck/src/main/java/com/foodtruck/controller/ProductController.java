@@ -67,7 +67,13 @@ public class ProductController {
 	@RequestMapping("/insertProduct")
 	@ResponseBody
 	public int insertProduct(ProductVO vo) throws IOException {
-
+		System.out.println(vo.getLicenseNo());
+		System.out.println(vo.getProdContent());
+		System.out.println(vo.getProdImg());
+		System.out.println(vo.getProdName());
+		System.out.println(vo.getProdNo());
+		System.out.println(vo.getProdOrgin());
+		System.out.println(vo.getProdPrice());
 		int num = productService.insertProduct(vo);
 		return num;
 
@@ -87,7 +93,10 @@ public class ProductController {
 
 		if (itr.hasNext()) {
 			List<MultipartFile> mpf = request.getFiles(itr.next());
-			// 임시 파일을 복사한다.
+			
+			//DB에 저장될 값
+			String pname="\\resources\\img\\upload\\"+mpf.get(0).getOriginalFilename();
+			
 			for (int i = 0; i < mpf.size(); i++) {
 				
 				File file = new File(path1 + mpf.get(i).getOriginalFilename());				
@@ -108,7 +117,7 @@ public class ProductController {
 			// model.addObject("path", PATH);
 			String pa=path1 + mpf.get(0).getOriginalFilename();
 			HashMap map = new HashMap();
-			map.put("path", pa);
+			map.put("path", pname);
 			return map;
 		} else {
 			HashMap map = new HashMap();
