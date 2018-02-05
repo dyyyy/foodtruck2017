@@ -4,6 +4,27 @@
 
 <mapper namespace="com.foodtruck.dao.MemberDAO">
 
+	<!-- 사용자 문의내역리스트 -->
+	<select id="getMemberQaInfoList" resultMap="InquiryMap">
+		SELECT Q.* FROM QA_SC Q , MEMBER M 
+		WHERE Q.MEM_ID = M.MEM_ID 
+		AND M.MEM_ID = #{memId}
+	</select>
+	
+	<!-- 사용자 문의내역 정보 -->
+	<select id="getMemberQaInfo" resultMap="InquiryMap">
+		SELECT Q.* FROM QA_SC Q , MEMBER M 
+		WHERE Q.MEM_ID = M.MEM_ID 
+		AND Q.QA_SC_NO = #{qaScNo}
+	</select>
+
+	<!-- 사용자 문의 답변 -->
+	<select id="getMemberQaReply" resultMap="InquiryReplyMap">
+		SELECT R.* FROM REPLY_SC R, QA_SC Q
+		WHERE Q.QA_SC_NO = R.QA_SC_NO
+		AND R.QA_SC_NO = #{qaScNo}
+	</select>
+
 	<!-- 회원 정보 -->
 	<select id="getMember" resultMap="memberMap">
 
@@ -138,4 +159,12 @@
 		<result column="QA_SC_STAT" property="qaScStat" />
 		<result column="LICENSE_NO" property="licenseNo" />
 	</resultMap>
+	
+	<resultMap type="com.foodtruck.vo.MinquiryReplyVO" id="InquiryReplyMap">
+		<result column="REPLY_SC_NO" property="replyScNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="QA_SC_NO" property="qaScNo" />
+		<result column="REPLY_SC_CONTENT" property="replyScContent" />
+		<result column="REPLY_SC_REG" property="replyScReg" />
+	</resultMap>	
 </mapper>

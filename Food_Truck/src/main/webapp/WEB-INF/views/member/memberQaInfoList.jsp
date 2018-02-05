@@ -24,6 +24,12 @@
 		})
 	});
 </script>
+<style>
+	 a:link { color: black; text-decoration: none;}
+ 	a:visited { color: black; text-decoration: none;}
+	 a:hover { color: blue; text-decoration: underline;
+
+</style>
 <body>
 
    <%@include file="../comm/nav.jsp"%>
@@ -48,47 +54,30 @@
                   <table class="table cart-table">      
                      <thead class="table-title">            
                         <tr>
-                           <th class="ftruckNo">푸드 트럭</th>
-                           <th class="ordDate">주문일</th>
-                           <th class="prodName">상품명</th>
-                           <th class="ordQty">수량</th>
-                           <th class="ordPrice">가격</th>
+                           <th class="qaScNo">문의번호</th>
+                           <th class="qaScTitle" colspan="5">제목</th>
+                           <th class="qaScReg">문의날짜</th>
+                           <th class="qaScState">답변상태</th>
                         </tr>
                      </thead>
                      <tbody>
-                     <c:set var = "sum" value="0" />
-                        <c:forEach items='${list}' var="MemberInfo">
-                           <tr class="table-info">
-                              <!-- 푸드트럭 이름 -->
-                              <td class="unit" id="ftruckName">${MemberInfo.ftruckName}
-                              <!-- 주문일 -->
-                              <td class="unit">${MemberInfo.ordDate}</td>      
-                              <!-- 상품명 -->
-                              <td class="unit">${MemberInfo.prodName}</td>
-                              <!-- 상품 갯수  -->
-                              <td class="unit">${MemberInfo.ordQty}개</td>
-                              <!-- 제품 가격 -->
-                              <td class="unit">${MemberInfo.ordPrice}원</td>
-                           </tr>
-                              <c:set var="sum" value="${sum+MemberInfo.ordPrice}" />
-                        </c:forEach>
+                     	<c:forEach items="${qalist}" var="list" varStatus="status">
+                     	<tr>
+                     		<td class="unit">${status.count}</td>
+                     		<td class="unit" colspan="5"><a href="/memberQaInfo?qaScNo=${list.qaScNo}">${list.qaScTitle}</a></td>
+                     		<td class="unit">${list.qaScReg}</td>
+                     		<td class="unit">${list.qaScStat}</td>
+                     	</tr>
+                     	</c:forEach>	
                      </tbody>
                   </table>
                </div>
-               <div class="col-sm-6 col-md-7"></div>               
-               <div class="col-sm-6 col-md-5">
-                  <div class="proceed fix">
-                     <div class="total">
-                        <h6>총 금액 <span class="totalPriceTest"><c:out value="${sum}" />원</span></h6>
-                     </div>
-		             <div class="reviewBtn"><input type="button" value="리뷰등록" id="reviewBtn"></div>
-                  </div>
-               </div>   
+               <div class="col-sm-6 col-md-7"></div>
             </div>         
          </div>
       </div>
+   </section>   
    <!--End Cart Area-->
-		<%@include file="../form/reviewForm.jsp" %>
    <br><br><br>
    
    <jsp:include page="../comm/footer.jsp"></jsp:include>

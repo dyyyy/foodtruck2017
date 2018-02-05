@@ -6,8 +6,18 @@ import java.util.Map;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.MinquiryReplyVO;
 
 public interface MemberDAO {
+	
+	// 사용자 문의내역 리스트
+	public List<MInquiryVO> getMemberQaInfoList(String memberId);
+	
+	// 사용자 문의내역 정보
+	public MInquiryVO getMemberQaInfo(int qaScNo);
+	
+	// 답변 내용
+	public MinquiryReplyVO getMemberQaReply(int qaScNo);	
 	
 	// 회원 정보
 	public MemberVO getMember(String memberId);
