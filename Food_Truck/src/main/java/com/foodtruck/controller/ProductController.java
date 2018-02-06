@@ -86,8 +86,7 @@ public class ProductController {
 		String path1="";
 		path1 += user;
 		path1 += "\\food\\Food_Truck\\src\\main\\webapp\\resources\\img\\upload\\";		
-		ModelAndView model = new ModelAndView();
-		model.setView(jsonView);
+		
 		
 		Iterator<String> itr = request.getFileNames();
 
@@ -111,19 +110,14 @@ public class ProductController {
 
 			}
 
-			JSONObject json = new JSONObject();
-			json.put("code", "true");
-			model.addObject("result", json);
+			
 			// model.addObject("path", PATH);
 			String pa=path1 + mpf.get(0).getOriginalFilename();
 			HashMap map = new HashMap();
 			map.put("path", pname);
 			return map;
 		} else {
-			HashMap map = new HashMap();
-			JSONObject json = new JSONObject();
-			json.put("code", "false");
-			model.addObject("result", json);
+			HashMap map = new HashMap();		
 			map.put("path", "실패");
 			return map;
 			
