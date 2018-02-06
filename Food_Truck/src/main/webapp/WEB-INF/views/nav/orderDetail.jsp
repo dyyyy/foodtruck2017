@@ -232,10 +232,10 @@
 									// 표 부분
 									switch (cookStat) {
 										case 0:
-											cookStatHangul = "대기"
+											cookStatHangul = "대기중"
 											break;
 										case 1:
-											cookStatHangul = "준비"
+											cookStatHangul = "조리중"
 											break;
 										case 2:
 											cookStatHangul = "완료"
