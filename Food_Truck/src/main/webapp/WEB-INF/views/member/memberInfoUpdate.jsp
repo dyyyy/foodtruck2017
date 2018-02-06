@@ -1,75 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
+<jsp:include page="../comm/header.jsp"></jsp:include>
+<%@include file="../comm/nav.jsp"%>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<style type=text/css>
+<script>
+$(function() {
+	$("#infoupdateBtn").click(function() {
+		
+		var memberPw = $('input[name="memberPw"]')
+		var check = prompt("비밀번호를 입력하세요")
+		if(check == memberPw.val()) {
+			frm.action = "/memberInfoUpdateGet"
+			frm.method = "POST"
+			frm.submit()
+		}else{
+			alert("정보가 틀렸습니다.")
+			return false;
+		}
+	})
+})	
+</script>
+<style>
 .login input {
 	color: red;
 }
-
 #frm {
 	padding-left: 200px;
 }
 h1 {
 	padding-left: 220px;
 }
-
 .btnEdit {
 	margin-left: 130px;
+} 
+.box {
+	border : 0px;
+	background-color: #ebebeb
+}
+.table-title {
+	background-color: #ebebeb 
 }
 </style>
-<jsp:include page="../comm/header.jsp"></jsp:include>
-<%@include file="../comm/nav.jsp"%>
+</head>
 <body>
-	<!--start create member Area-->
-	<div class="login-page page fix">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-md-3">
-					<div class="single-sidebar">
-						<h2>내 정보</h2>
-						<ul align="center">
-							<li><a href="/memberInfo">회원 정보</a></li>
-							<li><a href="/memberOrderInfo">주문 내역</a></li>
-							<li><a href="/memberQaInfoList">문의 내역</a></li>
-						</ul>
-					</div>
+<!--start create member Area-->
+<div class="login-page page fix">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-3">
+				<div class="single-sidebar">
+					<h2>내 정보</h2>
+					<ul align="center">
+						<li><a href="/memberInfo">회원 정보</a></li>
+						<li><a href="/memberOrderInfo">주문 내역</a></li>
+						<li><a href="/memberQaInfoList">문의 내역</a></li>
+					</ul>
 				</div>
-				<div class="col-sm-6 col-md-5">
-					<div class="join">
-							<h1> 회원 정보 </h1>
-						<form id="frm" action="/memberInfoUpdate" method="post" class="joinForm">
-							<!-- 이메일 (id) -->
-							<label>ID<span>*</span></label>
-							<input type="text" name="memberId" value="${memberInfo.memberId}" readonly="readonly">
-							<!-- Pw -->
-							<label>PW<span>*</span></label>
-							<input type="password" name="memberPw" value="">
-							<!-- 이름 -->
-							<label>Name<span>*</span></label> 
-							<input type="text" name="memberName"  value="${memberInfo.memberName}">
-							<!-- 휴대폰 번호  -->
-							<label>Phone Number<span>*</span></label>
-							<input type="text" name="memberTel" value="${memberInfo.memberTel}">
-							<br> <br>
-							<!-- 버튼 -->
-							<input type="submit" value="수정" class="btnEdit">
-						</form>
-					</div>
+			</div>
+			<div class="col-sm-6 col-md-5">
+				<div class="myInfo">																																									
+					<form id="frm" action="/join" method="post" class="joinForm">
+						<!-- 이메일 (id) -->
+						<table class="table cart-table">
+						<tr class="table-title">
+							<th width="100px">아이디</th>
+							<td><input type="text" name="memberId" readonly="readonly" value="${memberInfo.memberId}" class="box" style="width: 100%"></td>
+							<th></th>
+						</tr>
+						<tr class="table-title">
+							<th width="100px">비밀번호</th>
+							<td><input type="text" name="memberPw" value="${memberInfo.memberPw}" class="box" style="width: 100%"></td>							
+							<th></th>
+						</tr>
+						<tr class="table-title">
+							<th width="100px">이름</th>
+							<td><input type="text" name="memberName" value="${memberInfo.memberName}" class="box" style="width: 100%"></td>							
+							<th></th>
+						</tr>				
+						<tr class="table-title">
+							<th width="100px">전화번호</th>
+							<td><input type="text" name="memberTel" value="${memberInfo.memberTel}" class="box" style="width: 100%"></td>							
+							<th></th>
+						</tr>																		
+						<tr class="table-title">
+							<th width="100px"></th>
+							<td><input type="button" value="수정" id="infoupdateBtn" style="float: right"></td>
+							<th></th>
+						</tr>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--End create member Area-->
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+</div>
+<!--End create member Area-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
-<%@include file="../comm/footer.jsp"%>
 </html>
