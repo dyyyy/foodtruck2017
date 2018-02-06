@@ -44,8 +44,6 @@ $(function() {
 })	
 </script>
 <body onload="map()">
-<<<<<<< HEAD
-
 
     <%@include file="../comm/nav.jsp"%>
 	<section class="product-page page fix">
@@ -60,9 +58,7 @@ $(function() {
 								<div class="simpleLens-big-image-container">
 									<img src="<%=vo.getFtruckImg()%>" alt="" class="simpleLens-big-image" style="width: 600px; height: 500px;">
 								</div>
-
 							</div>
-
 					</div>
 						
 						<!-- Nav tabs -->
@@ -74,7 +70,7 @@ $(function() {
 					<h2><%=vo.getFtruckName()%></h2>
 						<!-- Product Ratting -->
 					<div class="pro-ratting">
-						<span style="width: ${grade*20}%"></span>
+						<span style="width:<%=vo.getFtruckGrade()*20%>%"></span>
 					</div>						
 					<div class="infomation" style="font-size: 15px; color: #5e636d">
 						평점:<%=format.format(grade)%>점<br>
