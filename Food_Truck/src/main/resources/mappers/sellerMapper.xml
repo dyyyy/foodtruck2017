@@ -73,6 +73,21 @@
 	
 	
 	</select>
+	<!-- 판매자 푸드트럭 승인 flg -->
+	<select id="getLicense2" resultMap="SellerMap">
+		SELECT LICENSE.LICENSE_NO AS LICENSE_NO, F.FTRUCK_NAME ftruckName,
+			   F.FTRUCK_INTRO ftruckIntro, F.FTRUCK_REG ftruckReg,
+			   F.CATEGORY category, F.FTRUCK_GRADE ftruckGrade
+		FROM MEMBER
+		INNER JOIN LICENSE
+		ON MEMBER.MEM_ID = LICENSE.MEM_ID
+		INNER JOIN FOODTRUCK F
+		ON F.LICENSE_NO = LICENSE.LICENSE_NO
+ 		WHERE MEMBER.MEM_ID=#{memberId} 
+		AND LICENSE.APP_STAT='N'
+	
+	
+	</select>
 	
 	<select id="getFoodTruckList" resultMap="FoodTruckMap">
 		select * from foodtruck where license_no = #{licenseNo}
@@ -80,13 +95,10 @@
 	
 	
 	<insert id="insertFoodTruck" parameterType="FoodTruckVO">
-		INSERT INTO 
-		FOODTRUCK(FTRUCK_NO, FTRUCK_NAME, FTRUCK_TEL, FTRUCK_ADDR, FTRUCK_ADDR2,
-				  FTRUCK_INTRO, FTRUCK_DLV_YN, FTRUCK_RSV_YN, FTRUCK_STATE,
-			 	  FTRUCK_IMG, CATEGORY, LICENSE_NO)
-		VALUES(FOODTRUCK_SEQ.NEXTVAL, #{ftruckName}, #{ftruckTel}, 
-			   #{ftruckAddr}, #{ftruckAddr2}, #{ftruckIntro}, #{ftruckDlvYn}, #{ftruckRsvYn},
-			   #{ftruckState}, #{ftruckImg}, #{category}, #{licenseNo})
+		insert into foodtruck
+		(FTRUCK_NO,ftruck_name,FTRUCK_ADDR2,FTRUCK_DLV_YN,FTRUCK_RSV_YN,ftruck_state,ftruck_img,FTRUCK_REG,CATEGORY,FTRUCK_GRADE,LICENSE_NO)
+		values
+		(FTRUCK_SEQ.nextval,#{ftruckName},#{ftruckAddr2},#{ftruckDlvYn},#{ftruckRsvYn},'N',#{ftruckImg},SYSDATE,#{category},0,#{licenseNo})
 		
 	</insert>
 	

@@ -43,9 +43,9 @@
 	<insert id="insertOrder" parameterType="map">
 		
 		INSERT INTO ORDERS
-		(ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, LICENSE_NO, SUM_PRICE)
+		(ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, LICENSE_NO, SUM_PRICE, ORD_DATE)
 		VALUES
-		(TO_CHAR(SYSDATE,'YYMMDD')||LPAD(ORD_SEQ.NEXTVAL,5,0), #{ordName}, #{ordTel}, #{ordReq}, #{licenseNo}, #{sumPrice})
+		(TO_CHAR(SYSDATE,'YYMMDD')||LPAD(ORD_SEQ.NEXTVAL,5,0), #{ordName}, #{ordTel}, #{ordReq}, #{licenseNo}, #{sumPrice}, TO_CHAR(SYSDATE, 'YYMMDD'))
 		
 		<selectKey keyProperty="ordNo" resultType="String">
 			
@@ -58,7 +58,15 @@
 		</selectKey>
 		
 	</insert>
-
+	
+	<!-- 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료) -->
+	<update id="cookStatChange">
+	
+		UPDATE ORDERS
+		SET COOK_STAT=#{cookStat}
+		<where> ORD_NO=#{ordNo} </where>
+	
+	</update>
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
@@ -76,6 +84,7 @@
 		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="PROD_NAME" property="prodName"/>
 		<result column="FTRUCK_NAME" property="ftruckName" />
+		<result column="COOK_STAT" property="cookStat" />
 	</resultMap>
 	
 	<resultMap type="LicenseVO" id="LicenseMap">

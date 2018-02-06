@@ -11,12 +11,31 @@ import com.foodtruck.dao.MemberDAO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.MinquiryReplyVO;
 
 @Service
 public class MemberService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
+	// 사용자 문의내역 리스트
+	public List<MInquiryVO> getMemberQaInfoList(String memberId) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaInfoList(memberId);
+	}
+	
+	// 사용자 문의내역 정보
+	public MInquiryVO getMemberQaInfo(int qaScNo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaInfo(qaScNo);
+	}
+	
+	// 문의 답변내용
+	public MinquiryReplyVO getMemberQaReply(int qaScNo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaReply(qaScNo);
+	}	
+	
 	// 회원 정보
 	public MemberVO getMember(String memberId) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);

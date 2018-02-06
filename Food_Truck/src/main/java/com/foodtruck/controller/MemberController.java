@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.MinquiryReplyVO;
 
 @Controller
 public class MemberController {
@@ -45,4 +46,27 @@ public class MemberController {
 		mservice.updateMember(vo);
 		return "redirect:/memberInfo";
 	}
+	
+	// 사용자 문의 내역 리스트
+	@RequestMapping("/memberQaInfoList") 
+	public String memberQaInfoList(HttpSession session,HttpServletRequest request) {
+		
+		MemberVO vo = (MemberVO)session.getAttribute("member");
+		request.setAttribute("qalist",mservice.getMemberQaInfoList(vo.getMemberId()));
+		
+		return "member/memberQaInfoList";
+	}
+	
+	// 사용자 문의 내역 상세보기 
+	@RequestMapping("/memberQaInfo")
+	public String memberQaInfo(HttpServletRequest request) {
+		
+		int qaScNo = Integer.parseInt(request.getParameter("qaScNo"));
+		MInquiryVO vo = mservice.getMemberQaInfo(qaScNo);
+		request.setAttribute("qaInfo", vo);
+		MinquiryReplyVO vo2 = mservice.getMemberQaReply(qaScNo);
+		request.setAttribute("qaReply", vo2);
+		
+		return "member/memberQaInfo";
+	}	
 }

@@ -68,7 +68,9 @@ public class SellerController {
 
 	@Autowired
 	private ProductService productService;
-
+	
+	@Autowired
+	FoodTruckService fservice;
 	
 
 	// 판매자 캘린더
@@ -111,15 +113,39 @@ public class SellerController {
 	// �Ǹ��� �޴� - �Ǹ��� ��� ?
  
 
-
-
+	@RequestMapping("/sellerInfo")
+	public String sellerInfo(@RequestParam(value="licenseNo" , required=false)String licenseNo,HttpServletRequest request,HttpSession session,Model model) throws Exception {
+		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
+		String num=list.get(0).getLicenseNo();
+		FoodTruckVO vo= new FoodTruckVO();
+		vo=fservice.getFoodTruck2(licenseNo);
+		if(vo.getFtruckAddr()==null) {
+			vo.setFtruckAddr(vo.getFtruckAddr2());
+		}
+		request.setAttribute("vo", vo);
+		model.addAttribute("licenseNo", num);
+		return "seller/Info";
+	}
+	//새좌표 업데이트
+	@RequestMapping("/updatePosition")
+	@ResponseBody
+	public int updatePosition (FoodTruckVO vo) throws Exception {
+		int num=fservice.updateTruckPosition(vo);
+		return num;
+	}
 	@RequestMapping("/sellerMain")
 	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		if(mvo != null) {
 			if(licenseNo == null) {
-				
-				return "seller/insertFoodTruck";
+				List<SellerVO> list=sservice.getLicense2(mvo.getMemberId());
+				int count=list.size();
+				if(count==0) {
+					return "seller/null";
+				}else {
+					return "seller/ing";
+				}			
 			}else {
 				List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
 					request.getSession().setAttribute("member", mvo);
@@ -136,6 +162,7 @@ public class SellerController {
 					return "seller/main";  
 			} 
 		} else return "sign/login";
+
 		
 	}
 
@@ -174,73 +201,23 @@ public class SellerController {
 	@ResponseBody
 
 	@RequestMapping("/insertFoodTruck")
-	public String insertFoodTruck(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo,
-			LicenseVO lvo) throws Exception, IOException {
+	public int insertFoodTruck(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo
+			) throws Exception, IOException {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-
-		String category[] = request.getParameterValues("category");
-		String ftruckDlvYn[] = request.getParameterValues("ftruckDlvYn");
-		String ftruckRsvYn[] = request.getParameterValues("ftruckRsvYn");
-		String ftruckState[] = request.getParameterValues("ftruckState");
-		String licenseNo = request.getParameter("licenseNo");
-
-		for (String c : category) {
-			switch (c) {
-			case "1":
-				fvo.setCategory(1);
-				break;
-			case "2":
-				fvo.setCategory(2);
-				break;
-			case "3":
-				fvo.setCategory(3);
-				break;
-			case "4":
-				fvo.setCategory(4);
-				break;
-			}
-		}
-
-		for (String dlv : ftruckDlvYn) {
-			switch (dlv) {
-			case "Y":
-				fvo.setFtruckDlvYn("Y");
-				break;
-			case "N":
-				fvo.setFtruckDlvYn("N");
-				break;
-			}
-		}
-
-		for (String rsv : ftruckRsvYn) {
-			switch (rsv) {
-			case "Y":
-				fvo.setFtruckRsvYn("Y");
-				break;
-			case "N":
-				fvo.setFtruckRsvYn("N");
-				break;
-			}
-		}
-
-		for (String state : ftruckState) {
-			switch (state) {
-			case "Y":
-				fvo.setFtruckState("Y");
-				break;
-			case "N":
-				fvo.setFtruckState("N");
-				break;
-			}
-		}
-
-		lvo.setMemId(mvo.getMemberId());
-		lvo.setLicenseNo(licenseNo);
+		
+		//License 테이블 insert
+		LicenseVO lvo=new LicenseVO();
+		lvo.setLicenseNo(fvo.getLicenseNo());
+		lvo.setMemId(mvo.getMemberId());		
 		sservice.insertLicense(lvo);
-		sservice.insertFoodTruck(fvo);
+		
+		//Foodtruck 테이블 insert
+		fvo.setLicenseNo(lvo.getLicenseNo());
+		fvo.setFtruckTel(mvo.getMemberTel());
+		int num=sservice.insertFoodTruck(fvo);
 
-		return "seller/main";
+		return num;
 	}
 
 	@RequestMapping("/detailFoodTruckForm")

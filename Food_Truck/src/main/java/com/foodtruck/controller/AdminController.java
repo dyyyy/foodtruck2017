@@ -292,12 +292,17 @@ public class AdminController {
 	@RequestMapping("/approvalList")
 	@ResponseBody
 	public HashMap approvalList(@RequestParam("licenseNo") String licenseNo) throws Exception {
+		System.out.println("진입");
+		System.out.println("sds"+licenseNo);
 		String category = "";
 		HashMap map = new HashMap();
 		FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
+		System.out.println("sdf"+vo.getFtruckName());
+		System.out.println("sdf"+vo.getFtruckAddr2());
 		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
+		System.out.println("asd"+vo.getFtruckAddr());
 		if (vo.getCategory() == 1) {
 			category = "한식";
 		} else if (vo.getCategory() == 2) {
@@ -334,7 +339,7 @@ public class AdminController {
 		table += "<table border=1 class=\"table table-striped table-bordered\">\r\n" + 
 				"					<tr>\r\n" + 
 				"						<td rowspan=2 style=\"width: 100px;\">대표이미지</td>\r\n" + 
-				"						<td rowspan=2 colspan=3><img  src=\"/resources/img/"+vo.getFtruckImg()+"\" style=\"width: 420px;height: 200px;\"></td>\r\n" + 
+				"						<td rowspan=2 colspan=3><img src=\""+vo.getFtruckImg()+"\" style=\"width: 420px;height: 200px;\"></td>\r\n" + 
 				"					</tr>\r\n" + 
 				"					<tr></tr>\r\n" + 
 				"					<tr>\r\n" + 

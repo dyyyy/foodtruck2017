@@ -1,4 +1,4 @@
-package com.foodtruck.controller;
+	package com.foodtruck.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -56,10 +56,10 @@ public class FoodTruckController {
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);	//rownum된 푸드트럭 리스트
 		System.out.println("dfsdfs"+list.size());
 		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i).getFtruckName());
+			System.out.println("asds===================="+list.get(i).getFtruckImg());
 		}
 		int pagecount = fservice.getCountTruck();	//총 푸드트럭 개수
-		System.out.println("������ ��ȣ" + pageNo);
+		
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", pagecount);	//총 페이지 수
@@ -89,7 +89,7 @@ public class FoodTruckController {
 	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
 		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		int NpageNo=0;
+		int NpageNo=1;
 		if(pageNo==1) {
 			pageNo=1;
 			vo.setPageNo(pageNo);	
@@ -99,6 +99,9 @@ public class FoodTruckController {
 		}
 		System.out.println(category);
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		for(int i=0;i<list.size();i++) {
+			System.out.println("asds===================="+list.get(i).getFtruckImg());
+		}
 		int pagecount=fservice.getCategoryCountTruck(category);	//총 푸드트럭 개수
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
@@ -112,7 +115,7 @@ public class FoodTruckController {
 	public String korFoodPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request, @RequestParam("category") int category) throws Exception {
 		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		int NpageNo=0;
+		int NpageNo=1;
 		if(pageNo==1) {
 			pageNo=1;
 			vo.setPageNo(pageNo);	
@@ -134,10 +137,12 @@ public class FoodTruckController {
 	// ������
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
-	      double pyengjum = 0;//리뷰 평점 합계
-	      double count = 0; //리뷰 수
-	      double total = 0; //푸드트럭 총 평점
-	      FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//푸드트럭 정보 호출
+
+	    FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//푸드트럭 정보 호출
+	    if(vo.getFtruckIntro()==null) {
+	    	vo.setFtruckIntro("없음");
+	    }
+		
 		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
@@ -146,18 +151,7 @@ public class FoodTruckController {
 		System.out.println("진입전");
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);	// 상품 정보 호출
 		System.out.println("진입후");
-		if(Rlist.size()!=0) {
-			for (int i = 0; i < Rlist.size(); i++) {
-				double score = Rlist.get(i).getGrade();
-				pyengjum += score;
-				count = Rlist.size();
-				total = pyengjum / count;
-				total = Double.parseDouble(String.format("%.2f",total));
-			}	
-		}else {
-			total=0;		
-		}
-		vo.setFtruckGrade(total);
+
 		request.setAttribute("vo", vo);
 		request.setAttribute("review", Rlist);
 		request.setAttribute("product", Plist);

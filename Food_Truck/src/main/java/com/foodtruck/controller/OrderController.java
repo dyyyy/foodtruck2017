@@ -9,8 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.foodtruck.service.OrderDetailService;
 import com.foodtruck.service.OrderService;
@@ -145,4 +149,24 @@ public class OrderController {
 		request.setAttribute("orderInfolist", orderInfolist);
 		return "nav/orderChk";
 	}
+	
+	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
+	@RequestMapping("/cookStatChange")
+	@ResponseBody
+	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") String cookStat, @RequestParam("ordNo") String ordNo) {
+		
+		System.out.println("상태 바꾸러 왔담 : " + "주문 번호" + ordNo + "변경할 상태 값 : " + cookStat);
+		
+		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
+
+		// 디비에 넣으러가잠!
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("cookStat", cookStat);
+		map.put("ordNo", ordNo);
+		   
+		mv.addObject("cookStatChange", Oservice.cookSataChange(map));
+		   
+		return mv;
+		
+	   }	
 }
