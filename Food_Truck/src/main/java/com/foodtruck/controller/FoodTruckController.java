@@ -138,7 +138,10 @@ public class FoodTruckController {
 	@RequestMapping("/read")
 	public String foodinfo(@RequestParam("ftruckNo") String ftruckNo, HttpServletRequest request) throws Exception {
 
-	    FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);		//푸드트럭 정보 호출
+	    FoodTruckVO vo = fservice.getFoodTruck(ftruckNo);//푸드트럭 정보 호출
+	    if(vo.getFtruckIntro()==null) {
+	    	vo.setFtruckIntro("없음");
+	    }
 		FoodTruckVO vo2 = fservice.getReviewCount(ftruckNo);	// 푸드트럭 전체 리뷰 갯수
 		FoodTruckVO vo3 = fservice.getReviewTotal(ftruckNo);	// 푸드트럭 전체 평점 합계
 		if(vo2 != null && vo3 != null) {

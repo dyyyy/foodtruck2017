@@ -131,6 +131,9 @@
 					<li class="active"><a
 						href="/sellerProduct?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>내 푸드트럭 메뉴</a></li>
+					<li><a
+						href="/sellerInfo?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>내 푸드트럭 설정</a></li>
 				</ul>
 			</div>
 			<div class="span9" id="content">
@@ -139,18 +142,7 @@
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">
-								나의 상품&nbsp;&nbsp;&nbsp;&nbsp;<select onchange="ck()">
-									<optgroup label="사업자번호">
-										<%
-											for (int i = 0; i < list.size(); i++) {
-										%>
-										<option><%=list.get(i).getLicenseNo()%></option>
-										<%
-											}
-										%>
-									</optgroup>
-								</select>
+							<div class="muted pull-left">나의 상품&nbsp;&nbsp;&nbsp;&nbsp;
 							</div>
 							<div class="muted pull-right">
 								<button class="btn" style="margin-top: -5px;"
@@ -165,7 +157,8 @@
 									<div class="span3">
 										<a href="#tutorialsplaneModal2" class="thumbnail"> <img
 											data-src="holder.js/260x180" alt="260x180"
-											style="width: 260px; height: 180px;" src="${all.prodImg}" data-toggle="modal">
+											style="width: 260px; height: 180px;" src="${all.prodImg}"
+											data-toggle="modal">
 										</a>
 										<div align="center">
 											<table>
@@ -211,14 +204,14 @@
 							<tr></tr>
 							<tr></tr>
 							<tr>
-								<tr>
+							<tr>
 								<td>이미지 파일</td>
 								<td colspan=3 id="mg" style="width: 100px;"><input
 									type="file" style="width: 350px;" name="img"
 									enctype="multipart/form-data" onchange="mm()"></td>
 							</tr>
-								
-							
+
+
 							<tr>
 								<td rowspan=2>원산지</td>
 								<td rowspan=2 colspan=3><textarea rows="5" cols="5"
@@ -228,7 +221,7 @@
 						</table>
 						<div class="num"></div>
 						<div class="img2"></div>
-					</form>					
+					</form>
 				</div>
 
 				<div class="modal-footer">

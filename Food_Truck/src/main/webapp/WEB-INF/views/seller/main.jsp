@@ -193,7 +193,7 @@ $(function() {
 									<tbody>
 										<c:forEach var="todayOrder" items="${todayOrder}">
 											<tr>
-												<td>${todayOrder.ordRcvDate}</td>
+												<td>${todayOrder.ordRsvDate}</td>
 												<td>${todayOrder.ordName}</td>
 												<td>${todayOrder.prodName}</td>
 												<td>${todayOrder.ordReq}</td>

@@ -38,7 +38,7 @@
 							<div class="product-img-hover">
 								<!-- Product image -->
 								<a href="/read?ftruckNo=${all.ftruckNo}">
-									<img src="/resources/img/foodtruck/${all.ftruckImg}" />
+									<img src="${all.ftruckImg}" />
 								</a>
 							</div>
 							<div class="pro-name-price-ratting">

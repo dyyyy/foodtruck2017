@@ -103,7 +103,11 @@ public class SellerController {
 	// �Ǹ��� �޴� - �Ǹ��� ��� ?
 
 
-
+	@RequestMapping("/sellerInfo")
+	public String sellerInfo(@RequestParam(value="licenseNo" , required=false)String licenseNo,HttpServletRequest request) {
+		
+		return "seller/Info";
+	}
 
 	@RequestMapping("/sellerMain")
 	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
@@ -182,6 +186,7 @@ public class SellerController {
 		
 		//Foodtruck 테이블 insert
 		fvo.setLicenseNo(lvo.getLicenseNo());
+		fvo.setFtruckTel(mvo.getMemberTel());
 		int num=sservice.insertFoodTruck(fvo);
 
 		return num;
