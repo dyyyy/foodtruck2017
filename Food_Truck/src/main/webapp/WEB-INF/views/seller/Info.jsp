@@ -44,8 +44,8 @@
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">푸드트럭 위치 설정하기</div>
-							<div class="muted pull-right" style="margin-top: -8px;"><button class="btn" onclick="reposition()">위치 등록하기</button></div>
+							<div class="muted pull-left">현재위치</div>
+							<div class="muted pull-right" style="margin-top: -8px;"><button class="btn" onclick="reposition()">위치 변경하기</button></div>
 							<input type="hidden" value="${licenseNo}" id="num">
 						</div>
 						<div class="block-content collapse in">
@@ -57,7 +57,7 @@
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 						    mapOption = {
 						        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-						        level: 2 // 지도의 확대 레벨
+						        level: 4 // 지도의 확대 레벨
 						    };  
 						var name="<%=vo.getFtruckName()%>";
 						// 지도를 생성합니다    
@@ -172,7 +172,8 @@
 								dataType : "json",
 								success : function(data) {
 									if(data==1){
-										alert("새로운 위치로 업데이트 되었습니다.")
+										alert("새로운 위치로 업데이트 되었습니다.");
+										location.reload();
 									}
 								}
 							})	
