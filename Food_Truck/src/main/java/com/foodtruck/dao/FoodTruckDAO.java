@@ -44,7 +44,10 @@ public interface FoodTruckDAO {
 
 	// 푸드트럭 수정
 	public int updateTruck(FoodTruckVO vo)throws Exception;
-
+	
+	// 푸드트럭 위치 수정
+	public int updateTruckPosition(FoodTruckVO vo)throws Exception;
+	
 	// 푸드트럭 삭제
 	public int deleteTruck(String ftruckNo)throws Exception;
 	

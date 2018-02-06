@@ -68,7 +68,9 @@ public class SellerController {
 
 	@Autowired
 	private ProductService productService;
-
+	
+	@Autowired
+	FoodTruckService fservice;
 	
 
 	// 판매자 캘린더
@@ -104,11 +106,26 @@ public class SellerController {
 
 
 	@RequestMapping("/sellerInfo")
-	public String sellerInfo(@RequestParam(value="licenseNo" , required=false)String licenseNo,HttpServletRequest request) {
-		
+	public String sellerInfo(@RequestParam(value="licenseNo" , required=false)String licenseNo,HttpServletRequest request,HttpSession session,Model model) throws Exception {
+		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
+		String num=list.get(0).getLicenseNo();
+		FoodTruckVO vo= new FoodTruckVO();
+		vo=fservice.getFoodTruck2(licenseNo);
+		if(vo.getFtruckAddr()==null) {
+			vo.setFtruckAddr(vo.getFtruckAddr2());
+		}
+		request.setAttribute("vo", vo);
+		model.addAttribute("licenseNo", num);
 		return "seller/Info";
 	}
-
+	//새좌표 업데이트
+	@RequestMapping("/updatePosition")
+	@ResponseBody
+	public int updatePosition (FoodTruckVO vo) throws Exception {
+		int num=fservice.updateTruckPosition(vo);
+		return num;
+	}
 	@RequestMapping("/sellerMain")
 	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
 		MemberVO mvo = (MemberVO)session.getAttribute("member");

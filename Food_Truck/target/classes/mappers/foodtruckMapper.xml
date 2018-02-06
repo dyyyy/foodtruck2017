@@ -107,7 +107,11 @@
 		where <![CDATA[rownum<=10]]>
 	</select>
 
-
+	<!-- 푸드트럭 위치 Update -->
+	<update id="updateTruckPosition">
+	update foodtruck set FTRUCK_ADDR=#{ftruckAddr} ,FTRUCK_ADDR2=#{ftruckAddr2} where LICENSE_NO=#{licenseNo}
+	
+	</update>
 	
 	
 

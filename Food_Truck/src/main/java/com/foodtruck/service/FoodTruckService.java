@@ -131,6 +131,11 @@ public class FoodTruckService {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getEndCountTruck();
 	}
+	//푸드트럭 주소 업데이트
+	public int updateTruckPosition(FoodTruckVO vo) throws Exception{
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.updateTruckPosition(vo);
+	}
 	
 
 }
