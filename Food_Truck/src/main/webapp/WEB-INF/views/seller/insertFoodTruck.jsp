@@ -183,13 +183,7 @@ textarea {
 											<input type=radio name=ftruckRsvYn value="N">N
 										</td>
 									</tr>
-									<tr>
-										<th>운영여부</th>
-										<td>
-											<input type=radio name=ftruckState value="Y" checked>Y
-											<input type=radio name=ftruckState value="N">N
-										</td>
-									</tr>
+									
 									<tr>
 										<th>카테고리</th>
 										<td>

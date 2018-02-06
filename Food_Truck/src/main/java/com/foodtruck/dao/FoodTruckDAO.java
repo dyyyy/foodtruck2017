@@ -40,8 +40,7 @@ public interface FoodTruckDAO {
 	// 푸드트럭 위클리 랭킹
 	public List<FoodTruckVO> getFoodTruckRank();
 
-	// 푸드트럭 등록
-	public int insertFoodTruck(FoodTruckVO vo)throws Exception;
+	
 
 	// 푸드트럭 수정
 	public int updateTruck(FoodTruckVO vo)throws Exception;

@@ -56,10 +56,10 @@ public class FoodTruckController {
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);	//rownum된 푸드트럭 리스트
 		System.out.println("dfsdfs"+list.size());
 		for(int i=0;i<list.size();i++) {
-			System.out.println(list.get(i).getFtruckName());
+			System.out.println("asds===================="+list.get(i).getFtruckImg());
 		}
 		int pagecount = fservice.getCountTruck();	//총 푸드트럭 개수
-		System.out.println("������ ��ȣ" + pageNo);
+		
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", pagecount);	//총 페이지 수
@@ -89,7 +89,7 @@ public class FoodTruckController {
 	public String korFoodPage(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request,@RequestParam("category") int category) throws Exception {
 		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		int NpageNo=0;
+		int NpageNo=1;
 		if(pageNo==1) {
 			pageNo=1;
 			vo.setPageNo(pageNo);	
@@ -99,6 +99,9 @@ public class FoodTruckController {
 		}
 		System.out.println(category);
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		for(int i=0;i<list.size();i++) {
+			System.out.println("asds===================="+list.get(i).getFtruckImg());
+		}
 		int pagecount=fservice.getCategoryCountTruck(category);	//총 푸드트럭 개수
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);
@@ -112,7 +115,7 @@ public class FoodTruckController {
 	public String korFoodPage2(Model model,@RequestParam("pageNo") int pageNo,HttpServletRequest request, @RequestParam("category") int category) throws Exception {
 		PageVO vo =new PageVO();
 		vo.setCategory(category);
-		int NpageNo=0;
+		int NpageNo=1;
 		if(pageNo==1) {
 			pageNo=1;
 			vo.setPageNo(pageNo);	

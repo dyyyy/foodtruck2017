@@ -51,8 +51,8 @@
 						<c:forEach items="${list}" var="all">
 						<div class="single-list-product col-sm-12">
 							<div class="list-pro-image">
-								<a href="/read?licenseNo=${all.licenseNo}">
-									<img src="/resources/img/foodtruck/${all.ftruckImg}">
+								<a href="/read?ftruckNo=${all.ftruckNo}">
+									<img src="${all.ftruckImg}">
 								</a>
 							</div>
 							<div class="list-pro-des fix">

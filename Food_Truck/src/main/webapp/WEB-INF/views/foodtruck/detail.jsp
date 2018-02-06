@@ -44,22 +44,23 @@ $(function() {
 })	
 </script>
 <body onload="map()">
-<%@include file="../comm/nav.jsp"%>
-<section class="product-page page fix">
-	<!--Start Product Details Area-->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="details-pro-tab">
-					<!-- Tab panes -->
-					<div class="tab-content details-pro-tab-content">
-						<div class="tab-pane fade in active" id="image-1">
-							<div class="simpleLens-big-image-container">
-								<img src="/resources/img/foodtruck/<%=vo.getFtruckImg()%>" alt="" class="simpleLens-big-image">
+
+    <%@include file="../comm/nav.jsp"%>
+	<section class="product-page page fix">
+		<!--Start Product Details Area-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="details-pro-tab">
+						<!-- Tab panes -->
+						<div class="tab-content details-pro-tab-content">
+							<div class="tab-pane fade in active" id="image-1">
+								<div class="simpleLens-big-image-container">
+									<img src="<%=vo.getFtruckImg()%>" alt="" class="simpleLens-big-image" style="width: 600px; height: 500px;">
+								</div>
 							</div>
-						</div>
 					</div>
-						<a href="#" style="padding-left: 20px"><img src="/resources/img/busy.png" id="cbtn"></a>
+						
 						<!-- Nav tabs -->
 				</div>
 			</div>
@@ -69,7 +70,7 @@ $(function() {
 					<h2><%=vo.getFtruckName()%></h2>
 						<!-- Product Ratting -->
 					<div class="pro-ratting">
-						<span style="width: ${grade*20}%"></span>
+						<span style="width:<%=vo.getFtruckGrade()*20%>%"></span>
 					</div>						
 					<div class="infomation" style="font-size: 15px; color: #5e636d">
 						평점:<%=format.format(grade)%>점<br>

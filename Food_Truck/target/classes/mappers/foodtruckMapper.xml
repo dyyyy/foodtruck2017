@@ -108,13 +108,8 @@
 	</select>
 
 
-	<!-- 푸드트럭 등록 -->
-	<insert id="insertFoodTruck">
-		insert into foodtruck
-		(FTRUCK_NO,ftruck_name,ftruck_tel,ftruck_addr,FTRUCK_DLV_YN,FTRUCK_RSV_YN,ftruck_state,ftruck_img)
-		values
-		(#{ftruckNo},#{ftruckName},#{ftruckTel},#{ftruckAddr},#{ftruckDlvYn},#{ftruckRsvYn},#{ftruckState},#{ftruckImg})
-	</insert>
+	
+	
 
 	<!-- 푸드트럭 삭제 -->
 	<delete id="deleteTruck">
@@ -172,8 +167,12 @@
 		<result column="FTRUCK_IMG" property="ftruckImg" />
 		<result column="FTRUCK_INTRO" property="ftruckIntro" />
 		<result column="FTRUCK_REG" property="ftruckReg" />
+
+		<result column="CATEGORY" property="category" />
+
 		<result column="COUNT" property="count" />
 		<result column="TOTAL" property="total" />		
+
 	</resultMap>
 	
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="LicenseMap">
