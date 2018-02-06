@@ -38,25 +38,6 @@
    $(document).ready(function() {
 		
 		selectList();
-		
-		// 판매자일 경우, 당일 날짜에 상태 값 변경할 수 있도록 하는 로직
-// 		$("#changeBtn").on("click", function() {
-// 			var cookStat = $("#cookStat option:selected").val();
-// 			console.log(cookStat);
-		
-// 			$.ajax ({
-// 				type : "post",
-// 				url : "/cookStatChange",
-// 				data : {
-// 							"cookStat" : cookStat
-// 					   },
-// 				success : function(data) {
-// 					alert(" 변경 완료 ");
-// 					selectList();
-// 				} 
-// 			})
-			
-// 		})
 
    });
 
@@ -83,7 +64,7 @@
                      		</c:forEach>
                      	</select>
                      <!-- 사업자번호 & 달력  -->	
-                     	<input type="text" placeholder="원하는 날짜를 선택하세요" id="cal" style="float: right; width: 210px; text-align:center;" ><br><br>	
+                     	<input type="text" placeholder="원하는 날짜를 선택하세요" id="cal" style="float: right; width: 210px; text-align:center;" ><br><br>
                      </div>
                      
                      <!-- 테이블 뿌려주자!!! -->
@@ -123,8 +104,7 @@
 	                             	<c:choose>
 	                             		<c:when test="${detailList.cookStat eq 0}">
 	                             			<td class="quantity" style="color: #6262dd; font-weight: bold; font-family: Raleway, sans-serif; "> 대기중
-	                             				<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
-	                             				</button>
+	                             				<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
 	                                    	</td>
 	                                	</c:when>
 	                                       
@@ -208,7 +188,7 @@
 			                  }, 
 			            dataType : "json",
 			            success : function(data) {
-			            	// test중 나중에 지워야햄!
+			            	// test중 나중에 지워야햄! -> 데이터 확인
 			            	var jsondata = JSON.stringify(data);
 							alert(jsondata);
 							
@@ -232,24 +212,41 @@
 									var ordPrice = calselectList[i].ordPrice;
 									var cookStat = calselectList[i].cookStat;
 									var cookStatHangul;
-										
+									var ordDate = calselectList[i].ordDate;
+									var ordDateCut = ordDate.substring(0,10);
+									var date = new Date();
+									var month = date.getMonth() + 1;
+									var day = date.getDate();
+									var year = date.getFullYear();
+								
+									if(month < 10 && day < 10) {
+										month = '0' + month;
+										day = '0' + day;
+									}
+								
+									// 판매자가 오늘날짜로 다시 셀렉할 경우, 함수 호출 -> 다른 날짜 인식 안함
+									if(ordDate.substring(0, 4) == year && ordDate.substring(5, 7) == month && ordDate.substring(8, 10)) {
+										selectList();
+									}
+									
+									// 표 부분
 									switch (cookStat) {
 										case 0:
-											cookStatHangul = "대기"
+											cookStatHangul = "대기중"
 											break;
-										case 0:
-											cookStatHangul = "준비"
+										case 1:
+											cookStatHangul = "조리중"
 											break;
-										default:
+										case 2:
 											cookStatHangul = "완료"
 											break;
 									}	//switch
-										
+									   
 									htmlObj += "<tr class='table-info'>";
 									htmlObj += "	<td class='unit'>" + ordNo + "</td>";
 									htmlObj += "	<td class='unit'>" + prodName + "</td>";
-									htmlObj += "	<td class='unit'>" + ordQty + "</td>";
-									htmlObj += "	<td class='unit'>" + ordPrice + "</td>";
+									htmlObj += "	<td class='unit'>" + ordQty+"개</td>";
+									htmlObj += "	<td class='unit'>" + ordPrice + "원</td>";
 									htmlObj += "	<td class='quantity'>" + cookStatHangul + "</td>";
 									htmlObj += "</tr>";
 								} // for
