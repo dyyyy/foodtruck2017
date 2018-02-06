@@ -60,11 +60,12 @@ public class LoginController {
 				if(mvo.getMemberAuth().equals("1")) {
 					session.setAttribute("memberGubun","1");
 				} else if(mvo.getMemberAuth().equals("2")) {
-					session.setAttribute("memberGubun","2");					
+					session.setAttribute("memberGubun","2");					 
 					List<SellerVO> list=sellerService.getLicense(mvo.getMemberId());
-						session.setAttribute("licenseNo", list);
+					session.setAttribute("licenseNo", list);
 					
 				}
+				request.getSession().setAttribute("member", mvo);
 				return "redirect:/";
 			} else {
 				request.setAttribute("msg", "占쏙옙橘占싫ｏ옙占� 占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
@@ -72,6 +73,7 @@ public class LoginController {
 				request.setAttribute("addr", "loginform");
 				return "comm/msg";
 			}
+
 		} else {
 
 			return "comm/msg";
@@ -87,7 +89,7 @@ public class LoginController {
 	
 	// 회원가입페이지
 	@RequestMapping("/joinform")
-	public String joinFormPage() {
+	public String joinFormPage() {  
 		return "sign/joinform";
 	}
 

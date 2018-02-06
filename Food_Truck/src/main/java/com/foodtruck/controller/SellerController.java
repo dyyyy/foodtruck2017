@@ -76,12 +76,17 @@ public class SellerController {
 	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
 			@RequestParam(value = "licenseNo", required = false) String licenseNo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
-			String num = licenseNo;
-			model.addAttribute("licenseNo", num);
-			return "seller/calendar";
+		if(mvo != null) {
+
+			if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
+				String num = licenseNo;
+				model.addAttribute("licenseNo", num);
+				return "seller/calendar";
+			} else {
+				return "seller/insertFoodTruck";
+			}
 		} else {
-			return "seller/null";
+			return "sign/login";
 		}
 	}
 
@@ -90,45 +95,47 @@ public class SellerController {
 	public String sellerChart(HttpSession session, Model model,
 			@RequestParam(value = "licenseNo", required = false) String licenseNo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
+		if(mvo != null) {
+			if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
 
-			String num = licenseNo;
-			model.addAttribute("licenseNo", num);
-			return "seller/chart";
-		} else {
-			return "seller/null";
+				String num = licenseNo;
+				model.addAttribute("licenseNo", num);
+				return "seller/chart";
+			} else {
+				return "seller/insertFoodTruck";
+			}
 		}
+		else return "sign/login"; 
 	}
 
 	// �Ǹ��� �޴� - �Ǹ��� ��� ?
-
+ 
 
 
 
 	@RequestMapping("/sellerMain")
 	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
-		if(licenseNo==null) {
-			
-		
-			return "seller/null";
-		}else {
-			List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
-			String num= licenseNo;
-
-			model.addAttribute("licenseNo", num);
-			model.addAttribute("license", list);
-
-			model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
-			System.out.println(request.getParameter("licenseNo"));
-			
-			model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
-			model.addAttribute("order", sservice.getOrderList(num));
-			model.addAttribute("img", sservice.getFoodTruckList(num));
-		
-			return "seller/main";
-		}
-			
+		if(mvo != null) {
+			if(licenseNo == null) {
+				
+				return "seller/insertFoodTruck";
+			}else {
+				List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
+					request.getSession().setAttribute("member", mvo);
+					String num= licenseNo;
+	
+					model.addAttribute("licenseNo", num); // 사업자번호 하나
+					model.addAttribute("license", list); // 사업자번호 여러개
+					model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
+					model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
+//					model.addAttribute("order", sservice.getOrderList(num));
+//					model.addAttribute("img", sservice.getFoodTruckList(num));
+					model.addAttribute("payment", sservice.getTodayPayment(num));
+					
+					return "seller/main";  
+			} 
+		} else return "sign/login";
 		
 	}
 
@@ -141,13 +148,16 @@ public class SellerController {
 	public String sellerProduct(@RequestParam(value = "licenseNo") String licenseNo, HttpServletRequest request,
 			Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
-		List<ProductVO> list2 = productService.getProductList(licenseNo);
-		request.setAttribute("list", list);
-		request.setAttribute("licenseNo", licenseNo);
-		request.setAttribute("list2", list2);
+		if(mvo != null) {
 
-		return "seller/sellerProduct";
+			List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
+			List<ProductVO> list2 = productService.getProductList(licenseNo);
+			request.setAttribute("list", list);
+			request.setAttribute("licenseNo", licenseNo);
+			request.setAttribute("list2", list2);
+
+			return "seller/sellerProduct";
+		} else return "sign/login";
 	}
 
 	@RequestMapping("/modal")
@@ -254,7 +264,7 @@ public class SellerController {
 			model.addAttribute("product", sservice.getProductList(request.getParameter("licenseNo")));
 			return "seller/productMng";
 		} else {
-			return "seller/null";
+			return "seller/insertFoodTruck";
 		}
 	}
 
@@ -266,7 +276,7 @@ public class SellerController {
 			model.addAttribute("foodtruck", sservice.getLicense(mvo.getMemberId()));
 			return "seller/foodTruckMng";
 		} else {
-			return "seller/null";
+			return "seller/insertFoodTruck";
 		}
 
 	}

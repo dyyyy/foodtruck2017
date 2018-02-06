@@ -5,7 +5,7 @@ public class SellerVO {
 	private String ordName;		
 	private String ordTel;		
 	private String ordDate;		
-	private String ordRsvDate;	
+	private String ordRsvDate;	 
 	private String ordDlyYn;	
 	private int ordStat;
 	private int cookStat;
@@ -14,10 +14,11 @@ public class SellerVO {
 	private String prodName;
 	private String ftruckName;
 	private String ordReq;
-	private String ftruckIntro;
-	private String ftruckGrade;
-	private String category;
-	private String ftruckReg;
+	private String payment;
+	private int ratio;
+	private int count;
+	private String sumPrice;
+	
 	
 	public String getOrdNo() {
 		return ordNo;
@@ -97,31 +98,30 @@ public class SellerVO {
 	public void setOrdReq(String ordReq) {
 		this.ordReq = ordReq;
 	}
-	public String getFtruckIntro() {
-		return ftruckIntro;
+	public String getPayment() {
+		return payment;
 	}
-	public void setFtruckIntro(String ftruckIntro) {
-		this.ftruckIntro = ftruckIntro;
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
-	public String getFtruckGrade() {
-		return ftruckGrade;
+	public int getRatio() {
+		return ratio;
 	}
-	public void setFtruckGrade(String ftruckGrade) {
-		this.ftruckGrade = ftruckGrade;
+	public void setRatio(int ratio) {
+		this.ratio = ratio;
 	}
-	public String getCategory() {
-		return category;
+	public int getCount() {
+		return count;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCount(int count) {
+		this.count = count;
 	}
-	public String getFtruckReg() {
-		return ftruckReg;
+	public String getSumPrice() {
+		return sumPrice;
 	}
-	public void setFtruckReg(String ftruckReg) {
-		this.ftruckReg = ftruckReg;
+	public void setSumPrice(String sumPrice) {
+		this.sumPrice = sumPrice;
 	}
-	
 	
 
 }

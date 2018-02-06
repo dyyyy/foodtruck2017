@@ -26,7 +26,7 @@ public class HomeController {
 	@Autowired
 	private FoodTruckService foodTruckService;
 
-	/**
+	/** 
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -36,7 +36,7 @@ public class HomeController {
 		if(list != null) {
 			model.addAttribute("rank", list);
 		}
-//		logger.info("index");
+//		logger.info("index"); 
 		
 		
 		return "home";

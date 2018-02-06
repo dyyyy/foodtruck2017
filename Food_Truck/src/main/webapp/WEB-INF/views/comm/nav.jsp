@@ -31,8 +31,8 @@
 								//로그인 체크!
 								if (mvo != null) {
 									isLogin = true;
-								}
-
+								} 
+								
 								//로그인 안했을때
 								if (!isLogin) {
 							%>
@@ -82,8 +82,7 @@
 								<ul>
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
-									<li><a
-										href="/sellerMain<%=list3.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
+									<li><a href="/sellerMain<%=list3.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
 								</ul></li>
 							<%
 								break;

@@ -373,7 +373,7 @@ public class AdminController {
 		map.put("licenseNo", vo.getLicenseNo());
 		return map;
 	}
-	@RequestMapping("/approval")
+	@RequestMapping("/approval") 
 	@ResponseBody
 	public int approval(@RequestParam("licenseNo") String licenseNo) throws Exception {
 		int num=0;

@@ -13,26 +13,38 @@
 	<select id="getTodayOrderList" resultMap="SellerMap">
 	
 		SELECT ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, 
-			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName
+			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName, orders.payment
 		FROM ORDERS, PRODUCT
 		WHERE ORDERS.LICENSE_NO = PRODUCT.LICENSE_NO
 		AND ORDERS.LICENSE_NO = #{licenseNo}
-		AND ORD_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
-		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
+		AND TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
+		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID, orders.payment
  	
  	</select>
  	
+ 	<!-- 오늘의 배달주문 리스트 -->
  	<select id="getTodayDlvList" resultMap="SellerMap">
  		SELECT ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, 
 			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName
 		FROM ORDERS, PRODUCT
 		WHERE ORDERS.LICENSE_NO = PRODUCT.LICENSE_NO
 		AND ORDERS.LICENSE_NO = #{licenseNo}
-		AND ORD_DATE = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		AND TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
 		AND ORD_DLV_YN = 'Y'
 		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
  	</select>
  	
+ 	<!-- 오늘의 주문 통계 -->
+ 	<select id="getTodayPayment" resultMap="SellerMap">
+ 		SELECT  DECODE(PAYMENT,'0','카드','1','현금',null,'총주문') payment, 
+ 				COUNT(*) count,
+		  		TO_CHAR(SUM(SUM_PRICE), '999,999') sumprice,
+		  		ROUND(RATIO_TO_REPORT(SUM(SUM_PRICE)) OVER(PARTITION BY GROUPING_ID(PAYMENT))*100) ratio
+		FROM ORDERS
+		WHERE TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
+		AND LICENSE_NO=#{licenseNo}
+		GROUP BY ROLLUP(PAYMENT)
+ 	</select>
 
 	<!-- 주문 리스트 -->
 	<select id="getOrderList" resultMap="SellerMap">
@@ -142,6 +154,7 @@
 		<result column="MEM_ID" property="memId"/>
 		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="PROD_NAME" property="prodName"/>
+		<result column="PAYMENT" property="payment"/>
 	</resultMap>
 	
 	<resultMap type="LicenseVO" id="LicenseMap">

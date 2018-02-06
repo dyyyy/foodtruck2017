@@ -34,13 +34,12 @@
 <script src="/resources/admin/vendors/flot/jquery.flot.resize.js"></script>
 <script src="/resources/admin/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-
+<script>
+	$(function() {
+		// Easy pie charts
+		$('.chart').easyPieChart({animate: 1000});
+	});
 </script>
-
-
-
 
 </head>
 <body>
@@ -53,6 +52,11 @@
 				</a>
 				<%
 					MemberVO mvo = (MemberVO) session.getAttribute("member");
+				
+				    // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+			    	if (session.getAttribute("member") == null) {
+			        	response.sendRedirect("sign/login");
+			    	}
 					
 					if(mvo.getMemberAuth().equals("1")) {
 				%>

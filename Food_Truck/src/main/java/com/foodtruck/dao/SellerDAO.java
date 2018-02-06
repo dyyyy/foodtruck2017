@@ -23,6 +23,9 @@ public interface SellerDAO {
 	// 총 주문 리스트
 	public List<SellerVO> getOrderList(String licenseNo);
 	
+	// 오늘의 매출건수
+	public List<SellerVO> getTodayPayment(String licenseNo);
+	
 	// 판매자의 라이센스 번호 가져오기
 	public List<SellerVO> getLicense(String memberId);
 	

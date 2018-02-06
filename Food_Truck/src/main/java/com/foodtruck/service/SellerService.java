@@ -37,6 +37,12 @@ public class SellerService {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
 		return dao.getTodayDlvList(licenseNo);
 	}
+	
+	// 오늘의 배달 내역 리스트
+		public List<SellerVO> getTodayPayment(String licenseNo) {
+			SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+			return dao.getTodayPayment(licenseNo);
+		}
 
 	// 총 주문 리스트
 	public List<SellerVO> getOrderList(String licenseNo) {
