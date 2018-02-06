@@ -1,4 +1,4 @@
-package com.foodtruck.controller;
+	package com.foodtruck.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -142,21 +142,6 @@ public class FoodTruckController {
 	    if(vo.getFtruckIntro()==null) {
 	    	vo.setFtruckIntro("없음");
 	    }
-		FoodTruckVO vo2 = fservice.getReviewCount(ftruckNo);	// 푸드트럭 전체 리뷰 갯수
-		FoodTruckVO vo3 = fservice.getReviewTotal(ftruckNo);	// 푸드트럭 전체 평점 합계
-		if(vo2 != null && vo3 != null) {
-			double count = vo2.getCount();	// 푸드트럭 총 댓글 갯수
-			double total = vo3.getTotal(); // 푸드트럭 평점 총합
-			double ftruckGrade = (total/count);
-			System.out.println("평점 총 합 " + total  + "총 갯수" + count);
-			System.out.println("평균" + ftruckGrade);
-			vo.setFtruckGrade(ftruckGrade);	// vo에 평점 set
-			int count2 = vo2.getCount();
-			int total2 = vo3.getTotal();
-			int ftruckGrade2 = (total2/count2);
-			request.setAttribute("grade", ftruckGrade2);
-		}
-		
 		
 		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());

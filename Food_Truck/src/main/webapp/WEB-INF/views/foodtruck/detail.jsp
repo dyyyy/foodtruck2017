@@ -12,8 +12,6 @@
 	@SuppressWarnings("unchecked")
 	List<ProductVO> list2 = (List<ProductVO>) request.getAttribute("product");
 	FoodTruckVO vo = (FoodTruckVO) request.getAttribute("vo");
-	DecimalFormat format = new DecimalFormat("0.0");
-	double grade = vo.getFtruckGrade();
 %>
 
 <!DOCTYPE html>
@@ -73,7 +71,7 @@ $(function() {
 						<span style="width:<%=vo.getFtruckGrade()*20%>%"></span>
 					</div>						
 					<div class="infomation" style="font-size: 15px; color: #5e636d">
-						평점:<%=format.format(grade)%>점<br>
+						평점:<%=vo.getFtruckGrade()%>점<br>
 						주소:<%=vo.getFtruckAddr()%><br>
 						전화번호:<%=vo.getFtruckTel()%><br> 
 						배달여부:<%=vo.getFtruckDlvYn()%>
