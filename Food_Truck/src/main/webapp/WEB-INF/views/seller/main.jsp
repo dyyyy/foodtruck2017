@@ -62,11 +62,12 @@
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
+		<%String no=(String)request.getAttribute("licenseNo"); %>
+		<%List<SellerVO> list=(List<SellerVO>)request.getAttribute("license"); %>
 			<select name="licenseNo">
-				<option>선택해주세요.</option>
-				<c:forEach var="license" items="${license}">
-					<option value="${license.licenseNo}">${license.ftruckName}</option>
-				</c:forEach>
+						<%for(int i=0;i<list.size();i++){ %>
+						<option value="<%=list.get(i).getLicenseNo()%>" <%=no.equals(list.get(i).getLicenseNo())?"selected":""%>><%=list.get(i).getFtruckName()%></option>
+						<%} %>
 			</select>
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
