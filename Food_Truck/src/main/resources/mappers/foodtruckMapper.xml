@@ -123,13 +123,10 @@
 
 	<!-- 푸드트럭 수정 -->
 	<update id="updateTruck">
-		update foodtruck set ftruck_name =
-		#{ftruckName},ftruck_addr =
-		#{ftruckAddr},ftruck_tel = #{ftruckTel},
+		update foodtruck set ftruck_tel = #{ftruckTel},
 		FTRUCK_DLV_YN = #{ftruckDlvYn},FTRUCK_RSV_YN =
-		#{ftruckRsvYn},ftruck_state =
-		#{ftruckState}, ftruck_img = #{ftruckImg}
-		where FTRUCK_NO = #{ftruckNo}
+		#{ftruckRsvYn},ftruck_img = #{ftruckImg},FTRUCK_INTRO=#{ftruckIntro},CATEGORY=#{category}
+		where LICENSE_NO = #{licenseNo}
 	</update>
 	
 

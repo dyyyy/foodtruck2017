@@ -2,7 +2,7 @@
 <%@page import="com.foodtruck.vo.OrderVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -45,16 +45,15 @@
 </style>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">      
-$(function() {
-	
-          $("select").change(function() {
-             var sel = $("select").val();      
-             location.href="/sellerMain?licenseNo="+sel;
-          });
+<script type="text/javascript">
+	$(function() {
 
-})
-      
+		$("select").change(function() {
+			var sel = $("select").val();
+			location.href = "/sellerMain?licenseNo=" + sel;
+		});
+
+	})
 </script>
 
 
@@ -71,7 +70,7 @@ $(function() {
 			</select>
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-<%-- 				
+					<%-- 				
 				<%
 					if(mvo.getMemberAuth().equals("2")) {
 						List<SellerVO> list3 = (List<SellerVO>)session.getAttribute("licenseNo");
@@ -80,7 +79,7 @@ $(function() {
                            ssvo = (SellerVO)list3.get(0);
                         }  
 				%>
- --%>				
+ --%>
 					<li class="active"><a
 						href="/sellerMain?licenseNo=${licenseNo}"> <i
 							class="icon-chevron-right"></i>주문 및 예약·배달
@@ -91,6 +90,8 @@ $(function() {
 							class="icon-chevron-right"></i>차트</a></li>
 					<li><a href="/sellerProduct?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>내 푸드트럭 메뉴</a></li>
+					<li><a href="/sellerInfo?licenseNo=${licenseNo}"><i
+							class="icon-chevron-right"></i>내 푸드트럭 설정</a></li>
 				</ul>
 			</div>
 
@@ -108,27 +109,30 @@ $(function() {
 							</div>
 						</div>
 						<div class="block-content collapse in">
-							
-						<c:if test="${payment ne null}">
-							<c:forEach var="payment" items="${payment}">
+
+							<c:if test="${payment ne null}">
+								<c:forEach var="payment" items="${payment}">
+									<div class="span3">
+										<div class="chart" data-percent="${payment.ratio}">${payment.ratio}%</div>
+										<div class="chart-bottom-heading">
+											<span>${payment.payment}</span>
+											<p>
+												<span>주문건수 : ${payment.count}</span>
+											<p>
+												<span>금액 : ${payment.sumPrice}</span>
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty payment}">
 								<div class="span3">
-									<div class="chart" data-percent="${payment.ratio}">${payment.ratio}%</div>
+									<div class="chart" data-percent="0">0%</div>
 									<div class="chart-bottom-heading">
-										<span>${payment.payment}</span><p>
-										<span>주문건수 : ${payment.count}</span><p>
-										<span>금액 : ${payment.sumPrice}</span>
+										<span>주문이 없습니다.</span>
+										<p>
 									</div>
 								</div>
-							</c:forEach>
-						</c:if>
-						<c:if test="${empty payment}">
-							<div class="span3">
-								<div class="chart" data-percent="0">0%</div>
-								<div class="chart-bottom-heading">
-									<span>주문이 없습니다.</span><p>
-								</div>
-							</div>
-						</c:if>
+							</c:if>
 						</div>
 					</div>
 					<!-- /block -->
@@ -231,15 +235,15 @@ $(function() {
 									</thead>
 									<tbody>
 										<c:forEach var="todayOrder" items="${todayOrder}">
-										<c:if test="${todayOrder.payment eq '0' }">
-											<tr>
-												<td>${todayOrder.ordDate}</td>
-												<td>${todayOrder.ordName}</td>
-												<td>${todayOrder.prodName}</td>
-												<td>${todayOrder.ordReq}</td>
-											</tr>
-										</c:if>
-									</c:forEach>
+											<c:if test="${todayOrder.payment eq '0' }">
+												<tr>
+													<td>${todayOrder.ordDate}</td>
+													<td>${todayOrder.ordName}</td>
+													<td>${todayOrder.prodName}</td>
+													<td>${todayOrder.ordReq}</td>
+												</tr>
+											</c:if>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -283,7 +287,7 @@ $(function() {
 						<!-- /block -->
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

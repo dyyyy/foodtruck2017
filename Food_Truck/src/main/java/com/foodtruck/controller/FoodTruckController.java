@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
@@ -332,5 +333,16 @@ public class FoodTruckController {
 		return "nav/recommend";
 
 	}
-	
+	//푸드트럭 업데이트
+	@RequestMapping("updateFoodtruck")
+	@ResponseBody
+	public int updateFoodtruck(FoodTruckVO vo) throws Exception {
+		System.out.println("소개"+vo.getFtruckIntro());
+		if(vo.getFtruckImg().equals("none")) {
+			FoodTruckVO fvo=fservice.getFoodTruck2(vo.getLicenseNo());
+			vo.setFtruckImg(fvo.getFtruckImg());
+		}
+		int num=fservice.updateFoodTruck(vo);
+		return num;
+	}
 }

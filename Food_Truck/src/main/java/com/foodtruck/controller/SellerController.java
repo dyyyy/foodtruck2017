@@ -123,6 +123,12 @@ public class SellerController {
 		if(vo.getFtruckAddr()==null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
+		if(vo.getFtruckTel()==null) {
+			vo.setFtruckTel("없음");
+		}
+		if(vo.getFtruckIntro()==null) {
+			vo.setFtruckIntro("없음");
+		}
 		request.setAttribute("vo", vo);
 		model.addAttribute("licenseNo", num);
 		return "seller/Info";
