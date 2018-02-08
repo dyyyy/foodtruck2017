@@ -33,8 +33,14 @@
 	select count(*) from
 		festival
 	</select>
+	<select id="getFestivalList3" resultMap="FestivalMap" parameterType="String">
+	select * from festival where fes_addr like #{addr}||'%'
+	</select>
 	
+	<select id="getList3Count" resultType="int">
+	select count(*) from festival where fes_addr like #{addr}||'%'
 	
+	</select>
 	<resultMap type="FestivalVO" id="FestivalMap">
 		<result column="FES_NO" property="fesNo" />
 		<result column="FES_ADDR" property="fesAddr" />

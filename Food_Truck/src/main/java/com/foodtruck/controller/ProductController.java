@@ -70,8 +70,7 @@ public class ProductController {
 		System.out.println(vo.getLicenseNo());
 		System.out.println(vo.getProdContent());
 		System.out.println(vo.getProdImg());
-		System.out.println(vo.getProdName());
-		System.out.println(vo.getProdNo());
+		System.out.println(vo.getProdName());		
 		System.out.println(vo.getProdOrgin());
 		System.out.println(vo.getProdPrice());
 		int num = productService.insertProduct(vo);
@@ -123,5 +122,39 @@ public class ProductController {
 			
 		}
 
+	}
+	//상품 상세보기
+	@RequestMapping("/productInfo")
+	@ResponseBody
+	public HashMap productInfo(ProductVO vo1) {
+
+		ProductVO vo=productService.getProduct(vo1.getProdNo());
+		
+		HashMap map2 = new HashMap();
+		
+		map2.put("prodName", vo.getProdName());	
+		map2.put("prodContent", vo.getProdContent());	
+		map2.put("prodImg", vo.getProdImg());	
+		map2.put("prodPrice", vo.getProdPrice());	
+		map2.put("prodOrgin", vo.getProdOrgin());	
+		map2.put("prodNo", vo.getProdNo());
+
+		return map2;
+	}
+	
+	//상품 업데이트
+	@RequestMapping("/productUpdate")
+	@ResponseBody
+	public int productUpdate(ProductVO vo) {
+		
+		int num=productService.updateProduct(vo);
+		return num;
+	}
+	//상품 삭제
+	@RequestMapping("/productDelete")
+	@ResponseBody
+	public int productDelete(@RequestParam("prodNo") String prodNo) {
+		int num=productService.deleteProduct(prodNo);
+		return num;
 	}
 }

@@ -2,7 +2,7 @@ package com.foodtruck.controller;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 
@@ -41,6 +42,7 @@ import com.foodtruck.service.OrderService;
 import com.foodtruck.service.ProductService;
 
 import com.foodtruck.service.SellerService;
+import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
@@ -72,7 +74,8 @@ public class SellerController {
 	@Autowired
 	FoodTruckService fservice;
 	
-
+	@Autowired
+	FestivalService feservice;
 	// 판매자 캘린더
 	@RequestMapping("/sellerCalendar")
 	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
@@ -141,7 +144,7 @@ public class SellerController {
 		return num;
 	}
 	@RequestMapping("/sellerMain")
-	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) {	
+	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) throws Exception {	
 		MemberVO mvo = (MemberVO)session.getAttribute("member");
 		if(mvo != null) {
 			if(licenseNo == null) {
@@ -156,7 +159,20 @@ public class SellerController {
 				List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
 					request.getSession().setAttribute("member", mvo);
 					String num= licenseNo;
-	
+					//해당 푸드트럭의 라이센스번호를 가져와서 해당 지역의 이름의 축제정보 가져오기
+					FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
+					if(vo.getFtruckAddr()==null) {
+						vo.setFtruckAddr(vo.getFtruckAddr2());
+					}
+					String addr=vo.getFtruckAddr().substring(0, 2);	
+					System.out.println(addr);
+					List<FestivalVO> list3= feservice.getFestivalList3(addr);
+					int count =feservice.getList3Count(addr);
+					
+					request.setAttribute("list3", list3);
+					request.setAttribute("count", count);
+					
+				
 					model.addAttribute("licenseNo", num); // 사업자번호 하나
 					model.addAttribute("license", list); // 사업자번호 여러개
 					model.addAttribute("todayOrder", sservice.getTodayOrderList(num));

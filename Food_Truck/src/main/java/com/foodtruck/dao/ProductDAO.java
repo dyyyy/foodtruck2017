@@ -7,7 +7,7 @@ import com.foodtruck.vo.ProductVO;
 public interface ProductDAO {
 
 	// 제품 정보
-	public ProductVO getProduct(int prodNo);
+	public ProductVO getProduct(String prodNo);
 
 	// 제품 리스트
 	public List<ProductVO> getProductList(String licenseNo);
@@ -19,5 +19,7 @@ public interface ProductDAO {
 	public int updateProduct(ProductVO vo);
 
 	// 제품 삭제
-	public int deleteProduct(int prodNo);
+	public int deleteProduct(String prodNo);
+	
+
 }

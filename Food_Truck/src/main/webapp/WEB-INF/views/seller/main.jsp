@@ -62,12 +62,25 @@
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
-		<%String no=(String)request.getAttribute("licenseNo"); %>
-		<%List<SellerVO> list=(List<SellerVO>)request.getAttribute("license"); %>
+
+
+
+
+			<%
+				String no = (String) request.getAttribute("licenseNo");
+			%>
+			<%
+				List<SellerVO> list = (List<SellerVO>) request.getAttribute("license");
+			%>
 			<select name="licenseNo">
-						<%for(int i=0;i<list.size();i++){ %>
-						<option value="<%=list.get(i).getLicenseNo()%>" <%=no.equals(list.get(i).getLicenseNo())?"selected":""%>><%=list.get(i).getFtruckName()%></option>
-						<%} %>
+				<%
+					for (int i = 0; i < list.size(); i++) {
+				%>
+				<option value="<%=list.get(i).getLicenseNo()%>"
+					<%=no.equals(list.get(i).getLicenseNo()) ? "selected" : ""%>><%=list.get(i).getFtruckName()%></option>
+				<%
+					}
+				%>
 			</select>
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
@@ -97,10 +110,50 @@
 			</div>
 
 			<!--/span-->
+			<div class="span9" id="content"></div>
 			<div class="span9" id="content">
 				<div class="row-fluid"></div>
 				<div class="row-fluid">
 					<!-- block -->
+					<div class="block">
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">오늘의 추천 위치</div>
+						</div>
+						<!-- 슬라이드 시작 -->
+						<%int num=(int)request.getAttribute("count"); 
+						int lol=0;%>
+						<div id="carousel-example-generic"
+							class="carousel slide hidden-xs" data-ride="carousel"
+							style="height: 300px; width: 100%;">
+							
+							<ol class="carousel-indicators">
+							<%for(int k=0;k<num;k++) {%>
+								<li data-target="#carousel-example-generic" data-slide-to="<%=lol%>"></li>							
+								<%
+								lol++;
+								} %>
+							</ol>
+							<div class="carousel-inner" style="height: 300px; width: 100%;">
+								<c:forEach items="${list3 }" var="all">
+									<div class="item">
+										<a><img src="${all.fesImg2}"
+											style="height: 300px; width: 100%;"></a>
+										<div class="carousel-caption">
+											<p>${all.fesName}</p>
+										</div>
+									</div>
+								</c:forEach>
+								<a class="left carousel-control"
+									href="#carousel-example-generic" data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left"></span></a><a
+									class="right carousel-control" href="#carousel-example-generic"
+									data-slide="next"><span
+									class="glyphicon glyphicon-chevron-right"> </span> </a>
+
+							</div>
+							<!-- carousel-inner close -->
+						</div>
+					</div>
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">Statistics</div>
