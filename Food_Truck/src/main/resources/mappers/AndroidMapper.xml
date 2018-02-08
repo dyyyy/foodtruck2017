@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foodtruck.dao.AndroidDAO">
+
+
+	<!-- 공지사항 전체 리스트 -->
+	<select id="getNoticeBoardList" resultMap="NoticeMap">
+		select * from notice_bd
+	</select>
+	
+	<!-- 이벤트 전체 리스트 -->
+	<select id="getEventBoardList" resultMap="EventMap">
+		select * from event_bd
+	</select>
+	
+	<!-- resultMap -->
+	<resultMap type="NoticeVO" id="NoticeMap">
+		<result column="NOTICE_NO" property="noticeNo" />
+		<result column="NOTICE_TITLE" property="noticeTitle" />
+		<result column="NOTICE_WRITER" property="noticeWriter" />
+		<result column="NOTICE_CONTENT" property="noticeContent" />
+		<result column="NOTICE_REG" property="noticeReg" />
+		<result column="NOTICE_CNT" property="noticeCnt" />
+
+	</resultMap>
+	
+	<!-- resultMap -->
+	<resultMap type="EventVO" id="EventMap">
+		<result column="EVENT_NO" property="eventNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="EVENT_TITLE" property="eventTitle" />
+		<result column="EVENT_CONTENT" property="eventContent" />
+		<result column="EVENT_REG" property="eventReg" />
+		<result column="EVENT_CNT" property="eventCnt" />
+
+	</resultMap>
+</mapper>
