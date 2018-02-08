@@ -1,5 +1,6 @@
 <%@page import="com.foodtruck.vo.OrderDetailVO"%>
 <%@page import="com.foodtruck.vo.OrderVO"%>
+<%@page import="com.foodtruck.vo.FestivalVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -62,10 +63,6 @@
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
-
-
-
-
 			<%
 				String no = (String) request.getAttribute("licenseNo");
 			%>
@@ -110,46 +107,76 @@
 			</div>
 
 			<!--/span-->
-			<div class="span9" id="content"></div>
 			<div class="span9" id="content">
 				<div class="row-fluid"></div>
 				<div class="row-fluid">
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">오늘의 추천 위치</div>
+							<div class="muted pull-left">오늘의 추천 축제</div>
 						</div>
 						<!-- 슬라이드 시작 -->
-						<%int num=(int)request.getAttribute("count"); 
-						int lol=0;%>
+
 						<div id="carousel-example-generic"
 							class="carousel slide hidden-xs" data-ride="carousel"
 							style="height: 300px; width: 100%;">
-							
-							<ol class="carousel-indicators">
-							<%for(int k=0;k<num;k++) {%>
-								<li data-target="#carousel-example-generic" data-slide-to="<%=lol%>"></li>							
-								<%
-								lol++;
-								} %>
-							</ol>
-							<div class="carousel-inner" style="height: 300px; width: 100%;">
-								<c:forEach items="${list3 }" var="all">
-									<div class="item">
-										<a><img src="${all.fesImg2}"
-											style="height: 300px; width: 100%;"></a>
-										<div class="carousel-caption">
-											<p>${all.fesName}</p>
-										</div>
-									</div>
-								</c:forEach>
-								<a class="left carousel-control"
-									href="#carousel-example-generic" data-slide="prev"> <span
-									class="glyphicon glyphicon-chevron-left"></span></a><a
-									class="right carousel-control" href="#carousel-example-generic"
-									data-slide="next"><span
-									class="glyphicon glyphicon-chevron-right"> </span> </a>
 
+							<ol class="carousel-indicators">
+
+								<li data-target="#carousel-example-generic" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="4"></li>
+
+							</ol>
+							<div class="carousel-inner" style="height: 300px; width: 100%;"
+								role="listbox">
+								<%
+									List<FestivalVO> festivalList = (List<FestivalVO>) request.getAttribute("list3");
+								%>
+
+								<%
+									for (int j = 0; j < festivalList.size(); j++) {
+								%>
+								<%
+									if (j == 0) {
+								%>
+								<div class="item active">
+									<img src="<%=festivalList.get(j).getFesImg2()%>"
+										style="height: 300px; width: 100%;">
+									<div class="carousel-caption">
+										<p><%=festivalList.get(j).getFesName()%></p>
+									</div>
+								</div>
+								<%
+									} else {
+								%>
+								<div class="item">
+									<img src="<%=festivalList.get(j).getFesImg2()%>"
+										style="height: 300px; width: 100%;">
+									<div class="carousel-caption">
+										<p><%=festivalList.get(j).getFesName()%></p>
+									</div>
+								</div>
+								<%
+									}
+								%>
+								<%
+									}
+								%>
+								<a class="left carousel-control"
+									href="#carousel-example-generic" role="button"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									<span class="sr-only"></span>
+								</a> <a class="right carousel-control"
+									href="#carousel-example-generic" role="button"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									<span class="sr-only"></span>
+								</a>
 							</div>
 							<!-- carousel-inner close -->
 						</div>

@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import java.util.List;
 
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -36,7 +34,6 @@ import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 
-
 import com.foodtruck.service.OrderService;
 
 import com.foodtruck.service.ProductService;
@@ -48,9 +45,6 @@ import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 
-
-
-
 import com.foodtruck.vo.OrderVO;
 
 import com.foodtruck.vo.ProductVO;
@@ -58,7 +52,7 @@ import com.foodtruck.vo.SellerVO;
 
 @Controller
 public class SellerController {
-	
+
 	@Autowired
 	FoodTruckService foodTruckService;
 
@@ -70,18 +64,19 @@ public class SellerController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	FoodTruckService fservice;
-	
+
 	@Autowired
 	FestivalService feservice;
+
 	// 판매자 캘린더
 	@RequestMapping("/sellerCalendar")
 	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
 			@RequestParam(value = "licenseNo", required = false) String licenseNo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if(mvo != null) {
+		if (mvo != null) {
 
 			if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
 				String num = licenseNo;
@@ -100,7 +95,7 @@ public class SellerController {
 	public String sellerChart(HttpSession session, Model model,
 			@RequestParam(value = "licenseNo", required = false) String licenseNo) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if(mvo != null) {
+		if (mvo != null) {
 			if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
 
 				String num = licenseNo;
@@ -109,83 +104,118 @@ public class SellerController {
 			} else {
 				return "seller/insertFoodTruck";
 			}
-		}
-		else return "sign/login"; 
+		} else
+			return "sign/login";
 	}
 
 	// �Ǹ��� �޴� - �Ǹ��� ��� ?
- 
 
 	@RequestMapping("/sellerInfo")
-	public String sellerInfo(@RequestParam(value="licenseNo" , required=false)String licenseNo,HttpServletRequest request,HttpSession session,Model model) throws Exception {
+	public String sellerInfo(@RequestParam(value = "licenseNo", required = false) String licenseNo,
+			HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
 		List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
-		String num=list.get(0).getLicenseNo();
-		FoodTruckVO vo= new FoodTruckVO();
-		vo=fservice.getFoodTruck2(licenseNo);
-		if(vo.getFtruckAddr()==null) {
+		String num = list.get(0).getLicenseNo();
+		FoodTruckVO vo = new FoodTruckVO();
+		vo = fservice.getFoodTruck2(licenseNo);
+		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-		if(vo.getFtruckTel()==null) {
+		if (vo.getFtruckTel() == null) {
 			vo.setFtruckTel("없음");
 		}
-		if(vo.getFtruckIntro()==null) {
+		if (vo.getFtruckIntro() == null) {
 			vo.setFtruckIntro("없음");
 		}
 		request.setAttribute("vo", vo);
 		model.addAttribute("licenseNo", num);
 		return "seller/Info";
 	}
-	//새좌표 업데이트
+
+	// 새좌표 업데이트
 	@RequestMapping("/updatePosition")
 	@ResponseBody
-	public int updatePosition (FoodTruckVO vo) throws Exception {
-		int num=fservice.updateTruckPosition(vo);
+	public int updatePosition(FoodTruckVO vo) throws Exception {
+		int num = fservice.updateTruckPosition(vo);
 		return num;
 	}
-	@RequestMapping("/sellerMain")
-	public String sellerMain(@RequestParam(value="licenseNo",required=false)String licenseNo,HttpServletRequest request, Model model, HttpSession session) throws Exception {	
-		MemberVO mvo = (MemberVO)session.getAttribute("member");
-		if(mvo != null) {
-			if(licenseNo == null) {
-				List<SellerVO> list=sservice.getLicense2(mvo.getMemberId());
-				int count=list.size();
-				if(count==0) {
-					return "seller/null";
-				}else {
-					return "seller/ing";
-				}			
-			}else {
-				List<SellerVO> list =sservice.getLicense(mvo.getMemberId());
-					request.getSession().setAttribute("member", mvo);
-					String num= licenseNo;
-					//해당 푸드트럭의 라이센스번호를 가져와서 해당 지역의 이름의 축제정보 가져오기
-					FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
-					if(vo.getFtruckAddr()==null) {
-						vo.setFtruckAddr(vo.getFtruckAddr2());
-					}
-					String addr=vo.getFtruckAddr().substring(0, 2);	
-					System.out.println(addr);
-					List<FestivalVO> list3= feservice.getFestivalList3(addr);
-					int count =feservice.getList3Count(addr);
-					
-					request.setAttribute("list3", list3);
-					request.setAttribute("count", count);
-					
-				
-					model.addAttribute("licenseNo", num); // 사업자번호 하나
-					model.addAttribute("license", list); // 사업자번호 여러개
-					model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
-					model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
-//					model.addAttribute("order", sservice.getOrderList(num));
-//					model.addAttribute("img", sservice.getFoodTruckList(num));
-					model.addAttribute("payment", sservice.getTodayPayment(num));
-					
-					return "seller/main";  
-			} 
-		} else return "sign/login";
 
-		
+	@RequestMapping("/sellerMain")
+	public String sellerMain(@RequestParam(value = "licenseNo", required = false) String licenseNo,
+			HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		if (mvo != null) {
+			if (licenseNo == null) {
+				List<SellerVO> list = sservice.getLicense2(mvo.getMemberId());
+				int count = list.size();
+				if (count == 0) {
+					return "seller/null";
+				} else {
+					return "seller/ing";
+				}
+			} else {
+				List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
+				request.getSession().setAttribute("member", mvo);
+				String num = licenseNo;
+				// 해당 푸드트럭의 라이센스번호를 가져와서 해당 지역의 이름의 축제정보 가져오기
+				FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
+				if (vo.getFtruckAddr() == null) {
+					vo.setFtruckAddr(vo.getFtruckAddr2());
+				}
+				// 주소의 앞부분 2자리까지 자르기
+				String addr = vo.getFtruckAddr().substring(0, 2);
+				// 주소로 축제 정보 리스트 가져오기
+				List<FestivalVO> list3 = (List<FestivalVO>) feservice.getFestivalList3(addr);
+				// 5개의 랜덤으로 축제정보 저장할 리스트
+				List<FestivalVO> finalList = new ArrayList<FestivalVO>();
+				// 주소로 가져온 행사의 리스트 사이즈
+				int size = list3.size();
+				if (size >= 5) {
+					int random = (int) (Math.random() * list3.size()); // 리스트 사이즈만큼의 숫자
+					ArrayList<Integer> arr = new ArrayList<Integer>();
+					arr.add(random);
+					while (true) {
+						int flag = 0; // 중복인지 아닌지 판별하는 변수
+
+						random = (int) (Math.random() * list3.size()); // 새로 넣을 값
+						for (int i = 0; i < arr.size(); i++) {
+							if (arr.get(i) == random) {
+								flag = 1;
+								break; // 새로 넣을 값이 리스트 안에 중복이면 빠져나감
+							}
+						}
+
+						if (flag == 0) { // 만약에 중복 값이 없을 경우
+							arr.add(random); // 리스트에 랜덤값 추가
+						}
+
+						if (arr.size() == 5)
+							break; // 만약 리스트의 사이즈가 5와 같다면 무한루프 빠져나감
+					}
+					for (int i = 0; i < arr.size(); i++) {
+						finalList.add(i, list3.get(arr.get(i)));
+						System.out.println(finalList.get(i).getFesName());
+						System.out.println("랜덤번호=" + arr.get(i));
+					}
+
+					request.setAttribute("list3", finalList);
+
+				} else {
+
+				}
+				model.addAttribute("licenseNo", num); // 사업자번호 하나
+				model.addAttribute("license", list); // 사업자번호 여러개
+				model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
+				model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
+				// model.addAttribute("order", sservice.getOrderList(num));
+				// model.addAttribute("img", sservice.getFoodTruckList(num));
+				model.addAttribute("payment", sservice.getTodayPayment(num));
+
+				return "seller/main";
+			}
+		} else
+			return "sign/login";
+
 	}
 
 	@RequestMapping("/insertFoodTruckForm")
@@ -197,7 +227,7 @@ public class SellerController {
 	public String sellerProduct(@RequestParam(value = "licenseNo") String licenseNo, HttpServletRequest request,
 			Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if(mvo != null) {
+		if (mvo != null) {
 
 			List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
 			List<ProductVO> list2 = productService.getProductList(licenseNo);
@@ -206,38 +236,39 @@ public class SellerController {
 			request.setAttribute("list2", list2);
 
 			return "seller/sellerProduct";
-		} else return "sign/login";
+		} else
+			return "sign/login";
 	}
 
 	@RequestMapping("/modal")
 	@ResponseBody
 	public HashMap modal(@RequestParam("licenseNo") String licenseNo) {
-		
-		 HashMap map = new HashMap();
-		 map.put("licenseNo", licenseNo);
+
+		HashMap map = new HashMap();
+		map.put("licenseNo", licenseNo);
 
 		return map;
 	}
-	
+
 	// 푸드트럭 등록
 	@ResponseBody
 
 	@RequestMapping("/insertFoodTruck")
-	public int insertFoodTruck(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo
-			) throws Exception, IOException {
+	public int insertFoodTruck(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo)
+			throws Exception, IOException {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		
-		//License 테이블 insert
-		LicenseVO lvo=new LicenseVO();
+
+		// License 테이블 insert
+		LicenseVO lvo = new LicenseVO();
 		lvo.setLicenseNo(fvo.getLicenseNo());
-		lvo.setMemId(mvo.getMemberId());		
+		lvo.setMemId(mvo.getMemberId());
 		sservice.insertLicense(lvo);
-		
-		//Foodtruck 테이블 insert
+
+		// Foodtruck 테이블 insert
 		fvo.setLicenseNo(lvo.getLicenseNo());
 		fvo.setFtruckTel(mvo.getMemberTel());
-		int num=sservice.insertFoodTruck(fvo);
+		int num = sservice.insertFoodTruck(fvo);
 
 		return num;
 	}
