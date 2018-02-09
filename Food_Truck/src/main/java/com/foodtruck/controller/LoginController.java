@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
-
+import com.foodtruck.service.OrderService;
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.LicenseVO;
 
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.OrderVO;
 import com.foodtruck.vo.SellerVO;
 
 @Controller
@@ -36,7 +37,8 @@ public class LoginController {
 	@Autowired
 	SellerService sellerService;
 	
-
+	@Autowired
+	OrderService orderService;
 
 	// 로그인 폼으로 이동
 	@RequestMapping("/loginform")
@@ -56,7 +58,8 @@ public class LoginController {
 		if (mvo != null) {
 			if (mvo.getMemberPw().equals(pw)) {
 				session.setAttribute("member", mvo);
-				session.setAttribute("memberId", mvo.getMemberName());
+				session.setAttribute("memberId", mvo.getMemberId());
+				session.setAttribute("memberName", mvo.getMemberName());
 				if(mvo.getMemberAuth().equals("1")) {
 					session.setAttribute("memberGubun","1");
 				} else if(mvo.getMemberAuth().equals("2")) {
@@ -152,5 +155,13 @@ public class LoginController {
 		map.put("memberId", memberId);
 		return memberService.getPw(map);
 	}
+	
+	@ResponseBody
+	@RequestMapping("/updateOrderCount")
+	public OrderVO updateOrderCount(HttpSession session) {
+		System.out.println("오나");
+		String memId = (String)session.getAttribute("memberId");
+		return orderService.getNewCount(memId);	// 판매자가 확인하지않은 새로운 주문 갯수
+	}	
 }
 
