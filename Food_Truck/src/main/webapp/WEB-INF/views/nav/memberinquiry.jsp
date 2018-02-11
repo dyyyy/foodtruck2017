@@ -9,6 +9,68 @@
 	type="text/javascript"></script>
 
 <script type="text/javascript">
+
+	// 유효성 체크할꺼얌!
+	$(function() {
+		$("#go").click(function() {
+			
+			// NOT NULL
+			var title = $("#title").val();
+			var txtContents = $("#txtContents").val();
+			var qaScTel = $("#qaScTel").val();
+			
+			if(title == "") {
+				alert("문의하실 제목을 입력해 주시기 바랍니다.");
+				$("#title").focus();
+				return false;  
+			}
+			
+			if(txtContents == "") {
+				alert("문의하실 내용을 입력해 주시기 바랍니다.");
+				$("#txtContents").focus();
+				return false;
+			}
+		
+			if(qaScTel == "") {
+				alert("연락받으실 SMS을 입력해 주시기 바랍니다.");
+				$("#qaScTel").focus();
+				return false;
+			}
+			
+			alert("나의설정 -> 내문의내역 리스트에서 확인가능합니다");
+			return true;
+		});
+		
+		// SMS 자릿수 & 입력칸에 숫자만 올 수 있도록 
+		$("#qaScTel").on("keyup", function() {
+			
+			var phone = $("#qaScTel").val();
+			var phoneHyphen = "";
+			
+			if(phone.length > 13) {
+				$("#qaScTel").focus();
+				alert("핸드폰 번호 자릿수를 확인해주시기 바랍니다.");
+				return false;
+			}
+			
+			if(phone.length == 11) {
+				phoneHyphen += phone.substr(0, 3);
+				phoneHyphen += "-";
+				phoneHyphen += phone.substr(3, 4);
+				phoneHyphen += "-";
+				phoneHyphen += phone.substr(7);
+				$("#qaScTel").val(phoneHyphen);
+			}
+			
+			if(!((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105) || (event.keyCode == 8) || (event.keyCode == 9))) {
+				$("#qaScTel").val("");
+				alert("핸드폰 번호는 숫자로 입력하셔야 합니다.");
+				return false;
+			};
+		});
+	});
+	
+	
 	function itemChange() {
 		var info = [ "가입/탈퇴", "정보확인/수정" ];
 		var pay = [ "주문/거래확인", "영수증", "카드결제", "무통장입금" ];
@@ -41,12 +103,6 @@
 
 	}
 	
-$(function(){
-	$("#go").click(function(){
-		alert("나의설정 -> 내문의내역 리스트에서 확인가능합니다");
-	})
-})
-	
 </script>
 <style type="text/css">
 b{
@@ -75,7 +131,7 @@ font-size: 30px;
 							<td>
 								<!-- 중분류 시작 --> <select id="select1" name="qaScCategory1"
 								onchange="itemChange()" title="문의종류 선택 정보1"
-								style="width: 110px;"><option value="ALL">선택</option>
+								style="width: 110px;"><option>선택</option>
 									<option>고객정보</option>
 									<option>주문/결제</option>
 									<option>배송/예약</option>
@@ -113,7 +169,7 @@ font-size: 30px;
 						<tr>
 							<th scope="row">연락 받으실 SMS</th>
 							<td colspan="3"><input type="text" class="txt"
-								style="width: 200px;" name="qaScTel" title="핸드폰번호 "> <input
+								style="width: 200px;" name="qaScTel" title="핸드폰번호 " id="qaScTel"> <input
 								name="SMS_NOTI_YN" type="checkbox" class="chk" value="Y"
 								checked="" title="SMS로 답변 받음 체크">답신여부를 SMS로 받음 <!--<input name="chkCUSTOM_UPDATE_YN" id="chkCUSTOM_UPDATE_YN" type="checkbox" class="chk2" value="Y" title="나의정보 동시변경 체크" checked>나의정보 동시변경-->
 							</td>
@@ -134,7 +190,7 @@ font-size: 30px;
 			</div>
 			<div class="btn_center_box" align="center">
 				<input type="submit" class="btn btn-danger btn-large"
-					value="문의하기 등록" id="go">&nbsp;&nbsp;&nbsp;&nbsp;<input
+					value="문의하기 등록" id="go" onsubmit="return validation();">&nbsp;&nbsp;&nbsp;&nbsp;<input
 					type="button" class="btn btn-danger btn-large" value="입력취소">
 			</div>
 		</form>
@@ -147,9 +203,5 @@ font-size: 30px;
 		$('#e_mail2').val($('#mail_server').val());
 	}
 	$('#mail_server').change(email);
-	
-	
-
-	
 </script>
 </html>
