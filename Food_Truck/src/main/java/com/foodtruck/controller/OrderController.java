@@ -95,7 +95,7 @@ public class OrderController {
 										@RequestParam("ordName") String ordName, 
 										@RequestParam("ordTel") String ordTel, 
 										@RequestParam("ordReq") String ordReq, 
- 
+										@RequestParam("memId2") String memId,		
 										@RequestParam("licenseNo") String licenseNo, 
 										@RequestParam("prodNo") List<String> prodNo, 
 										@RequestParam("prodName") List<String> prodName,
@@ -116,6 +116,7 @@ public class OrderController {
 			orderMap.put("ordReq", ordReq);
 			orderMap.put("licenseNo", licenseNo);
 			orderMap.put("sumPrice", sumPrice);
+			orderMap.put("memId", memId);
 		}
 		
 		Oservice.insertOrder(orderMap); 

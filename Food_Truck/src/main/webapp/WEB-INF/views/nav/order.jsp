@@ -142,6 +142,7 @@
 						<% if(mvo != null) {  %>
 							<label> 회원 아이디</label>
 							<input type="text" name="memId" value="<%=mvo.getMemberId()%> " readonly="readonly">
+							<input type="hidden" name="memId2" value="<%=mvo.getMemberId()%>">
 						<% } %>
 						<label>주문자 이름<span>*</span></label>
 						<input type="text" name="ordName" id="ordName">
