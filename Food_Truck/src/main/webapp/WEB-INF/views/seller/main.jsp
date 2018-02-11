@@ -47,13 +47,17 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+	
 	$(function() {
 
+		$('.chart').easyPieChart({
+			animate : 1000
+		});
+		
 		$("select").change(function() {
 			var sel = $("select").val();
 			location.href = "/sellerMain?licenseNo=" + sel;
 		});
-
 	})
 </script>
 
