@@ -19,7 +19,6 @@
 <body>
 
 <%@include file="../comm/nav.jsp" %>
-
 	<div class="featured-product section fix">
 		<div class="container">
 		<!-- notice title -->
@@ -27,7 +26,6 @@
 				<h2 style="font-size: 30px">Event</h2>
 				<div class="underline" style="margin: 0px; width: 200px;"></div>
 			</div>
-		
 		
 			<table class="table">
 				<tr>
@@ -48,16 +46,16 @@
 					<td>${vo.memId}</td>
 				</tr>
 			</table>
-			<button onclick="location.href='/updateEventForm?eventNo=${vo.eventNo}'">수정</button>
-			<button id=delete onclick="location.href='/deleteEvent?eventNo=${vo.eventNo}'">삭제</button>
-			<button onclick="location.href='/eventBoard?pageNo=1'">목록</button>
-			
-			
+			<div class="row2">
+				<div class="eventBtn">
+					<button onclick="location.href='/updateEventForm?eventNo=${vo.eventNo}'">수정</button>
+					<button id=delete onclick="location.href='/deleteEvent?eventNo=${vo.eventNo}'">삭제</button>
+					<button onclick="location.href='/eventBoard?pageNo=1'">목록</button>
+				</div>
+			</div>
 		</div>
 	</div>
-
-
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
-
+	<br><br>
 </body>
 </html>

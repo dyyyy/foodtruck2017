@@ -48,10 +48,12 @@
 				//로그인 체크!
 				if (mvo != null) {
 					isLogin = true;
-					if (mvo.getMemberAuth().equals("1")) {
+					if (mvo.getMemberAuth().equals("1") || mvo.getMemberAuth().equals("2")) {
 			%>
-			<button onclick="location.href='/writeEventForm'"
+			<div class="eventBtn" style="float:right;">
+				<button onclick="location.href='/writeEventForm'"
 				style="margin-right: 0px">글쓰기</button>
+			</div>
 			<%
 				}
 				}
