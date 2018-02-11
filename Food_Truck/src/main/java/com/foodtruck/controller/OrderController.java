@@ -42,10 +42,11 @@ public class OrderController {
 	ReviewService reviewService;
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request) {
+	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request,
+						@RequestParam("ftruckNo") String ftruckNo) {
 		System.out.println("����");
 		System.out.println(licenseNo);
-		List<ProductVO> Plist = Pservice.getProductList(licenseNo);
+		List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
 
 		request.setAttribute("list",Plist);
 		return "nav/order";

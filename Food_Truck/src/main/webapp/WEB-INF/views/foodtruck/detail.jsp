@@ -23,11 +23,11 @@
 <script type="text/javascript">
 function goOrder() {
 	var licenseNo = <%=vo.getLicenseNo()%>;
-	order.action = "order?licenseNo=" + licenseNo
+	var ftruckNo = <%=vo.getFtruckNo()%>;
+	order.action = "order?licenseNo=" + licenseNo +"&ftruckNo="+ftruckNo
 	order.method = "post"
 	order.submit();
 }
-	
 //필요없는부분 표정이바뀜..
 $(function() {	
 	$("#cbtn").click(function() {
