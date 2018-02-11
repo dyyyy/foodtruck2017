@@ -47,6 +47,7 @@
 				<!-- Single Product -->
 				<div class="shop-products">
 				<c:forEach items="${list}" var="all">
+				<fieldset>
 					<div class="single-list-product col-sm-12">
 						<div class="list-pro-image">
 							<a href="/read?ftruckNo=${all.ftruckNo}"> 
@@ -61,6 +62,7 @@
 							<p>${all.ftruckIntro}</p>
 					</div>
 				</div>
+				</fieldset><br>
 				</c:forEach>
 				
 					<!-- Pagination -->

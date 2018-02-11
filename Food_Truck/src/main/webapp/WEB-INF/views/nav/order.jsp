@@ -81,7 +81,7 @@
 			var ordName = $("#ordName").val();
 			if(ordName == "") {
 				alert("주문자 이름을 입력해 주시기 바랍니다.");
-				$("ordName").focus();
+				$("#ordName").focus();
 				return false;
 			};
 			
@@ -89,7 +89,7 @@
 			var ordTel = $("#ordTel").val();
 			if(ordTel == "") {
 				alert("주문자 연락처를 입력해 주시기 바랍니다.");
-				$("ordTel").focus();
+				$("#ordTel").focus();
 				return false;
 			};
 			return true;
@@ -101,7 +101,7 @@
 			var phoneHyphen = "";
 			
 			if(phone.length > 13) {
-				$("#ordTel").val("");
+				$("#ordTel").focus();
 				alert("핸드폰 번호 자릿수를 확인해주시기 바랍니다.");
 				return false;
 			}
@@ -180,6 +180,7 @@
 						<% if(mvo != null) {  %>
 							<label> 회원 아이디</label>
 							<input type="text" name="memId" value="<%=mvo.getMemberId()%> " readonly="readonly">
+							<input type="hidden" name="memId2" value="<%=mvo.getMemberId()%>">
 						<% } %>
 						<label>주문자 이름<span>*</span></label>
 						<input type="text" name="ordName" id="ordName">

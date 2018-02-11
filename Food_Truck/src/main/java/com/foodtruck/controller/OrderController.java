@@ -45,10 +45,11 @@ public class OrderController {
 	ReviewService reviewService;
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request) {
+	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request,
+						@RequestParam("ftruckNo") String ftruckNo) {
 		System.out.println("����");
 		System.out.println(licenseNo);
-		List<ProductVO> Plist = Pservice.getProductList(licenseNo);
+		List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
 
 		request.setAttribute("list",Plist);
 		return "nav/order";
@@ -98,7 +99,7 @@ public class OrderController {
 										@RequestParam("ordName") String ordName, 
 										@RequestParam("ordTel") String ordTel, 
 										@RequestParam("ordReq") String ordReq, 
- 
+										@RequestParam("memId2") String memId,		
 										@RequestParam("licenseNo") String licenseNo, 
 										@RequestParam("prodNo") List<String> prodNo, 
 										@RequestParam("prodName") List<String> prodName,
@@ -134,9 +135,8 @@ public class OrderController {
 				orderMap.put("ordDlyYn", ordDlyYn);
 				orderMap.put("payment", payment);
 				orderMap.put("ordRsvDate", ordRsvDate);
-				
+				orderMap.put("memId", memId);
 			}
-			
 			Oservice.insertOrder(orderMap); 
 			String ordNo = String.valueOf(orderMap.get("ordNo"));
 			

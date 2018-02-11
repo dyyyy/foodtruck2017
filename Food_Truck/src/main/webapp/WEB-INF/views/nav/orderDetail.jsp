@@ -189,8 +189,8 @@
 			            dataType : "json",
 			            success : function(data) {
 			            	// test중 나중에 지워야햄! -> 데이터 확인
-			            	var jsondata = JSON.stringify(data);
-							alert(jsondata);
+// 			            	var jsondata = JSON.stringify(data);
+// 							alert(jsondata);
 							
 							var rowLength = 0;
 							var htmlObj = "";

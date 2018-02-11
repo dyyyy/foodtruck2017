@@ -48,14 +48,13 @@
 	<insert id="insertOrder" parameterType="map">
 
 		INSERT INTO ORDERS
+
 		(ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, LICENSE_NO,
-		SUM_PRICE, ORD_DLV_YN, PAYMENT, ORD_DATE,ORD_RSV_DATE)
+		SUM_PRICE, ORD_DLV_YN, PAYMENT, ORD_DATE,ORD_RSV_DATE, MEM_ID)
 		VALUES
 		(TO_CHAR(SYSDATE,'YYMMDD')||LPAD(ORD_SEQ.NEXTVAL,5,0), #{ordName},
 		#{ordTel}, #{ordReq}, #{licenseNo}, #{sumPrice}, #{ordDlyYn},
-		#{payment}, TO_CHAR(SYSDATE, 'YYMMDD'),#{ordRsvDate})
-
-
+		#{payment}, TO_CHAR(SYSDATE, 'YYMMDD'),#{ordRsvDate},#{memId})
 		<selectKey keyProperty="ordNo" resultType="String">
 			
 			 <![CDATA[
