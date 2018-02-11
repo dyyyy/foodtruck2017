@@ -167,42 +167,40 @@ public class SellerController {
 				// 주소로 축제 정보 리스트 가져오기
 				List<FestivalVO> list3 = (List<FestivalVO>) feservice.getFestivalList3(addr);
 				// 5개의 랜덤으로 축제정보 저장할 리스트
-				List<FestivalVO> finalList = new ArrayList<FestivalVO>();
-				// 주소로 가져온 행사의 리스트 사이즈
-				int size = list3.size();
-				if (size >= 5) {
-					int random = (int) (Math.random() * list3.size()); // 리스트 사이즈만큼의 숫자
-					ArrayList<Integer> arr = new ArrayList<Integer>();
-					arr.add(random);
-					while (true) {
-						int flag = 0; // 중복인지 아닌지 판별하는 변수
+				if(list3!=null) {
+					List<FestivalVO> finalList = new ArrayList<FestivalVO>();
+					// 주소로 가져온 행사의 리스트 사이즈
+					int size = list3.size();
+					if (size >= 5) {
+						int random = (int) (Math.random() * list3.size()); // 리스트 사이즈만큼의 숫자
+						ArrayList<Integer> arr = new ArrayList<Integer>();
+						arr.add(random);
+						while (true) {
+							int flag = 0; // 중복인지 아닌지 판별하는 변수
 
-						random = (int) (Math.random() * list3.size()); // 새로 넣을 값
-						for (int i = 0; i < arr.size(); i++) {
-							if (arr.get(i) == random) {
-								flag = 1;
-								break; // 새로 넣을 값이 리스트 안에 중복이면 빠져나감
+							random = (int) (Math.random() * list3.size()); // 새로 넣을 값
+							for (int i = 0; i < arr.size(); i++) {
+								if (arr.get(i) == random) {
+									flag = 1;
+									break; // 새로 넣을 값이 리스트 안에 중복이면 빠져나감
+								}
 							}
+
+							if (flag == 0) { // 만약에 중복 값이 없을 경우
+								arr.add(random); // 리스트에 랜덤값 추가
+							}
+
+							if (arr.size() == 5)
+								break; // 만약 리스트의 사이즈가 5와 같다면 무한루프 빠져나감
 						}
+						for (int i = 0; i < arr.size(); i++) {
+							finalList.add(i, list3.get(arr.get(i)));				
+						}					
+						request.setAttribute("list3", finalList);
 
-						if (flag == 0) { // 만약에 중복 값이 없을 경우
-							arr.add(random); // 리스트에 랜덤값 추가
-						}
-
-						if (arr.size() == 5)
-							break; // 만약 리스트의 사이즈가 5와 같다면 무한루프 빠져나감
-					}
-					for (int i = 0; i < arr.size(); i++) {
-						finalList.add(i, list3.get(arr.get(i)));
-						System.out.println(finalList.get(i).getFesName());
-						System.out.println("랜덤번호=" + arr.get(i));
-					}
-
-					request.setAttribute("list3", finalList);
-
-				} else {
-
+					}	
 				}
+				
 				model.addAttribute("licenseNo", num); // 사업자번호 하나
 				model.addAttribute("license", list); // 사업자번호 여러개
 				model.addAttribute("todayOrder", sservice.getTodayOrderList(num));

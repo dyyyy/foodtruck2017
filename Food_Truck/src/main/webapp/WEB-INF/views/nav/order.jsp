@@ -139,6 +139,9 @@
 				<div class="col-sm-6 col-md-5">
 					<div class="product">
 						<h2>Please order</h2>
+						<label><input type="radio" name="gubun" value="N"
+							checked> 예약하기 <input type="radio" name="Y"
+							value="Y"> 배달하기 </label>
 						<% if(mvo != null) {  %>
 							<label> 회원 아이디</label>
 							<input type="text" name="memId" value="<%=mvo.getMemberId()%> " readonly="readonly">
