@@ -34,6 +34,7 @@
 					<!-- Single Product Start -->
 					<c:forEach items="${list}" var="all">
 					<div class="col-sm-4 fix">
+					<fieldset>
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
@@ -52,6 +53,7 @@
 								</div>							
 							</div>
 						</div>
+					</fieldset><br>
 					</div><!-- Single Product End -->
 					</c:forEach>
 					<!-- Pagination -->

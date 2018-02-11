@@ -27,6 +27,7 @@
 						
 						<!-- Single Product Start -->
 						<c:forEach var="rank" items="${rank}" >
+						<fieldset>
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
@@ -55,6 +56,7 @@
 								</div>
 							</div>
 						</div>
+						</fieldset>
 						</c:forEach>
 						<!-- Single Product End -->
 						

@@ -165,7 +165,7 @@
 
 </head>
 <body>
-
+<%@include file="../comm/nav.jsp"%>
 	<!--start create member Area-->
 	<div class="login-page page fix">
 		<div class="container">
