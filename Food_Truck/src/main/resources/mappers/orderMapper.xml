@@ -68,6 +68,23 @@
 	
 	</update>
 
+	<!-- 새로운 주문 -->
+	<select id="getNewCount" resultMap="OrderMap">
+			 
+		SELECT COUNT(O.ORD_CHECK)AS newCount
+		FROM ORDERS O
+		WHERE O.LICENSE_NO IN (SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
+		AND O.ORD_CHECK = 'N'
+		
+	</select>
+	
+	<!-- 새로운 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
+ 	<update id="checkNewOrder">
+ 		UPDATE ORDERS SET
+ 		ORD_CHECK = 'Y'
+ 		WHERE LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
+ 	</update>	
+
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
 		<result column="ORD_NO" property="ordNo"/>
@@ -85,6 +102,8 @@
 		<result column="PROD_NAME" property="prodName"/>
 		<result column="FTRUCK_NAME" property="ftruckName" />
 		<result column="COOK_STAT" property="cookStat" />
+		<result column="NEWCOUNT" property="newCount"/>
+		<result column="ORD_CHECK" property="ordCheck" />
 	</resultMap>
 	
 	<resultMap type="LicenseVO" id="LicenseMap">

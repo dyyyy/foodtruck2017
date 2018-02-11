@@ -153,8 +153,7 @@ textarea {
 									<tr>
 										<th>휴대폰 번호 </th>
 										<td>
-											<input type="text" name="ftruckTel"> 
-											<input type="button" class="btn btn-default" id="checkTel" value="인증하기">
+											<input type="text" name="ftruckTel"> 											
 										</td>
 									</tr>
 									<tr>

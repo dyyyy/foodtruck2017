@@ -83,7 +83,11 @@
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/deliveryDetails">배달 내역</a></li>
 									<li><a href="/sellerMain<%=list3.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
-								</ul></li>
+								</ul>
+							</li>
+							<li>
+								<a href="/checkNewOrder" onload="updateData()"><img src='/resources/img/ms3.png' ><b id="newCount"></b></a>
+							</li>									
 							<%
 								break;
 									//운영자

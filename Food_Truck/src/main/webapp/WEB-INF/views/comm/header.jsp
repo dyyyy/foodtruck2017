@@ -143,7 +143,30 @@
 			break;
 		}
 	}
+	
+<% 
+	String gubun  = (String)session.getAttribute("memberGubun");
+%>
 
+if(<%=gubun%> == "2") {
+	$(function() {
+		updateData()
+	})
+}		
+	
+	
+	function updateData() {
+		var str = "&nbsp;&nbsp;"
+		$.ajax({
+			url : "/updateOrderCount",
+			type : "post" ,
+			cache : false,
+			success : function(data) {
+				$("#newCount").html(str+data.newCount+"개")
+			}
+		})
+		setTimeout("updateData()",10000)
+	}
 	//search button
 /*
 	$(function() {

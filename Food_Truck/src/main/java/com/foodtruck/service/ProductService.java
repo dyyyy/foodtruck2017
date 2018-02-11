@@ -16,7 +16,7 @@ public class ProductService {
 	private SqlSessionTemplate sessionTemplate;
 
 	// 제품 정보
-	public ProductVO getProduct(int prodNo) {
+	public ProductVO getProduct(String prodNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.getProduct(prodNo);
 	}
@@ -40,9 +40,10 @@ public class ProductService {
 	}
 
 	// 제품 삭제
-	public int deleteProduct(int prodNo) {
+	public int deleteProduct(String prodNo) {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.deleteProduct(prodNo);
 	}
+	
 
 }

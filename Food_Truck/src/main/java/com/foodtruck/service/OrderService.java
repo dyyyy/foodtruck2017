@@ -64,4 +64,16 @@ public class OrderService {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.cookStatChange(map);
 	}	
+	
+	// 새로운 주문알림 갯수 표시하기
+	public OrderVO getNewCount(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.getNewCount(memId);
+	}	
+	
+	// 새로운 주문 확인
+	public int checkNewOrder(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.checkNewOrder(memId);
+	}	
 }

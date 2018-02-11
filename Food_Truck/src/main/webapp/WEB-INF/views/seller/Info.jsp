@@ -12,10 +12,68 @@
 
 <head>
 <title>상품</title>
-
+<script src="/resources/editor/js/HuskyEZCreator.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<link rel="stylesheet" href="/resources/css/lc_switch.css">
+<script src="/resources/js/lc_switch.js"></script>
+<script type="text/javascript">
+function mm() {
+	var formData = new FormData(document.getElementById("uploadForm"));
+	$.ajax({
+		url : "/imggo", //컨트롤러 URL
+		data : formData,
+		dataType : 'json',
+		processData : false,
+		contentType : false,
+		type : 'POST',
+		success : function(data) {
+			$('.img2').html('<input type="hidden" value="' + data.path + '" id="path">');
+		},
+		error : function(jqXHR) {
+			alert(jqXHR.responseText);
+		}
+	});
 
+}
+function changInfo(){
+	var licenseNo=${licenseNo};
+	var path=document.getElementById("path").value;
+	var tel=document.getElementById("tel").value;
+	var ftruckDlvYn = $("input[name='ftruckDlvYn']:checked").val();
+	var ftruckRsvYn = $("input[name='ftruckRsvYn']:checked").val();
+	var content=$("#con").val();
+	var category = $("#select").val();
+	
+		$.ajax({
+			url:"/updateFoodtruck",
+			data:{
+				ftruckImg:path,
+				ftruckTel:tel,
+				ftruckDlvYn:ftruckDlvYn,
+				ftruckRsvYn:ftruckRsvYn,
+				ftruckIntro:content,
+				category:category,
+				licenseNo:licenseNo
+			},
+			dataType : 'json',
+			type : 'POST',
+			success : function(data) {
+				if(data==1){
+					alert("수정이 완료되었습니다");
+					location.reload();
+				}else{
+					alert("에러!  관리자에게 문의해주세요");
+				}
+				
+			}
+		})
+	}
+	
+
+
+</script>
 </head>
 <%@include file="../comm/header2.jsp"%>
 <body>
@@ -41,7 +99,82 @@
 				<!-- morris stacked chart -->
 				<%FoodTruckVO vo=(FoodTruckVO)request.getAttribute("vo"); %>
 				<div class="row-fluid">
-					<!-- block -->
+					<div class="block">
+						<div class="navbar navbar-inner block-header">
+							<div class="muted pull-left">푸드트럭 정보</div>
+							<div class="muted pull-right" style="margin-top: -8px;">
+								<button class="btn" onclick="changInfo()">정보 변경하기</button>
+							</div>
+						</div>
+						<div class="block-content collapse in">
+							<form id="uploadForm" class="form-horizontal">
+								<fieldset>
+									<div class="control-group">
+										<label class="control-label">대표 이미지<span
+											class="required">*</span></label>
+										<div class="controls">
+											<img src="<%=vo.getFtruckImg()%>"
+												style="width: 260px; height: 180px;">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="fileInput"></label>
+										<div class="controls">
+											<input class="input-file uniform_on" id="fileInput"
+												type="file" name="img" enctype="multipart/form-data"
+												onchange="mm()">
+										</div>
+										<div class="img2"><input type="hidden" id="path" value="none"></div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">연락처<span class="required">*</span></label>
+										<div class="controls">
+											<input type="text" name="name" data-required="1"
+												class="span6 m-wrap" / value="<%=vo.getFtruckTel()%>" id="tel">
+										</div>
+									</div>
+									<%String ck=vo.getFtruckDlvYn();%>
+									<div class="control-group">
+										<label class="control-label">배달여부<span
+											class="required">*</span></label>
+										<div class="controls">
+											<input type="radio" value="Y" name="ftruckDlvYn" <%=ck.equals("Y")?"checked":""%>>Y <input
+												type="radio" value="N" name="ftruckDlvYn" <%=ck.equals("N")?"checked":""%>>N
+										</div>
+									</div>
+									<%String ck2=vo.getFtruckRsvYn(); %>
+									<div class="control-group">
+										<label class="control-label">예약여부<span
+											class="required">*</span></label>
+										<div class="controls">
+											<input type="radio" value="Y" name="ftruckRsvYn" <%=ck2.equals("Y")?"checked":""%>>Y <input
+												type="radio" value="N" name="ftruckRsvYn" <%=ck2.equals("N")?"checked":""%>>N
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">푸드트럭 소개<span
+											class="required">*</span></label>
+										<div class="controls">
+											<textarea style="width: 610px; height: 200px;" id="con"><%=vo.getFtruckIntro() %></textarea>
+										</div>
+									</div>
+									<%int num=vo.getCategory(); %>
+									<div class="control-group">
+										<label class="control-label">카테고리<span
+											class="required">*</span></label>
+										<div class="controls">
+											<select class="span6 m-wrap" id="select" >												
+												<option value="1" <%=num==1?"selected":""%>>한식</option>
+												<option value="2" <%=num==2?"selected":""%>>중식</option>
+												<option value="3" <%=num==3?"selected":""%>>양식</option>
+												<option value="4" <%=num==4?"selected":""%>>일식</option>
+											</select>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">현재위치</div>
@@ -181,11 +314,10 @@
 							}
 						}
 							</script>
-							<script type="text/javascript">
-							
-							</script>
+
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>

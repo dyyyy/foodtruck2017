@@ -168,5 +168,25 @@ public class OrderController {
 		   
 		return mv;
 		
-	   }	
+	}
+	
+	// 새로운 주문 확인
+	@RequestMapping("/checkNewOrder")
+	public String checkNewOrder(HttpSession session, HttpServletRequest request)throws Exception {
+		System.out.println("오나아");
+		String memId = (String)session.getAttribute("memberId");	
+		try {
+			if(Oservice.checkNewOrder(memId) != 0) {
+				return "redirect:/orderDetail";
+			}else {
+				return "";
+			}	
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			return "";
+		}
+		
+		
+	}
 }

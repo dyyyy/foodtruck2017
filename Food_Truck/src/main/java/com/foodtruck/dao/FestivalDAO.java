@@ -23,4 +23,10 @@ public interface FestivalDAO {
 	
 	//축제정보 10개씩 가져오기
 	public List<FestivalVO> getFestivalList2(int npageNo) throws Exception;
+	
+	//푸드트럭 지역이름으로 행사정보 가져오기
+	public List<FestivalVO> getFestivalList3(String addr)throws Exception;
+	
+	//푸드트럭 지역이름으로 행사정보 카운드
+	public int getList3Count(String addr)throws Exception;
 }
