@@ -92,10 +92,27 @@
 				$("#ordTel").focus();
 				return false;
 			};
+			
+			// 예약 하기 버튼, 시간 체크 유효성 검사
+			var ordDlyYn = $('input:radio[name=ordDlyYn]').is(':checked');
+			if(ordDlyYn == false) {
+				alert("예약하기나, 배달하기 버튼을 클릭해 주세요 :-)");
+				return false;
+			}
+			
+			var ordRsvDate1 = $("#ordRsvDate1 option:selected").val();
+			var ordRsvDate2 = $("#ordRsvDate2 option:selected").val();
+			
+			if(ordRsvDate1 == "" || ordRsvDate2 == "") {
+				console.log(ordRsvDate1);
+				alert("시간을 체크해주시기 바랍니다 :-)");
+				return false;
+			}
+			
 			return true;
 		})
 		
-		
+		// 핸드폰 번호 유효성 검사		
 		$("#ordTel").on("keyup", function() {
 			var phone = $("#ordTel").val();
 			var phoneHyphen = "";
@@ -160,21 +177,21 @@
 						<br>
 						<div align="right" id="time" style="display: none">
 							예약시간:<select style=" width: 50px;" name="ordRsvDate1">
-								<option>--</option>
-								<option>0</option>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>	
+								<option value="">--</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>	
 								</select>
-								<select style=" width: 50px;" name="ordRsvDate2">
-								<option>--</option>
-								<option>00</option>
-								<option>10</option>
-								<option>20</option>
-								<option>30</option>
-								<option>40</option>
-								<option>50</option>						
+								<select style=" width: 50px;" name="ordRsvDate2" id="ordRsvDate2">
+								<option value="">--</option>
+								<option value="00">00</option>
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>							
 								</select>분 뒤
 						</div>
 						<% if(mvo != null) {  %>
