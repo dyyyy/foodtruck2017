@@ -112,4 +112,9 @@ public class SellerService {
 		return dao.getProductList(licenseNo);
 
 	}
+	
+	public List<SellerVO> getDate(String licenseNo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getDate(licenseNo);
+	}
 }

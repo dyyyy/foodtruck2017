@@ -58,4 +58,6 @@ public interface SellerDAO {
 	// 푸드트럭별 상품 리스트 
 	public List<ProductVO> getProductList(String licenseNo);
 	
+	public List<SellerVO> getDate(String licenseNo);
+	
 }
