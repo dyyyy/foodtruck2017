@@ -46,6 +46,12 @@
 					<td>${vo.memId}</td>
 				</tr>
 			</table>
+			<%
+				//로그인 체크!
+				if (mvo != null) {
+					isLogin = true;
+					if (mvo.getMemberAuth().equals("1") || mvo.getMemberAuth().equals("2")) {
+			%>
 			<div class="row2">
 				<div class="eventBtn">
 					<button onclick="location.href='/updateEventForm?eventNo=${vo.eventNo}'">수정</button>
@@ -53,6 +59,10 @@
 					<button onclick="location.href='/eventBoard?pageNo=1'">목록</button>
 				</div>
 			</div>
+			<%
+				}
+				}
+			%>
 		</div>
 	</div>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
