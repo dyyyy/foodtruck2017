@@ -2778,7 +2778,7 @@ table td[class*=col-], table th[class*=col-] {
 
 fieldset {
 	min-width: 0;
-	padding: 0;
+	padding: 10px;
 	margin: 0;
 	border-color:#5ba2b3;
 }
