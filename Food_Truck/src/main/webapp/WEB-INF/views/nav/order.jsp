@@ -120,9 +120,21 @@
 				alert("핸드폰 번호는 숫자로 입력하셔야 합니다 :-)");
 				return false;
 			};
-		})
+		})	
 	});
-	
+	$(function(){
+		$("#res").change(function(){
+			var select=document.getElementById("time");
+			select.style.display='block';
+			
+		})
+		$("#dly").change(function(){
+			var select=document.getElementById("time");
+			select.style.display='none';
+			
+		})
+		
+	});
 </script>
 <form action="/orderRegit" id="signup-form" onsubmit="return validation();">
 	<%
@@ -139,9 +151,32 @@
 				<div class="col-sm-6 col-md-5">
 					<div class="product">
 						<h2>Please order</h2>
-						<label><input type="radio" name="gubun" value="N"
-							checked> 예약하기 <input type="radio" name="Y"
-							value="Y"> 배달하기 </label>
+						<div>
+							<input type="radio" name="ordDlyYn" value="N" id="res"
+								style="width: 50px; margin-left: 100px; float: left;">예약하기
+							<input type="radio" name="ordDlyYn" value="Y"
+								style="width: 50px;" id="dly"> 배달하기
+						</div>
+						<br>
+						<div align="right" id="time" style="display: none">
+							예약시간:<select style=" width: 50px;" name="ordRsvDate1">
+								<option>--</option>
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>	
+								</select>
+								<select style=" width: 50px;" name="ordRsvDate2">
+								<option>--</option>
+								<option>00</option>
+								<option>10</option>
+								<option>20</option>
+								<option>30</option>
+								<option>40</option>
+								<option>50</option>						
+								</select>분 뒤
+						</div>
 						<% if(mvo != null) {  %>
 							<label> 회원 아이디</label>
 							<input type="text" name="memId" value="<%=mvo.getMemberId()%> " readonly="readonly">
@@ -204,31 +239,46 @@
 					</div>
 				</div>
 				</div>
-				<div class="col-sm-6 col-md-7">
-					<!-- 					<div class="coupon"> -->
-					<!-- 						<h3>할인쿠폰</h3> -->
-					<!-- 							<input type="text" placeholder="쿠폰번호를 입력해주세요" /> <a href="#">쿠폰적용하기</a> -->
-					<!-- 					</div> -->
+				<div align="right"  >
+				<table class="table cart-table" style="width: 400px; vertical-align: middle; background-color: white;margin-right: 10px; font-weight: 700px;">
+					<tr>
+						<td><h3 align="center">결재수단 선택</h3></td>
+					</tr>
+					<tr>
+						<td><input type="radio"name="payment" value="0" checked="checked">&nbsp;&nbsp;&nbsp;푸드트럭에서 결제하기</td>
+					</tr>
+					<tr>
+						<td><input type="radio" name="payment" value="1">&nbsp;&nbsp;&nbsp;신용카드</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-6 col-md-7">
+				<div class="coupon">
+					<h3>할인쿠폰</h3>
+					<input type="text" placeholder="쿠폰번호를 입력해주세요" /> <a href="#">쿠폰적용하기</a>
 				</div>
+			</div>
 
-				<div class="col-sm-6 col-md-5">
-					<div class="proceed fix">
-						<div class="total">
-							<h5>
-								총 금액 <span class="sumPriceResult"></span>
-								<div id="sumPrice"></div>
-							</h5>
-							<h6>
-								할인 적용가 <span> 여기에 가격 넣자 ! </span>
-							</h6>
-						</div>
-						<!-- 							<a id="procedto" href="checkout.html">PROCEED TO CHECK OUT</a> -->
-						<div class="orderForm">
-							<input type="submit" value="결제하기"><br><br>
-						</div>
+			<div class="col-sm-6 col-md-5">
+				<div class="proceed fix">
+					<div class="total">
+						<h5>
+							총 금액 <span class="sumPriceResult"></span>
+							<div id="sumPrice"></div>
+						</h5>
+						<h6>
+							할인 적용가 <span> 여기에 가격 넣자 ! </span>
+						</h6>
+					</div>
+					<!-- 							<a id="procedto" href="checkout.html">PROCEED TO CHECK OUT</a> -->
+					<div class="orderForm">
+						<input type="submit" value="결제하기"><br>
+						<br>
 					</div>
 				</div>
 			</div>
+			
+		</div>
 		</div>
 	</section>
 	<!--End Cart Area-->

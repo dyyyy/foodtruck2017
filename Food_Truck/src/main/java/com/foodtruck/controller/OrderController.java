@@ -1,5 +1,8 @@
 package com.foodtruck.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,52 +104,72 @@ public class OrderController {
 										@RequestParam("prodName") List<String> prodName,
 										@RequestParam("ordQty") List<Integer> ordQty,
 										@RequestParam("ordPrice") List<Integer> ordPrice,
-										@RequestParam("sumPrice") int sumPrice) {
-		
-
-		System.out.println("주문할 거 디비에 넣자!");
-		Map<String,Object> orderMap = new HashMap<String, Object>();
-		Map<String,Object> orderdetailMap = new HashMap<String, Object>();
-		Map<String,Object> orderInfoList = new HashMap<String, Object>();
-		
-		// order 테이블에 들어갈껑!
-		if(ordName != null) {
-			orderMap.put("ordName", ordName);
-			orderMap.put("ordTel", ordTel);
-			orderMap.put("ordReq", ordReq);
-			orderMap.put("licenseNo", licenseNo);
-			orderMap.put("sumPrice", sumPrice);
-		}
-		
-		Oservice.insertOrder(orderMap); 
-		String ordNo = String.valueOf(orderMap.get("ordNo"));
-		
-		for(int i = 0 ; i < prodNo.size() ; i++) {
-			// orderdetail 테이블
-			orderdetailMap.put("prodNo", prodNo.get(i));
-			orderdetailMap.put("ordQty", ordQty.get(i));
-			orderdetailMap.put("ordPrice", ordPrice.get(i));
-			
-			if(ordQty.get(i) != 0) {
-				System.out.println(ordNo);
-				orderdetailMap.put("ordNo", ordNo);
-				orderdetailService.insertOrderDetail(orderdetailMap);
+										@RequestParam("sumPrice") int sumPrice,
+										@RequestParam("ordDlyYn") String ordDlyYn,
+										@RequestParam("payment") int payment,
+										@RequestParam(value="ordRsvDate1" ,required=false) int ordRsvDate1,
+										@RequestParam(value="ordRsvDate2" ,required=false) int ordRsvDate2) {
+		//현금계산이면
+		if(payment==0) {
+			System.out.println("주문할 거 디비에 넣자!");
+			String ordRsvDate="";
+			Date date = new Date();
+			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+			 Calendar cal = Calendar.getInstance();
+			 cal.setTime(date);
+			 cal.add(Calendar.HOUR, ordRsvDate1);
+			 cal.add(Calendar.MINUTE, ordRsvDate2);
+			 ordRsvDate = sdformat.format(cal.getTime());  
+	
+			Map<String,Object> orderMap = new HashMap<String, Object>();
+			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
+			Map<String,Object> orderInfoList = new HashMap<String, Object>();				
+			// order 테이블에 들어갈껑!
+			if(ordName != null) {
+				orderMap.put("ordName", ordName);
+				orderMap.put("ordTel", ordTel);
+				orderMap.put("ordReq", ordReq);
+				orderMap.put("licenseNo", licenseNo);
+				orderMap.put("sumPrice", sumPrice);
+				orderMap.put("ordDlyYn", ordDlyYn);
+				orderMap.put("payment", payment);
+				orderMap.put("ordRsvDate", ordRsvDate);
+				
 			}
+			
+			Oservice.insertOrder(orderMap); 
+			String ordNo = String.valueOf(orderMap.get("ordNo"));
+			
+			for(int i = 0 ; i < prodNo.size() ; i++) {
+				// orderdetail 테이블
+				orderdetailMap.put("prodNo", prodNo.get(i));
+				orderdetailMap.put("ordQty", ordQty.get(i));
+				orderdetailMap.put("ordPrice", ordPrice.get(i));
+				
+				if(ordQty.get(i) != 0) {
+					System.out.println(ordNo);
+					orderdetailMap.put("ordNo", ordNo);
+					orderdetailService.insertOrderDetail(orderdetailMap);
+				}
+			}
+			
+			orderInfoList.put("ordNo", ordNo);
+			orderInfoList.put("licenseNo", licenseNo);
+			List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
+			
+			request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
+			request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
+			request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
+			request.setAttribute("ordDate", orderInfolist.get(0).getOrdDate());
+			request.setAttribute("ordReq", orderInfolist.get(0).getOrdReq());
+			request.setAttribute("sumPrice", orderInfolist.get(0).getSumPrice());
+			
+			// 다수의 값들
+			request.setAttribute("orderInfolist", orderInfolist);	
+		}else {
+		//카드계산이면	
 		}
 		
-		orderInfoList.put("ordNo", ordNo);
-		orderInfoList.put("licenseNo", licenseNo);
-		List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
-		
-		request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
-		request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
-		request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
-		request.setAttribute("ordDate", orderInfolist.get(0).getOrdDate());
-		request.setAttribute("ordReq", orderInfolist.get(0).getOrdReq());
-		request.setAttribute("sumPrice", orderInfolist.get(0).getSumPrice());
-		
-		// 다수의 값들
-		request.setAttribute("orderInfolist", orderInfolist);
 		return "nav/orderChk";
 	}
 	

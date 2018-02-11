@@ -2,51 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	
+
 <mapper namespace="com.foodtruck.dao.OrderDAO">
 
 	<!-- 주문 정보 -->
 	<select id="getOrder" resultMap="OrderMap">
-		
+
 		SELECT * FROM ORDERS
 		<where> ord_no=#{ordNo} </where>
-	
+
 	</select>
-	
- 	
+
+
 	<!-- 주문 리스트 -->
-	<select id="getOrderList" resultMap="OrderMap" >
-  		select * from orders
+	<select id="getOrderList" resultMap="OrderMap">
+		select * from orders
 
 	</select>
-	
-	
-	<!-- 비회원 주문번호로 주문내역보기 -->
-	<select id="getNonmemberInfo" resultMap="OrderMap" parameterType="map">
-	
-		SELECT O.*,D.*,P.* FROM ORDERS O,ORDERDETAIL D,PRODUCT P
-		<where>P.PROD_NO = D.PROD_NO AND O.ORD_NO = D.ORD_NO AND O.ORD_NO = #{ordNo} AND O.ORD_TEL = #{ordTel} </where>
-		
-	</select>	
 
-	<!-- 사용자 주문내역  -->
+
+	<!-- 비회원 주문번호로 주문내역보기 -->
+	<select id="getNonmemberInfo" resultMap="OrderMap"
+		parameterType="map">
+
+		SELECT O.*,D.*,P.* FROM ORDERS O,ORDERDETAIL D,PRODUCT P
+		<where>P.PROD_NO = D.PROD_NO AND O.ORD_NO = D.ORD_NO AND O.ORD_NO =
+			#{ordNo} AND O.ORD_TEL = #{ordTel} </where>
+
+	</select>
+
+	<!-- 사용자 주문내역 -->
 	<select id="getMemberOrderList" resultMap="OrderMap">
-		SELECT O.*,D.*,P.PROD_NAME,F.FTRUCK_NAME
-		FROM ORDERS O,ORDERDETAIL D,PRODUCT P,FOODTRUCK F
+		SELECT
+		O.*,D.*,P.PROD_NAME,F.FTRUCK_NAME
+		FROM ORDERS O,ORDERDETAIL D,PRODUCT
+		P,FOODTRUCK F
 		WHERE O.ORD_NO = D.ORD_NO
 		AND D.PROD_NO = P.PROD_NO
-		AND P.FTRUCK_NO = F.FTRUCK_NO
+		AND
+		P.FTRUCK_NO = F.FTRUCK_NO
 		AND O.MEM_ID = #{memId}
 	</select>
 
-	<!-- 주문 등록  -->
+	<!-- 주문 등록 -->
 	<insert id="insertOrder" parameterType="map">
-		
+
 		INSERT INTO ORDERS
-		(ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, LICENSE_NO, SUM_PRICE, ORD_DATE)
+		(ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, LICENSE_NO,
+		SUM_PRICE, ORD_DLV_YN, PAYMENT, ORD_DATE,ORD_RSV_DATE)
 		VALUES
-		(TO_CHAR(SYSDATE,'YYMMDD')||LPAD(ORD_SEQ.NEXTVAL,5,0), #{ordName}, #{ordTel}, #{ordReq}, #{licenseNo}, #{sumPrice}, TO_CHAR(SYSDATE, 'YYMMDD'))
-		
+		(TO_CHAR(SYSDATE,'YYMMDD')||LPAD(ORD_SEQ.NEXTVAL,5,0), #{ordName},
+		#{ordTel}, #{ordReq}, #{licenseNo}, #{sumPrice}, #{ordDlyYn},
+		#{payment}, TO_CHAR(SYSDATE, 'YYMMDD'),#{ordRsvDate})
+
+
 		<selectKey keyProperty="ordNo" resultType="String">
 			
 			 <![CDATA[
@@ -54,60 +63,65 @@
 				WHERE ROWNUM < 2
 				ORDER BY ORD_NO DESC
 			 ]]>
-				
+
 		</selectKey>
-		
+
 	</insert>
-	
+
 	<!-- 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료) -->
 	<update id="cookStatChange">
-	
+
 		UPDATE ORDERS
 		SET COOK_STAT=#{cookStat}
 		<where> ORD_NO=#{ordNo} </where>
-	
+
 	</update>
 
 	<!-- 새로운 주문 -->
 	<select id="getNewCount" resultMap="OrderMap">
-			 
+
 		SELECT COUNT(O.ORD_CHECK)AS newCount
 		FROM ORDERS O
-		WHERE O.LICENSE_NO IN (SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
-		AND O.ORD_CHECK = 'N'
-		
+		WHERE O.LICENSE_NO IN
+		(SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
+		AND
+		O.ORD_CHECK = 'N'
+
 	</select>
-	
+
 	<!-- 새로운 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
- 	<update id="checkNewOrder">
- 		UPDATE ORDERS SET
- 		ORD_CHECK = 'Y'
- 		WHERE LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
- 	</update>	
+	<update id="checkNewOrder">
+		UPDATE ORDERS SET
+		ORD_CHECK = 'Y'
+		WHERE LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID =
+		#{memId})
+	</update>
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
-		<result column="ORD_NO" property="ordNo"/>
-		<result column="ORD_NAME" property="ordName"/>
-		<result column="ORD_TEL" property="ordTel"/>
-		<result column="ORD_DATE" property="ordDate"/>
-		<result column="ORD_RSV_DATE" property="ordRsvDate"/>
-		<result column="ORD_DLV_YN" property="ordDlyYn"/>
-		<result column="ORD_REQ" property="ordReq"/>
-		<result column="SUM_PRICE" property="sumPrice"/>
+		<result column="ORD_NO" property="ordNo" />
+		<result column="ORD_NAME" property="ordName" />
+		<result column="ORD_TEL" property="ordTel" />
+		<result column="ORD_DATE" property="ordDate" />
+		<result column="ORD_RSV_DATE" property="ordRsvDate" />
+		<result column="ORD_DLV_YN" property="ordDlyYn" />
+		<result column="ORD_REQ" property="ordReq" />
+		<result column="SUM_PRICE" property="sumPrice" />
 		<result column="ORD_QTY" property="ordQty" />
 		<result column="ORD_PRICE" property="ordPrice" />
-		<result column="MEM_ID" property="memId"/>
-		<result column="LICENSE_NO" property="licenseNo"/>
-		<result column="PROD_NAME" property="prodName"/>
+		<result column="MEM_ID" property="memId" />
+		<result column="LICENSE_NO" property="licenseNo" />
+		<result column="PROD_NAME" property="prodName" />
 		<result column="FTRUCK_NAME" property="ftruckName" />
 		<result column="COOK_STAT" property="cookStat" />
-		<result column="NEWCOUNT" property="newCount"/>
+		<result column="NEWCOUNT" property="newCount" />
 		<result column="ORD_CHECK" property="ordCheck" />
+		<result column="PATMENT" property="payment" />
+
 	</resultMap>
-	
+
 	<resultMap type="LicenseVO" id="LicenseMap">
-		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="LICENSE_NO" property="licenseNo" />
 		<result column="PROD_NAME" property="prodName" />
 		<result column="FTRUCK_NAME" property="ftruckName" />
 	</resultMap>

@@ -7,7 +7,8 @@ public class OrderVO {
 	private String ordName;		// 주문자 이름
 	private String ordTel;		// 주문자 연락처
 	private String ordDate;		// 주문 시간
-	private String ordRsvDate;	// 예약 시간
+	private String ordRsvDate;	// 예약 시간(시)
+	private String ordRsvDate2;	// 예약 시간(분)
 	private String ordDlyYn;	// 배달 여부(Y/N)
 	private int ordStat;		// 주문 상태
 	private int cookStat;		// 조리 상태
@@ -21,7 +22,7 @@ public class OrderVO {
 	private String ftruckName;	// 푸드트럭 이름
 	private int newCount;		// 새로운 주문갯수
 	private String ordCheck;	// 새로들어온 주문 확인(Y/N)
-	
+	private int payment;//결제방식
 	
 	// getter & setter
 
@@ -133,4 +134,18 @@ public class OrderVO {
 	public void setOrdCheck(String ordCheck) {
 		this.ordCheck = ordCheck;
 	}
+	public int getPayment() {
+		return payment;
+	}
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+	public String getOrdRsvDate2() {
+		return ordRsvDate2;
+	}
+	public void setOrdRsvDate2(String ordRsvDate2) {
+		this.ordRsvDate2 = ordRsvDate2;
+	}
+	
+	
 }
