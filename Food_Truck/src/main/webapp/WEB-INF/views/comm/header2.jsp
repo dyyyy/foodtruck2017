@@ -21,7 +21,7 @@
 <script src="/resources/admin/vendors/fullcalendar/fullcalendar.js"></script>
 <script src="/resources/admin/vendors/fullcalendar/gcal.js"></script>
 <script src="/resources/admin/assets/scripts.js"></script>
-<script src="/resources/admin/assets/test.js"></script>
+<!-- <script src="/resources/admin/assets/test.js"></script> -->
 <link rel="stylesheet" href="/resources/admin/vendors/morris/morris.css">
 <script src="/resources/admin/vendors/jquery.knob.js"></script>
 <script src="/resources/admin/vendors/raphael-min.js"></script>
@@ -33,13 +33,6 @@
 <script src="/resources/admin/vendors/flot/jquery.flot.stack.js"></script>
 <script src="/resources/admin/vendors/flot/jquery.flot.resize.js"></script>
 <script src="/resources/admin/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
-
-<script>
-	$(function() {
-		// Easy pie charts
-		$('.chart').easyPieChart({animate: 1000});
-	});
-</script>
 
 </head>
 <body>

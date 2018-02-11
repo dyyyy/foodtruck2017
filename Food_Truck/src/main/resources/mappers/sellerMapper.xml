@@ -108,6 +108,14 @@
 		values(#{licenseNo}, #{memId}, 'N') 
 	</insert>
 	
+	<select id="getDate" parameterType="String" resultMap="SellerMap" resultType="java.util.List">
+		select TO_CHAR(ord_date, 'YYYY-MM-DD') ordDate, 
+        to_char(sum(sum_price), '999,999') sumPrice
+  		from orders 
+  		where license_no=#{licenseNo}
+ 		group by TO_CHAR(ord_date, 'YYYY-MM-DD') 
+	</select>
+	
 	
 	<select id="getInfo" resultMap="LicenseMap">
 		select * from license where mem_id='${memId}'
@@ -167,6 +175,7 @@
 		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="PROD_NAME" property="prodName"/>
 		<result column="PAYMENT" property="payment"/>
+		<result column="sum_price" property="sumPrice"/>
 	</resultMap>
 	
 	<resultMap type="LicenseVO" id="LicenseMap">

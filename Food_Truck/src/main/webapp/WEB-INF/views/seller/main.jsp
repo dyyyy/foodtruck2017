@@ -53,8 +53,9 @@ $(function() {
              location.href="/sellerMain?licenseNo="+sel;
           });
 
+		$('.chart').easyPieChart({animate: 1000});
 })
-      
+
 </script>
 
 

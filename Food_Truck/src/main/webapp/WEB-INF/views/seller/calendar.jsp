@@ -6,19 +6,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Monthly - Event Tests</title>
+
+<link rel="stylesheet" href="resources/calendar/css/monthly.css">
+<script>
+$("select").change(function() {
+    var sel = $("select").val();      
+    location.href="/sellerMain?licenseNo="+sel;
+ });
+</script>
+<style type="text/css">
+body {
+	font-family: Calibri;
+	background-color: #f0f0f0;
+	padding: 0em 1em;
+}
+
+#mycalendar {
+	width: 100%;
+	margin: 2em auto 0 auto;
+	max-width: 80em;
+	border: 1px solid #F6F6F6;
+	border-top: 10px solid #08c;
+	border-bottom: 3px solid #A6A6A6;
+}
+</style>
+
 </head>
 <%@include file="../comm/header2.jsp"%>
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
+<%-- 		
+			<select name="licenseNo">
+				<option>선택해주세요.</option>
+				<c:forEach var="license" items="${license}">
+					<option value="${license.licenseNo}">${license.ftruckName}</option>
+				</c:forEach>
+			</select>
+ --%>			
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li ><a
-						href="/sellerMain?licenseNo=${licenseNo}"> <i
+					<li><a href="/sellerMain?licenseNo=${licenseNo}"> <i
 							class="icon-chevron-right"></i>주문 및 예약·배달
 					</a></li>
-					<li class="active"><a href="/sellerCalendar?licenseNo=${licenseNo}"><i
+					<li class="active"><a
+						href="/sellerCalendarForm?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>매출 통계</a></li>
 					<li><a href="/sellerChart?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>차트</a></li>
@@ -32,47 +65,67 @@
 					<!-- block -->
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Calendar</div>
+							<div class="muted pull-left">매출·통계</div>
 							<div class="pull-right">
 								<span class="badge badge-warning">View More</span>
 
 							</div>
 						</div>
 						<div class="block-content collapse in">
-							<div class="span2">
-								<div id='external-events'>
-									<h4>Draggable Events</h4>
-									<div class='external-event'>My Event 1</div>
-									<div class='external-event'>My Event 2</div>
-									<div class='external-event'>My Event 3</div>
-									<div class='external-event'>My Event 4</div>
-									<div class='external-event'>My Event 5</div>
-									<div class='external-event'>My Event 6</div>
-									<div class='external-event'>My Event 7</div>
-									<div class='external-event'>My Event 8</div>
-									<div class='external-event'>My Event 9</div>
-									<div class='external-event'>My Event 10</div>
-									<div class='external-event'>My Event 11</div>
-									<div class='external-event'>My Event 12</div>
-									<div class='external-event'>My Event 13</div>
-									<div class='external-event'>My Event 14</div>
-									<div class='external-event'>My Event 15</div>
-									<p>
-										<input type='checkbox' id='drop-remove' /> <label
-											for='drop-remove'>remove after drop</label>
-									</p>
-								</div>
-
-							</div>
-							<div class="span10">
-								<div id='calendar'></div>
-							</div>
+							
+							<div class="monthly" id="mycalendar"></div>
+							
+							<script type="text/javascript"
+								src="resources/calendar/js/jquery.js"></script>
+							<script type="text/javascript"
+								src="resources/calendar/js/monthly.js"></script>
+							<script type="text/javascript">
+							var list = [];
+							var re = [];
+							
+							 var sampleEvents = 
+									 
+							 	<%= request.getAttribute("monthly") %> 
+							 /* 
+							 = {
+								"monthly": [
+									{
+									"id": 1,
+									"name": "Whole month event",
+									"startdate": "2018-02-01",
+									"endtime": "2:00",
+									"color": "#99CCCC",
+									"url": ""
+									},
+									{
+									"id": 2,
+									"name": "Test encompasses month",
+									"startdate": "2016-10-29",
+									"enddate": "2016-12-02",
+									"starttime": "12:00",
+									"endtime": "2:00",
+									"color": "#CC99CC",
+									"url": ""
+									}
+								]
+								};
+							 */
+								$(window).load( function() {
+									
+									
+									$('#mycalendar').monthly({
+										mode: 'event',
+										dataType: 'json',
+										events: sampleEvents
+									});
+									
+								}); 
+							</script>
 						</div>
+						<!-- /block -->
 					</div>
-					<!-- /block -->
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
