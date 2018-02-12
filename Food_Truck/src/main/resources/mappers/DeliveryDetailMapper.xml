@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodtruck.dao.DeliveryDetailDAO">
+
+
+	<insert id="insertDeliveryDetail">
+		insert into
+		DELIVERYDETAIL(ORD_NO,DLV_STATE,DLV_ADDR)VALUES(#{ordNo},#{dlvState},#{dlvAddr})
+
+	</insert>
+
+
+	<resultMap type="DeliveryDetailVO" id="DeliveryDetailMap">
+		<result column="ORD_NO" property="ordNo" />
+		<result column="DLV_STATE" property="dlvState" />
+		<result column="DLV_ADDR" property="dlvAddr" />
+		<result column="DLV_DATE" property="dlvDate" />
+
+	</resultMap>
+</mapper>
