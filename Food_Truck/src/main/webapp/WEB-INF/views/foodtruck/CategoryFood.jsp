@@ -56,11 +56,12 @@
 									<img src="${all.ftruckImg}">
 								</a>
 							</div>
-							<div class="list-pro-des fix">
-								<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
-								<div class="pro-ratting">
-									<span style="width: ${all.ftruckGrade*20}%"></span>
-								</div>
+						<div class="list-pro-des fix">
+							<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
+						<div class="pro-ratting">
+							<span style="width: ${all.ftruckGrade*20}%"></span>
+						</div>
+						<div>&nbsp;&nbsp;${all.ftruckGrade}점&nbsp;&nbsp;/&nbsp;리뷰수 : ${all.count} 개</div>
 								<p>${all.ftruckIntro}</p>
 							</div>
 						</div>
