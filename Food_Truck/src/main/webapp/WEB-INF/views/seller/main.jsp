@@ -49,15 +49,16 @@
 <script type="text/javascript">
 	
 	$(function() {
+		var sel = $("select").val();
 
 		$('.chart').easyPieChart({
 			animate : 1000
 		});
 		
 		$("select").change(function() {
-			var sel = $("select").val();
 			location.href = "/sellerMain?licenseNo=" + sel;
 		});
+		
 	})
 </script>
 
@@ -189,7 +190,9 @@
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">Statistics</div>
 							<div class="pull-right">
-								<span class="badge badge-warning">View More</span>
+								<span class="badge badge-warning"  id="close">
+								
+								</span>
 
 							</div>
 						</div>

@@ -9,11 +9,34 @@
 <title>Monthly - Event Tests</title>
 
 <link rel="stylesheet" href="resources/calendar/css/monthly.css">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-$("select").change(function() {
-    var sel = $("select").val();      
-    location.href="/sellerMain?licenseNo="+sel;
- });
+$(function() {
+	
+	var sel = $("select").val();      
+	$("select").change(function() {
+	    location.href="/sellerCalendar?licenseNo="+sel;
+	 });
+	 
+	$("#close").click(function() {
+		if(confirm("마감하시겠습니까?")) {
+			location.href = "/closeFoodTruck?licenseNo="+<%= request.getParameter("licenseNo") %>;
+		} else {
+			return false;
+		}
+		
+	});
+	
+	$("#open").click(function() {
+		if(confirm("운영하시겠습니까?")) {
+			location.href = "/openFoodTruck?licenseNo="+<%= request.getParameter("licenseNo") %>;
+		} else {
+			return false;
+		}
+		
+	});
+});
 </script>
 <style type="text/css">
 body {
@@ -37,21 +60,17 @@ body {
 <body>
 	<div class="container-fluid">
 		<div class="row-fluid">
-<%-- 		
 			<select name="licenseNo">
-				<option>선택해주세요.</option>
 				<c:forEach var="license" items="${license}">
 					<option value="${license.licenseNo}">${license.ftruckName}</option>
 				</c:forEach>
 			</select>
- --%>			
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
 					<li><a href="/sellerMain?licenseNo=${licenseNo}"> <i
 							class="icon-chevron-right"></i>주문 및 예약·배달
 					</a></li>
 					<li class="active"><a
-						href="/sellerCalendarForm?licenseNo=${licenseNo}"><i
 						href="/sellerCalendar?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>매출 통계</a></li>
 					<li><a href="/sellerChart?licenseNo=${licenseNo}"><i
@@ -71,7 +90,20 @@ body {
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">매출·통계</div>
 							<div class="pull-right">
-								<span class="badge badge-warning">View More</span>
+								
+							<%
+								FoodTruckVO vo = (FoodTruckVO)request.getAttribute("state");
+								if(vo != null) {
+										if(vo.getFtruckState().equals("Y")) {
+											System.out.println("state : " + vo.getFtruckState());
+							%>
+								<span class="badge badge-warning"  id="close">마감하기</span>
+							<%
+										} else if(vo.getFtruckState().equals("N")) {
+											System.out.println("state : " + vo.getFtruckState());
+							%>
+								<span class="badge badge-warning"  id="open">운영하기</span>
+							<% } }  %>
 
 							</div>
 						</div>

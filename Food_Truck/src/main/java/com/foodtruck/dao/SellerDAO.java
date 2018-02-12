@@ -37,6 +37,24 @@ public interface SellerDAO {
 	// 푸드트럭 등록
 	public int insertFoodTruck(FoodTruckVO vo);
 	
+	//푸드트럭 마감
+	public int closeFoodTruck(FoodTruckVO vo);
+	
+	//푸드트럭 운영
+	public int openFoodTruck(FoodTruckVO vo);
+	
+	// 매출 등록
+	public int insertPrice(SellerVO vo);
+	
+	// 매출 수정
+	public int updatePrice(SellerVO vo);
+	
+	// 매출 조회
+	public List<SellerVO> getPrice(String licenseNo);
+	
+	// 매출 중복 체크
+	public SellerVO getPrice1(String licenseNo);
+	
 	// 라이센스 등록
 	public int insertLicense(LicenseVO vo);
 	

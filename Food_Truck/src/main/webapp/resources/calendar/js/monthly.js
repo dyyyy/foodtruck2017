@@ -189,6 +189,10 @@ Monthly 2.2.2 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 			}
 		}
 
+		function test() {
+			
+		}
+		
 		function addEvent(event, setMonth, setYear) {
 			// Year [0]   Month [1]   Day [2]
 			var fullStartDate = _getEventDetail(event, "ordDate"),

@@ -77,30 +77,6 @@ public class SellerController {
 	@Autowired
 	FestivalService feservice;
 
-/*	
-	// 판매자 캘린더
-	@ResponseBody
-	@RequestMapping(value = "/sellerCalendar")
-	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
-			@RequestParam(value = "licenseNo", required = false) String licenseNo, SellerVO vo) {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if (mvo != null) {
-
-			if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
-				String num=licenseNo;
-				model.addAttribute("licenseNo", sservice.getLicense(mvo.getMemberId()));
-				model.addAttribute("startDate", sservice.getDate(num));
-				return "seller/calendar";
-			} else {
-				return "seller/ing";
-			}
-		} else {
-			return "sign/login";
-		}
-	}
-*/
-	
-
 	@RequestMapping("/sellerInfo")
 	public String sellerInfo(@RequestParam(value = "licenseNo", required = false) String licenseNo,
 			HttpServletRequest request, HttpSession session, Model model) throws Exception {
@@ -131,7 +107,7 @@ public class SellerController {
 		return num;
 	}
 	
-
+/*
 	// 판매자 캘린더
 	@RequestMapping("/sellerCalendar")
 	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
@@ -145,6 +121,8 @@ public class SellerController {
 			if (licenseNo != null) {
 				String num=licenseNo;
 				list = (List<SellerVO>)sservice.getDate(num);
+				model.addAttribute("licenseNo", num); 
+				model.addAttribute("license", sservice.getLicense2(mvo.getMemberId()));
 				for(SellerVO vvo : list) {
 					dateInfo = new JSONObject();
 					
@@ -158,13 +136,88 @@ public class SellerController {
 				
 				// 전체의 jsonObject에 monthly 라는 이름으로 배열의 value값을 입력
 				jsonObject.put("monthly", dateArray);
-//				model.addAttribute("licenseNo", num); 
-//				model.addAttribute("license", list);
+				
 			}
 			request.setAttribute("monthly", jsonObject.toJSONString());
 		}
 		
 		return "seller/calendar";
+	}
+*/	
+	
+	@RequestMapping("/sellerCalendar")
+	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
+			@RequestParam(value = "licenseNo", required = false) String licenseNo, SellerVO vo) throws Exception {
+		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		List<SellerVO> list = new ArrayList<SellerVO>();
+		JSONObject jsonObject = new JSONObject(); // 푸드트럭 매출 최종
+		JSONArray dateArray = new JSONArray(); // 푸드트럭 매출 json 배열
+		JSONObject dateInfo = null; // 매출 정보
+		if(mvo != null) {
+			if (licenseNo != null) {
+				String num=licenseNo;
+				list = (List<SellerVO>)sservice.getPrice(num);
+				model.addAttribute("licenseNo", num); 
+				model.addAttribute("license", sservice.getLicense(mvo.getMemberId()));
+				for(SellerVO vvo : list) {
+					dateInfo = new JSONObject();
+					System.out.println("salesDate : " + vvo.getSalesDate());
+					System.out.println("salesDate : " + vvo.getSumPrice());
+					
+					// 정보 입력(날짜, 매출)
+					dateInfo.put("ordDate", vvo.getSalesDate());
+					dateInfo.put("sumPrice", vvo.getSumPrice());
+					
+					// 입력한 정보를 배열에 담는다.
+					dateArray.add(dateInfo);
+				}
+				
+				// 전체의 jsonObject에 monthly 라는 이름으로 배열의 value값을 입력
+				jsonObject.put("monthly", dateArray);
+				System.out.println("state : " + fservice.getFoodTruck2(num));
+				request.setAttribute("state", fservice.getFoodTruck2(num));
+			}
+			request.setAttribute("monthly", jsonObject.toJSONString());
+			
+			return "seller/calendar";
+			
+		} else return "sign/login";
+		
+	}
+	
+	// 마감
+	@RequestMapping("/closeFoodTruck")
+	public String closeFoodTruck(@RequestParam(value = "licenseNo", required = false) String licenseNo,FoodTruckVO fvo, SellerVO svo,
+			HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		String no = null;
+		if (mvo != null) {
+			if (licenseNo != null) {
+				no = licenseNo;
+				sservice.closeFoodTruck(fvo);
+				if(sservice.getPrice(no) == null) {
+					sservice.insertPrice(svo);
+				} else {
+					sservice.updatePrice(svo);
+				}
+			}
+		}
+		return "redirect:/sellerCalendar?licenseNo="+no;
+	}
+	
+	// 운영
+	@RequestMapping("/openFoodTruck")
+	public String openFoodTruck(@RequestParam(value = "licenseNo", required = false) String licenseNo,FoodTruckVO fvo, SellerVO svo,
+			HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		String no = null;
+		if (mvo != null) {
+			if (licenseNo != null) {
+				no = licenseNo;
+				sservice.openFoodTruck(fvo);
+			}
+		}
+		return "redirect:/sellerCalendar?licenseNo="+no;
 	}
 	
 	

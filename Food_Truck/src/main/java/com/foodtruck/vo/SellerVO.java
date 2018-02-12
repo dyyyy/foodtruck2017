@@ -18,6 +18,7 @@ public class SellerVO {
 	private int ratio;
 	private int count;
 	private String sumPrice;
+	private String salesDate;
 	
 	
 	public String getOrdNo() {
@@ -122,6 +123,13 @@ public class SellerVO {
 	public void setSumPrice(String sumPrice) {
 		this.sumPrice = sumPrice;
 	}
+	public String getSalesDate() {
+		return salesDate;
+	}
+	public void setSalesDate(String salesDate) {
+		this.salesDate = salesDate;
+	}
+	
 	
 
 }

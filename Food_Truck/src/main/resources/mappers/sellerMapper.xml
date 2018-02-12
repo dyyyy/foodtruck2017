@@ -89,6 +89,60 @@
 	
 	</select>
 	
+	<!-- 푸드트럭 마감 -->
+	<update id="closeFoodTruck">
+		update foodtruck set ftruck_state='N' where license_no=#{licenseNo}
+	</update>
+	
+	<!-- 푸드트럭 운영 -->
+	<update id="openFoodTruck">
+		update foodtruck set ftruck_state='Y' where license_no=#{licenseNo}
+	</update>
+	
+	<!-- 매출 등록 -->
+	<insert id="insertPrice">
+		INSERT INTO sales_management(license_no, sum_price, sales_date)
+		select license_no,
+        sum(sum_price) sumPrice,
+        TO_CHAR(sysdate, 'YYYY-MM-DD') ordDate
+      	from orders 
+  		where license_no=#{licenseNo}
+  		and ord_date=TO_CHAR(sysdate, 'YYYY-MM-DD')
+ 		group by TO_CHAR(sysdate, 'YYYY-MM-DD'), license_no
+	</insert>
+	
+	<!-- 매출 수정 -->
+	<update id="updatePrice">
+		update sales_management set
+		sales_date = to_char(sysdate, 'YYYY-MM-DD'),
+		sum_price = (select sum(sum_price) sum_price 
+					from orders 
+					where license_no=#{licenseNo} 
+					and ord_date=to_char(sysdate, 'YYYY-MM-DD'))
+  		where license_no=#{licenseNo}
+  		and sales_date=TO_CHAR(sysdate, 'YYYY-MM-DD')
+	</update>
+	
+	<!-- 매출 조회 -->
+	<select id="getPrice" resultMap="SellerMap">
+		select license_no, TO_CHAR(sales_date, 'YYYY-MM-DD') salesDate,
+				to_char(sum(sum_price), '999,999') sumPrice
+		from sales_management 
+		where license_no=#{licenseNo}
+		group by LICENSE_NO, TO_CHAR(sales_date, 'YYYY-MM-DD')
+	</select>
+	
+	<!-- 중복 체크 -->
+	<select id="getPrice1" resultMap="SellerMap">
+		select license_no, 
+      	TO_CHAR(sales_date, 'YYYY-MM-DD') salesDate,
+				to_char(sum(sum_price), '999,999') sumPrice 
+		from sales_management 
+		where license_no=#{licenseNo} and sales_date=to_char(sysdate, 'YYYY-MM-DD')
+		group by license_no, sales_date
+	</select>
+	
+	
 	<select id="getFoodTruckList" resultMap="FoodTruckMap">
 		select * from foodtruck where license_no = #{licenseNo}
 	</select>

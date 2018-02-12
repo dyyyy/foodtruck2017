@@ -74,6 +74,43 @@ public class SellerService {
 		return dao.insertFoodTruck(vo);
 	}
 	
+	
+	// 푸드트럭 마감
+	public int closeFoodTruck(FoodTruckVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.closeFoodTruck(vo);
+	}
+	
+	// 푸드트럭 오픈
+	public int openFoodTruck(FoodTruckVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.openFoodTruck(vo);
+	}
+	
+	// 매출 등록
+	public int insertPrice(SellerVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.insertPrice(vo);
+	}
+	
+	// 매출 수정
+	public int updatePrice(SellerVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.updatePrice(vo);
+	}
+	
+	// 매출 조회
+	public List<SellerVO> getPrice(String licenseNo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getPrice(licenseNo);
+	}
+	
+	// 매출 중복 체크
+	public SellerVO getPrice1(String licenseNo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getPrice1(licenseNo);
+	}
+	
 	// 라이센스 등록
 	public int insertLicense(LicenseVO vo) {
 		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
