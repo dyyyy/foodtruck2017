@@ -47,9 +47,6 @@
 
 </script>
 
-
-
-
 </head>
 
 <jsp:include page="../comm/header.jsp"></jsp:include>
@@ -57,8 +54,6 @@
 <body>
 
 <%@include file="../comm/nav.jsp" %>
-
-
 	<div class="featured-product section fix">
 		<div class="container">
 			<!-- event title -->
@@ -68,34 +63,33 @@
 			</div>
 
 			<form id="frm" action="/insertEvent" method="get">
-
 				<table class="table">
-				<tr>
-					<th>제목</th>
-					<td><input type=text name=eventTitle></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td><input type=text name=memId></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea name="eventContent" id="editor" style="width: 610px ; height: 220px;" rows="10" cols="30"></textarea>
-					</td>
-				</tr>
-
+					<tr>
+						<th>제목</th>
+						<td><input type=text name=eventTitle style="width: 970px;"></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td><input type=text name=memId style="width: 970px;"></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>
+							<textarea name="eventContent" id="editor" style="width: 970px ; height: 220px;" rows="10" cols="30"></textarea>
+						</td>
+					</tr>
 				</table>
-				<input id="savebutton" type="button" value="확인"> 
-				<input type=reset value="다시작성">
-				<button id=cancel type="button">취소</button>
-
+				
+				<div class="row2">
+					<div class="eventBtn">
+						<input id="savebutton" type="button" value="확인"> 
+						<input type=reset value="다시작성">
+						<button id=cancel type="button">취소</button>
+					</div>
+				</div>
 			</form>
-
-
 		</div>
-	</div>
-
+	</div><br><br>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>

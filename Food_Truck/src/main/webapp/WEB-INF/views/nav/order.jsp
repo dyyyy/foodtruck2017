@@ -81,7 +81,7 @@
 			var ordName = $("#ordName").val();
 			if(ordName == "") {
 				alert("주문자 이름을 입력해 주시기 바랍니다.");
-				$("ordName").focus();
+				$("#ordName").focus();
 				return false;
 			};
 			
@@ -89,19 +89,36 @@
 			var ordTel = $("#ordTel").val();
 			if(ordTel == "") {
 				alert("주문자 연락처를 입력해 주시기 바랍니다.");
-				$("ordTel").focus();
+				$("#ordTel").focus();
 				return false;
 			};
+			
+			// 예약 하기 버튼, 시간 체크 유효성 검사
+			var ordDlyYn = $('input:radio[name=ordDlyYn]').is(':checked');
+			if(ordDlyYn == false) {
+				alert("예약하기나, 배달하기 버튼을 클릭해 주세요 :-)");
+				return false;
+			}
+			
+			var ordRsvDate1 = $("#ordRsvDate1 option:selected").val();
+			var ordRsvDate2 = $("#ordRsvDate2 option:selected").val();
+			
+			if(ordRsvDate1 == "" || ordRsvDate2 == "") {
+				console.log(ordRsvDate1);
+				alert("시간을 체크해주시기 바랍니다 :-)");
+				return false;
+			}
+			
 			return true;
 		})
 		
-		
+		// 핸드폰 번호 유효성 검사		
 		$("#ordTel").on("keyup", function() {
 			var phone = $("#ordTel").val();
 			var phoneHyphen = "";
 			
 			if(phone.length > 13) {
-				$("#ordTel").val("");
+				$("#ordTel").focus();
 				alert("핸드폰 번호 자릿수를 확인해주시기 바랍니다.");
 				return false;
 			}
@@ -120,9 +137,21 @@
 				alert("핸드폰 번호는 숫자로 입력하셔야 합니다 :-)");
 				return false;
 			};
-		})
+		})	
 	});
-	
+	$(function(){
+		$("#res").change(function(){
+			var select=document.getElementById("time");
+			select.style.display='block';
+			
+		})
+		$("#dly").change(function(){
+			var select=document.getElementById("time");
+			select.style.display='none';
+			
+		})
+		
+	});
 </script>
 <form action="/orderRegit" id="signup-form" onsubmit="return validation();">
 	<%
@@ -139,6 +168,32 @@
 				<div class="col-sm-6 col-md-5">
 					<div class="product">
 						<h2>Please order</h2>
+						<div>
+							<input type="radio" name="ordDlyYn" value="N" id="res"
+								style="width: 50px; margin-left: 100px; float: left;">예약하기
+							<input type="radio" name="ordDlyYn" value="Y"
+								style="width: 50px;" id="dly"> 배달하기
+						</div>
+						<br>
+						<div align="right" id="time" style="display: none">
+							예약시간:<select style=" width: 50px;" name="ordRsvDate1">
+								<option value="">--</option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>	
+								</select>
+								<select style=" width: 50px;" name="ordRsvDate2" id="ordRsvDate2">
+								<option value="">--</option>
+								<option value="00">00</option>
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>							
+								</select>분 뒤
+						</div>
 						<% if(mvo != null) {  %>
 							<label> 회원 아이디</label>
 							<input type="text" name="memId" value="<%=mvo.getMemberId()%> " readonly="readonly">
@@ -201,31 +256,46 @@
 					</div>
 				</div>
 				</div>
-				<div class="col-sm-6 col-md-7">
-					<!-- 					<div class="coupon"> -->
-					<!-- 						<h3>할인쿠폰</h3> -->
-					<!-- 							<input type="text" placeholder="쿠폰번호를 입력해주세요" /> <a href="#">쿠폰적용하기</a> -->
-					<!-- 					</div> -->
+				<div align="right"  >
+				<table class="table cart-table" style="width: 400px; vertical-align: middle; background-color: white;margin-right: 10px; font-weight: 700px;">
+					<tr>
+						<td><h3 align="center">결재수단 선택</h3></td>
+					</tr>
+					<tr>
+						<td><input type="radio"name="payment" value="0" checked="checked">&nbsp;&nbsp;&nbsp;푸드트럭에서 결제하기</td>
+					</tr>
+					<tr>
+						<td><input type="radio" name="payment" value="1">&nbsp;&nbsp;&nbsp;신용카드</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-6 col-md-7">
+				<div class="coupon">
+					<h3>할인쿠폰</h3>
+					<input type="text" placeholder="쿠폰번호를 입력해주세요" /> <a href="#">쿠폰적용하기</a>
 				</div>
+			</div>
 
-				<div class="col-sm-6 col-md-5">
-					<div class="proceed fix">
-						<div class="total">
-							<h5>
-								총 금액 <span class="sumPriceResult"></span>
-								<div id="sumPrice"></div>
-							</h5>
-							<h6>
-								할인 적용가 <span> 여기에 가격 넣자 ! </span>
-							</h6>
-						</div>
-						<!-- 							<a id="procedto" href="checkout.html">PROCEED TO CHECK OUT</a> -->
-						<div class="orderForm">
-							<input type="submit" value="결제하기"><br><br>
-						</div>
+			<div class="col-sm-6 col-md-5">
+				<div class="proceed fix">
+					<div class="total">
+						<h5>
+							총 금액 <span class="sumPriceResult"></span>
+							<div id="sumPrice"></div>
+						</h5>
+						<h6>
+							할인 적용가 <span> 여기에 가격 넣자 ! </span>
+						</h6>
+					</div>
+					<!-- 							<a id="procedto" href="checkout.html">PROCEED TO CHECK OUT</a> -->
+					<div class="orderForm">
+						<input type="submit" value="결제하기"><br>
+						<br>
 					</div>
 				</div>
 			</div>
+			
+		</div>
 		</div>
 	</section>
 	<!--End Cart Area-->

@@ -49,7 +49,7 @@
 							<%
 								} else {
 							%>
-							<li><a href="/logout">로그아웃</a></li>
+							
 							<%
 								switch (mvo.getMemberAuth()) {
 									//비회원
@@ -78,6 +78,9 @@
                                }  
                            
                      %>
+							<li>
+								<a href="/checkNewOrder" onload="updateData()"><img src='/resources/img/ms3.png' ><b id="newCount"></b></a>
+							</li>									
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/orderDetail">예약 내역</a></li>
@@ -85,9 +88,6 @@
 									<li><a href="/sellerMain<%=list3.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
 								</ul>
 							</li>
-							<li>
-								<a href="/checkNewOrder" onload="updateData()"><img src='/resources/img/ms3.png' ><b id="newCount"></b></a>
-							</li>									
 							<%
 								break;
 									//운영자
@@ -131,7 +131,7 @@
 								</ul></li>
 							<%break;
 								}%>
-
+								<li><a href="/logout">로그아웃</a></li>
 							<%
 								}
 							%>

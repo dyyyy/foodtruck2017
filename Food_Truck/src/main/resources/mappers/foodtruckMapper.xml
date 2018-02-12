@@ -101,18 +101,22 @@
 
 
 	<!-- 푸드트럭 위클리 랭킹 -->
-	<select id="getFoodTruckRank" resultMap="FoodTruckMap"
-		parameterType="int">
-		select * from (select * from foodtruck order by ftruck_grade desc)
+	<select id="getFoodTruckRank" resultMap="FoodTruckMap" parameterType="int">
+		select * from (select f.* from foodtruck f,license l where f.license_no = l.license_no order by l.app_stat desc,ftruck_grade desc)
 		where <![CDATA[rownum<=10]]>
 	</select>
+
+   <!-- 신규 푸드트럭 -->
+   <select id="getNewFoodTruck" resultMap="FoodTruckMap">
+      select * from (select f.* from foodtruck f,license l where f.license_no = l.license_no order by l.app_stat desc,ftruck_Reg)
+      where <![CDATA[rownum<=10]]>
+   </select>	
 
 	<!-- 푸드트럭 위치 Update -->
 	<update id="updateTruckPosition">
 	update foodtruck set FTRUCK_ADDR=#{ftruckAddr} ,FTRUCK_ADDR2=#{ftruckAddr2} where LICENSE_NO=#{licenseNo}
 	
 	</update>
-	
 	
 
 	<!-- 푸드트럭 삭제 -->
