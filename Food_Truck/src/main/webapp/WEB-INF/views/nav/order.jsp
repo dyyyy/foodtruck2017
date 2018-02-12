@@ -108,7 +108,7 @@
 				var ordRsvDate1 = $("#ordRsvDate1 option:selected").val();
 				var ordRsvDate2 = $("#ordRsvDate2 option:selected").val();
 
-				if (ordRsvDate1 == "" || ordRsvDate2 == "") {
+				if (ordRsvDate1 == "99" || ordRsvDate2 == "99") {
 					console.log(ordRsvDate1);
 					alert("시간을 체크해주시기 바랍니다 :-)");
 					return false;
@@ -190,12 +190,14 @@
 						<br>
 						<div align="right" id="time" style="display: none">
 							예약시간:<select style="width: 50px;" name="ordRsvDate1">								
+								<option value="99">--</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
 							</select> <select style="width: 50px;" name="ordRsvDate2" id="ordRsvDate2">
+								<option value="99">--</option>
 								<option value="00">00</option>
 								<option value="10">10</option>
 								<option value="20">20</option>
@@ -361,11 +363,11 @@
 						<td><h3 align="center">결재수단 선택</h3></td>
 					</tr>
 					<tr>
-						<td><input type="radio" name="payment" value="0"
-							checked="checked">&nbsp;&nbsp;&nbsp;푸드트럭에서 결제하기</td>
+						<td><input type="radio" name="payment" value="1"
+							checked="checked">&nbsp;&nbsp;&nbsp;현금</td>
 					</tr>
 					<tr>
-						<td><input type="radio" name="payment" value="1">&nbsp;&nbsp;&nbsp;신용카드</td>
+						<td><input type="radio" name="payment" value="0">&nbsp;&nbsp;&nbsp;신용카드</td>
 					</tr>
 				</table>
 			</div>
