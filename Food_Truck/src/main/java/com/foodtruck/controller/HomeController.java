@@ -30,11 +30,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model,Model model2) {
 		
 		List<FoodTruckVO> list = foodTruckService.getFoodTruckRank();
+		List<FoodTruckVO> nlist = foodTruckService.getNewFoodTruck();
 		if(list != null) {
 			model.addAttribute("rank", list);
+			model2.addAttribute("newTruck", nlist);
 		}
 //		logger.info("index"); 
 		

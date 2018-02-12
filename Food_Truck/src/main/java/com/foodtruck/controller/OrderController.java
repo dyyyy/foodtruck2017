@@ -109,7 +109,6 @@ public class OrderController {
 										@RequestParam("ordName") String ordName, 
 										@RequestParam("ordTel") String ordTel, 
 										@RequestParam("ordReq") String ordReq, 
-										@RequestParam("memId2") String memId,		
 										@RequestParam("licenseNo") String licenseNo, 
 										@RequestParam("prodNo") List<String> prodNo, 
 										@RequestParam("prodName") List<String> prodName,
@@ -136,7 +135,15 @@ public class OrderController {
 	
 			Map<String,Object> orderMap = new HashMap<String, Object>();
 			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
-			Map<String,Object> orderInfoList = new HashMap<String, Object>();				
+			Map<String,Object> orderInfoList = new HashMap<String, Object>();	
+			
+			String memId = (String)session.getAttribute("memberId");
+			// 회원 & 비회원
+			if(memId != null) {
+				orderMap.put("memId", memId);
+			}else {
+				orderMap.put("memId", "");
+			}		
 			// order 테이블에 들어갈껑!
 			if(ordName != null) {
 				orderMap.put("ordName", ordName);
@@ -147,7 +154,6 @@ public class OrderController {
 				orderMap.put("ordDlyYn", ordDlyYn);
 				orderMap.put("payment", payment);
 				orderMap.put("ordRsvDate", ordRsvDate);
-				orderMap.put("memId", memId);
 			}
 			Oservice.insertOrder(orderMap); 
 			String ordNo = String.valueOf(orderMap.get("ordNo"));
@@ -182,7 +188,14 @@ public class OrderController {
 		//배달이면
 			Map<String,Object> orderMap = new HashMap<String, Object>();
 			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
-			Map<String,Object> orderInfoList = new HashMap<String, Object>();				
+			Map<String,Object> orderInfoList = new HashMap<String, Object>();
+			String memId = (String)session.getAttribute("memberId");
+			// 회원 & 비회원
+			if(memId != null) {
+				orderMap.put("memId", memId);
+			}else {
+				orderMap.put("memId", "");
+			}	
 			if(ordName != null) {
 				orderMap.put("ordName", ordName);
 				orderMap.put("ordTel", ordTel);

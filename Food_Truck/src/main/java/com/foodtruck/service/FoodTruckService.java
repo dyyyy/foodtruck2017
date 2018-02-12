@@ -77,7 +77,11 @@ public class FoodTruckService {
 		return dao.getFoodTruckRank();
 	}
 
-	
+	// 신규 푸드트럭
+	public List<FoodTruckVO> getNewFoodTruck() {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getNewFoodTruck();
+	}	
 
 	// 푸드트럭 수정
 	public int updateFoodTruck(FoodTruckVO vo) throws Exception {
