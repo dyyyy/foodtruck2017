@@ -141,5 +141,11 @@ public class FoodTruckService {
 		return dao.updateTruckPosition(vo);
 	}
 	
-
+	// 푸드트럭 별 리뷰 수 
+	public List<FoodTruckVO> getReviewCountList()throws Exception {
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getReviewCountList();
+	}
+	
+	
 }
