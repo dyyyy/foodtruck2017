@@ -107,43 +107,6 @@ public class SellerController {
 		return num;
 	}
 	
-/*
-	// 판매자 캘린더
-	@RequestMapping("/sellerCalendar")
-	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
-			@RequestParam(value = "licenseNo", required = false) String licenseNo, SellerVO vo) {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		List<SellerVO> list = new ArrayList<SellerVO>();
-		JSONObject jsonObject = new JSONObject(); // 푸드트럭 매출 최종
-		JSONArray dateArray = new JSONArray(); // 푸드트럭 매출 json 배열
-		JSONObject dateInfo = null; // 매출 정보
-		if(mvo != null) {
-			if (licenseNo != null) {
-				String num=licenseNo;
-				list = (List<SellerVO>)sservice.getDate(num);
-				model.addAttribute("licenseNo", num); 
-				model.addAttribute("license", sservice.getLicense2(mvo.getMemberId()));
-				for(SellerVO vvo : list) {
-					dateInfo = new JSONObject();
-					
-					// 정보 입력(날짜, 매출)
-					dateInfo.put("ordDate", vvo.getOrdDate());
-					dateInfo.put("sumPrice", vvo.getSumPrice());
-					
-					// 입력한 정보를 배열에 담는다.
-					dateArray.add(dateInfo);
-				}
-				
-				// 전체의 jsonObject에 monthly 라는 이름으로 배열의 value값을 입력
-				jsonObject.put("monthly", dateArray);
-				
-			}
-			request.setAttribute("monthly", jsonObject.toJSONString());
-		}
-		
-		return "seller/calendar";
-	}
-*/	
 	
 	@RequestMapping("/sellerCalendar")
 	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,

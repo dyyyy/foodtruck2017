@@ -73,8 +73,6 @@ body {
 					<li class="active"><a
 						href="/sellerCalendar?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>매출 통계</a></li>
-					<li><a href="/sellerChart?licenseNo=${licenseNo}"><i
-							class="icon-chevron-right"></i>차트</a></li>
 					<li><a href="/sellerProduct?licenseNo=${licenseNo}"><i
 							class="icon-chevron-right"></i>내 푸드트럭 메뉴</a></li>
 					<li><a
