@@ -74,8 +74,8 @@
                            <tr>
                               <th class="unit"> 주문 번호 </th>
                               <th class="unit"> 제품 이름 </th>
-                              <th class="unit"> 수량 </th>
-                              <th class="unit"> 주문 총 가격 </th>
+                              <th class="acti"> 수량 </th>
+                              <th class="sumtd"> 주문 총 가격 </th>
                               <th class="unit"> 요청 사항 </th>
                               <th class="quantity"> 상태 </th>
                            </tr> 
@@ -267,8 +267,8 @@
 									htmlObj += "<tr class='table-info'>";
 									htmlObj += "	<td class='unit'>" + ordNo + "</td>";
 									htmlObj += "	<td class='unit'>" + prodName + "</td>";
-									htmlObj += "	<td class='unit'>" + ordQty+"개</td>";
-									htmlObj += "	<td class='unit'>" + ordPrice + "원</td>";
+									htmlObj += "	<td class='acti'>" + ordQty+"개</td>";
+									htmlObj += "	<td class='sumtd'>" + ordPrice + "원</td>";
 									htmlObj += "	<td class='unit'>" + ordReq + "</td>";
 									htmlObj += "	<td class='quantity'>" + cookStatHangul + "</td>";
 									htmlObj += "</tr>";
