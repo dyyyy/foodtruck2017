@@ -232,6 +232,7 @@
 									var ordPrice = calselectList[i].ordPrice;
 									var cookStat = calselectList[i].cookStat;
 									var cookStatHangul;
+									var ordReq = calselectList[i].ordReq;
 									var ordDate = calselectList[i].ordDate;
 									var ordDateCut = ordDate.substring(0,10);
 									var date = new Date();
@@ -267,6 +268,7 @@
 									htmlObj += "	<td class='unit'>" + prodName + "</td>";
 									htmlObj += "	<td class='unit'>" + ordQty+"개</td>";
 									htmlObj += "	<td class='unit'>" + ordPrice + "원</td>";
+									htmlObj += "	<td class='unit'>" + ordReq + "</td>";
 									htmlObj += "	<td class='quantity'>" + cookStatHangul + "</td>";
 									htmlObj += "</tr>";
 								} // for
