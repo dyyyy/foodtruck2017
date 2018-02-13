@@ -47,13 +47,13 @@
 <%@include file="../comm/nav.jsp"%>
 <!-- test -->
 <div></div>
-<section class="cart-page page fix">
+<section class="cart-page page fix" >
 	<!--Start Cart Area-->
 	<div class="container">
 		<div class="row2">
 			<div class="col-sm-12">
                <div class="product">
-                  <div class="table-responsive">
+                  <div class="table-responsive" style="width: 1500px;">
                   <h2>DAILY ORDER STATE</h2>
                      <p> 오늘의 기준 - 판매현황 <br><br>사업자 번호 선택 후, 날짜를 선택하시면 지난 예약 내역도 확인 가능하답니다 :-) </p><br><br>
                      <!-- 사업자 기준으로 통계 -->
@@ -73,12 +73,13 @@
                      <table class="table cart-table">
                         <thead class="table-title">
                            <tr>
-                              <th class="unit"> 주문 번호 </th>
+                              <th class="unit" style="width: 200px;"> 주문 번호 </th>
                               <th class="unit"> 제품 이름 </th>
-                              <th class="unit"> 수량 </th>
+                              <th class="unit" style="width: 100px;"> 수량 </th>
                               <th class="unit"> 주문 총 가격 </th>
                               <th class="unit"> 요청 사항 </th>
                               <th class="quantity"> 상태 </th>
+                              <th class="namedes" > 주소 </th>
                            </tr> 
                         </thead>
                         
@@ -134,6 +135,7 @@
 	                                    	</td>
 	                                	</c:when>
 	                            	</c:choose>
+	                            	<td class="quantity">${detailList.dlvAddr}</td>
                            		</tr>
                           	</c:forEach>
                         </tbody>
