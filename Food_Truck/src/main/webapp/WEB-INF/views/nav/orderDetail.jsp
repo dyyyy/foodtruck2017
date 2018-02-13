@@ -114,22 +114,28 @@
 	                             		</c:when>
 	                             	</c:choose>
 	                             	<!-- 상태  -->
-	                             	<c:choose>
+	                             	   	<c:choose>
 	                             		<c:when test="${detailList.cookStat eq 0}">
 	                             			<td class="quantity" style="color: #6262dd; font-weight: bold; font-family: Raleway, sans-serif; "> 대기중
-	                             				<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
+	                             				<button type="button" class="btn btn-primary2" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+	                             					<img src="/resources/img/chef2.png">
+	                             				</button>
 	                                    	</td>
 	                                	</c:when>
 	                                       
 	                               		<c:when test="${detailList.cookStat eq 1}">
 	                                		<td class="quantity" style="color: #ea5f8b; font-weight: bold; font-family: Raleway, sans-serif; "> 조리중 
-												<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
+												<button type="button" class="btn btn-primary2" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+													<img src="/resources/img/pan2.png">
+												</button>
 	                                   		</td>
 	                               		</c:when>
 	                               	
 	                               		<c:when test="${detailList.cookStat eq 2}">
-	                               			<td class="quantity" style="font-weight: bold; font-family: Raleway, sans-serif; "> 완료
-												<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
+	                               			<td class="quantity" style="font-weight: bold; font-family: Raleway, sans-serif; "> 완 &nbsp;료
+												<button type="button" class="btn btn-primary2"  data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+													<img src="/resources/img/food2.png">
+												</button>
 	                                    	</td>
 	                                	</c:when>
 	                            	</c:choose>
