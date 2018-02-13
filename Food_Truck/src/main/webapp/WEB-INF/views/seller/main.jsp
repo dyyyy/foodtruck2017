@@ -47,6 +47,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+
 $(function() {
     $('.chart').easyPieChart({
        animate : 1000
@@ -57,6 +58,7 @@ $(function() {
 	var sel = $("select").val();
 	location.href = "/sellerMain?licenseNo=" + sel;
 }
+
 </script>
 
 
@@ -183,11 +185,9 @@ $(function() {
 					</div>
 					<div class="block">
 						<div class="navbar navbar-inner block-header">
-							<div class="muted pull-left">Statistics</div>
+							<div class="muted pull-left">매출</div>
 							<div class="pull-right">
-								<span class="badge badge-warning"  id="close">
-								
-								</span>
+								<span class="badge badge-warning" id="close"> </span>
 
 							</div>
 						</div>
