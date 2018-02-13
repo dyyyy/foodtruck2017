@@ -20,6 +20,9 @@ public interface SellerDAO {
 	// 오늘의 배달 내역 리스트
 	public List<SellerVO> getTodayDlvList(String licenseNo);
 	
+	// 오늘의 예약 내역 리스트
+	public List<SellerVO> getTodayRsvList(String licenseNo);
+	
 	// 총 주문 리스트
 	public List<SellerVO> getOrderList(String licenseNo);
 	

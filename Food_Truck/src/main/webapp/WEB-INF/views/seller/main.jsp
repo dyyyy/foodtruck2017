@@ -283,12 +283,12 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="todayOrder" items="${todayOrder}">
+										<c:forEach var="todayRsv" items="${todayRsv}">
 											<tr>
-												<td>${todayOrder.ordRsvDate}</td>
-												<td>${todayOrder.ordName}</td>
-												<td>${todayOrder.prodName}</td>
-												<td>${todayOrder.ordReq}</td>
+												<td>${todayRsv.ordRsvDate}</td>
+												<td>${todayRsv.ordName}</td>
+												<td>${todayRsv.prodName}</td>
+												<td>${todayRsv.ordReq}</td>
 											</tr>
 										</c:forEach>
 									</tbody>

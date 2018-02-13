@@ -249,6 +249,7 @@ public class SellerController {
 				model.addAttribute("license", list); // 사업자번호 여러개
 				model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
 				model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
+				model.addAttribute("todayRsv", sservice.getTodayDlvList(num));
 				// model.addAttribute("order", sservice.getOrderList(num));
 				// model.addAttribute("img", sservice.getFoodTruckList(num));
 				model.addAttribute("payment", sservice.getTodayPayment(num));
