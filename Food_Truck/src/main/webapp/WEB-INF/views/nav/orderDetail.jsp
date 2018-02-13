@@ -276,7 +276,7 @@
 								// 없을 경우,
 							} else {
 								htmlObj += "<tr class='table-info'>";
-								htmlObj += "	<td class='unit' colspan='5'> 해당 날짜에는 데이터가 없습니다. </td>";
+								htmlObj += "	<td class='unit' colspan='6'> 해당 날짜에는 데이터가 없습니다. </td>";
 								htmlObj += "</tr>";
 							}
 							
