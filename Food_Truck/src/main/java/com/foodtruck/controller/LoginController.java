@@ -158,7 +158,7 @@ public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping("/updateOrderCount")
-	public OrderVO updateOrderCount(HttpSession session) {
+	public List<OrderVO> updateOrderCount(HttpSession session) {
 		System.out.println("오나");
 		String memId = (String)session.getAttribute("memberId");
 		return orderService.getNewCount(memId);	// 판매자가 확인하지않은 새로운 주문 갯수

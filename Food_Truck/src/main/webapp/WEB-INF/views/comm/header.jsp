@@ -155,18 +155,32 @@ if(<%=gubun%> == "2") {
 }		
 	
 	
-	function updateData() {
-		var str = "&nbsp;&nbsp;"
-		$.ajax({
-			url : "/updateOrderCount",
-			type : "post" ,
-			cache : false,
-			success : function(data) {
-				$("#newCount").html(str+data.newCount+"개")
-			}
-		})
-		setTimeout("updateData()",10000)
-	}
+function updateData() {
+	var str = "&nbsp;&nbsp;"
+	$.ajax({
+		url : "/updateOrderCount",
+		type : "post" ,
+		cache : false,
+		success : function(data) {
+			var count = 0;
+			var content = "";
+			$.each(data,function(idx,val) {
+				content += val.ftruckName + " : " + val.newCount + " 개  \n "
+				count += val.newCount
+			})
+			$("#newCount").html(str+count+"개")
+				$("#newInfo").click(function() {
+					if(count != 0) {
+						alert("새로운 주문 정보 \n" + content)
+						location.href="/checkNewOrder"
+					}else{
+						alert("새로운 주문 정보가 없습니다.")
+					}
+				})				
+		}
+	})
+	setTimeout("updateData()",10000)
+}
 	//search button
 /*
 	$(function() {
