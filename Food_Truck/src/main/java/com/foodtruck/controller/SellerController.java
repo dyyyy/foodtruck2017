@@ -103,10 +103,8 @@ public class SellerController {
 
 	@RequestMapping("/sellerInfo")
 	public String sellerInfo(@RequestParam(value = "licenseNo", required = false) String licenseNo,
-			HttpServletRequest request, HttpSession session, Model model) throws Exception {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
-		String num = list.get(0).getLicenseNo();
+			HttpServletRequest request, HttpSession session, Model model) throws Exception {	
+		String num=licenseNo;
 		FoodTruckVO vo = new FoodTruckVO();
 		vo = fservice.getFoodTruck2(licenseNo);
 		if (vo.getFtruckAddr() == null) {
