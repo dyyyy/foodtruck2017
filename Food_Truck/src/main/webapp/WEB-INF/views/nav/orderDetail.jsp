@@ -138,6 +138,7 @@
 												</button>
 	                                    	</td>
 	                                	</c:when>
+	                                	
 	                            	</c:choose>
                            		</tr>
                           	</c:forEach>
