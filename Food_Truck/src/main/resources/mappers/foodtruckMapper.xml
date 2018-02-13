@@ -47,7 +47,7 @@
 		(select rownum as rnum, ft.*
 		from (select f.*,nvl2(f.ftruck_grade,0,10) as count
 		from
-		foodtruck f,license l where category=#{category} and f.license_no = l.license_no order by l.app_stat desc,f.FTRUCK_REG) ft)fft
+		foodtruck f,license l where category=#{category} and f.license_no = l.license_no and l.app_stat = 'Y' order by l.app_stat desc,f.FTRUCK_REG) ft)fft
 		where rownum &lt;=#{pageNo}+9)ffft
 		where rnum >=#{pageNo}
 	</select>
@@ -60,7 +60,7 @@
 		rnum, ft.*
 		from
 		(select f.*,l.app_stat,nvl2(f.ftruck_grade,0,10) as count from foodtruck f,license l where f.license_no =
-		l.license_no order by l.app_stat desc,f.ftruck_reg)
+		l.license_no and l.app_stat = 'Y' order by l.app_stat desc,f.ftruck_reg)
 		ft)fft
 		where
 		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft

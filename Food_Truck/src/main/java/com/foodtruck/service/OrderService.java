@@ -75,5 +75,11 @@ public class OrderService {
 	public int checkNewOrder(String memId) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.checkNewOrder(memId);
-	}	
+	}
+
+	// 자주 시켜먹은 푸드트럭 순위
+	public List<OrderVO> getFavoriteFoodtruck(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.getFavoriteFoodtruck(memId);
+	}
 }

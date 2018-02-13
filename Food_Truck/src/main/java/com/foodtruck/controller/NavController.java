@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foodtruck.service.OrderService;
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
+import com.foodtruck.vo.OrderVO;
 
 @Controller
 public class NavController {
@@ -34,6 +36,9 @@ public class NavController {
 */
 	@Autowired
 	SellerService sservice;
+	
+	@Autowired
+	OrderService orderService;
 	
 	// 1:1 일반회원 문의
 	@RequestMapping("/inquiry")
@@ -88,10 +93,17 @@ public class NavController {
 		return "nav/orderList";
 	}
 
-	// ������ �޴� - ���� Ǫ��Ʈ��
-	@RequestMapping("/favoritFoodtruck")
-	public String favoritFoodtruckPage() {
-		return "nav/favoritFoodtruck";
+	// 관심있는 푸드트럭 5개 까지 보여주고 / 바로 주문할 수 있또로로오오오옥!
+	@RequestMapping("/favoriteFoodtruck")
+	public String favoriteFoodtruckPage(HttpSession session, HttpServletRequest request) {
+		
+		MemberVO mvo = (MemberVO)session.getAttribute("member");
+		String memId = mvo.getMemberId();
+		List<OrderVO> list = orderService.getFavoriteFoodtruck(memId);
+
+		request.setAttribute("list", list);
+		
+		return "nav/favoriteFoodtruck";
 	}
 
 	// ������ �޴� - ���� ����

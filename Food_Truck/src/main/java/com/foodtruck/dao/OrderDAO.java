@@ -36,5 +36,8 @@ public interface OrderDAO {
 	
 	// 새로운 주문 확인
 	public int checkNewOrder(String memberId);
+	
+	// 자주 시켜먹은 푸드트럭 순위 
+	public List<OrderVO> getFavoriteFoodtruck(String memId);
 }
 
