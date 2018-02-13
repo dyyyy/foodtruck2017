@@ -246,7 +246,9 @@ public class OrderController {
 			System.out.println("진입이당!7");
 			//배달상세내역 insert
 			String dlvAddr="";
-			dlvAddr+=dlvAddr1+dlvAddr2;
+			dlvAddr+=dlvAddr1;
+			dlvAddr+="  "+dlvAddr2;
+			
 			DeliveryDetailVO vo= new DeliveryDetailVO();
 			vo.setDlvAddr(dlvAddr);
 			vo.setOrdNo(ordNo);

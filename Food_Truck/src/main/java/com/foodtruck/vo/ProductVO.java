@@ -8,7 +8,7 @@ public class ProductVO {
 	private String prodContent;		// 상품 내용
 	private String prodImg;			// 상품 이미지
 	private int prodPrice;			// 상품 가격 
-	
+	private String ftruckNo;
 	private String licenseNo;		// 사업자 번호
 	private String prodOrgin; //원산지
 	
@@ -54,6 +54,12 @@ public class ProductVO {
 	}
 	public void setProdOrgin(String prodOrgin) {
 		this.prodOrgin = prodOrgin;
+	}
+	public String getFtruckNo() {
+		return ftruckNo;
+	}
+	public void setFtruckNo(String ftruckNo) {
+		this.ftruckNo = ftruckNo;
 	}
 	
 	

@@ -47,19 +47,16 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	
-	$(function() {
-		var sel = $("select").val();
-
-		$('.chart').easyPieChart({
-			animate : 1000
-		});
-		
-		$("select").change(function() {
-			location.href = "/sellerMain?licenseNo=" + sel;
-		});
-		
-	})
+$(function() {
+    $('.chart').easyPieChart({
+       animate : 1000
+    });
+ })
+ 
+ function ch(){
+	var sel = $("select").val();
+	location.href = "/sellerMain?licenseNo=" + sel;
+}
 </script>
 
 
@@ -74,7 +71,7 @@
 			<%
 				List<SellerVO> list = (List<SellerVO>) request.getAttribute("license");
 			%>
-			<select name="licenseNo">
+			<select name="licenseNo" id="ch" onchange="ch()">
 				<%
 					for (int i = 0; i < list.size(); i++) {
 				%>
