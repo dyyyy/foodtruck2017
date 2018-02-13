@@ -1,6 +1,7 @@
 package com.foodtruck.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,9 @@ public class DeliveryDetailService {
 	}
 
 	// 배달 상세 리스트Ʈ
-	public List<DeliveryDetailVO> getDeliveryDetailList(String memId) {
+	public List<DeliveryDetailVO> getDeliveryDetailList(Map<String, Object> map) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
-		return dao.getDeliveryDetailList(memId);
+		return dao.getDeliveryDetailList(map);
 	}
 
 	// 배달 상세 등록
@@ -33,9 +34,9 @@ public class DeliveryDetailService {
 	}
 
 	// 배달 상세 수정
-	public int updateDeliveryDetail(DeliveryDetailVO vo) {
+	public int dlecookStatChange(Map<String, Object> map) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
-		return dao.updateDeliveryDetail(vo);
+		return dao.dlecookStatChange(map);
 	}
 
 	// 배달 상세 삭제

@@ -1,6 +1,6 @@
 package com.foodtruck.vo;
 
-public class DeliveryDetailVO {
+public class DeliveryDetailVO extends OrderDetailVO{
 	
 	private String ordNo;		// 주문 번호
 	private int dlvState;	// 배달 상태
