@@ -32,7 +32,7 @@ public interface OrderDAO {
 	public int cookStatChange(Map<String, Object> map);	
 	
 	// 새로운 주문알림 갯수 표시하기
-	public OrderVO getNewCount(String memId);
+	public List<OrderVO> getNewCount(String memId);
 	
 	// 새로운 주문 확인
 	public int checkNewOrder(String memberId);

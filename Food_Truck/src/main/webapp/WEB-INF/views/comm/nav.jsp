@@ -79,7 +79,7 @@
                            
                      %>
 							<li>
-								<a href="/checkNewOrder" onload="updateData()"><img src='/resources/img/ms3.png' ><b id="newCount"></b></a>
+								<a id="newInfo"><img src='/resources/img/ms3.png' ><b id="newCount"></b></a>
 							</li>									
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
