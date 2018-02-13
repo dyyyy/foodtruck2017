@@ -16,12 +16,14 @@
    	<!-- 주문 상세 리스트 -->
   	<select id="getOrderDetailList" resultMap="OrderDetailMap" parameterType="map">
    
-   		SELECT D.LICENSE_NO, O.PROD_NO, O.ORD_NO, P.PROD_NAME, O.ORD_QTY, O.ORD_PRICE,D.COOK_STAT,D.ORD_DATE
-     	FROM ORDERDETAIL O, PRODUCT P, ORDERS D
+   		SELECT D.LICENSE_NO, O.PROD_NO, O.ORD_NO, P.PROD_NAME, O.ORD_QTY, O.ORD_PRICE,D.COOK_STAT,D.ORD_DATE, F.FTRUCK_NAME, D.ORD_REQ
+     	FROM ORDERDETAIL O, PRODUCT P, ORDERS D, FOODTRUCK F
       	WHERE
       	O.ORD_NO = D.ORD_NO
       	AND P.PROD_NO = O.PROD_NO
       	AND D.LICENSE_NO IN (SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
+      	AND P.FTRUCK_NO = F.FTRUCK_NO
+      	AND D.LICENSE_NO = F.LICENSE_NO
       	<choose>
       		<when test="ordDate != null and ordDate != '' and licenseNo != null and licenseNo != ''">
       			AND D.ORD_DATE = #{ordDate} 
@@ -82,5 +84,6 @@
 		<result column="MEM_ID" property="memId"/>
 		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="SUM_PRICE" property="sumPrice"/>
+		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
 </mapper>

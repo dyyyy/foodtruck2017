@@ -54,7 +54,7 @@
                <div class="product">
                   <div class="table-responsive">
                   <h2>DAILY ORDER STATE</h2>
-                     <p> 오늘의 기준 - 판매현황 </p><br><br>
+                     <p> 오늘의 기준 - 판매현황 <br><br>사업자 번호 선택 후, 날짜를 선택하시면 지난 예약 내역도 확인 가능하답니다 :-) </p><br><br>
                      <!-- 사업자 기준으로 통계 -->
                      <div>
                      	<select id="licenseList" name="licenseNo" >
@@ -63,6 +63,7 @@
                      			<option value="${licenseList.licenseNo}">${licenseList.licenseNo}</option>
                      		</c:forEach>
                      	</select>
+
                      <!-- 사업자번호 & 달력  -->	
                      	<input type="text" placeholder="원하는 날짜를 선택하세요" id="cal" style="float: right; width: 210px; text-align:center;" ><br><br>
                      </div>
@@ -75,6 +76,7 @@
                               <th class="unit"> 제품 이름 </th>
                               <th class="unit"> 수량 </th>
                               <th class="unit"> 주문 총 가격 </th>
+                              <th class="unit"> 요청 사항 </th>
                               <th class="quantity"> 상태 </th>
                            </tr> 
                         </thead>
@@ -84,13 +86,14 @@
                         <c:set var="temp" value="" />
                         	<c:forEach items='${orderDetailList}' var="detailList">
                         		<tr class="table-info">
+                        			
                         			<c:choose>
                         				<c:when test="${detailList.ordNo eq temp}">
                         					<td></td>
                         				</c:when>
                         				
                         				<c:when test="${detailList.ordNo ne temp}">
-                        					<td class="valu">${detailList.ordNo}</td>
+                        					<td class="valu">${detailList.ordNo} <br> (${detailList.ftruckName})</td>
                                         </c:when>
                                     </c:choose>
                                  	<c:set var="temp" value="${detailList.ordNo}" />
@@ -100,6 +103,16 @@
 	                             	<td class="unit">${detailList.ordQty}개</td>
 	                             	<!-- 주문 총 가격 -->
 	                             	<td class="unit">${detailList.ordPrice}원</td>
+	                             	<!-- 요청 사항 -->
+	                             	<c:choose>
+	                       	  	    	<c:when test="${detailList.ordReq eq null}">
+	                             			<td class="unit">요청사항이 없습니다.</td>
+	                             		</c:when>
+	                             		
+	                             		<c:when test="${detailList.ordReq ne null}">
+	                             			<td class="unit">${detailList.ordReq}</td>
+	                             		</c:when>
+	                             	</c:choose>
 	                             	<!-- 상태  -->
 	                             	<c:choose>
 	                             		<c:when test="${detailList.cookStat eq 0}">
@@ -165,7 +178,7 @@
 <script>
 
 <!-- datepicker & licenseNoList -->
-
+	
 	var selectList = function A() {
 		$("#licenseList").on("change", function() {
 			var licenseNo = $("#licenseList option:selected").val();
@@ -177,6 +190,7 @@
 			    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
 			    monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
 			    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			    maxDate: 0,
 			    onSelect: function(dateText, inst, licenseNo){
 // 			    	var licenseNo = $("#licenseList option:selected").val();
 			    	$.ajax ({
