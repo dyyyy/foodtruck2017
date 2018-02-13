@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.foodtruck.service.DeliveryDetailService;
+import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.OrderDetailService;
 import com.foodtruck.service.OrderService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
+import com.foodtruck.vo.DeliveryDetailVO;
+import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.OrderDetailVO;
 import com.foodtruck.vo.OrderVO;
@@ -44,14 +48,29 @@ public class OrderController {
 	@Autowired
 	ReviewService reviewService;
 	
+	@Autowired
+	FoodTruckService fService;
+	
+	@Autowired
+	DeliveryDetailService ddservice;
+	
 	@RequestMapping("/order")
 	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request,
-						@RequestParam("ftruckNo") String ftruckNo) {
-		System.out.println("����");
-		System.out.println(licenseNo);
-		List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
+						@RequestParam("ftruckNo") String ftruckNo) throws Exception {
+		String memId = (String) session.getAttribute("memberId");
+		if (memId == null) {
+			List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
+			request.setAttribute("ftruckDlvYn", "N");
+			request.setAttribute("list", Plist);
+		} else {
+			List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
+			FoodTruckVO vo = fService.getFoodTruck(ftruckNo);
+			String ftruckDlvYn = vo.getFtruckDlvYn();
 
-		request.setAttribute("list",Plist);
+			request.setAttribute("ftruckDlvYn", ftruckDlvYn);
+			request.setAttribute("list", Plist);
+		}
+		
 		return "nav/order";
 	}
 	
@@ -108,19 +127,25 @@ public class OrderController {
 										@RequestParam("ordDlyYn") String ordDlyYn,
 										@RequestParam("payment") int payment,
 										@RequestParam(value="ordRsvDate1" ,required=false) int ordRsvDate1,
-										@RequestParam(value="ordRsvDate2" ,required=false) int ordRsvDate2) {
-		//현금계산이면
-		if(payment==0) {
-			System.out.println("주문할 거 디비에 넣자!");
+			                            @RequestParam(value="ordRsvDate2" ,required=false) int ordRsvDate2,
+			                            @RequestParam(value="dlvAddr1",required=false) String dlvAddr1,
+			                            @RequestParam(value="dlvAddr2",required=false) String dlvAddr2
+										) {
+		System.out.println("진입으로 가즈아");
+		System.out.println("진입으로 가즈아="+ordDlyYn);
+		//예약내역이면
+		if(ordDlyYn.equals("N")) {
+			//System.out.println("주문할 거 디비에 넣자!="+dlvAddr1);
+			//System.out.println("주문할 거 디비에 넣자!="+dlvAddr2);
 			String ordRsvDate="";
 			Date date = new Date();
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 			 Calendar cal = Calendar.getInstance();
 			 cal.setTime(date);
-			 cal.add(Calendar.HOUR, ordRsvDate1);
-			 cal.add(Calendar.MINUTE, ordRsvDate2);
+			cal.add(Calendar.HOUR, ordRsvDate1);
+			cal.add(Calendar.MINUTE, ordRsvDate2);
 			 ordRsvDate = sdformat.format(cal.getTime());  
-	
+			 
 			Map<String,Object> orderMap = new HashMap<String, Object>();
 			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
 			Map<String,Object> orderInfoList = new HashMap<String, Object>();	
@@ -162,7 +187,7 @@ public class OrderController {
 			orderInfoList.put("ordNo", ordNo);
 			orderInfoList.put("licenseNo", licenseNo);
 			List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
-			
+			request.setAttribute("dlvAddr", "none");
 			request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
 			request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
 			request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
@@ -173,7 +198,69 @@ public class OrderController {
 			// 다수의 값들
 			request.setAttribute("orderInfolist", orderInfolist);	
 		}else {
-		//카드계산이면	
+		//배달이면
+			System.out.println("진입이당!");
+			Map<String,Object> orderMap = new HashMap<String, Object>();
+			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
+			Map<String,Object> orderInfoList = new HashMap<String, Object>();	
+			System.out.println("진입이당!2");
+			String memId = (String)session.getAttribute("memberId");
+			// 회원 & 비회원
+			if(memId != null) {
+				orderMap.put("memId", memId);
+			}else {
+				orderMap.put("memId", "");
+			}		
+			// order 테이블에 들어갈껑!
+			System.out.println("진입이당!3");
+			if(ordName != null) {
+				orderMap.put("ordName", ordName);
+				orderMap.put("ordTel", ordTel);
+				orderMap.put("ordReq", ordReq);
+				orderMap.put("licenseNo", licenseNo);
+				orderMap.put("sumPrice", sumPrice);
+				orderMap.put("ordDlyYn", ordDlyYn);
+				orderMap.put("payment", payment);
+				orderMap.put("ordRsvDate", "none");
+			}
+			System.out.println("진입이당!4");
+			Oservice.insertOrder(orderMap); 
+			String ordNo = String.valueOf(orderMap.get("ordNo"));
+			System.out.println("진입이당!5");
+			for(int i = 0 ; i < prodNo.size() ; i++) {
+				// orderdetail 테이블
+				orderdetailMap.put("prodNo", prodNo.get(i));
+				orderdetailMap.put("ordQty", ordQty.get(i));
+				orderdetailMap.put("ordPrice", ordPrice.get(i));
+				
+				if(ordQty.get(i) != 0) {
+					System.out.println(ordNo);
+					orderdetailMap.put("ordNo", ordNo);
+					orderdetailService.insertOrderDetail(orderdetailMap);
+				}
+			}
+			System.out.println("진입이당!6");
+			orderInfoList.put("ordNo", ordNo);
+			orderInfoList.put("licenseNo", licenseNo);
+			List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
+			System.out.println("진입이당!7");
+			//배달상세내역 insert
+			String dlvAddr="";
+			dlvAddr+=dlvAddr1+dlvAddr2;
+			DeliveryDetailVO vo= new DeliveryDetailVO();
+			vo.setDlvAddr(dlvAddr);
+			vo.setOrdNo(ordNo);
+			vo.setDlvState(0);
+			ddservice.insertDeliveryDetail(vo);
+			System.out.println("진입이당!8");
+			request.setAttribute("dlvAddr", dlvAddr);
+			request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
+			request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
+			request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
+			request.setAttribute("ordDate", orderInfolist.get(0).getOrdDate());
+			request.setAttribute("ordReq", orderInfolist.get(0).getOrdReq());
+			request.setAttribute("sumPrice", orderInfolist.get(0).getSumPrice());
+			request.setAttribute("orderInfolist", orderInfolist);	
 		}
 		
 		return "nav/orderChk";

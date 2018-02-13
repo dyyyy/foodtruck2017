@@ -29,6 +29,16 @@ public class OrderDetailController {
 	@Autowired
 	private SellerService sellerService;
 	
+	
+		//배달상세내역보기
+		@RequestMapping("/DeliveryDetail")
+		public String DeliveryDetail(Model model, HttpSession session) {
+			MemberVO mvo = (MemberVO)session.getAttribute("member");
+		      Map<String,Object> map = new HashMap<String,Object>();
+		      
+			
+			return "nav/DeliveryDetail";
+		}
 	   /*예약내역 이름변경하기*/
 	   @RequestMapping("/orderDetail")
 	   public String orderDetailPage(Model model, HttpSession session) {

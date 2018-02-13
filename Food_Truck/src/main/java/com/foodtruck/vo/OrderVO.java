@@ -8,7 +8,6 @@ public class OrderVO {
 	private String ordTel;		// 주문자 연락처
 	private String ordDate;		// 주문 시간
 	private String ordRsvDate;	// 예약 시간(시)
-	private String ordRsvDate2;	// 예약 시간(분)
 	private String ordDlyYn;	// 배달 여부(Y/N)
 	private int ordStat;		// 주문 상태
 	private int cookStat;		// 조리 상태
@@ -23,6 +22,12 @@ public class OrderVO {
 	private int newCount;		// 새로운 주문갯수
 	private String ordCheck;	// 새로들어온 주문 확인(Y/N)
 	private int payment;//결제방식
+	private String dlvAddr1;
+	private String dlvAddr2;
+	private int favoriteCount;	// 관심있는 푸드트럭 갯수
+	private int rank;			// 순위
+	private String ftruckNo;	// 푸드트럭 번호
+	
 	
 	// getter & setter
 
@@ -140,12 +145,36 @@ public class OrderVO {
 	public void setPayment(int payment) {
 		this.payment = payment;
 	}
-	public String getOrdRsvDate2() {
-		return ordRsvDate2;
-	}
-	public void setOrdRsvDate2(String ordRsvDate2) {
-		this.ordRsvDate2 = ordRsvDate2;
-	}
 	
+	public String getDlvAddr1() {
+		return dlvAddr1;
+	}
+	public void setDlvAddr1(String dlvAddr1) {
+		this.dlvAddr1 = dlvAddr1;
+	}
+	public String getDlvAddr2() {
+		return dlvAddr2;
+	}
+	public void setDlvAddr2(String dlvAddr2) {
+		this.dlvAddr2 = dlvAddr2;
+	}
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+	public String getFtruckNo() {
+		return ftruckNo;
+	}
+	public void setFtruckNo(String ftruckNo) {
+		this.ftruckNo = ftruckNo;
+	}
 	
 }

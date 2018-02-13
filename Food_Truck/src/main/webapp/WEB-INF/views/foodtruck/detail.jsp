@@ -110,7 +110,7 @@ $(function() {
 									for (int i = 0; i < list2.size(); i++) {
 								%>
 								<tr style="width: 860px; height: 95.2px;">
-									<td style="width: 120px; height: 94.8px;">사진</td>
+									<td style="width: 120px; height: 94.8px;"><img src="<%=list2.get(i).getProdImg() %>"></td>
 									<td style="width: 840px; height: 95.2px;"><%=list2.get(i).getProdName()%><%=list2.get(i).getProdContent()%></td>
 									<td style="width: 140px; height: 95.2px;">
 										<dl class="comment">
@@ -124,6 +124,7 @@ $(function() {
 								%>
 							</table>
 						</div>
+						
 						<!-- 상품리스트 끝 -->
 						<div id="review" class="tab-pane fade" role="tabpanel">
 							<!-- 리뷰 리스트 시작 -->

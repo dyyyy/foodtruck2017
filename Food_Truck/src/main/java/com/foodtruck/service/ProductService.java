@@ -45,5 +45,7 @@ public class ProductService {
 		return dao.deleteProduct(prodNo);
 	}
 	
+	//판매자 관리의 
+	
 
 }

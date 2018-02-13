@@ -21,5 +21,6 @@ public interface ProductDAO {
 	// 제품 삭제
 	public int deleteProduct(String prodNo);
 	
-
+	// 판매자 관리의 제품 리스트 출력하기
+	public List<ProductVO> getProductList2(String licenseNo);
 }

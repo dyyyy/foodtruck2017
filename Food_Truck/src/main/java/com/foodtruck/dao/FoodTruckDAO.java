@@ -69,4 +69,7 @@ public interface FoodTruckDAO {
 	//마감된 푸드트럭 count
 	public int getEndCountTruck()throws Exception;
 	
+	// 푸드트럭 별 리뷰 수 
+	public List<FoodTruckVO> getReviewCountList()throws Exception;
+	
 }

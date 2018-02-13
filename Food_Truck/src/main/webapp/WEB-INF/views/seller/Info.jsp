@@ -39,6 +39,8 @@ function mm() {
 }
 function changInfo(){
 	var licenseNo=${licenseNo};
+	
+	
 	var path=document.getElementById("path").value;
 	var tel=document.getElementById("tel").value;
 	var ftruckDlvYn = $("input[name='ftruckDlvYn']:checked").val();

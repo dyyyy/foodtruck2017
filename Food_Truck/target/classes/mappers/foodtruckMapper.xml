@@ -45,9 +45,9 @@
 		select ffft.* from
 		(select fft.*from
 		(select rownum as rnum, ft.*
-		from (select f.*
+		from (select f.*,nvl2(f.ftruck_grade,0,10) as count
 		from
-		foodtruck f,license l where category=#{category} and f.license_no = l.license_no order by l.app_stat desc,f.FTRUCK_REG) ft)fft
+		foodtruck f,license l where category=#{category} and f.license_no = l.license_no and l.app_stat = 'Y' order by l.app_stat desc,f.FTRUCK_REG) ft)fft
 		where rownum &lt;=#{pageNo}+9)ffft
 		where rnum >=#{pageNo}
 	</select>
@@ -59,8 +59,8 @@
 		(select rownum as
 		rnum, ft.*
 		from
-		(select f.*,l.app_stat from foodtruck f,license l where f.license_no =
-		l.license_no order by l.app_stat desc,f.ftruck_reg)
+		(select f.*,l.app_stat,nvl2(f.ftruck_grade,0,10) as count from foodtruck f,license l where f.license_no =
+		l.license_no and l.app_stat = 'Y' order by l.app_stat desc,f.ftruck_reg)
 		ft)fft
 		where
 		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
@@ -156,6 +156,11 @@
 	<select id="getCategoryCountTruck" resultType="int">
 		select count(*)
 		from foodtruck f,license l where f.license_no = l.license_no and l.app_stat = 'Y' and category=#{category}
+	</select>
+
+	<!-- 푸드트럭에 달린 댓글 갯수 보여주기 -->
+	<select id="getReviewCountList" resultMap="FoodTruckMap">
+		select count(f.ftruck_no)as count,f.ftruck_no from foodtruck f,review r where r.ftruck_no = f.ftruck_no group by f.ftruck_no
 	</select>
 
 	<resultMap type="FoodTruckVO" id="FoodTruckMap" extends="ReviewMap">

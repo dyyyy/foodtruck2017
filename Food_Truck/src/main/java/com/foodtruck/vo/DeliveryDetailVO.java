@@ -3,7 +3,7 @@ package com.foodtruck.vo;
 public class DeliveryDetailVO {
 	
 	private String ordNo;		// 주문 번호
-	private String dlvState;	// 배달 상태
+	private int dlvState;	// 배달 상태
 	private String dlvAddr;		// 배달 주소
 	private String dlvDate;		// 배달 시간
 	
@@ -17,12 +17,7 @@ public class DeliveryDetailVO {
 	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
-	public String getDlvState() {
-		return dlvState;
-	}
-	public void setDlvState(String dlvState) {
-		this.dlvState = dlvState;
-	}
+	
 	public String getDlvAddr() {
 		return dlvAddr;
 	}
@@ -34,6 +29,12 @@ public class DeliveryDetailVO {
 	}
 	public void setDlvDate(String dlvDate) {
 		this.dlvDate = dlvDate;
+	}
+	public int getDlvState() {
+		return dlvState;
+	}
+	public void setDlvState(int dlvState) {
+		this.dlvState = dlvState;
 	}
 	
 }

@@ -9,7 +9,7 @@ public class ReviewVO {
 	private String revDelYn;		// 삭제 여부
 	private double grade;			// 평점
 	private String memId;			// 회원 아이디
-	private int ordNo;				// 주문 번호
+	private String ordNo;				// 주문 번호
 	private String ftruckName;		// 푸드트럭 이름
 	private String licenseNo;		// 사업자 번호
 	
@@ -18,10 +18,10 @@ public class ReviewVO {
 	public int getRevSeq() {
 		return revSeq;
 	}
-	public int getOrdNo() {
+	public String getOrdNo() {
 		return ordNo;
 	}
-	public void setOrdNo(int ordNo) {
+	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
 	public String getFtruckName() {

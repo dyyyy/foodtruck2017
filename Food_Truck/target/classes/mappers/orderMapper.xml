@@ -95,6 +95,27 @@
 		WHERE LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID =
 		#{memId})
 	</update>
+	
+	<!-- 구매자가 주문한 푸드트럭 순위 뽑자! -->
+	<select id="getFavoriteFoodtruck" resultMap="OrderMap">
+	
+		<![CDATA[
+			SELECT A.*
+			FROM (SELECT COUNT(O.LICENSE_NO) AS favoriteCount, F.LICENSE_NO, F.FTRUCK_NO, F.FTRUCK_NAME, ROW_NUMBER() OVER(ORDER BY COUNT(O.LICENSE_NO) DESC) AS RANK
+					FROM ORDERS O, FOODTRUCK F
+					WHERE MEM_ID=#{memId}
+					AND O.LICENSE_NO = F.LICENSE_NO
+					GROUP BY F.FTRUCK_NAME, F.FTRUCK_NO, F.LICENSE_NO) A
+			WHERE A.RANK <= 5
+		 ]]>
+		
+		<!-- 
+			rank -> 중복 순위 다음은 해당 개수만큼 건너뛰고 반환
+			dense_rank() -> 중복 순위 상관없이 순차적으로 반환
+			row_number() -> 중복과 관계 없이 무조건 순서대로 반환
+			http://codingdojang.com/scode/255
+		 -->
+	</select>
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
@@ -116,6 +137,9 @@
 		<result column="NEWCOUNT" property="newCount" />
 		<result column="ORD_CHECK" property="ordCheck" />
 		<result column="PATMENT" property="payment" />
+		<result column="FAVORITECOUNT" property="favoriteCount"/>
+		<result column="RANK" property="rank"/>
+		<result column="FTRUCK_NO" property="ftruckNo"/>
 
 	</resultMap>
 

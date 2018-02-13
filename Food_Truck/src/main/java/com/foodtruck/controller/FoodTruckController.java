@@ -55,6 +55,15 @@ public class FoodTruckController {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);	//rownum된 푸드트럭 리스트
+		List<FoodTruckVO> count = fservice.getReviewCountList();
+		for(int i=0; i<count.size(); i++) {
+			exit :for(int j=0; j<list.size(); j++) {
+				if(count.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
+					list.get(j).setCount(count.get(i).getCount());
+					break exit;
+				}
+			}
+		}
 		System.out.println("dfsdfs"+list.size());
 		for(int i=0;i<list.size();i++) {
 			System.out.println("asds===================="+list.get(i).getFtruckImg());
@@ -76,7 +85,16 @@ public class FoodTruckController {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);	//rownum된 푸드트럭 리스트
-		;
+		List<FoodTruckVO> count = fservice.getReviewCountList();
+		for(int i=0; i<count.size(); i++) {
+			exit :for(int j=0; j<list.size(); j++) {
+				if(count.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
+					list.get(j).setCount(count.get(i).getCount());
+					break exit;
+				}
+			}
+		}
+		
 		int pagecount = fservice.getCountTruck();	//총 푸드트럭 개수
 		System.out.println("������ ��ȣ" + pageNo);
 		request.setAttribute("pageNo", pageNo);
@@ -100,6 +118,15 @@ public class FoodTruckController {
 		}
 		System.out.println(category);
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		List<FoodTruckVO> count = fservice.getReviewCountList();
+		for(int i=0; i<count.size(); i++) {
+			exit :for(int j=0; j<list.size(); j++) {
+				if(count.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
+					list.get(j).setCount(count.get(i).getCount());
+					break exit;
+				}
+			}
+		}
 		for(int i=0;i<list.size();i++) {
 			System.out.println("asds===================="+list.get(i).getFtruckImg());
 		}
@@ -125,6 +152,15 @@ public class FoodTruckController {
 			vo.setPageNo(NpageNo);	
 		}
 		List<FoodTruckVO> list=fservice.getCategoryList(vo);
+		List<FoodTruckVO> count = fservice.getReviewCountList();
+		for(int i=0; i<count.size(); i++) {
+			exit :for(int j=0; j<list.size(); j++) {
+				if(count.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
+					list.get(j).setCount(count.get(i).getCount());
+					break exit;
+				}
+			}
+		}
 		int pagecount=fservice.getCategoryCountTruck(category);	//총 푸드트럭 개수
 		 request.setAttribute("pageNo", pageNo);
 		 request.setAttribute("list",list);

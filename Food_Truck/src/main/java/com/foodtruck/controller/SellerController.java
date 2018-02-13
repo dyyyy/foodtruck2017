@@ -79,10 +79,8 @@ public class SellerController {
 
 	@RequestMapping("/sellerInfo")
 	public String sellerInfo(@RequestParam(value = "licenseNo", required = false) String licenseNo,
-			HttpServletRequest request, HttpSession session, Model model) throws Exception {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
-		String num = list.get(0).getLicenseNo();
+			HttpServletRequest request, HttpSession session, Model model) throws Exception {	
+		String num=licenseNo;
 		FoodTruckVO vo = new FoodTruckVO();
 		vo = fservice.getFoodTruck2(licenseNo);
 		if (vo.getFtruckAddr() == null) {
@@ -268,12 +266,13 @@ public class SellerController {
 
 	@RequestMapping("/sellerProduct")
 	public String sellerProduct(@RequestParam(value = "licenseNo") String licenseNo, HttpServletRequest request,
-			Model model, HttpSession session) {
+			Model model, HttpSession session) throws Exception {
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
 		if (mvo != null) {
-
+			FoodTruckVO vo=foodTruckService.getFoodTruck2(licenseNo);
+			String ftno=vo.getFtruckNo();
 			List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
-			List<ProductVO> list2 = productService.getProductList(licenseNo);
+			List<ProductVO> list2 = productService.getProductList(ftno);
 			request.setAttribute("list", list);
 			request.setAttribute("licenseNo", licenseNo);
 			request.setAttribute("list2", list2);
