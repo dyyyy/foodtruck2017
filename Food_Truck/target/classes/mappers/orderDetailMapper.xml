@@ -59,7 +59,16 @@
 		ON D.PROD_NO = P.PROD_NO
 	
 	</select>
-
+	
+	<!-- 주문 삭제  -->
+	<delete id="deleteOrderDetail">
+		
+		<![CDATA[
+			DELETE FROM ORDERDETAIL
+			WHERE ORD_NO=#{ordNo}
+		]]>
+		
+	</delete>
 
 	<!-- OrderDetailVO -->
 	<resultMap type="OrderDetailVO" id="OrderDetailMap" extends="OrderMap">

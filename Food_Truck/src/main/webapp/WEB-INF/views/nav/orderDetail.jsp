@@ -74,8 +74,8 @@
                            <tr>
                               <th class="unit"> 주문 번호 </th>
                               <th class="unit"> 제품 이름 </th>
-                              <th class="unit"> 수량 </th>
-                              <th class="unit"> 주문 총 가격 </th>
+                              <th class="acti"> 수량 </th>
+                              <th class="sumtd"> 주문 총 가격 </th>
                               <th class="unit"> 요청 사항 </th>
                               <th class="quantity"> 상태 </th>
                            </tr> 
@@ -100,9 +100,9 @@
 	                           		<!-- 제품 이름 -->
 	                            	<td class="unit">${detailList.prodName}</td>
 	                             	<!-- 수량-->
-	                             	<td class="unit">${detailList.ordQty}개</td>
+	                             	<td class="acti">${detailList.ordQty}개</td>
 	                             	<!-- 주문 총 가격 -->
-	                             	<td class="unit">${detailList.ordPrice}원</td>
+	                             	<td class="sumtd">${detailList.ordPrice}원</td>
 	                             	<!-- 요청 사항 -->
 	                             	<c:choose>
 	                       	  	    	<c:when test="${detailList.ordReq eq null}">
@@ -138,6 +138,7 @@
 												</button>
 	                                    	</td>
 	                                	</c:when>
+	                                	
 	                            	</c:choose>
                            		</tr>
                           	</c:forEach>
@@ -266,8 +267,8 @@
 									htmlObj += "<tr class='table-info'>";
 									htmlObj += "	<td class='unit'>" + ordNo + "</td>";
 									htmlObj += "	<td class='unit'>" + prodName + "</td>";
-									htmlObj += "	<td class='unit'>" + ordQty+"개</td>";
-									htmlObj += "	<td class='unit'>" + ordPrice + "원</td>";
+									htmlObj += "	<td class='acti'>" + ordQty+"개</td>";
+									htmlObj += "	<td class='sumtd'>" + ordPrice + "원</td>";
 									htmlObj += "	<td class='unit'>" + ordReq + "</td>";
 									htmlObj += "	<td class='quantity'>" + cookStatHangul + "</td>";
 									htmlObj += "</tr>";
@@ -276,7 +277,7 @@
 								// 없을 경우,
 							} else {
 								htmlObj += "<tr class='table-info'>";
-								htmlObj += "	<td class='unit' colspan='5'> 해당 날짜에는 데이터가 없습니다. </td>";
+								htmlObj += "	<td class='unit' colspan='6'> 해당 날짜에는 데이터가 없습니다. </td>";
 								htmlObj += "</tr>";
 							}
 							

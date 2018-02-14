@@ -34,7 +34,7 @@ public class OrderDetailService {
    }
 
    // 주문 상세 삭제
-   public int deleteOrderDetail(int ordNo) throws Exception {
+   public int deleteOrderDetail(String ordNo) {
       OrderDetailDAO dao = sessionTemplate.getMapper(OrderDetailDAO.class);
       return dao.deleteOrderDetail(ordNo);
    }

@@ -60,4 +60,7 @@ public interface MemberDAO {
 	
 	//1:1문의 insert하기(판매자)
 	public int insertInquiry2(MInquiryVO vo);
+	
+	// 주문 금액 5% 마일리지 적립
+	public void updateMileage(Map<String,Object> map);
 }

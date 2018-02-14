@@ -117,6 +117,15 @@
 			http://codingdojang.com/scode/255
 		 -->
 	</select>
+	
+	<delete id="deleteOrder">
+		
+		<![CDATA[
+			DELETE FROM ORDERS
+			WHERE ORD_NO=#{ordNo}
+		]]>
+
+	</delete>
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">

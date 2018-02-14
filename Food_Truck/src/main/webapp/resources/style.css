@@ -3115,7 +3115,7 @@ h4.heading {
    width: 100%;
 }
 
-.join input[type="radio"] {
+.join input[type="radio"], .coupon input[type="radio"] {
    display: inline;
    width: 20px;
 }
@@ -3790,7 +3790,7 @@ h4.heading {
 
 .quantity {
    text-align: center;
-   width: 15%;
+   width: 10%;
 }
 
 .cart-plus-minus {
@@ -3838,7 +3838,12 @@ h4.heading {
 
 .acti {
    text-align: center;
-   width: 15%;
+   width: 6%;
+}
+
+.sumtd {
+   text-align: center;
+   width: 9%;
 }
 
 .table-info i {

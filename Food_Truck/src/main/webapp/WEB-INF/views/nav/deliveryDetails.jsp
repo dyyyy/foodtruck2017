@@ -47,13 +47,13 @@
 <%@include file="../comm/nav.jsp"%>
 <!-- test -->
 <div></div>
-<section class="cart-page page fix">
+<section class="cart-page page fix" >
 	<!--Start Cart Area-->
 	<div class="container">
 		<div class="row2">
 			<div class="col-sm-12">
                <div class="product">
-                  <div class="table-responsive">
+                  <div class="table-responsive" >
                   <h2>DAILY ORDER STATE</h2>
                      <p> 오늘의 기준 - 판매현황 <br><br>사업자 번호 선택 후, 날짜를 선택하시면 지난 예약 내역도 확인 가능하답니다 :-) </p><br><br>
                      <!-- 사업자 기준으로 통계 -->
@@ -73,12 +73,13 @@
                      <table class="table cart-table">
                         <thead class="table-title">
                            <tr>
-                              <th class="unit"> 주문 번호 </th>
+                              <th class="unit" style="width: 200px;"> 주문 번호 </th>
                               <th class="unit"> 제품 이름 </th>
-                              <th class="unit"> 수량 </th>
+                              <th class="unit" style="width: 100px;"> 수량 </th>
                               <th class="unit"> 주문 총 가격 </th>
                               <th class="unit"> 요청 사항 </th>
                               <th class="quantity"> 상태 </th>
+                              <th class="namedes" > 주소 </th>
                            </tr> 
                         </thead>
                         
@@ -118,22 +119,33 @@
 	                             	<c:choose>
 	                             		<c:when test="${detailList.cookStat eq 0}">
 	                             			<td class="quantity" style="color: #6262dd; font-weight: bold; font-family: Raleway, sans-serif; "> 대기중
-	                             				<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
+	                             				<button type="button" class="btn btn-primary2" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+	                             				<img src="/resources/img/chef2.png"></button>
 	                                    	</td>
 	                                	</c:when>
 	                                       
 	                               		<c:when test="${detailList.cookStat eq 1}">
 	                                		<td class="quantity" style="color: #ea5f8b; font-weight: bold; font-family: Raleway, sans-serif; "> 조리중 
-												<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
+												<button type="button" class="btn btn-primary2" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+												<img src="/resources/img/pan2.png"></button>
 	                                   		</td>
 	                               		</c:when>
 	                               	
 	                               		<c:when test="${detailList.cookStat eq 2}">
-	                               			<td class="quantity" style="font-weight: bold; font-family: Raleway, sans-serif; "> 완료
-												<button type="button" class="btn btn-primary" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);"></button>
+	                               			<td class="quantity" style="font-weight: bold; font-family: Raleway, sans-serif; "> 배달중
+												<button type="button" class="btn btn-primary2" data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+												<img src="/resources/img/tray.png"></button>
+	                                    	</td>
+	                                	</c:when>
+	                                	<c:when test="${detailList.cookStat eq 3}">
+	                               			<td class="quantity" style="font-weight: bold; font-family: Raleway, sans-serif; "> 배달완료
+												<button type="button" class="btn btn-primary2"  data-toggle="modal" data-id="${detailList.ordNo}" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="exampleModal(this);">
+													<img src="/resources/img/waiter.png">
+												</button>
 	                                    	</td>
 	                                	</c:when>
 	                            	</c:choose>
+	                            	<td class="quantity">${detailList.dlvAddr}</td>
                            		</tr>
                           	</c:forEach>
                         </tbody>

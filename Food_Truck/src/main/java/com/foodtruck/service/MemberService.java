@@ -118,5 +118,11 @@ public class MemberService {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
 		return dao.insertInquiry2(vo);
 	}
+	
+	// 주문 금액 5% 마일리지 적립
+	public void updateMileage(Map<String,Object> map) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		dao.updateMileage(map);
+	}
 
 }

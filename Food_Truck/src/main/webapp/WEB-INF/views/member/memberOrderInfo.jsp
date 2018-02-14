@@ -53,6 +53,7 @@
                            <th class="prodName">상품명</th>
                            <th class="ordQty">수량</th>
                            <th class="ordPrice">가격</th>
+                           <th class="ordPrice">주문 현황</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -69,6 +70,20 @@
                               <td class="unit">${MemberInfo.ordQty}개</td>
                               <!-- 제품 가격 -->
                               <td class="unit">${MemberInfo.ordPrice}원</td>
+                              <!-- 결제 취소 하기 버튼 -->
+                              <c:if test="${MemberInfo.cookStat eq 0 }">
+                              	<td class="unit">
+                              		<input type="button" value="결제취소하기" onclick="location.href='/orderCancel?ordNo=${MemberInfo.ordNo}'">
+                              	</td>
+                              </c:if>
+                              	
+                              <c:if test="${MemberInfo.cookStat eq 1 }">
+                              	<td class="unit"> 조리중 </td>
+                              </c:if>
+                              	
+                              <c:if test="${MemberInfo.cookStat eq 2 }">
+                              	<td class="unit"> 주문 완료 </td>
+                              </c:if>
                            </tr>
                               <c:set var="sum" value="${sum+MemberInfo.ordPrice}" />
                         </c:forEach>

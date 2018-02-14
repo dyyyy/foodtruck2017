@@ -156,9 +156,12 @@ public class SellerController {
 			if (licenseNo != null) {
 				no = licenseNo;
 				sservice.closeFoodTruck(fvo);
-				if(sservice.getPrice(no) == null) {
+				System.out.println("test : " + sservice.getPrice(no));
+				if(sservice.getPrice(no).isEmpty()) {
+					System.out.println("insertinsertinsert");
 					sservice.insertPrice(svo);
 				} else {
+					System.out.println("updateupdateupdate");
 					sservice.updatePrice(svo);
 				}
 			}
@@ -247,7 +250,7 @@ public class SellerController {
 				model.addAttribute("license", list); // 사업자번호 여러개
 				model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
 				model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
-				model.addAttribute("todayRsv", sservice.getTodayDlvList(num));
+				model.addAttribute("todayRsv", sservice.getTodayRsvList(num));
 				// model.addAttribute("order", sservice.getOrderList(num));
 				// model.addAttribute("img", sservice.getFoodTruckList(num));
 				model.addAttribute("payment", sservice.getTodayPayment(num));

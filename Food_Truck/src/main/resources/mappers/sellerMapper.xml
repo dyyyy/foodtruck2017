@@ -29,7 +29,7 @@
 		WHERE ORDERS.LICENSE_NO = PRODUCT.LICENSE_NO
 		AND ORDERS.LICENSE_NO = #{licenseNo}
 		AND TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
-		and ord_rsv_date is not null
+		and ord_rsv_date != 'none'
 		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
  	</select>
  	
@@ -118,7 +118,7 @@
         TO_CHAR(sysdate, 'YYYY-MM-DD') ordDate
       	from orders 
   		where license_no=#{licenseNo}
-  		and ord_date=TO_CHAR(sysdate, 'YYYY-MM-DD')
+  		and to_char(ord_date, 'YYYY-MM-DD')=TO_CHAR(sysdate, 'YYYY-MM-DD')
  		group by TO_CHAR(sysdate, 'YYYY-MM-DD'), license_no
 	</insert>
 	
@@ -129,7 +129,7 @@
 		sum_price = (select sum(sum_price) sum_price 
 					from orders 
 					where license_no=#{licenseNo} 
-					and ord_date=to_char(sysdate, 'YYYY-MM-DD'))
+					and to_char(ord_date, 'YYYY-MM-DD')=to_char(sysdate, 'YYYY-MM-DD'))
   		where license_no=#{licenseNo}
   		and sales_date=TO_CHAR(sysdate, 'YYYY-MM-DD')
 	</update>

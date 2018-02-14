@@ -26,8 +26,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.ProductService;
+import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.ProductVO;
 
@@ -46,8 +48,11 @@ public class ProductController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired private ServletContext servletContext;
-
+	@Autowired 
+	private ServletContext servletContext;
+	
+	@Autowired
+	private FoodTruckService fservice;
 
 	// ��ǰ ��� �ϴ� ������ �̵�
 	@RequestMapping("/insertProductForm")
@@ -66,13 +71,11 @@ public class ProductController {
 	// ��ǰ ���
 	@RequestMapping("/insertProduct")
 	@ResponseBody
-	public int insertProduct(ProductVO vo) throws IOException {
-		System.out.println(vo.getLicenseNo());
-		System.out.println(vo.getProdContent());
-		System.out.println(vo.getProdImg());
-		System.out.println(vo.getProdName());		
-		System.out.println(vo.getProdOrgin());
-		System.out.println(vo.getProdPrice());
+	public int insertProduct(ProductVO vo) throws Exception {
+		String licenseNo=vo.getLicenseNo();
+		FoodTruckVO vo1=fservice.getFoodTruck2(licenseNo);
+		System.out.println("sdfsdf"+vo.getFtruckNo());
+		vo.setFtruckNo(vo1.getFtruckNo());
 		int num = productService.insertProduct(vo);
 		return num;
 
