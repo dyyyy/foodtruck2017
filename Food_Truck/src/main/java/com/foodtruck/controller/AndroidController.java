@@ -1,76 +1,76 @@
 package com.foodtruck.controller;
 
-import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.foodtruck.service.AndroidService;
 import com.foodtruck.service.EventService;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.NoticeService;
 import com.foodtruck.vo.EventVO;
-import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.NoticeVO;
+import com.sun.media.jfxmedia.Media;
 
 @Controller
-public class AndroidController {
+@RequestMapping("/android")
+public class AndroidController<Article> {
 	@Autowired
 	private NoticeService noticeService;
-	@Autowired
-	private AndroidService androidService;
 	@Autowired
 	private EventService eventService;
 	@Autowired
 	private MemberService memberService;
 
+	/*안드로이드에서 페이징처리 어떻게 할것인지*/
+	
+	
+	
 	/* NOTICE */
-	@RequestMapping(value = "/notice", produces = "application/json;charset=utf8")
+	@RequestMapping(value = "/notice", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String androidNotice(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String androidNotice() throws Exception {
 		System.out.println("android notice connect");
 
-		List<NoticeVO> list = androidService.getNoticeBoardList();
+		List<NoticeVO> list = noticeService.getNoticeBoardList(1);
 
 		String result = new ObjectMapper().writeValueAsString(list);
 
 		System.out.println("json: " + result);
 
 		return result;
+
 	}
 
 	/* NOTICE COUNT */
-	@RequestMapping("/noticecount")
-	public String androidNoticeCount(@RequestBody String params, HttpServletRequest request)
-			throws JsonParseException, JsonMappingException, IOException {
+	@RequestMapping(value = "/noticecount", method = RequestMethod.PUT)
+	public ResponseEntity<String> androidNoticeCount(@RequestBody NoticeVO vo) throws Exception {
+		System.out.println("android notice connect");
 
-		Map<String, Integer> map = new ObjectMapper().readValue(params, Map.class);
+		int i = noticeService.countNotice(vo.getNoticeNo());
 
-		int i = noticeService.countNotice(map.get("no"));
-
-		return String.valueOf(i);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
 	/* EVENT */
-	@RequestMapping(value = "/event", produces = "application/json;charset=utf8")
+	@RequestMapping(value = "/event", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String androidEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String androidEvent() throws Exception {
 		System.out.println("android event connect");
 
-		List<EventVO> list = androidService.getEventeBoardList();
+		List<EventVO> list = eventService.getEventBoardList(1);
 
 		String result = new ObjectMapper().writeValueAsString(list);
 
@@ -80,126 +80,72 @@ public class AndroidController {
 	}
 
 	/* EVENT COUNT */
-	@RequestMapping("/eventcount")
-	public String androidEventCount(@RequestBody String params, HttpServletRequest request)
-			throws JsonParseException, JsonMappingException, IOException {
+	@RequestMapping(value = "/eventcount", method = RequestMethod.PUT)
+	public ResponseEntity<String> androidEventCount(@RequestBody EventVO vo) throws Exception {
 
-		Map<String, Integer> map = new ObjectMapper().readValue(params, Map.class);
-
-		int i = eventService.countEvent(map.get("no"));
-
-		return String.valueOf(i);
-	}
-
-	/* LOGIN CHECK */
-	@RequestMapping(value = "/androidlogin", produces = "application/json;charset=utf8")
-	@ResponseBody
-	public String androidLogin(@RequestBody String params, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) throws Exception {
-		System.out.println("login connect");
-
-		Map<String, String> map = new ObjectMapper().readValue(params, Map.class);
-
-		MemberVO mvo = memberService.getMember(map.get("id"));
-
-		String result;
-
-		/* 데이터베이스에 사용자가 등록되어있는지 */
-		if (mvo != null) {
-			/* 비밀번호가 맞는지 */
-			if (mvo.getMemberPw().equals(map.get("pw"))) {
-
-				result = new ObjectMapper().writeValueAsString(mvo);
-
-				/* mvo(데이터베이스정보)를 json을 안드로이드에 전달.하고 로그인이 성공했다고 알려주기 */
-				return result;
-			} else {
-				/* 비밀번호가 틀렸을때 false */
-				result = "not pw";
-				return result;
-			}
-
+		if (eventService.countEvent(vo.getEventNo()) <= 1) {
+			return new ResponseEntity<String>(HttpStatus.OK);
 		} else {
-			/* 없는 사용자일때 알려주기 */
-			result = "not id";
-			return result;
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 
 	}
 
 	/* REGISTER */
-	@RequestMapping(value = "/androidregister", produces = "application/json;charset=utf8")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean androidRegister(@RequestBody String params, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) throws Exception {
+	public ResponseEntity<String> androidRegister(@RequestBody MemberVO vo) throws Exception {
 		System.out.println("register connect");
+		vo.setMemberAuth("3");
+		memberService.insertMember(vo);
 
-		MemberVO vo = new ObjectMapper().readValue(params, MemberVO.class);
-
-		int result = memberService.insertMember(vo);
-
-		if (result <= 1) {
-			return true;
-		} else {
-			return false;
-		}
+		return new ResponseEntity<String>(HttpStatus.CREATED);
 	}
 
-	/* 문의하기 */
-	// MemberController - memberinquriy 메소드, MinquiryVO, MinquiryReplyVO
-	@RequestMapping(value = "/androidmemberinquiry", produces = "application/json;charset=utf8")
+	/* LOGIN CHECK */
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=utf-8", consumes = "application/json;charset=utf-8")
 	@ResponseBody
-	public Boolean androidinquriy(@RequestBody String params, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		System.out.println("inquiry connect");
-		MInquiryVO vo = new MInquiryVO();
+	public String androidLogin(@RequestBody String json) throws Exception {
+		System.out.println("login connect");
+		System.out.println("json : " + json);
+		// Map<String, String> map = new ObjectMapper().readValue(params, Map.class);
+		JSONObject jsonObject = new ObjectMapper().readValue(json, JSONObject.class);
 
-		vo = new ObjectMapper().readValue(params, MInquiryVO.class);
-		vo.setQaScStat("N");
+		
+		
+		MemberVO mvo = memberService.getMember(jsonObject.get("id").toString());
+		System.out.println("mvo : "+mvo);
+		
+		String result;
 
-		if (params != null) {
+		/* 데이터베이스에 사용자가 등록되어있는지 */
+		if (mvo != null) {
+			/* 비밀번호가 맞는지 */
+			if (mvo.getMemberPw().equals(jsonObject.get("pw").toString())) {
 
-			memberService.insertInquiry(vo);
+				result = new ObjectMapper().writeValueAsString(mvo);
 
-			return true;
+				System.out.println(result);
+				/* mvo(데이터베이스정보)를 json을 안드로이드에 전달.하고 로그인이 성공했다고 알려주기 */
+				return result;
+			} else {
+				/* 비밀번호가 틀렸을때 false */
+				result = "pw failed";
+
+				return result;
+			}
+
 		} else {
-			return false;
+			/* 없는 사용자일때 알려주기 */
+			result = "id failed";
+			return result;
 		}
-	}
 
-	/* 문의내역 */
-	@RequestMapping(value = "/androidinqueryinfo", produces = "application/json;charset=utf8")
-	@ResponseBody
-	public String androidInquriyInfo(@RequestBody String params, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		System.out.println("inqueryinfo connect");
-
-		Map<String, String> map = new ObjectMapper().readValue(params, Map.class);
-
-		List<MInquiryVO> list = memberService.getMemberQaInfoList(map.get("id"));
-
-		String result = new ObjectMapper().writeValueAsString(list);
-
-		System.out.println("json: " + result);
-
-		return result;
 	}
 
 	/* 푸드트럭과 상품보여주기 */
-	/*푸드트럭 검색기능*/
-	/*푸드트럭 상세보기 기능*/
-	/*푸드트럭 위치 지도로 보여주는 기능*/
-	
-	/*주문하기*/
-	/*주문내역*/
-	/*주문한제품 상태 변경되면 알림*/
-	/*평점, 댓글 달기*/
-	
-	
-	
-	// 판매자
-	/* 주문확인*/
-	/*종료*/
-	/*주문거부*/
-	/* 매출통계 및 매출관리 */
+	/* 푸드트럭 검색기능 */
+	/* 푸드트럭 상세보기 기능 */
+	/* 푸드트럭 위치 지도로 보여주는 기능 */
+
 }
