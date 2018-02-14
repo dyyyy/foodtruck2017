@@ -3115,7 +3115,7 @@ h4.heading {
    width: 100%;
 }
 
-.join input[type="radio"] {
+.join input[type="radio"], .coupon input[type="radio"] {
    display: inline;
    width: 20px;
 }
