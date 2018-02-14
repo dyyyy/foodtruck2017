@@ -7,6 +7,7 @@ public class MemberVO extends LicenseVO{
 	private String memberPw;		// 회원 비밀번호
 	private String memberTel;		// 회원 전화번호
 	private String memberAuth;		// 회원 구분 (1 = 윤영자  , 2 = 판매자 , 3 = 일반회원 )
+	private int mileage;			// 마일리지
 	 
 	
 	// getter & setter
@@ -41,7 +42,11 @@ public class MemberVO extends LicenseVO{
 	public void setMemberAuth(String memberAuth) {
 		this.memberAuth = memberAuth;
 	}
-	
-	
+	public int getMileage() {
+		return mileage;
+	}
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}	
 
 }

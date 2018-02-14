@@ -132,6 +132,13 @@
 	<update id="updateMinquiry">
 		update qa_sc set QA_SC_STAT='Y' where QA_SC_NO=#{qno}
 	</update>
+	
+	<!-- 결제 시 마일리지 증가  -->
+	<update id="updateMileage" parameterType="map">
+		UPDATE MEMBER 
+		SET MILEAGE = #{mileage}
+		WHERE MEM_ID = #{memId}
+	</update>
 
 	<resultMap type="com.foodtruck.vo.MemberVO" id="memberMap">
 		<result column="MEM_ID" property="memberId" />
@@ -139,6 +146,7 @@
 		<result column="MEM_NAME" property="memberName" />
 		<result column="MEM_TEL" property="memberTel" />
 		<result column="MEM_AUTH" property="memberAuth" />
+		<result column="MILEAGE" property="mileage"/>
 	</resultMap>
 
 

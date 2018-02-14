@@ -151,9 +151,18 @@
          select.style.display='none';
          
       })
-      
    });
    
+   $(function() {
+	   $(".check").click(function() {
+		   var price =  $('input[name="sumPrice"]').val();	//현재 총금액
+		   var mmmm = $('input:text[name=useM]').val();		//사용한 마일리지
+	   		$("#mileage").html("&nbsp;&nbsp;"+mmmm)			//할인금액에 뿌려주기만함
+	   		price = (Number(price-mmmm))
+	   		$(".sumPriceResult").html(price)
+	   		var discount = Number($('input[name="sumPrice"]').val(price))
+	   })
+   })   
 </script>
 <form action="/orderRegit" id="signup-form" onsubmit="return validation();">
    <%
@@ -268,6 +277,10 @@
                <div>
                   <input type="radio" name="payment" value="0" checked="checked">&nbsp;&nbsp;&nbsp;푸드트럭에서 결제하기&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="radio" name="payment" value="1">&nbsp;&nbsp;&nbsp;신용카드
+               </div><br><br><br>
+               <div>
+               		보유 마일리지 : <input type="text" readonly="readonly" value="${mileage}" style="border: 0px; background-color:#ebebeb"><br><br>
+               		사용 마일리지 : <input type="text" name="useM" style="border: 0px;"><input type="button" value="적용" class="check" style="padding-bottom: 2px">
                </div>
             </div>
          </div>
@@ -275,20 +288,18 @@
          <div class="col-sm-6 col-md-5">
             <div class="proceed fix">
                <div class="total">
-                  <h5> 총 금액  <span class="sumPriceResult"></span>
-                     <div id="sumPrice"></div>
+                  <h5> 
+                     	할인 금액
+                     	<span id="mileage"></span><br><br>          
+                  		총 금액 
+                  		<span class="sumPriceResult"></span>
+                     	<div id="sumPrice"></div>
                   </h5>
-                  
-                  <h6>
-                     할인 적용가 <span> 여기에 가격 넣자 ! </span>
-                  </h6>
-                  
-               </div>
-               
-               <div class="orderForm">
-                  <input type="submit" value="결제하기"><br><br>
                </div>
             </div>
+              <div class="orderForm">
+                  <input type="submit" value="결제하기"><br><br>
+              </div>
          </div>
       </div>
    </section>

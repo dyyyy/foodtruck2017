@@ -16,7 +16,7 @@
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.1.6:1521:xe"></property>
 		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property> -->
-		<!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
+<!-- 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
 		<property name="username" value="foodtruck"></property>
 		<property name="password" value="foodtruck"></property>
 	</bean>
@@ -25,6 +25,7 @@
 	<bean id="dataSourceSpied" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
 		<property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.1.6:1521:xe"></property>
+<!-- 		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property> -->
         <property name="username" value="foodtruck"></property>
         <property name="password" value="foodtruck"></property>
         <property name="poolPingEnabled" value="true"/>	<!-- 커넥션 ping 테스트 -->

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.foodtruck.service.DeliveryDetailService;
 import com.foodtruck.service.FoodTruckService;
+import com.foodtruck.service.MemberService;
 import com.foodtruck.service.OrderDetailService;
 import com.foodtruck.service.OrderService;
 import com.foodtruck.service.ProductService;
@@ -54,6 +55,9 @@ public class OrderController {
 	@Autowired
 	DeliveryDetailService ddservice;
 	
+	@Autowired
+	MemberService mService;	
+	
 	@RequestMapping("/order")
 	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request,
 						@RequestParam("ftruckNo") String ftruckNo) throws Exception {
@@ -66,7 +70,10 @@ public class OrderController {
 			List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
 			FoodTruckVO vo = fService.getFoodTruck(ftruckNo);
 			String ftruckDlvYn = vo.getFtruckDlvYn();
-
+			
+			int mileage = mService.getMember(memId).getMileage();	//사용자가 가지고있는 마일리지
+			request.setAttribute("mileage", mileage);
+			
 			request.setAttribute("ftruckDlvYn", ftruckDlvYn);
 			request.setAttribute("list", Plist);
 		}
@@ -169,6 +176,20 @@ public class OrderController {
 				orderMap.put("ordRsvDate", ordRsvDate);
 			}
 			Oservice.insertOrder(orderMap); 
+			
+			Map<String,Object> memberMap = new HashMap<String, Object>();
+			
+			int mileage = (int)(sumPrice * 5 * 0.01);	// 주문 총 가격 의 5% 마일리지로 적립
+			int getmileage = mService.getMember(memId).getMileage(); // 회원의 마일리지 확인
+			if(getmileage != 0) {	// 마일리지가 있으면 기존 마일리지 + 적립 마일리지
+				mileage += getmileage;
+			}
+			
+			memberMap.put("memId", memId);
+			memberMap.put("mileage", mileage);
+			mService.updateMileage(memberMap);	// 마일리지 수정
+			
+			
 			String ordNo = String.valueOf(orderMap.get("ordNo"));
 			
 			for(int i = 0 ; i < prodNo.size() ; i++) {
