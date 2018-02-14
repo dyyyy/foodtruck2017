@@ -35,7 +35,7 @@ public class OrderService {
 	}
 
 	// 주문 삭제
-	public int deleteOrder(int ordNo) {
+	public int deleteOrder(String ordNo) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.deleteOrder(ordNo);
 	}

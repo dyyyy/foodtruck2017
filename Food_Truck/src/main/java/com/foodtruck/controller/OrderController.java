@@ -314,7 +314,21 @@ public class OrderController {
 			// TODO: handle exception
 			return "";
 		}
+	}
+	
+	// 회원 주문 취소 하기
+	@RequestMapping("/orderCancel")
+	public String deleteOrder(@RequestParam("ordNo") String ordNo) {
 		
+		System.out.println("주문 번호 확인 : " + ordNo);
+			
+		int result = orderdetailService.deleteOrderDetail(ordNo);
 		
+		if(result != 0) {
+			Oservice.deleteOrder(ordNo);
+			System.out.println("삭제 완료");
+		}
+		
+		return "redirect:/memberOrderInfo";
 	}
 }

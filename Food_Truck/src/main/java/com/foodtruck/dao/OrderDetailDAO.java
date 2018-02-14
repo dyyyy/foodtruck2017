@@ -20,7 +20,7 @@ public interface OrderDetailDAO {
    public int updateOrderDetail(OrderDetailVO vo);
 
    // 주문 상세 삭제
-   public int deleteOrderDetail(int ordNo) throws Exception;;
+   public int deleteOrderDetail(String ordNo);
    
    // 주문
    public int insertOrderDetail(Map<String, Object> map);
