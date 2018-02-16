@@ -156,11 +156,20 @@ public class OrderController {
 			Map<String,Object> orderMap = new HashMap<String, Object>();
 			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
 			Map<String,Object> orderInfoList = new HashMap<String, Object>();	
+			Map<String,Object> memberMap = new HashMap<String, Object>();
 			
 			String memId = (String)session.getAttribute("memberId");
 			// 회원 & 비회원
 			if(memId != null) {
 				orderMap.put("memId", memId);
+				int mileage = (int)(sumPrice * 5 * 0.01);	// 주문 총 가격 의 5% 마일리지로 적립
+				int getmileage = mService.getMember(memId).getMileage(); // 회원의 마일리지 확인
+				if(getmileage != 0) {	// 마일리지가 있으면 기존 마일리지 + 적립 마일리지
+					mileage += getmileage;
+				}
+				memberMap.put("memId", memId);
+				memberMap.put("mileage", mileage);
+				mService.updateMileage(memberMap);	// 마일리지 수정				
 			}else {
 				orderMap.put("memId", "");
 			}		
@@ -176,19 +185,6 @@ public class OrderController {
 				orderMap.put("ordRsvDate", ordRsvDate);
 			}
 			Oservice.insertOrder(orderMap); 
-			
-			Map<String,Object> memberMap = new HashMap<String, Object>();
-			
-			int mileage = (int)(sumPrice * 5 * 0.01);	// 주문 총 가격 의 5% 마일리지로 적립
-			int getmileage = mService.getMember(memId).getMileage(); // 회원의 마일리지 확인
-			if(getmileage != 0) {	// 마일리지가 있으면 기존 마일리지 + 적립 마일리지
-				mileage += getmileage;
-			}
-			
-			memberMap.put("memId", memId);
-			memberMap.put("mileage", mileage);
-			mService.updateMileage(memberMap);	// 마일리지 수정
-			
 			
 			String ordNo = String.valueOf(orderMap.get("ordNo"));
 			

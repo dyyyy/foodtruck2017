@@ -3115,7 +3115,7 @@ h4.heading {
    width: 100%;
 }
 
-.join input[type="radio"], .coupon input[type="radio"] {
+.join input[type="radio"], .coupon input[type="radio"], .coupon[type="text"] {
    display: inline;
    width: 20px;
 }
@@ -3892,15 +3892,17 @@ h4.heading {
    text-transform: uppercase;
 }
 
-.coupon input {
+.coupon input[type='button'] {
    border: 1px solid #cccccc;
-   display: block;
+   display: inline-block;
    font-size: 10px;
    font-weight: 500;
    margin-bottom: 20px;
    padding: 7px 15px;
    text-transform: uppercase;
-   width: 40%;
+   color:#fff;
+   background: #5ba2b3 none repeat scroll 0 0;
+   
 }
 
 .coupon a, .proceed a {
@@ -4695,3 +4697,8 @@ star-input>.input.focus {
    background: transparent ;
    border: none ;
    outline: 0 ;
+}
+
+.orderForm {
+	float: right;	
+}

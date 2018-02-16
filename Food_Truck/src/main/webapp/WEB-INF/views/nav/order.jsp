@@ -163,6 +163,7 @@
 	   		var discount = Number($('input[name="sumPrice"]').val(price))
 	   })
    })   
+   
 </script>
 <form action="/orderRegit" id="signup-form" onsubmit="return validation();">
    <%
@@ -208,7 +209,6 @@
                   <% if(mvo != null) {  %>
                      <label> 회원 아이디</label>
                      <input type="text" name="memId" value="<%=mvo.getMemberId()%> " readonly="readonly">
-                     <input type="hidden" name="memId2" value="<%=mvo.getMemberId()%>">
                   <% } %>
                   
                   <label>주문자 이름<span>*</span></label>
@@ -278,13 +278,14 @@
                   <input type="radio" name="payment" value="0" checked="checked">&nbsp;&nbsp;&nbsp;푸드트럭에서 결제하기&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="radio" name="payment" value="1">&nbsp;&nbsp;&nbsp;신용카드
                </div><br><br><br>
-               <div>
+               <%if(mvo != null){ %>
+               <div class="showMileage">
                		보유 마일리지 : <input type="text" readonly="readonly" value="${mileage}" style="border: 0px; background-color:#ebebeb"><br><br>
                		사용 마일리지 : <input type="text" name="useM" style="border: 0px;"><input type="button" value="적용" class="check" style="padding-bottom: 2px">
                </div>
+               <%} %>
             </div>
          </div>
-
          <div class="col-sm-6 col-md-5">
             <div class="proceed fix">
                <div class="total">
