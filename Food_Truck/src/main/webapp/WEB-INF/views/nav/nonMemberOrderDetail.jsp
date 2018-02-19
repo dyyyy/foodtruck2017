@@ -71,6 +71,10 @@
 								<h6>
 									총 금액 <span class="totalPriceTest">${sumPrice}</span>
 								</h6>
+								<!-- cookStat / 0이면 결제 취소 할 수 있도록 -->
+								<c:if test="${cookStat eq 0 }">
+                              		<br><br><input type="button" value="결제 취소 하기" onclick="location.href='/nonMemberOrderCancle?ordNo=${ordNo}'">  
+                            	</c:if>
 							</div>
 						</div>
 					</div>	

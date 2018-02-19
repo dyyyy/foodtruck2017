@@ -3166,7 +3166,7 @@ h4.heading {
    text-decoration: none;
 }
 
-.login input[type="button"], .join input[type="button"], .eventBtn input[type="button"] {
+.login input[type="button"], .join input[type="button"], .eventBtn input[type="button"], .unit input[type="button"], .total input[type="button"] {
    background: #b10505 none repeat scroll 0 0;
    border: medium none;
    color: #fff;

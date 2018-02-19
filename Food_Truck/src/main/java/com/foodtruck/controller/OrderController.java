@@ -99,7 +99,7 @@ public class OrderController {
 		request.setAttribute("ordDate", list.get(0).getOrdDate());
 		request.setAttribute("ordReq", list.get(0).getOrdReq());
 		request.setAttribute("sumPrice", list.get(0).getSumPrice());
-		
+		request.setAttribute("cookStat", list.get(0).getCookStat());
 		return "nav/nonMemberOrderDetail";
 	}
 
@@ -347,5 +347,23 @@ public class OrderController {
 		}
 		
 		return "redirect:/memberOrderInfo";
+	}
+	
+	// 비회원 주문  취소 - 주문 취소 하나로 통일하고 싶어.
+	@RequestMapping("/nonMemberOrderCancle")
+	public String nonMemberOrderCancle(HttpServletRequest request, @RequestParam("ordNo") String ordNo) {
+
+		System.out.println("test : " + ordNo + " / ");
+	      
+	    int result = orderdetailService.deleteOrderDetail(ordNo);
+	      
+	    if (result != 0) {
+	    	Oservice.deleteOrder(ordNo);
+	        System.out.println("삭제 완료");
+	    }
+	    
+	    request.setAttribute("msg", "주문이 취소 되었습니다.");
+	    request.setAttribute("addr", "loginform");
+	    return "comm/msg";
 	}
 }
