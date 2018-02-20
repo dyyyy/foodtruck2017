@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -334,36 +335,25 @@ public class OrderController {
 	}
 	
 	// 회원 주문 취소 하기
-	@RequestMapping("/orderCancel")
-	public String deleteOrder(@RequestParam("ordNo") String ordNo) {
-		
-		System.out.println("주문 번호 확인 : " + ordNo);
-			
-		int result = orderdetailService.deleteOrderDetail(ordNo);
-		
-		if(result != 0) {
-			Oservice.deleteOrder(ordNo);
-			System.out.println("삭제 완료");
-		}
-		
-		return "redirect:/memberOrderInfo";
-	}
-	
-	// 비회원 주문  취소 - 주문 취소 하나로 통일하고 싶어.
-	@RequestMapping("/nonMemberOrderCancle")
-	public String nonMemberOrderCancle(HttpServletRequest request, @RequestParam("ordNo") String ordNo) {
+   @RequestMapping("/orderCancel")
+   public String deleteOrder(HttpSession session, HttpServletRequest request, @RequestParam("ordNo") String ordNo) {
+      
+      System.out.println("주문 번호 확인 : " + ordNo);
+      String memId = (String) session.getAttribute("memberId");
+      
+      int result = orderdetailService.deleteOrderDetail(ordNo);
 
-		System.out.println("test : " + ordNo + " / ");
-	      
-	    int result = orderdetailService.deleteOrderDetail(ordNo);
-	      
-	    if (result != 0) {
-	    	Oservice.deleteOrder(ordNo);
-	        System.out.println("삭제 완료");
-	    }
-	    
-	    request.setAttribute("msg", "주문이 취소 되었습니다.");
-	    request.setAttribute("addr", "loginform");
-	    return "comm/msg";
-	}
+      if(result != 0) {
+         Oservice.deleteOrder(ordNo);
+         System.out.println("삭제 완료");
+      }
+      if(memId != null) {
+    	  return "redirect:/memberOrderInfo";
+      } else {
+	      request.setAttribute("msg", "주문이 취소 되었습니다.");
+	      request.setAttribute("addr", "loginform");
+	      return "comm/msg";
+      }
+      
+   }
 }
