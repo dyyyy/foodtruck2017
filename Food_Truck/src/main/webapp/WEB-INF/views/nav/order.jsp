@@ -190,10 +190,14 @@
                <div class="product">
                   <h2>Please order</h2>
                   <div>
+                  <% if(mvo != null) { %>
                      <input type="radio" name="ordDlyYn" value="N" id="res" style="width: 50px; margin-left: 100px; float: left;">예약하기
                      <%if(ftruckDlvYn.equals("Y")) { %>
-                     <input type="radio" name="ordDlyYn" value="Y" style="width: 50px;" id="dly"> 배달하기 
+                     	<input type="radio" name="ordDlyYn" value="Y" style="width: 50px;" id="dly"> 배달하기 
                   	 <% } %>
+                  <%} else { %>
+                  	 <input type="radio" name="ordDlyYn" value="N" id="res" style="width: 50px; margin-left: 150px; float: left;">예약하기
+                  <% } %>
                   </div><br>
                   
                   <div align="right" id="time" style="display: none"> 예약시간 : 
@@ -363,10 +367,12 @@
                   <input type="radio" name="payment" value="0" checked="checked">&nbsp;&nbsp;&nbsp;푸드트럭에서 결제하기&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="radio" name="payment" value="1">&nbsp;&nbsp;&nbsp;신용카드
                </div><br><br><br>
-               <div>
-               		보유 마일리지 : <input type="text" readonly="readonly" value="${mileage}" style="border: 0px; background-color:#ebebeb"><br><br>
-               		사용 마일리지 : <input type="text" name="useM" style="border: 0px;"><input type="button" value="적용" class="check" style="padding-bottom: 2px">
-               </div>
+               <% if(mvo != null) {  %>
+               	   <div>
+	               		보유 마일리지 : <input type="text" readonly="readonly" value="${mileage}" style="border: 0px; background-color:#ebebeb"><br><br>
+	               		사용 마일리지 : <input type="text" name="useM" style="border: 0px;"><input type="button" value="적용" class="check" style="padding-bottom: 2px">
+	               </div>
+               <% } %>
             </div>
          </div>
 
