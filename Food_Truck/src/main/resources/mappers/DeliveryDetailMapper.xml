@@ -39,7 +39,11 @@
 		UPDATE ORDERS
 		SET COOK_STAT=#{cookStat}
 		<where> ORD_NO=#{ordNo} </where>
-
+	</update>
+	
+	<update id="dlyTimeUpdate">
+	update DELIVERYDETAIL set DLV_DATE=#{dlvDate}
+	<where> ORD_NO=#{ordNo}</where>
 	</update>
 
 	<resultMap type="DeliveryDetailVO" id="DeliveryDetailMap" extends="OrderDetailMap">

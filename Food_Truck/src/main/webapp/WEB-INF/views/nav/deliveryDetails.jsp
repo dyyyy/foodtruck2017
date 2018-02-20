@@ -11,28 +11,43 @@
 
 
 <script type="text/javascript">
-	
+	function time(){
+		var cookStat = $("#cookStat option:selected").val();
+		var time= document.getElementById("time");
+		if(cookStat==1){
+			 time.style.display = 'block';
+		}else{
+			 time.style.display = 'none';
+		}
+	}
 	function exampleModal(e) {
 		var data = e.getAttribute("data-id");
 		
-		$("#changeBtn").on("click", function() {
-			var cookStat = $("#cookStat option:selected").val();
-			console.log(cookStat + " / " + data);
-			var ordNo = data;
-			var dlever= document.getElementById("dlever").value;
-			$.ajax ({
-				type : "post",
-				url : "/cookStatChange",
-				data : {
-							"cookStat" : cookStat,
-							"ordNo" : ordNo,
-							"dlever" :dlever
-					   },
-				success : function(data) {
-					location.reload();
-					selectList();				
-				} 
-			})
+		$("#changeBtn").on("click", function() {		
+			var cookStat = $("#cookStat option:selected").val();	
+			var cktime = $("#time option:selected").val();	
+			if(cktime==""){
+				alert("배달시간을 설정해주세요!");
+			}else{
+				console.log(cookStat + " / " + data);
+				var ordNo = data;
+				var dlever= document.getElementById("dlever").value;
+				alert("진입")
+				$.ajax ({
+					type : "post",
+					url : "/cookStatChange",
+					data : {	"dlvDate": cktime,
+								"cookStat" : cookStat,
+								"ordNo" : ordNo,
+								"dlever" :dlever
+						   },
+					success : function(data) {
+						location.reload();
+						selectList();				
+					} 
+				})
+			}
+		
 		})
 	}     
 
@@ -171,15 +186,26 @@
 	      		
 		      	<div class="modal-body">
 		      		<div class="form-group">
-		      			<select class="form-control" name="cookStat" id="cookStat">
+		      			<select class="form-control" name="cookStat" id="cookStat" onchange="time()">
 		      				<option value=""> [조리중/ 배송중 / 배달완료] 중 하나를 선택해 주세요 </option>
 							<option value="0"> 대기중 </option>
 							<option value="1"> 조리중 </option>
 							<option value="2"> 배송중 </option>
 							<option value="3"> 배달완료 </option>
+						</select > <select class="form-control" style="display: none;" id="time">
+							<option value="">--</option>
+							<option value="20">20분</option>
+							<option value="30">30분</option>
+							<option value="40">40분</option>
+							<option value="50">50분</option>
+							<option value="60">60분</option>
+							<option value="70">70분</option>
 						</select>
-		      		</div>
-		      		<div class="modal-footer">
+					</div>
+					
+						
+					
+					<div class="modal-footer">
 		        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        		<button type="button" class="btn btn-primary" id="changeBtn">Change</button>
 		      		</div>

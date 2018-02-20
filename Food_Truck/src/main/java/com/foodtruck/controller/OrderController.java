@@ -58,6 +58,7 @@ public class OrderController {
 	@Autowired
 	MemberService mService;	
 	
+	
 	@RequestMapping("/order")
 	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request,
 						@RequestParam("ftruckNo") String ftruckNo) throws Exception {
@@ -288,16 +289,19 @@ public class OrderController {
 	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
 	@RequestMapping("/cookStatChange")
 	@ResponseBody
-	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") String cookStat, @RequestParam("ordNo") String ordNo, @RequestParam(value="dlever",required=false) String dlever) {
+	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") String cookStat, @RequestParam("ordNo") String ordNo, @RequestParam(value="dlever",required=false) String dlever,@RequestParam(value="dlvDate",required=false) String dlvDate) {
 		//배달정보
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
 		if(dlever.equals("Y")) {
-			
+			System.out.println("진입");
 			// 디비에 넣으러가잠!
 			HashMap<String, Object> map = new HashMap<>();
 			map.put("cookStat", cookStat);
 			map.put("ordNo", ordNo);
-			   
+			map.put("dlvDate",dlvDate);
+			//배달시간 update
+			
+			mv.addObject("time", ddservice.dlyTimeUpdate(map));
 			mv.addObject("cookStatChange", ddservice.dlecookStatChange(map));
 		}else {
 			System.out.println("상태 바꾸러 왔담 : " + "주문 번호" + ordNo + "변경할 상태 값 : " + cookStat);

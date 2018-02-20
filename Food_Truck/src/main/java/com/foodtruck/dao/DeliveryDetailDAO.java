@@ -21,4 +21,7 @@ public interface DeliveryDetailDAO {
 
    // 배달상세 삭제
    public int deleteDeliveryDetail(String prodNo);
+   
+   //주문 접수후 배달시간 조정
+   public String dlyTimeUpdate(Map<String, Object> map);
 }
