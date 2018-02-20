@@ -46,7 +46,7 @@ public class DeliveryDetailService {
 	}
 	
 	//주문 접수후 배달 시간 설정
-	public String dlyTimeUpdate(Map<String, Object> map) {
+	public int dlyTimeUpdate(Map<String, Object> map) {
 		DeliveryDetailDAO dao = sessionTemplate.getMapper(DeliveryDetailDAO.class);
 		return dao.dlyTimeUpdate(map);
 	}
