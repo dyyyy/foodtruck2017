@@ -103,11 +103,14 @@
          var ordRsvDate1 = $("#ordRsvDate1 option:selected").val();
          var ordRsvDate2 = $("#ordRsvDate2 option:selected").val();
          
-         if(ordRsvDate1 == "" || ordRsvDate2 == "") {
-            console.log(ordRsvDate1);
-            alert("시간을 체크해주시기 바랍니다 :-)");
-            return false;
+         if( $('input:radio[id=res]').is(':checked')==true){
+        	 if(ordRsvDate1 == "" || ordRsvDate2 == "") {
+                 console.log(ordRsvDate1);
+                 alert("시간을 체크해주시기 바랍니다 :-)");
+                 return false;
+              } 
          }
+        
          
          return true;
       })

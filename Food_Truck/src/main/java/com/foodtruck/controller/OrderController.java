@@ -135,8 +135,8 @@ public class OrderController {
 										@RequestParam("sumPrice") int sumPrice,
 										@RequestParam("ordDlyYn") String ordDlyYn,
 										@RequestParam("payment") int payment,
-										@RequestParam(value="ordRsvDate1" ,required=false) int ordRsvDate1,
-			                            @RequestParam(value="ordRsvDate2" ,required=false) int ordRsvDate2,
+										@RequestParam(value="ordRsvDate1" ,required=false) String ordRsvDate1,
+			                            @RequestParam(value="ordRsvDate2" ,required=false) String ordRsvDate2,
 			                            @RequestParam(value="dlvAddr1",required=false) String dlvAddr1,
 			                            @RequestParam(value="dlvAddr2",required=false) String dlvAddr2
 										) {
@@ -151,8 +151,10 @@ public class OrderController {
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 			 Calendar cal = Calendar.getInstance();
 			 cal.setTime(date);
-			cal.add(Calendar.HOUR, ordRsvDate1);
-			cal.add(Calendar.MINUTE, ordRsvDate2);
+			 
+			 
+			cal.add(Calendar.HOUR, Integer.parseInt(ordRsvDate1));
+			cal.add(Calendar.MINUTE, Integer.parseInt(ordRsvDate2));
 			 ordRsvDate = sdformat.format(cal.getTime());  
 			 
 			Map<String,Object> orderMap = new HashMap<String, Object>();
