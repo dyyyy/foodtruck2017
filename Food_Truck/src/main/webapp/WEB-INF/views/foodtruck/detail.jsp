@@ -18,7 +18,7 @@
 <html>
 
 <jsp:include page="../comm/header.jsp"></jsp:include>
-
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <head>
 <script type="text/javascript">
 function goOrder() {
@@ -77,13 +77,22 @@ $(function() {
 						배달여부:<%=vo.getFtruckDlvYn()%>
 						예약여부:<%=vo.getFtruckRsvYn()%>
 					</div>
-					<%@include file="map.jsp" %>				
-					<form name="order">
-						<button class="getoder" onclick="goOrder()">주문하러가기!!</button>
+						<%@include file="map.jsp"%>
+
+						<div class="alert alert-danger" role="alert">
+							<i class="fa fa-exclamation-triangle fa-5x pull-left"></i>
+							<div style="margin-top: 20px;">현재 이 푸드트럭은 대기자수가 많습니다. </div><br>
+						</div>
+						<form name="order" >				
+						<div align="center" class="orderForm">
+						<input type="submit" value="주문하러가기" style="width: 100%;" onclick="goOrder()">
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+		<br>
+		<br>
 			<div class="col-sm-12 fix">
 				<div class="description">
 					<!-- Nav tabs -->

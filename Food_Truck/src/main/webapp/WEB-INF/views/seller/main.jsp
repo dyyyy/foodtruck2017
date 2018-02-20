@@ -230,9 +230,7 @@ $(function() {
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
 								<div class="muted pull-left">배달</div>
-								<div class="pull-right">
-									<span class="badge badge-info"></span>
-								</div>
+								
 							</div>
 							<div class="block-content collapse in ins">
 								<table class="table table-striped">
@@ -263,11 +261,7 @@ $(function() {
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">예약</div>
-								<div class="pull-right">
-									<span class="badge badge-info">752</span>
-
-								</div>
+								<div class="muted pull-left">예약</div>							
 							</div>
 							<div class="block-content collapse in ins">
 								<table class="table table-striped">
@@ -300,11 +294,8 @@ $(function() {
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">카드</div>
-								<div class="pull-right">
-									<span class="badge badge-info">17</span>
-
-								</div>
+								<div class="muted pull-left">현금</div>
+								
 							</div>
 							<div class="block-content collapse in ins">
 								<table class="table table-striped">
@@ -337,11 +328,8 @@ $(function() {
 						<!-- block -->
 						<div class="block">
 							<div class="navbar navbar-inner block-header">
-								<div class="muted pull-left">현금</div>
-								<div class="pull-right">
-									<span class="badge badge-info">812</span>
-
-								</div>
+								<div class="muted pull-left">카드</div>
+								
 							</div>
 							<div class="block-content collapse in ins">
 								<table class="table table-striped">

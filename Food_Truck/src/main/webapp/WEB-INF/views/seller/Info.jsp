@@ -151,6 +151,15 @@ function changInfo(){
 												type="radio" value="N" name="ftruckRsvYn" <%=ck2.equals("N")?"checked":""%>>N
 										</div>
 									</div>
+									
+									<div class="control-group">
+										<label class="control-label">포화상태<span
+											class="required">*</span></label>
+										<div class="controls">
+											<input type="radio" value="Y" name="ftruckRsvYn" <%=ck2.equals("Y")?"checked":""%>>Y <input
+												type="radio" value="N" name="ftruckRsvYn" <%=ck2.equals("N")?"checked":""%>>N
+										</div>
+									</div>
 									<div class="control-group">
 										<label class="control-label">푸드트럭 소개<span
 											class="required">*</span></label>

@@ -245,15 +245,31 @@ public class SellerController {
 
 					}	
 				}
+				//전체
+				List<SellerVO> slist=sservice.getTodayOrderList(num);
+				//통계
+				List<SellerVO> clist=sservice.getTodayPayment(num);
+				//배달
+				List<SellerVO> dlist=sservice.getTodayDlvList(num);
+				//예약
+				List<SellerVO> rlist=sservice.getTodayRsvList(num);
+				System.out.println(slist.size());
+				System.out.println(clist.size());
+				System.out.println(dlist.size());
+				System.out.println(rlist.size());
+				model.addAttribute("scount",slist.size());//현금 개수
+				model.addAttribute("cdount",clist.size());//카드 개수
+				model.addAttribute("dcount",dlist.size());//배달 개수
+				model.addAttribute("rcount",rlist.size());//예약 개수
 				
 				model.addAttribute("licenseNo", num); // 사업자번호 하나
 				model.addAttribute("license", list); // 사업자번호 여러개
-				model.addAttribute("todayOrder", sservice.getTodayOrderList(num));
-				model.addAttribute("todayDlv", sservice.getTodayDlvList(num));
-				model.addAttribute("todayRsv", sservice.getTodayRsvList(num));
-				// model.addAttribute("order", sservice.getOrderList(num));
-				// model.addAttribute("img", sservice.getFoodTruckList(num));
-				model.addAttribute("payment", sservice.getTodayPayment(num));
+				
+				
+				model.addAttribute("todayDlv",dlist);
+				model.addAttribute("todayRsv",rlist);
+				model.addAttribute("todayOrder", slist);//현금ㅇ
+				model.addAttribute("payment", clist);//카드
 
 				return "seller/main";
 			}
