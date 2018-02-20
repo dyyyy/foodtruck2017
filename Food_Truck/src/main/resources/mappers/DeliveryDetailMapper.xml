@@ -45,6 +45,17 @@
 	update DELIVERYDETAIL set DLV_DATE=#{dlvDate}
 	<where> ORD_NO=#{ordNo}</where>
 	</update>
+	
+	<!-- 배달내역 삭제 할 수 있도록 -->
+	<delete id="deleteDeliveryDetail">
+		
+		<![CDATA[
+			DELETE FROM DELIVERYDETAIL
+			WHERE ORD_NO=#{ordNo}
+		]]>
+	
+	</delete>
+	
 
 	<resultMap type="DeliveryDetailVO" id="DeliveryDetailMap" extends="OrderDetailMap">
 		<result column="ORD_NO" property="ordNo" />

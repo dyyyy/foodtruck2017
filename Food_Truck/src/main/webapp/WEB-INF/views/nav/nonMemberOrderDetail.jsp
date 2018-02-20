@@ -73,7 +73,7 @@
 								</h6>
 								<!-- cookStat / 0이면 결제 취소 할 수 있도록 -->
 								<c:if test="${cookStat eq 0 }">
-                              		<br><br><input type="button" value="결제 취소 하기" onclick="location.href='/orderCancle?ordNo=${ordNo}'">  
+                              		<br><br><input type="button" value="결제 취소 하기" onclick="location.href='/orderCancel?ordNo=${ordNo}&ordDlyYn=${ordDlyYn}'">
                             	</c:if>
 							</div>
 						</div>

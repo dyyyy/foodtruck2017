@@ -102,6 +102,7 @@ public class OrderController {
 		request.setAttribute("ordReq", list.get(0).getOrdReq());
 		request.setAttribute("sumPrice", list.get(0).getSumPrice());
 		request.setAttribute("cookStat", list.get(0).getCookStat());
+		request.setAttribute("ordDlyYn", list.get(0).getOrdDlyYn());
 		return "nav/nonMemberOrderDetail";
 	}
 
@@ -122,6 +123,7 @@ public class OrderController {
 	}
 	
 	
+	// 주문 -> 예약 & 예약 디테일 (& 배달 디테일)
 	@RequestMapping("/orderRegit")
 	public String wishInsert(HttpSession session, HttpServletRequest request,
 										@RequestParam("ordName") String ordName, 
@@ -138,138 +140,93 @@ public class OrderController {
 										@RequestParam(value="ordRsvDate1" ,required=false) String ordRsvDate1,
 			                            @RequestParam(value="ordRsvDate2" ,required=false) String ordRsvDate2,
 			                            @RequestParam(value="dlvAddr1",required=false) String dlvAddr1,
-			                            @RequestParam(value="dlvAddr2",required=false) String dlvAddr2
-										) {
-		System.out.println("진입으로 가즈아");
-		System.out.println("진입으로 가즈아="+ordDlyYn);
+			                            @RequestParam(value="dlvAddr2",required=false) String dlvAddr2) {
+		
+		Map<String,Object> orderMap = new HashMap<String, Object>();
+		Map<String,Object> orderdetailMap = new HashMap<String, Object>();
+		Map<String,Object> orderInfoList = new HashMap<String, Object>();	
+		Map<String,Object> memberMap = new HashMap<String, Object>();
+		
 		//예약내역이면
 		if(ordDlyYn.equals("N")) {
-			//System.out.println("주문할 거 디비에 넣자!="+dlvAddr1);
-			//System.out.println("주문할 거 디비에 넣자!="+dlvAddr2);
 			String ordRsvDate="";
 			Date date = new Date();
 			SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-			 Calendar cal = Calendar.getInstance();
-			 cal.setTime(date);
-			 
-			 
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
 			cal.add(Calendar.HOUR, Integer.parseInt(ordRsvDate1));
 			cal.add(Calendar.MINUTE, Integer.parseInt(ordRsvDate2));
-			 ordRsvDate = sdformat.format(cal.getTime());  
-			 
-			Map<String,Object> orderMap = new HashMap<String, Object>();
-			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
-			Map<String,Object> orderInfoList = new HashMap<String, Object>();	
-			Map<String,Object> memberMap = new HashMap<String, Object>();
-			
-			String memId = (String)session.getAttribute("memberId");
-			// 회원 & 비회원
-			if(memId != null) {
-				orderMap.put("memId", memId);
-				int mileage = (int)(sumPrice * 5 * 0.01);	// 주문 총 가격 의 5% 마일리지로 적립
-				int getmileage = mService.getMember(memId).getMileage(); // 회원의 마일리지 확인
-				if(getmileage != 0) {	// 마일리지가 있으면 기존 마일리지 + 적립 마일리지
-					mileage += getmileage;
-				}
-				memberMap.put("memId", memId);
-				memberMap.put("mileage", mileage);
-				mService.updateMileage(memberMap);	// 마일리지 수정				
-			}else {
-				orderMap.put("memId", "");
-			}		
-			// order 테이블에 들어갈껑!
-			if(ordName != null) {
-				orderMap.put("ordName", ordName);
-				orderMap.put("ordTel", ordTel);
-				orderMap.put("ordReq", ordReq);
-				orderMap.put("licenseNo", licenseNo);
-				orderMap.put("sumPrice", sumPrice);
-				orderMap.put("ordDlyYn", ordDlyYn);
-				orderMap.put("payment", payment);
-				orderMap.put("ordRsvDate", ordRsvDate);
+			ordRsvDate = sdformat.format(cal.getTime()); 
+			orderMap.put("ordRsvDate", ordRsvDate);
+		} else {
+			orderMap.put("ordRsvDate", "");
+		}
+		
+		String memId = (String)session.getAttribute("memberId");
+		// 회원 & 비회원
+		if(memId != null) {
+			orderMap.put("memId", memId);
+			int mileage = (int)(sumPrice * 5 * 0.01);	// 주문 총 가격 의 5% 마일리지로 적립
+			int getmileage = mService.getMember(memId).getMileage(); // 회원의 마일리지 확인
+			if(getmileage != 0) {	// 마일리지가 있으면 기존 마일리지 + 적립 마일리지
+				mileage += getmileage;
 			}
-			Oservice.insertOrder(orderMap); 
-			
-			String ordNo = String.valueOf(orderMap.get("ordNo"));
-			
-			for(int i = 0 ; i < prodNo.size() ; i++) {
-				// orderdetail 테이블
-				orderdetailMap.put("prodNo", prodNo.get(i));
-				orderdetailMap.put("ordQty", ordQty.get(i));
-				orderdetailMap.put("ordPrice", ordPrice.get(i));
-				
-				if(ordQty.get(i) != 0) {
-					System.out.println(ordNo);
-					orderdetailMap.put("ordNo", ordNo);
-					orderdetailService.insertOrderDetail(orderdetailMap);
-				}
-			}
-			
-			orderInfoList.put("ordNo", ordNo);
-			orderInfoList.put("licenseNo", licenseNo);
-			List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
-			request.setAttribute("dlvAddr", "none");
-			request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
-			request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
-			request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
-			request.setAttribute("ordDate", orderInfolist.get(0).getOrdDate());
-			request.setAttribute("ordReq", orderInfolist.get(0).getOrdReq());
-			request.setAttribute("sumPrice", orderInfolist.get(0).getSumPrice());
-			
-			// 다수의 값들
-			request.setAttribute("orderInfolist", orderInfolist);	
+			memberMap.put("memId", memId);
+			memberMap.put("mileage", mileage);
+			mService.updateMileage(memberMap);	// 마일리지 수정				
 		}else {
-		//배달이면
-			System.out.println("진입이당!");
-			Map<String,Object> orderMap = new HashMap<String, Object>();
-			Map<String,Object> orderdetailMap = new HashMap<String, Object>();
-			Map<String,Object> orderInfoList = new HashMap<String, Object>();	
-			System.out.println("진입이당!2");
-			String memId = (String)session.getAttribute("memberId");
-			// 회원 & 비회원
-			if(memId != null) {
-				orderMap.put("memId", memId);
-			}else {
-				orderMap.put("memId", "");
-			}		
-			// order 테이블에 들어갈껑!
-			System.out.println("진입이당!3");
-			if(ordName != null) {
-				orderMap.put("ordName", ordName);
-				orderMap.put("ordTel", ordTel);
-				orderMap.put("ordReq", ordReq);
-				orderMap.put("licenseNo", licenseNo);
-				orderMap.put("sumPrice", sumPrice);
-				orderMap.put("ordDlyYn", ordDlyYn);
-				orderMap.put("payment", payment);
-				orderMap.put("ordRsvDate", "none");
-			}
-			System.out.println("진입이당!4");
-			Oservice.insertOrder(orderMap); 
-			String ordNo = String.valueOf(orderMap.get("ordNo"));
-			System.out.println("진입이당!5");
-			for(int i = 0 ; i < prodNo.size() ; i++) {
-				// orderdetail 테이블
-				orderdetailMap.put("prodNo", prodNo.get(i));
-				orderdetailMap.put("ordQty", ordQty.get(i));
-				orderdetailMap.put("ordPrice", ordPrice.get(i));
+			orderMap.put("memId", "");
+		}		
+		// order 테이블에 들어갈껑!
+		if(ordName != null) {
+			orderMap.put("ordName", ordName);
+			orderMap.put("ordTel", ordTel);
+			orderMap.put("ordReq", ordReq);
+			orderMap.put("licenseNo", licenseNo);
+			orderMap.put("sumPrice", sumPrice);
+			orderMap.put("ordDlyYn", ordDlyYn);
+			orderMap.put("payment", payment);
 				
-				if(ordQty.get(i) != 0) {
-					System.out.println(ordNo);
-					orderdetailMap.put("ordNo", ordNo);
-					orderdetailService.insertOrderDetail(orderdetailMap);
-				}
+		}
+		
+		Oservice.insertOrder(orderMap); 
+		
+		String ordNo = String.valueOf(orderMap.get("ordNo"));
+		
+		for(int i = 0 ; i < prodNo.size() ; i++) {
+			// orderdetail 테이블
+			orderdetailMap.put("prodNo", prodNo.get(i));
+			orderdetailMap.put("ordQty", ordQty.get(i));
+			orderdetailMap.put("ordPrice", ordPrice.get(i));
+				
+			if(ordQty.get(i) != 0) {
+				System.out.println(ordNo);
+				orderdetailMap.put("ordNo", ordNo);
+				orderdetailService.insertOrderDetail(orderdetailMap);
 			}
-			System.out.println("진입이당!6");
-			orderInfoList.put("ordNo", ordNo);
-			orderInfoList.put("licenseNo", licenseNo);
-			List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
-			System.out.println("진입이당!7");
-			//배달상세내역 insert
+		}
+			
+		orderInfoList.put("ordNo", ordNo);
+		orderInfoList.put("licenseNo", licenseNo);
+		List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
+		request.setAttribute("dlvAddr", "none");
+		request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
+		request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
+		request.setAttribute("ordTel", orderInfolist.get(0).getOrdTel());
+		request.setAttribute("ordDate", orderInfolist.get(0).getOrdDate());
+		request.setAttribute("ordReq", orderInfolist.get(0).getOrdReq());
+		request.setAttribute("sumPrice", orderInfolist.get(0).getSumPrice());
+			
+		// 다수의 값들
+		request.setAttribute("orderInfolist", orderInfolist);	
+		System.out.println("진입이당!");
+			
+		//배달상세내역 insert
+		if("Y".equals(ordDlyYn)) {
 			String dlvAddr="";
 			dlvAddr+=dlvAddr1;
 			dlvAddr+="  "+dlvAddr2;
-			
+				
 			DeliveryDetailVO vo= new DeliveryDetailVO();
 			vo.setDlvAddr(dlvAddr);
 			vo.setOrdNo(ordNo);
@@ -340,26 +297,31 @@ public class OrderController {
 		}
 	}
 	
-	// 회원 주문 취소 하기
-   @RequestMapping("/orderCancel")
-   public String deleteOrder(HttpSession session, HttpServletRequest request, @RequestParam("ordNo") String ordNo) {
-      
-      System.out.println("주문 번호 확인 : " + ordNo);
-      String memId = (String) session.getAttribute("memberId");
-      
-      int result = orderdetailService.deleteOrderDetail(ordNo);
-
-      if(result != 0) {
-         Oservice.deleteOrder(ordNo);
-         System.out.println("삭제 완료");
-      }
-      if(memId != null) {
-    	  return "redirect:/memberOrderInfo";
-      } else {
-	      request.setAttribute("msg", "주문이 취소 되었습니다.");
-	      request.setAttribute("addr", "loginform");
-	      return "comm/msg";
-      }
-      
-   }
+	// 주문 취소 하기
+	@RequestMapping("/orderCancel")
+	public String deleteOrder(HttpSession session, HttpServletRequest request, 
+			   							@RequestParam("ordNo") String ordNo,
+			   							@RequestParam("ordDlyYn") String ordDlyYn) {
+		
+		System.out.println("주문 번호 확인 : " + ordNo + " /  배달 여부 확인  " + ordDlyYn);
+	    String memId = (String) session.getAttribute("memberId");
+	      
+	    // 배달 내역 삭제할 때
+	    if("Y".equals(ordDlyYn)) {
+	    	ddservice.deleteDeliveryDetail(ordNo);
+	    }
+	    
+	    orderdetailService.deleteOrderDetail(ordNo);
+	     
+	    Oservice.deleteOrder(ordNo);
+	    System.out.println("삭제 완료");
+	         
+	    if(memId != null) {
+	    	return "redirect:/memberOrderInfo";
+	    } else {
+	    	request.setAttribute("msg", "주문이 취소 되었습니다.");
+		    request.setAttribute("addr", "loginform");
+		    return "comm/msg";
+	   }
+	 }
 }
