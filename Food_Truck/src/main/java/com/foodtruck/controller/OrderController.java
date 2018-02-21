@@ -280,23 +280,19 @@ public class OrderController {
 		
 	}
 	
-	// 새로운 주문 확인
-	@RequestMapping("/checkNewOrder")
-	public String checkNewOrder(HttpSession session, HttpServletRequest request)throws Exception {
-		System.out.println("오나아");
-		String memId = (String)session.getAttribute("memberId");	
-		try {
-			if(Oservice.checkNewOrder(memId) != 0) {
-				return "redirect:/orderDetail";
-			}else {
-				return "";
-			}	
-		}
-		catch (Exception e) {
-			// TODO: handle exception
-			return "";
-		}
+	@ResponseBody
+	@RequestMapping("/updateOrderCountRsv")
+	public List<OrderVO> updateOrderCountRsv(HttpSession session) {
+		String memId = (String)session.getAttribute("memberId");
+		return Oservice.getNewCountRsv(memId);	// 판매자가 확인하지않은 새로운 예약 주문 갯수 및 정보
 	}
+	
+	@ResponseBody
+	@RequestMapping("/updateOrderCountDlv")
+	public List<OrderVO> updateOrderCountDlv(HttpSession session) {
+		String memId = (String)session.getAttribute("memberId");
+		return Oservice.getNewCountDlv(memId);	// 판매자가 확인하지 않은 새로운 배달 주문 갯수 및 정보
+	}	
 	
 	// 주문 취소 하기
 	@RequestMapping("/orderCancel")

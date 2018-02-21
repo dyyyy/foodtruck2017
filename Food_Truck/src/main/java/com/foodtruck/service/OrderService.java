@@ -65,17 +65,29 @@ public class OrderService {
 		return dao.cookStatChange(map);
 	}	
 	
-	// 새로운 주문알림 갯수 표시하기
-	public List<OrderVO> getNewCount(String memId) {
+	// 새로운 예약 주문알림 갯수 표시하기
+	public List<OrderVO> getNewCountRsv(String memId) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
-		return dao.getNewCount(memId);
+		return dao.getNewCountRsv(memId);
 	}	
 	
-	// 새로운 주문 확인
-	public int checkNewOrder(String memId) {
+	// 새로운 배달 주문알림 갯수 표시하기
+	public List<OrderVO> getNewCountDlv(String memId) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
-		return dao.checkNewOrder(memId);
+		return dao.getNewCountDlv(memId);
 	}
+	
+	// 새로운 예약 주문 확인
+	public int checkNewOrderRsv(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.checkNewOrderRsv(memId);
+	}
+	
+	// 새로운 배달 주문 확인
+	public int checkNewOrderDlv(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.checkNewOrderDlv(memId);
+	}	
 
 	// 자주 시켜먹은 푸드트럭 순위
 	public List<OrderVO> getFavoriteFoodtruck(String memId) {

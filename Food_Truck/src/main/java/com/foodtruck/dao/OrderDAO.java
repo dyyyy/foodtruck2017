@@ -31,11 +31,17 @@ public interface OrderDAO {
 	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
 	public int cookStatChange(Map<String, Object> map);	
 	
-	// 새로운 주문알림 갯수 표시하기
-	public List<OrderVO> getNewCount(String memId);
+	// 새로운 예약 주문알림 갯수 표시하기
+	public List<OrderVO> getNewCountRsv(String memId);
 	
-	// 새로운 주문 확인
-	public int checkNewOrder(String memberId);
+	// 새로운 배달 주문알림 갯수 표시하기
+	public List<OrderVO> getNewCountDlv(String memId);
+	
+	// 새로운 예약 주문 확인
+	public int checkNewOrderRsv(String memberId);
+	
+	// 새로운 배달 주문 확인
+	public int checkNewOrderDlv(String memberId);
 	
 	// 자주 시켜먹은 푸드트럭 순위 
 	public List<OrderVO> getFavoriteFoodtruck(String memId);
