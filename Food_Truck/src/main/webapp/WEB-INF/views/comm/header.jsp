@@ -153,8 +153,34 @@ if(<%=gubun%> == "2") {
 		updateRsvData()
 		updateDlvData()
 	})
-}		
+}	
+
+if(<%=gubun%> == "3") {
+	$(function() {
+		updateDlvTimeSend()
+	})
+}
 	
+function updateDlvTimeSend() {
+	$("#dlvTime").off("click")
+	$.ajax({
+		url : "/dlvTimeSend",
+		type : "post",
+		cache : false,
+		success : function(data) {
+			if(data.ftruckName != null) {
+				var str = "<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='/resources/img/ms3.png'></a>"
+				$("#dlvTime").html(str)
+				$("#dlvTime").click(function() {
+					alert(data.ftruckName+":"+data.dlvDate)
+					location.href="/memberOrderInfo";
+				})
+			}
+		}
+	})
+	setTimeout("updateDlvTimeSend()",10000)
+}
+
 
 function updateRsvData() {
 	$("#newRsv").off("click")

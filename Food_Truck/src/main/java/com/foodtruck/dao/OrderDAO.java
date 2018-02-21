@@ -43,6 +43,14 @@ public interface OrderDAO {
 	// 새로운 배달 주문 확인
 	public int checkNewOrderDlv(String memberId);
 	
+	// 사용자에게 배달시간보내기
+	public OrderVO dlvTimeSend(String memberId);
+	
+	// 사용자가 배달시간을 확인하면 ORD_CHECK 3으로
+	public int dlvTimeUpdate(String memberId);	
+	
+	public List<OrderVO> ordStatFind(String memberId);
+	
 	// 자주 시켜먹은 푸드트럭 순위 
 	public List<OrderVO> getFavoriteFoodtruck(String memId);
 }

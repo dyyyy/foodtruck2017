@@ -20,7 +20,13 @@
 
 	</select>
 
-
+	<!-- 사용자 주문 상태 -->
+	<select id="ordStatFind" resultMap="OrderMap">
+		SELECT * FROM ORDERS
+		WHERE MEM_ID = #{memId}
+	</select>
+	
+	
 	<!-- 비회원 주문번호로 주문내역보기 -->
 	<select id="getNonmemberInfo" resultMap="OrderMap"
 		parameterType="map">
@@ -84,7 +90,7 @@
 		WHERE O.LICENSE_NO IN
 		(SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
 		AND
-		O.ORD_CHECK = 'N'
+		O.ORD_CHECK = '1'
 		AND
 		O.ORD_DLV_YN = 'N'
 		AND
@@ -99,7 +105,7 @@
 		WHERE O.LICENSE_NO IN
 		(SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
 		AND
-		O.ORD_CHECK = 'N'
+		O.ORD_CHECK = '1'
 		AND
 		O.ORD_DLV_YN = 'Y'
 		AND
@@ -111,14 +117,14 @@
 	<!-- 새로운  예약 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
 	<update id="checkNewOrderRsv">
 		UPDATE ORDERS O SET
-		O.ORD_CHECK = 'Y'
+		O.ORD_CHECK = '2'
 		WHERE O.ORD_DLV_YN = 'N' AND O.LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
 	</update>
 	
 	<!-- 새로운  배달 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
 	<update id="checkNewOrderDlv">
 		UPDATE ORDERS O SET
-		O.ORD_CHECK = 'Y'
+		O.ORD_CHECK = '2'
 		WHERE O.ORD_DLV_YN = 'Y' AND O.LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
 	</update>
 	
@@ -152,6 +158,27 @@
 
 	</delete>
 
+	<!-- 판매자가 배달중 예상시간 선택후 사용자에게 알림(배달시간,푸드트럭이름) -->
+	<select id="dlvTimeSend" resultMap="OrderMap">
+		SELECT D.DLV_DATE,F.FTRUCK_NAME
+		FROM DELIVERYDETAIL D,ORDERS O,ORDERDETAIL R,FOODTRUCK F
+		WHERE O.ORD_NO = D.ORD_NO 
+		AND O.ORD_NO = R.ORD_NO 
+		AND D.ORD_NO = R.ORD_NO 
+		AND F.LICENSE_NO = O.LICENSE_NO 
+		AND O.ORD_CHECK = '2' AND O.ORD_DLV_YN = 'Y'
+		AND O.MEM_ID = #{memId} 
+		GROUP BY F.FTRUCK_NAME,D.DLV_DATE	
+	</select>
+	
+	<!-- 사용자가 배달시간을 확인하면 3으로 변경 -->
+	<update id="dlvTimeUpdate">
+		UPDATE ORDERS O
+		SET O.ORD_CHECK = '3' 
+		WHERE O.ORD_CHECK = '2' AND O.ORD_DLV_YN = 'Y' AND O.MEM_ID = #{memId}
+	</update>
+
+
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">
 		<result column="ORD_NO" property="ordNo" />
@@ -175,7 +202,7 @@
 		<result column="FAVORITECOUNT" property="favoriteCount"/>
 		<result column="RANK" property="rank"/>
 		<result column="FTRUCK_NO" property="ftruckNo"/>
-
+		<result column="DLV_DATE" property="dlvDate" />
 	</resultMap>
 
 	<resultMap type="LicenseVO" id="LicenseMap">

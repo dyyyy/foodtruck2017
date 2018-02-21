@@ -66,7 +66,8 @@ public class LoginController {
 					session.setAttribute("memberGubun","2");					 
 					List<SellerVO> list=sellerService.getLicense(mvo.getMemberId());
 					session.setAttribute("licenseNo", list);
-					
+				} else if(mvo.getMemberAuth().equals("3")) {
+					session.setAttribute("memberGubun", "3");
 				}
 				request.getSession().setAttribute("member", mvo);
 				return "redirect:/";

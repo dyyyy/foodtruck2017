@@ -27,7 +27,7 @@ public class OrderVO {
 	private int favoriteCount;	// 관심있는 푸드트럭 갯수
 	private int rank;			// 순위
 	private String ftruckNo;	// 푸드트럭 번호
-	
+	private String dlvDate;		// 배달시간
 	
 	// getter & setter
 
@@ -176,5 +176,10 @@ public class OrderVO {
 	public void setFtruckNo(String ftruckNo) {
 		this.ftruckNo = ftruckNo;
 	}
-	
+	public String getDlvDate() {
+		return dlvDate;
+	}
+	public void setDlvDate(String dlvDate) {
+		this.dlvDate = dlvDate;
+	}
 }
