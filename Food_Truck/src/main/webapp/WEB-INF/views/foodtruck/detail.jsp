@@ -30,15 +30,13 @@ function goOrder() {
 }
 //필요없는부분 표정이바뀜..
 $(function() {	
-	$("#cbtn").click(function() {
-		if($(this).val() == '혼잡') {
-			$(this).val('여유')
-			$(this).attr('src','/resources/img/happy.png')
-		}else{
-			$(this).val('혼잡')
-			$(this).attr('src','/resources/img/busy.png')
-		}
-	})
+	var ck= "<%=vo.getFtruckCondtion()%>";
+	var alert=document.getElementById("alert");
+	if(ck=="Y"){
+		alert.style.display = 'block';
+	}else{
+		alert.style.display = 'none';
+	}
 })	
 </script>
 <body onload="map()">
@@ -58,7 +56,7 @@ $(function() {
 								</div>
 							</div>
 					</div>
-						
+					<img src="" >
 						<!-- Nav tabs -->
 				</div>
 			</div>
@@ -78,8 +76,8 @@ $(function() {
 						예약여부:<%=vo.getFtruckRsvYn()%>
 					</div>
 						<%@include file="map.jsp"%>
-
-						<div class="alert alert-danger" role="alert">
+						<%String ck=vo.getFtruckCondtion(); %>
+						<div class="alert alert-danger" role="alert" id="alert" style="display: none;">
 							<i class="fa fa-exclamation-triangle fa-5x pull-left"></i>
 							<div style="margin-top: 20px;">현재 이 푸드트럭은 대기자수가 많습니다. </div><br>
 						</div>
@@ -87,6 +85,7 @@ $(function() {
 						<div align="center" class="orderForm">
 						<input type="submit" value="주문하러가기" style="width: 100%;" onclick="goOrder()">
 						</div>
+						
 					</form>
 				</div>
 			</div>
