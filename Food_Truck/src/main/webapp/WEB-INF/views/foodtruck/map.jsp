@@ -11,7 +11,7 @@
 %>
 </head>
 <body>
-			<div class="review">
+			<div class="review" >
 				<div id="map" style="width: 550px; height: 370px;"></div>
 					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a898d01cf109199d2b5c34d8e1c5835&libraries=services,clusterer,drawing"></script>
 					<script type="text/javascript">
@@ -43,7 +43,7 @@
 								            '        </div>' + 
 								            '        <div class="body">' + 
 								            '            <div class="img">' +//이미지 작업후 수정예정
-								            '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+								            '                <img src="<%=vo2.getFtruckImg()%>" style="width: 73; height: 70;">' +
 								            '           </div>' + 
 								            '            <div class="desc">' + 
 								            '                <div class="ellipsis"><%=vo2.getFtruckAddr()%></div>' +
