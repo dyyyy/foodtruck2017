@@ -73,7 +73,7 @@
                               <!-- 결제 취소 하기 버튼 -->
                               <c:if test="${MemberInfo.cookStat eq 0 }">
                               	<td class="unit">
-                              		<input type="button" value="결제취소하기" onclick="location.href='/orderCancel?ordNo=${MemberInfo.ordNo}'">
+                              		<input type="button" value="결제취소하기" onclick="location.href='/orderCancel?ordNo=${MemberInfo.ordNo}&ordDlyYn=${MemberInfo.ordDlyYn}'">
                               	</td>
                               </c:if>
                               	
