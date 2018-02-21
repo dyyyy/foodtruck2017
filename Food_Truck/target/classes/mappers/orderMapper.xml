@@ -77,8 +77,8 @@
 
 	</update>
 
-	<!-- 새로운 주문 -->
-	<select id="getNewCount" resultMap="OrderMap">
+	<!-- 새로운 예약 주문 -->
+	<select id="getNewCountRsv" resultMap="OrderMap">
 		SELECT COUNT(O.ORD_CHECK)AS newCount,F.FTRUCK_NAME
 		FROM ORDERS O,FOODTRUCK F
 		WHERE O.LICENSE_NO IN
@@ -86,16 +86,40 @@
 		AND
 		O.ORD_CHECK = 'N'
 		AND
+		O.ORD_DLV_YN = 'N'
+		AND
 		O.LICENSE_NO = F.LICENSE_NO
 		GROUP BY F.FTRUCK_NAME
 	</select>
+	
+	<!-- 새로운 배달 주문 -->
+	<select id="getNewCountDlv" resultMap="OrderMap">
+		SELECT COUNT(O.ORD_CHECK)AS newCount,F.FTRUCK_NAME
+		FROM ORDERS O,FOODTRUCK F
+		WHERE O.LICENSE_NO IN
+		(SELECT L.LICENSE_NO FROM LICENSE L WHERE L.MEM_ID = #{memId})
+		AND
+		O.ORD_CHECK = 'N'
+		AND
+		O.ORD_DLV_YN = 'Y'
+		AND
+		O.LICENSE_NO = F.LICENSE_NO
+		GROUP BY F.FTRUCK_NAME
+	</select>	
 
-	<!-- 새로운 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
-	<update id="checkNewOrder">
-		UPDATE ORDERS SET
-		ORD_CHECK = 'Y'
-		WHERE LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID =
-		#{memId})
+
+	<!-- 새로운  예약 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
+	<update id="checkNewOrderRsv">
+		UPDATE ORDERS O SET
+		O.ORD_CHECK = 'Y'
+		WHERE O.ORD_DLV_YN = 'N' AND O.LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
+	</update>
+	
+	<!-- 새로운  배달 주문 확인하면 ORD_CHECK 'Y'로 변경 -->
+	<update id="checkNewOrderDlv">
+		UPDATE ORDERS O SET
+		O.ORD_CHECK = 'Y'
+		WHERE O.ORD_DLV_YN = 'Y' AND O.LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
 	</update>
 	
 	<!-- 구매자가 주문한 푸드트럭 순위 뽑자! -->

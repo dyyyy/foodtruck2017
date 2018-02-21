@@ -194,10 +194,10 @@
                      <input type="radio" name="ordDlyYn" value="N" id="res" style="width: 50px; margin-left: 100px; float: left;">예약하기
                      <%if(ftruckDlvYn.equals("Y")) { %>
                      	<input type="radio" name="ordDlyYn" value="Y" style="width: 50px;" id="dly"> 배달하기 
-                  	 <% } %>
-                  <%} else { %>
-                  	 <input type="radio" name="ordDlyYn" value="N" id="res" style="width: 50px; margin-left: 150px; float: left;">예약하기
-                  <% } %>
+                  	 <% } 
+               	  	 } else { %>
+                  	 	<input type="radio" name="ordDlyYn" value="N" id="res" style="width: 50px; margin-left: 150px; float: left;">예약하기
+                  	<% } %>
                   </div><br>
                   
                   <div align="right" id="time" style="display: none"> 예약시간 : 

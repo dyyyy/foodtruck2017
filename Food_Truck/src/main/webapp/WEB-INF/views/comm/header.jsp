@@ -150,62 +150,72 @@
 
 if(<%=gubun%> == "2") {
 	$(function() {
-		updateData()
+		updateRsvData()
+		updateDlvData()
 	})
 }		
 	
-	
-function updateData() {
+
+function updateRsvData() {
+	$("#newRsv").off("click")
 	var str = "&nbsp;&nbsp;"
 	$.ajax({
-		url : "/updateOrderCount",
+		url : "/updateOrderCountRsv",
 		type : "post" ,
 		cache : false,
 		success : function(data) {
-			var count = 0;
-			var content = "";
+			count = 0;
+			content = "";
 			$.each(data,function(idx,val) {
 				content += val.ftruckName + " : " + val.newCount + " 개  \n "
 				count += val.newCount
 			})
-			$("#newCount").html(str+count+"개")
-				$("#newInfo").click(function() {
-					if(count != 0) {
-						alert("새로운 주문 정보 \n" + content)
-						location.href="/checkNewOrder"
-					}else{
-						alert("새로운 주문 정보가 없습니다.")
-					}
-				})				
+			$("#newCountRsv").html(str+count+"개")
+			$("#newRsv").one("click",function() {
+				if(count != 0) {
+					alert("새로운 주문 정보 \n" + content)
+					location.href="/orderDetail"
+				}else{
+					alert("새로운 예약 주문 정보가 없습니다.")
+				}
+			})			
 		}
 	})
-	setTimeout("updateData()",10000)
+	setTimeout("updateRsvData()",10000)
+	
 }
-	//search button
-/*
-	$(function() {
-		$('#locbtn').click(function() {
-			alert('search');
-			
-			var pageNo = 1;
-			var search = $("#search").val();
-			$.ajax({
-				url : "/search",
-				type : "post",
-				dataType : "json",
-				sync : false,
-				data : {
-					"pageNo" : pageNo,
-					"search" : search
-				}
 
-			});
-			
-			
-			
-			
-		});
-		
-	});*/
+
+
+
+function updateDlvData() {
+	$("#newDlv").off("click")
+	var str = "&nbsp;&nbsp;"
+	$.ajax({
+		url : "/updateOrderCountDlv",
+		type : "post",
+		cache : false,
+		success : function(data) {
+			count = 0;
+			content = "";		
+			$.each(data,function(idx,val) {
+				content += val.ftruckName + " : " + val.newCount + " 개 \n "
+				count += val.newCount
+			})
+			$("#newCountDlv").html(str+count+"개")
+				$("#newDlv").one("click",function() {
+					if(count != 0) {
+						alert("새로운 주문 정보 \n" + content)
+						location.href="/DeliveryDetail"
+					}else{
+						alert("새로운 예약 주문 정보가 없습니다.")
+					}				
+				})				
+			}
+	})
+
+	setTimeout("updateDlvData()",10000)
+	
+}
 </script>
 </head>

@@ -79,7 +79,11 @@
                            
                      %>
 							<li>
-								<a id="newInfo"><img src='/resources/img/ms3.png' ><b id="newCount"></b></a>
+								<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='/resources/img/ms3.png' ><i class="fa fa-angle-down"></i></a>
+								<ul>
+									<li><a id="newRsv">예약<b id="newCountRsv"></b></a></li>
+									<li><a id="newDlv">배달<b id="newCountDlv"></b></a></li>
+								</ul>
 							</li>									
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>

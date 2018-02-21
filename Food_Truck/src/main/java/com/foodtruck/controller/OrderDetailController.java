@@ -33,6 +33,9 @@ public class OrderDetailController {
 
 	@Autowired
 	private DeliveryDetailService dservice;
+	
+	@Autowired
+	private OrderService oservice;
 
 	// 배달상세내역보기
 	@RequestMapping("/DeliveryDetail")
@@ -50,7 +53,7 @@ public class OrderDetailController {
 			model.addAttribute("ORD_DLV_YN", "Y");
 			model.addAttribute("dleverDetailList", dservice.getDeliveryDetailList(map));
 			model.addAttribute("licenseList", sellerService.getLicense(memId));
-
+			oservice.checkNewOrderDlv(memId);
 		} else {
 			return "home";
 		}
@@ -74,7 +77,7 @@ public class OrderDetailController {
 		if (mvo != null) {
 			model.addAttribute("orderDetailList", orderDetailService.getOrderDetailList(map));
 			model.addAttribute("licenseList", sellerService.getLicense(memId));
-
+			oservice.checkNewOrderRsv(memId);
 		} else {
 			return "home";
 		}
