@@ -118,6 +118,7 @@ public class OrderController {
 		
 		List<ReviewVO> reviewList = reviewService.getFoodTrcukName(memId);
 		request.setAttribute("reviewList", reviewList);
+		Oservice.dlvTimeUpdate(memId); // 사용자가 배달시간? 알림온거 확인하면 변경
 		
 		return "member/memberOrderInfo";
 	}
@@ -257,6 +258,7 @@ public class OrderController {
 			System.out.println("진입");
 			// 디비에 넣으러가잠!
 			HashMap<String, Object> map = new HashMap<>();
+	
 			map.put("cookStat", cookStat);
 			map.put("ordNo", ordNo);
 			map.put("dlvDate",dlvDate);
@@ -293,6 +295,20 @@ public class OrderController {
 		String memId = (String)session.getAttribute("memberId");
 		return Oservice.getNewCountDlv(memId);	// 판매자가 확인하지 않은 새로운 배달 주문 갯수 및 정보
 	}	
+	
+	@ResponseBody
+	@RequestMapping("/dlvTimeSend")
+	public OrderVO dlvTimeSend(HttpSession session) {
+		OrderVO vo = new OrderVO();
+		String memId = (String)session.getAttribute("memberId");
+		List<OrderVO> list = Oservice.ordStatFind(memId);
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getCookStat() == 1) {
+				vo = Oservice.dlvTimeSend(memId);
+			}
+		}
+		return vo;
+	}
 	
 	// 주문 취소 하기
 	@RequestMapping("/orderCancel")

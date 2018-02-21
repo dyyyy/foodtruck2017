@@ -61,6 +61,8 @@
 									//일반회원
 									case "3":
 							%>
+							<li id="dlvTime">
+							</li>	
 							<li><a href="#">나의 주문<i class="fa fa-angle-down"></i></a>
 								<ul style="width: 120px;">
 									<li><a href="/memberOrderInfo">전체 주문 내역</a></li>

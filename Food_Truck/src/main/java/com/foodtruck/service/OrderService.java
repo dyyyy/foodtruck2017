@@ -89,6 +89,23 @@ public class OrderService {
 		return dao.checkNewOrderDlv(memId);
 	}	
 
+	// 사용자에게 배달시간 보내기
+	public OrderVO dlvTimeSend(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.dlvTimeSend(memId);
+	}
+
+	// 사용자가 배달시간을 확인하면 ORD_CHECK 3으로
+	public int dlvTimeUpdate(String memberId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.dlvTimeUpdate(memberId);
+	}	
+	
+	public List<OrderVO> ordStatFind(String memberId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.ordStatFind(memberId);
+	}
+	
 	// 자주 시켜먹은 푸드트럭 순위
 	public List<OrderVO> getFavoriteFoodtruck(String memId) {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
