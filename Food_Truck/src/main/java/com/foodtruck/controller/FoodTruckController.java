@@ -188,7 +188,9 @@ public class FoodTruckController {
 		System.out.println("진입전");
 		List<ProductVO> Plist = pservice.getProductList(ftruckNo);	// 상품 정보 호출
 		System.out.println("진입후");
-		
+		String img=vo.getFtruckImg();
+		String reimg=img.replaceAll("\\\\", "/");
+		vo.setFtruckImg(reimg);
 		request.setAttribute("vo", vo);
 		request.setAttribute("review", Rlist);
 		request.setAttribute("product", Plist);

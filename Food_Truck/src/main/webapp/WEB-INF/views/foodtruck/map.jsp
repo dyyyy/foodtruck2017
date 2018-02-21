@@ -10,6 +10,7 @@
 	FoodTruckVO vo2 = (FoodTruckVO) request.getAttribute("vo");
 %>
 </head>
+
 <body>
 			<div class="review">
 				<div id="map" style="width: 550px; height: 370px;"></div>
@@ -27,7 +28,7 @@
 
 							// 정상적으로 검색이 완료됐으면 
 							if (status === daum.maps.services.Status.OK) {
-
+							
 							 var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 									        
 									        // 결과값으로 받은 위치를 마커로 표시합니다
@@ -43,7 +44,7 @@
 								            '        </div>' + 
 								            '        <div class="body">' + 
 								            '            <div class="img">' +//이미지 작업후 수정예정
-								            '                <img src="http://i.huffpost.com/gen/4479322/thumbs/o-42-570.jpg?7" width="73" height="70">' +
+								            '                <img src="<%=vo2.getFtruckImg() %>" width="73" height="70">' +
 								            '           </div>' + 
 								            '            <div class="desc">' + 
 								            '                <div class="ellipsis"><%=vo2.getFtruckAddr()%></div>' +
