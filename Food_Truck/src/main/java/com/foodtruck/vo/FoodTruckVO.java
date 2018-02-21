@@ -20,6 +20,7 @@ public class FoodTruckVO extends ReviewVO{
 	private String licenseNo; // 사업자 번호
 	private int count;	// 리뷰 총 갯수
 	private int total;	// 리뷰 평점 총 합 
+	private String ftruckCondtion;
 	
 	
 	// getter & setter
@@ -131,4 +132,11 @@ public class FoodTruckVO extends ReviewVO{
 	public void setTotal(int total) {
 		this.total = total;
 	}
+	public String getFtruckCondtion() {
+		return ftruckCondtion;
+	}
+	public void setFtruckCondtion(String ftruckCondtion) {
+		this.ftruckCondtion = ftruckCondtion;
+	}
+	
 }

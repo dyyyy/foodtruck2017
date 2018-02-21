@@ -25,14 +25,15 @@
 		
 		$("#changeBtn").on("click", function() {		
 			var cookStat = $("#cookStat option:selected").val();	
-			var cktime = $("#time option:selected").val();	
-			if(cktime==""){
+			var cktime = $("#time option:selected").val();
+			if(cookStat==1&&cktime==""){
 				alert("배달시간을 설정해주세요!");
-			}else{
+			}
+			else{
 				console.log(cookStat + " / " + data);
 				var ordNo = data;
 				var dlever= document.getElementById("dlever").value;
-				alert("진입")
+				
 				$.ajax ({
 					type : "post",
 					url : "/cookStatChange",

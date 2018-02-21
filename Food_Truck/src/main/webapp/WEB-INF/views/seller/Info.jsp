@@ -39,15 +39,13 @@ function mm() {
 }
 function changInfo(){
 	var licenseNo=${licenseNo};
-	
-	
 	var path=document.getElementById("path").value;
 	var tel=document.getElementById("tel").value;
 	var ftruckDlvYn = $("input[name='ftruckDlvYn']:checked").val();
 	var ftruckRsvYn = $("input[name='ftruckRsvYn']:checked").val();
 	var content=$("#con").val();
 	var category = $("#select").val();
-	
+	var ftruckCondtion = $("input[name='ftruckCondtion']:checked").val();
 		$.ajax({
 			url:"/updateFoodtruck",
 			data:{
@@ -57,7 +55,8 @@ function changInfo(){
 				ftruckRsvYn:ftruckRsvYn,
 				ftruckIntro:content,
 				category:category,
-				licenseNo:licenseNo
+				licenseNo:licenseNo,
+				ftruckCondtion:ftruckCondtion
 			},
 			dataType : 'json',
 			type : 'POST',
@@ -151,13 +150,13 @@ function changInfo(){
 												type="radio" value="N" name="ftruckRsvYn" <%=ck2.equals("N")?"checked":""%>>N
 										</div>
 									</div>
-									
+									<%String ck3=vo.getFtruckCondtion(); %>
 									<div class="control-group">
-										<label class="control-label">포화상태<span
+										<label class="control-label">대기자 경고<span
 											class="required">*</span></label>
 										<div class="controls">
-											<input type="radio" value="Y" name="ftruckRsvYn" <%=ck2.equals("Y")?"checked":""%>>Y <input
-												type="radio" value="N" name="ftruckRsvYn" <%=ck2.equals("N")?"checked":""%>>N
+											<input type="radio" value="Y" name="ftruckCondtion" <%=ck3.equals("Y")?"checked":""%>>Y <input
+												type="radio" value="N" name="ftruckCondtion" <%=ck3.equals("N")?"checked":""%>>N
 										</div>
 									</div>
 									<div class="control-group">

@@ -17,6 +17,7 @@
 		
 		$("#changeBtn").on("click", function() {
 			var cookStat = $("#cookStat option:selected").val();
+			
 			console.log(cookStat + " / " + data);
 			var ordNo = data;
 			

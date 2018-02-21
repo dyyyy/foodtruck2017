@@ -129,7 +129,7 @@
 	<update id="updateTruck">
 		update foodtruck set ftruck_tel = #{ftruckTel},
 		FTRUCK_DLV_YN = #{ftruckDlvYn},FTRUCK_RSV_YN =
-		#{ftruckRsvYn},ftruck_img = #{ftruckImg},FTRUCK_INTRO=#{ftruckIntro},CATEGORY=#{category}
+		#{ftruckRsvYn},ftruck_img = #{ftruckImg},FTRUCK_INTRO=#{ftruckIntro},CATEGORY=#{category},FTRUCK_CONDITION=#{ftruckCondtion}
 		where LICENSE_NO = #{licenseNo}
 	</update>
 	
@@ -177,6 +177,7 @@
 		<result column="FTRUCK_IMG" property="ftruckImg" />
 		<result column="FTRUCK_INTRO" property="ftruckIntro" />
 		<result column="FTRUCK_REG" property="ftruckReg" />
+		<result column="FTRUCK_CONDITION" property="ftruckCondtion" />
 
 		<result column="CATEGORY" property="category" />
 

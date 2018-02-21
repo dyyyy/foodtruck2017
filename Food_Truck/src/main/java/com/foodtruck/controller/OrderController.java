@@ -292,10 +292,11 @@ public class OrderController {
 	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
 	@RequestMapping("/cookStatChange")
 	@ResponseBody
-	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") String cookStat, @RequestParam("ordNo") String ordNo, @RequestParam(value="dlever",required=false) String dlever,@RequestParam(value="dlvDate",required=false) String dlvDate) {
+	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") int cookStat, @RequestParam("ordNo") String ordNo, @RequestParam(value="dlever",required=false) String dlever,@RequestParam(value="dlvDate",required=false) String dlvDate) {
 		//배달정보
+		System.out.println("상태봐꾸기 집입");
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
-		if(dlever.equals("Y")) {
+		if(dlever!=null) {
 			System.out.println("진입");
 			// 디비에 넣으러가잠!
 			HashMap<String, Object> map = new HashMap<>();

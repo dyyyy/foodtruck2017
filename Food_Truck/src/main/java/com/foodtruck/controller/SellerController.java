@@ -83,6 +83,7 @@ public class SellerController {
 		String num=licenseNo;
 		FoodTruckVO vo = new FoodTruckVO();
 		vo = fservice.getFoodTruck2(licenseNo);
+		System.out.println(vo.getFtruckCondtion()+"=====================");
 		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
