@@ -75,6 +75,8 @@ $(function() {
 						배달여부:<%=vo.getFtruckDlvYn()%>
 						예약여부:<%=vo.getFtruckRsvYn()%>
 					</div>
+					
+					
 						<%@include file="map.jsp"%>
 						<%String ck=vo.getFtruckCondtion(); %>
 						<div class="alert alert-danger" role="alert" id="alert" style="display: none;">
@@ -85,6 +87,7 @@ $(function() {
 						<div align="center" class="orderForm">
 						<input type="submit" value="주문하러가기" style="width: 100%;" onclick="goOrder()">
 						</div>
+						
 						
 					</form>
 				</div>
@@ -167,7 +170,8 @@ $(function() {
 			</div>
 		</div>
 	</div>
-</section>
+		
+	</section>
 <!--End Product Details Area-->
 <jsp:include page="../comm/footer.jsp"></jsp:include>
 

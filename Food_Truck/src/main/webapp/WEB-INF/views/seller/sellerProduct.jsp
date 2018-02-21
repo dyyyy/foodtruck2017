@@ -311,21 +311,7 @@ function del(){
 							</tr>
 							<tr></tr>
 							
-							<tr>
-								<td rowspan=2>대기  예상 시간</td>
-								<td rowspan=2 colspan=3>
-									<select>
-										<option value="">예상 시간을 선택해주세요.</option>
-										<option value="5"> 5분 </option>
-										<option value="10"> 10분 </option>
-										<option value="15"> 15분 </option>
-										<option value="20"> 20분 </option>
-										<option value="25"> 25분 </option>
-										<option value="30"> 30분 </option>
-									</select>
-								</td>
-							</tr>
-							<tr></tr>
+							
 						</table>
 						<div class="num"></div>
 						<div class="img2"></div>
