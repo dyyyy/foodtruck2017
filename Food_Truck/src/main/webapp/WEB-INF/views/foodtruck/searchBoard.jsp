@@ -129,23 +129,24 @@ function map() {
 						<div class="shop-products">
 							<!-- Single Product -->
 							<c:forEach items="${list}" var="all">
+							<fieldset>
 								<div class="single-list-product col-sm-12">
 									<div class="list-pro-image">
 										<a href="/read?licenseNo=${all.licenseNo}"> <img
-											src="/resources/img/foodtruck/${all.ftruckImg}">
+											src="${all.ftruckImg}">
 										</a>
 									</div>
 									<div class="list-pro-des fix">
 										<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
 										<div class="pro-ratting">
-											<i class="fa fa-star on"></i> <i class="fa fa-star on"></i> <i
-												class="fa fa-star on"></i> <i class="fa fa-star on"></i> <i
-												class="fa fa-star-half-o on"></i>
+											<span style="width: ${all.ftruckGrade*20}%"></span>
 										</div>
+										<div>&nbsp;&nbsp;${all.ftruckGrade}점&nbsp;&nbsp;/&nbsp;리뷰수 : ${all.count} 개</div>
 										<p>${all.ftruckIntro}</p>
 
 									</div>
 								</div>
+								</fieldset><br>
 							</c:forEach>
 							<!-- Pagination -->
 							<div class="pagination">
@@ -226,6 +227,8 @@ function map() {
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
 	<!-- Shop Product Area End -->
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>

@@ -200,11 +200,14 @@ public class SellerController {
 					return "seller/ing";
 				}
 			} else {
+				System.out.println("진입1");
 				List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
 				request.getSession().setAttribute("member", mvo);
 				String num = licenseNo;
+				System.out.println("진입2");
 				// 해당 푸드트럭의 라이센스번호를 가져와서 해당 지역의 이름의 축제정보 가져오기
 				FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
+				System.out.println("진입3");
 				if (vo.getFtruckAddr() == null) {
 					vo.setFtruckAddr(vo.getFtruckAddr2());
 				}
