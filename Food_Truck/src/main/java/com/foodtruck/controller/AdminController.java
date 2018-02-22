@@ -24,26 +24,37 @@ import com.foodtruck.vo.MinquiryReplyVO;
 
 @Controller
 public class AdminController {
-	@Autowired
-	private FoodTruckService fservice;
-	@Autowired
-	private FestivalService feservice;
-	@Autowired
-	private MemberService mservice;
-	@Autowired
-	private AdminService aservice;
-	@Autowired
-	private SellerService sservice;
 
-	// 전체 푸드트럭 출력
+
+	@Autowired
+	private FoodTruckService foodtruckService;
+	@Autowired
+	private FestivalService festivalService;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private AdminService adminService;
+	@Autowired
+	private SellerService sellerService;
+
+	// 운영자 - 메인
+	@RequestMapping("/admin")
+	public String admin() {
+		return "admin/main";
+	}
+
+	// 운영자 - 푸드트럭 현황 & 상태 -> 전체보기
 	@RequestMapping("/stute")
 	public String stute(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
+		System.out.println("운영자의 푸드트럭 현황 & 상태 페이지");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 
-		List<FoodTruckVO> list = fservice.getAllFoodTruckList(NpageNo);
+
+		List<FoodTruckVO> list = foodtruckService.getFoodTruckList(NpageNo);
+
 		String stat="운영중";
 		String stat2="마감";
 		for(int i=0;i<list.size();i++) {
@@ -56,23 +67,24 @@ public class AdminController {
 			if(list.get(i).getFtruckAddr()==null) {
 				list.get(i).setFtruckAddr(list.get(i).getFtruckAddr2());
 			}
-			
-			
 		}
-		int count = fservice.getAllCountTruck();
+
+		int count = foodtruckService.getCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", count);// �� ������ ��
+		request.setAttribute("pagecount", count);
 		return "admin/stute";
 	}
-	//운영중 푸드트럭
+	
+	//푸드트럭 - 운영
 	@RequestMapping("/run")
 	public String run(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
+		System.out.println("운영자 - 운영중인 푸드트럭");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list=fservice.getRunFoodTruckList(NpageNo);
+		List<FoodTruckVO> list = foodtruckService.getRunFoodTruckList(NpageNo);
 		String stat="운영중";
 		String stat2="마감";
 		for(int i=0;i<list.size();i++) {
@@ -82,20 +94,22 @@ public class AdminController {
 				list.get(i).setFtruckState(stat2);
 			}
 		}
-		int count=fservice.getRunCountTruck();
+		int count = foodtruckService.getRunCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);
 		return "admin/runstute";
 	}
-	//마감중 푸드트럭
+	
+	//푸드트럭 - 마감
 	@RequestMapping("/end")
 	public String end(@RequestParam("pageNo") int pageNo, HttpServletRequest request)throws Exception{
+		System.out.println("운영자 - 마감한 푸드트럭");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FoodTruckVO> list=fservice.getEndFoodTruckList(NpageNo);
+		List<FoodTruckVO> list = foodtruckService.getEndFoodTruckList(NpageNo);
 		String stat="운영중";
 		String stat2="마감";
 		for(int i=0;i<list.size();i++) {
@@ -105,7 +119,7 @@ public class AdminController {
 				list.get(i).setFtruckState(stat2);
 			}
 		}
-		int count=fservice.getEndCountTruck();
+		int count = foodtruckService.getEndCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);
@@ -115,12 +129,13 @@ public class AdminController {
 	// 판매자 Q&A
 	@RequestMapping("/sellerQnA")
 	public String sellerQnA(HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
+		System.out.println("운영자 - 판매자 Q&A");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<MInquiryVO> list = sservice.getSinquiryList(NpageNo);
-		int count = sservice.getSinquiryListcount();
+		List<MInquiryVO> list = sellerService.getSinquiryList(NpageNo);
+		int count = sellerService.getSinquiryListcount();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("pagecount", count);
 		request.setAttribute("list", list);
@@ -130,59 +145,63 @@ public class AdminController {
 	// 일반회원 Q&A
 	@RequestMapping("/memberQnA")
 	public String memberQnA(HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
+		System.out.println("운영자 - 일반회원 Q&A");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<MInquiryVO> list = mservice.getMinquiryList(NpageNo);
-		int count = mservice.getMinquiryListcount();
+		List<MInquiryVO> list = memberService.getMinquiryList(NpageNo);
+		int count = memberService.getMinquiryListcount();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("pagecount", count);
 		request.setAttribute("list", list);
 		return "admin/memberQnA";
 	}
 
+	// 축제관리
 	@RequestMapping("/festival")
 	public String festival(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
+		System.out.println("운영자 - 축제관리 페이지");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<FestivalVO> list = feservice.getFestivalList2(NpageNo);
-		int count = feservice.getcountFestival();
+		List<FestivalVO> list = festivalService.getFestivalList2(NpageNo);
+		int count = festivalService.getcountFestival();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
-		request.setAttribute("pagecount", count);// �� ������ ��
+		request.setAttribute("pagecount", count);
 		return "admin/festival";
 	}
 
-	@RequestMapping("/admin")
-	public String admin() {
-		return "admin/main";
-	}
-
+	// 푸드트럭 관리
 	@RequestMapping("/foodtruck")
 	public String foodtruck(HttpServletRequest request, @RequestParam("pageNo") int pageNo) {
+		System.out.println("운영자 - 푸드트럭 관리");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
-		List<LicenseVO> list = aservice.getRequestList(NpageNo);
-		int count = aservice.getRequestCount();
+		List<LicenseVO> list = adminService.getRequestList(NpageNo);
+		int count = adminService.getRequestCount();
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);
 		request.setAttribute("pageNo", pageNo);
-		return "admin/foodturck";
+		return "admin/foodtruck";
 	}
+	
+	// 운영자 - 푸드트럭 현황 & 상태 -> 한 푸드트럭의 상세보기
 	@RequestMapping("/getTruck")
 	@ResponseBody
-	public HashMap getTruck(@RequestParam("ftruckNo") String ftruckNo) throws Exception {
-		HashMap map = new HashMap();
-		FoodTruckVO vo= fservice.getFoodTruck(ftruckNo);
-		if(vo.getFtruckAddr()==null) {
+	public HashMap<String, Object> getTruck(@RequestParam("ftruckNo") String ftruckNo) throws Exception {
+		HashMap<String, Object> map = new HashMap<>();
+		FoodTruckVO vo = foodtruckService.getFoodTruck(ftruckNo);
+		if(vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-		String category="";
+		
+		// 밑에 테이블에서 카테 고리 나타내주기 위해서
+		String category = "";
 		if (vo.getCategory() == 1) {
 			category = "한식";
 		} else if (vo.getCategory() == 2) {
@@ -192,6 +211,22 @@ public class AdminController {
 		} else if (vo.getCategory() == 4) {
 			category = "일식";
 		}
+		
+		// 예약 여부 & 배달 여부
+		String RsvYn = "";
+		String DlvYn = "";
+		if("Y".equals(vo.getFtruckRsvYn()) || "y".equals(vo.getFtruckRsvYn())) {
+			RsvYn = "예약 가능";
+		} else {
+			RsvYn = "예약 불가능";
+		}
+		
+		if("Y".equals(vo.getFtruckDlvYn()) || "y".equals(vo.getFtruckDlvYn())) {
+			DlvYn = "배달 가능";
+		} else {
+			DlvYn = "배달 불가능";
+		}
+		
 		String Content = "";
 		Content += "<script type=\"text/javascript\">"
 				+ "								var geocoder = new daum.maps.services.Geocoder();\r\n"
@@ -245,11 +280,11 @@ public class AdminController {
 				"					</tr>\r\n" + 
 				"					<tr>\r\n" + 
 				"						<td>예약</td>\r\n" + 
-				"						<td colspan=3>"+vo.getFtruckRsvYn()+"</td>\r\n" + 
+				"						<td colspan=3>"+RsvYn+"</td>\r\n" + 
 				"					</tr>\r\n" + 
 				"					<tr>\r\n" + 
 				"						<td>배달</td>\r\n" + 
-				"						<td colspan=3>"+vo.getFtruckDlvYn()+"</td>\r\n" + 
+				"						<td colspan=3>"+DlvYn+"</td>\r\n" + 
 				"					</tr>\r\n" + 
 				"				</table>";
 		map.put("content", Content);
@@ -257,13 +292,12 @@ public class AdminController {
 		return map;
 	}
 	
-	
-
+	//
 	@RequestMapping("/MQnAdetail")
 	@ResponseBody
-	public HashMap MQnAdetail(@RequestParam("qno") int qno) {
-		MInquiryVO vo = mservice.getinfo(qno);
-		HashMap map = new HashMap();
+	public HashMap<String, Object> MQnAdetail(@RequestParam("qno") int qno) {
+		MInquiryVO vo = memberService.getinfo(qno);
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("id", vo.getMemId());
 		map.put("content", vo.getQaScContent());
 		map.put("title", vo.getQaScTitle());
@@ -271,37 +305,39 @@ public class AdminController {
 		return map;
 	}
 
-	// ㅇㅇ
 	// 1:1 일반회원 댓글달기
 	@RequestMapping("/MinquryReply")
 	@ResponseBody
-	public int MinquryReply(@RequestParam("email") String email, @RequestParam("reply") String reply,
-			@RequestParam("qno") int qno) throws InterruptedException {
+	public int MinquryReply(@RequestParam("email") String email, 
+							@RequestParam("reply") String reply,
+							@RequestParam("qno") int qno) throws InterruptedException {
+		
 		int finish = 0;
 		MinquiryReplyVO vo = new MinquiryReplyVO();
 		vo.setMemId(email);
 		vo.setReplyScContent(reply);
 		vo.setQaScNo(qno);
-		aservice.insertMinquryReply(vo);
-		finish = mservice.updateMinquiry(qno);
+		adminService.insertMinquryReply(vo);
+		finish = memberService.updateMinquiry(qno);
 		return finish;
-
 	}
 
+	// 푸드트럭 관리 - 상세정보 - 승인
 	@RequestMapping("/approvalList")
 	@ResponseBody
-	public HashMap approvalList(@RequestParam("licenseNo") String licenseNo) throws Exception {
-		System.out.println("진입");
-		System.out.println("sds"+licenseNo);
+	public HashMap<String, Object> approvalList(@RequestParam("licenseNo") String licenseNo) throws Exception {
+		
+		System.out.println("푸드트럭 관리에서 상세정보보기 클릭 -> 해당 푸드트럭의 라이센스 번호 : " + licenseNo );
+		
 		String category = "";
-		HashMap map = new HashMap();
-		FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
-		System.out.println("sdf"+vo.getFtruckName());
-		System.out.println("sdf"+vo.getFtruckAddr2());
+		HashMap<String, Object> map = new HashMap<>();
+		FoodTruckVO vo = foodtruckService.getFoodTruck2(licenseNo);
+
 		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
-		System.out.println("asd"+vo.getFtruckAddr());
+		
+		// 밑에 테이블에서 카테 고리 나타내주기 위해서
 		if (vo.getCategory() == 1) {
 			category = "한식";
 		} else if (vo.getCategory() == 2) {
@@ -311,6 +347,22 @@ public class AdminController {
 		} else if (vo.getCategory() == 4) {
 			category = "일식";
 		}
+		
+		// 예약 여부 & 배달 여부
+		String RsvYn = "";
+		String DlvYn = "";
+		if("Y".equals(vo.getFtruckRsvYn()) || "y".equals(vo.getFtruckRsvYn())) {
+			RsvYn = "예약 가능";
+		} else {
+			RsvYn = "예약 불가능";
+		}
+		
+		if("Y".equals(vo.getFtruckDlvYn()) || "y".equals(vo.getFtruckDlvYn())) {
+			DlvYn = "배달 가능";
+		} else {
+			DlvYn = "배달 불가능";
+		}		
+		
 		String Content = "";
 		Content += "<script type=\"text/javascript\">"
 				+ "								var geocoder = new daum.maps.services.Geocoder();\r\n"
@@ -365,30 +417,30 @@ public class AdminController {
 				"					</tr>\r\n" + 
 				"					<tr>\r\n" + 
 				"						<td>예약</td>\r\n" + 
-				"						<td colspan=3>"+vo.getFtruckRsvYn()+"</td>\r\n" + 
+				"						<td colspan=3>"+RsvYn+"</td>\r\n" + 
 				"					</tr>\r\n" + 
 				"					<tr>\r\n" + 
 				"						<td>배달</td>\r\n" + 
-				"						<td colspan=3>"+vo.getFtruckDlvYn()+"</td>\r\n" + 
+				"						<td colspan=3>"+DlvYn+"</td>\r\n" + 
 				"					</tr>\r\n" + 
 				"				</table>";
+		
 		map.put("content", Content);
 		map.put("table", table);
 		map.put("licenseNo", vo.getLicenseNo());
 		return map;
 	}
+	
+	// 승인 완료
 	@RequestMapping("/approval") 
 	@ResponseBody
 	public int approval(@RequestParam("licenseNo") String licenseNo) throws Exception {
-		int num=0;
-		String app="Y";
-		LicenseVO vo= new LicenseVO();
+		int num = 0;
+		String app = "Y";
+		LicenseVO vo = new LicenseVO();
 		vo.setAppStat(app);
 		vo.setLicenseNo(licenseNo);		
-		num=aservice.appFoodtruck(vo);
+		num = adminService.appFoodtruck(vo);
 		return num;
 	}
-	
-	
-
 }
