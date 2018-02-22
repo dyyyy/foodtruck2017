@@ -21,9 +21,9 @@ public class OrderVO {
 	private String ftruckName;	// 푸드트럭 이름
 	private int newCount;		// 새로운 주문갯수
 	private String ordCheck;	// 새로들어온 주문 확인(Y/N)
-	private int payment;//결제방식
-	private String dlvAddr1;
-	private String dlvAddr2;
+	private int payment;		// 결제방식
+	private String dlvAddr1;	// 배달 주소 1
+	private String dlvAddr2;	// 배달 주소 2
 	private int favoriteCount;	// 관심있는 푸드트럭 갯수
 	private int rank;			// 순위
 	private String ftruckNo;	// 푸드트럭 번호

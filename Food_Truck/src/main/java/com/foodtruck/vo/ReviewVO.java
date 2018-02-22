@@ -9,7 +9,7 @@ public class ReviewVO {
 	private String revDelYn;		// 삭제 여부
 	private double grade;			// 평점
 	private String memId;			// 회원 아이디
-	private String ordNo;				// 주문 번호
+	private String ordNo;			// 주문 번호
 	private String ftruckName;		// 푸드트럭 이름
 	private String licenseNo;		// 사업자 번호
 	
@@ -75,6 +75,5 @@ public class ReviewVO {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	
 		
 }
