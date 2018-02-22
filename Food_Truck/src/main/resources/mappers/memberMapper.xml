@@ -13,16 +13,16 @@
 	
 	<!-- 사용자 문의내역 정보 -->
 	<select id="getMemberQaInfo" resultMap="InquiryMap">
-		SELECT Q.* FROM QA_SC Q , MEMBER M 
+		SELECT Q.* FROM QA_SELLER Q , MEMBER M 
 		WHERE Q.MEM_ID = M.MEM_ID 
-		AND Q.QA_SC_NO = #{qaScNo}
+		AND Q.QA_SEL_NO = #{qaSelNo}
 	</select>
 
 	<!-- 사용자 문의 답변 -->
 	<select id="getMemberQaReply" resultMap="InquiryReplyMap">
-		SELECT R.* FROM REPLY_SC R, QA_SC Q
-		WHERE Q.QA_SC_NO = R.QA_SC_NO
-		AND R.QA_SC_NO = #{qaScNo}
+		SELECT R.* FROM REPLY_SELLER R, QA_SELLER Q
+		WHERE Q.QA_SEL_NO = R.QA_SEL_NO
+		AND R.QA_SEL_NO = #{qaSelNo}
 	</select>
 
 	<!-- 회원 정보 -->
@@ -100,7 +100,7 @@
 		(QA_SEL_SEQ.NEXTVAL,#{memId},#{ordNo},#{qaSelTitle},#{qaSelContent},SYSDATE,#{qaSelCategory1},#{qaSelCategory2},#{qaSelTel})
 	</insert>
 	
-	<!-- 1:1 insert 판매자가 운영자한테  -->
+	<!-- 1:1 insert 사용자도 판매자가 운영자한테  -->
 	<insert id="insertInquiry2">
 		INSERT INTO QA_SC
 		(QA_SC_NO,MEM_ID,LICENSE_NO,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL)
@@ -180,10 +180,10 @@
 	</resultMap>
 	
 	<resultMap type="com.foodtruck.vo.MinquiryReplyVO" id="InquiryReplyMap">
-		<result column="REPLY_SC_NO" property="replyScNo" />
+		<result column="REPLY_SEL_NO" property="replySelNo" />
 		<result column="MEM_ID" property="memId" />
-		<result column="QA_SC_NO" property="qaScNo" />
-		<result column="REPLY_SC_CONTENT" property="replyScContent" />
-		<result column="REPLY_SC_REG" property="replyScReg" />
-	</resultMap>	
+		<result column="QA_SEL_NO" property="qaSelNo" />
+		<result column="REPLY_SEL_CONTENT" property="replySelContent" />
+		<result column="REPLY_SEL_REG" property="replySelReg" />
+	</resultMap>
 </mapper>

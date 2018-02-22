@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.OrderService;
@@ -49,13 +50,23 @@ public class MemberController {
 	
 	//1:1문의하기
 	@RequestMapping("/inquriy")
-	public String memberinquriy(MInquiryVO vo,HttpSession session,HttpServletRequest request) {	
+	public String memberinquriy(MInquiryVO vo,HttpSession session,HttpServletRequest request,@RequestParam(value="ordNo",required=false)String ordNo) {	
 		
 		String gubun = (String)session.getAttribute("memberGubun");
 		if(gubun == "2") {
 			memberService.insertInquiry2(vo);
-		} else {
-			memberService.insertInquiry(vo);
+		} else if(gubun == "3"){
+			if(ordNo == "") {
+				vo.setLicenseNo("");
+				vo.setQaScCategory1(vo.getQaSelCategory1());
+				vo.setQaScCategory2(vo.getQaSelCategory2());
+				vo.setQaScTitle(vo.getQaSelTitle());
+				vo.setQaScContent(vo.getQaSelContent());
+				vo.setQaScTel(vo.getQaSelTel());
+				memberService.insertInquiry2(vo);
+			}else {
+				memberService.insertInquiry(vo); //사용자가 판매자한테 
+			}
 		}
 		return "redirect:/";
 	}
@@ -104,8 +115,8 @@ public class MemberController {
 	@RequestMapping("/memberQaInfoList") 
 	public String memberQaInfoList(HttpSession session,HttpServletRequest request) {
 		
-		MemberVO vo = (MemberVO)session.getAttribute("member");
-		request.setAttribute("qalist",memberService.getMemberQaInfoList(vo.getMemberId()));
+		String memId = (String)session.getAttribute("memberId");
+		request.setAttribute("qalist",memberService.getMemberQaInfoList(memId));
 		
 		return "member/memberQaInfoList";
 	}
@@ -114,10 +125,10 @@ public class MemberController {
 	@RequestMapping("/memberQaInfo")
 	public String memberQaInfo(HttpServletRequest request) {
 		
-		int qaScNo = Integer.parseInt(request.getParameter("qaScNo"));
-		MInquiryVO vo = memberService.getMemberQaInfo(qaScNo);
+		int qaSelNo = Integer.parseInt(request.getParameter("qaSelNo"));
+		MInquiryVO vo = memberService.getMemberQaInfo(qaSelNo);
 		request.setAttribute("qaInfo", vo);
-		MinquiryReplyVO vo2 = memberService.getMemberQaReply(qaScNo);
+		MinquiryReplyVO vo2 = memberService.getMemberQaReply(qaSelNo);
 		request.setAttribute("qaReply", vo2);
 		
 		return "member/memberQaInfo";

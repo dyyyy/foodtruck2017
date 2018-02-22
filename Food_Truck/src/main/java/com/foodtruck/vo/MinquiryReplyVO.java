@@ -8,6 +8,11 @@ public class MinquiryReplyVO {
 	private String replyScContent;		// 답글 내용
 	private String replyScReg;			// 등록일
 	
+	private String replySelNo;			// 답글 번호 ( 판매자 ) 
+	private int qaSelNo;				// 문의 번호
+	private String replySelContent;		// 답글 내용
+	private String replySelReg;			// 등록일
+	
 	
 	// getter & setter
 	
@@ -41,6 +46,28 @@ public class MinquiryReplyVO {
 	public void setReplyScReg(String replyScReg) {
 		this.replyScReg = replyScReg;
 	}
-	
-	
+	public String getReplySeclNo() {
+		return replySelNo;
+	}
+	public void setReplySeclNo(String replySelNo) {
+		this.replySelNo = replySelNo;
+	}
+	public int getQaSelNo() {
+		return qaSelNo;
+	}
+	public void setQaSelNo(int qaSelNo) {
+		this.qaSelNo = qaSelNo;
+	}
+	public String getReplySelContent() {
+		return replySelContent;
+	}
+	public void setReplySelContent(String replySelContent) {
+		this.replySelContent = replySelContent;
+	}
+	public String getReplySelReg() {
+		return replySelReg;
+	}
+	public void setReplySelReg(String replySelReg) {
+		this.replySelReg = replySelReg;
+	}
 }

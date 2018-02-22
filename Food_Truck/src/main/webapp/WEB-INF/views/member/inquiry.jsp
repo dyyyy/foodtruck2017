@@ -20,6 +20,7 @@
 			var txtContents = $("#txtContents").val();
 			var qaScTel = $("#qaScTel").val();
 			var qaSelTel = $("#qaSelTel").val()
+			var ordNo = $("#ordNo option:selected").val()
 			
 			if(title == "") {
 				alert("문의하실 제목을 입력해 주시기 바랍니다.");
@@ -38,6 +39,9 @@
 				$("#qaScTel").focus();
 				return false;
 			}
+			
+			
+			
 			
 			alert("나의설정 -> 내문의내역 리스트에서 확인가능합니다");
 			return true;
@@ -175,6 +179,14 @@
 			}		
 		}
 	}
+	
+	function check(num) {
+		if(num == 1) {
+			$(".ordNoChk1,.ordNoChk2").hide();
+		}else{
+			$(".ordNoChk1,.ordNoChk2").show();
+		}
+	}
 </script>
 <body>
 <section class="checkout-page pagez fix"><!--Start Checkout Area-->
@@ -292,18 +304,30 @@
 										<col width="12%;">
 										<col width="*%;">
 									</colgroup>
-									<tbody>										
+									<tbody>							
 										<tr>
+											<th scope="row">문의자 선택</th>
+											<td>
+												<input type="radio" name="radioChk" onclick="check(1)">관리자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="radio" name="radioChk" onclick="check(2)" checked>판매자
+											</td>	
+										</tr>
+										<tr>
+											<th>&nbsp;</th>
+											<td>&nbsp;</td>
+										</tr>				
+										<tr class="ordNoChk1">
 											<th scope="row">주문 번호</th>
 											<td>
-												<select name="ordNo">
+												<select name="ordNo" id="ordNo">
+														<option value="">선택</option>
 													<c:forEach items="${list}" var="all">
 														<option>${all.ordNo}</option>
 													</c:forEach>
 												</select>
 											</td>
 										</tr>
-										<tr>
+										<tr class="ordNoChk2">
 											<th>&nbsp;</th>
 											<td>&nbsp;</td>
 										</tr>										
