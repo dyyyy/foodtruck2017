@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.foodtruck.dao.AdminDao;
+import com.foodtruck.dao.AdminDAO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MinquiryReplyVO;
 
@@ -16,20 +16,29 @@ public class AdminService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
+	
+	// 1:1 Q&A 댓글 등록
 	public int insertMinquryReply(MinquiryReplyVO vo) {
-		AdminDao dao=sessionTemplate.getMapper(AdminDao.class);
+		AdminDAO dao = sessionTemplate.getMapper(AdminDAO.class);
 		return dao.insertMinquryReply(vo);
 	}
+	
+	//푸드트럭 신청 list
 	public List<LicenseVO> getRequestList(int NpageNo){
-		AdminDao dao=sessionTemplate.getMapper(AdminDao.class);
+		AdminDAO dao = sessionTemplate.getMapper(AdminDAO.class);
 		return dao.getRequestList(NpageNo);
 	}
+	
+	//푸드트럭 신청 count
 	public int getRequestCount() {
-		AdminDao dao=sessionTemplate.getMapper(AdminDao.class);
+		AdminDAO dao = sessionTemplate.getMapper(AdminDAO.class);
 		return dao.getRequestCount();
 	}
+	
+	//푸드트럭 등록 최종 승인 업데이트
 	public int appFoodtruck(LicenseVO vo) throws Exception {
-		AdminDao dao=sessionTemplate.getMapper(AdminDao.class);
+		AdminDAO dao = sessionTemplate.getMapper(AdminDAO.class);
 		return dao.appFoodtruck(vo);
 	}
+	
 }
