@@ -177,7 +177,13 @@
 		SET O.ORD_CHECK = '3' 
 		WHERE O.ORD_CHECK = '2' AND O.ORD_DLV_YN = 'Y' AND O.MEM_ID = #{memId}
 	</update>
-
+	
+	<!-- 1:1 구매자가 구매한 주문번호 가져오기 -->
+	<select id="getOrdNo" resultMap="OrderMap">
+		SELECT * FROM
+		ORDERS O,MEMBER M
+		WHERE M.MEM_ID = O.MEM_ID AND M.MEM_ID = #{memId}
+	</select>
 
 	<!-- resultMap -->
 	<resultMap type="OrderVO" id="OrderMap">

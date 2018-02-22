@@ -402,16 +402,6 @@ public class SellerController {
 	}
 */
 	
-	// 판매자 1:1문의
-	@RequestMapping("sellerinquriy")
-	public String sellerinquriy(MInquiryVO vo) {
-		String result = "N";
-		vo.setQaScStat(result);
-		System.out.println(vo.getLicenseNo());
-		mservice.insertInquiry2(vo);
-		return "home";
-	}
-
 	// 판매자 licenseNo로 푸드트럭 정보 가져오기
 	@RequestMapping("/asd")
 	@ResponseBody

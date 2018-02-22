@@ -59,19 +59,19 @@
                            <th class="qaScReg">등록일</th>
                         </tr>
                      	<tr>
-                     		<td class="unit">${qaInfo.qaScNo}</td>
-                     		<td class="unit">${qaInfo.qaScTitle}</td>
-                     		<td class="unit">${qaInfo.qaScReg}</td>
+                     		<td class="unit">${qaInfo.qaSelNo}</td>
+                     		<td class="unit">${qaInfo.qaSelTitle}</td>
+                     		<td class="unit">${qaInfo.qaSelReg}</td>
                      	</tr>                        
                      	<tr class="table-title">
                      		<th class="qaScContent" colspan="3">문의내용</th>
                      	</tr>
                      	<tr>
-                     		<td class="unit" colspan="3">${qaInfo.qaScContent}</td>
+                     		<td class="unit" colspan="3">${qaInfo.qaSelContent}</td>
                      	</tr>
                   </table>
                </div>
-               	<c:set var="temp" value="${qaInfo.qaScStat}" />
+               	<c:set var="temp" value="${qaInfo.qaSelStat}" />
                	<c:if test="${temp eq 'Y'}">
                		<div class="reviewBtn"><input type="button" value="답변내용" id="reviewBtn" style="float: right"></div>
                	</c:if>
@@ -82,7 +82,7 @@
                				<th class="replyScContent" colspan="2">답변내용</th>
                			</tr>
                			<tr>
-               				<td class="unit" colspan="2" align="center">${qaReply.replyScContent}</td>
+               				<td class="unit" colspan="2" align="center">${qaReply.replySelContent}</td>
                			</tr>
                			<tr class="table-title">
                				<th class="memId">관리자</th>
@@ -90,7 +90,7 @@
                			</tr>
                			<tr>
 							<td class="unit">${qaReply.memId}</td>
-							<td class="unit">${qaReply.replyScReg}</td>               			
+							<td class="unit">${qaReply.replySelReg}</td>               			
                			</tr>
                		</table>
                </div>

@@ -53,5 +53,8 @@ public interface OrderDAO {
 	
 	// 자주 시켜먹은 푸드트럭 순위 
 	public List<OrderVO> getFavoriteFoodtruck(String memId);
+	
+	// 사용자가 주문한 정보 ordNo만 쓸거
+	public List<OrderVO> getOrdNo(String memId);
 }
 
