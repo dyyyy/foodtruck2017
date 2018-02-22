@@ -23,10 +23,8 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
-	
 	@Autowired
 	SellerService sellerService;
-	
 	@Autowired
 	OrderService orderService;
 	
@@ -90,12 +88,24 @@ public class MemberController {
 		return "redirect:/memberInfo";
 	}
 	
+	// 관심있는 푸드트럭 5개 까지 보여주고 / 바로 주문할 수 있또로로오오오옥!
+	@RequestMapping("/favoriteFoodtruck")
+	public String favoriteFoodtruckPage(HttpSession session, HttpServletRequest request) {
+		
+		String memId = (String) session.getAttribute("memberId");
+		List<OrderVO> list = orderService.getFavoriteFoodtruck(memId);
+
+		request.setAttribute("list", list);
+			
+		return "nav/favoriteFoodtruck";
+	}
+	
 	// *********************************************************** 사용자 문의 내역 리스트
 	@RequestMapping("/memberQaInfoList") 
 	public String memberQaInfoList(HttpSession session,HttpServletRequest request) {
 		
-		String memId = (String)session.getAttribute("memberId");
-		request.setAttribute("qalist",memberService.getMemberQaInfoList(memId));
+		MemberVO vo = (MemberVO)session.getAttribute("member");
+		request.setAttribute("qalist",memberService.getMemberQaInfoList(vo.getMemberId()));
 		
 		return "member/memberQaInfoList";
 	}
@@ -104,10 +114,10 @@ public class MemberController {
 	@RequestMapping("/memberQaInfo")
 	public String memberQaInfo(HttpServletRequest request) {
 		
-		int qaSelNo = Integer.parseInt(request.getParameter("qaSelNo"));
-		MInquiryVO vo = memberService.getMemberQaInfo(qaSelNo);
+		int qaScNo = Integer.parseInt(request.getParameter("qaScNo"));
+		MInquiryVO vo = memberService.getMemberQaInfo(qaScNo);
 		request.setAttribute("qaInfo", vo);
-		MinquiryReplyVO vo2 = memberService.getMemberQaReply(qaSelNo);
+		MinquiryReplyVO vo2 = memberService.getMemberQaReply(qaScNo);
 		request.setAttribute("qaReply", vo2);
 		
 		return "member/memberQaInfo";
