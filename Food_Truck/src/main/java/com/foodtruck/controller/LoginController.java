@@ -1,4 +1,3 @@
-
 package com.foodtruck.controller;
 
 import java.util.HashMap;
@@ -18,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.MemberService;
-import com.foodtruck.service.OrderService;
 import com.foodtruck.service.SellerService;
-import com.foodtruck.vo.LicenseVO;
-
 import com.foodtruck.vo.MemberVO;
-import com.foodtruck.vo.OrderVO;
 import com.foodtruck.vo.SellerVO;
 
 @Controller
@@ -33,12 +28,8 @@ public class LoginController {
 
 	@Autowired
 	MemberService memberService;
-
 	@Autowired
 	SellerService sellerService;
-	
-	@Autowired
-	OrderService orderService;
 
 	// 로그인 폼으로 이동
 	@RequestMapping("/loginform")
@@ -51,11 +42,12 @@ public class LoginController {
 	// 로그인 했을때
 	@RequestMapping("/login")
 	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, HttpSession session,
-			HttpServletRequest request, HttpServletResponse response) {
+						HttpServletRequest request, HttpServletResponse response) {
 		
 		MemberVO mvo = memberService.getMember(id);
 
 		if (mvo != null) {
+			
 			if (mvo.getMemberPw().equals(pw)) {
 				session.setAttribute("member", mvo);
 				session.setAttribute("memberId", mvo.getMemberId());
@@ -71,8 +63,8 @@ public class LoginController {
 				}
 				request.getSession().setAttribute("member", mvo);
 				return "redirect:/";
+			
 			} else {
-				request.setAttribute("msg", "占쏙옙橘占싫ｏ옙占� 占쏙옙占쏙옙 占십쏙옙占싹댐옙.");
 				request.setAttribute("msg", "비밀번호가 틀립니다.");
 				request.setAttribute("addr", "loginform");
 				return "comm/msg";
@@ -81,6 +73,7 @@ public class LoginController {
 		} else {
 
 			return "comm/msg";
+			
 		}
 	}
 
@@ -139,7 +132,7 @@ public class LoginController {
 	@RequestMapping("/findId")
 	public MemberVO findId(HttpServletRequest request){
 		String memberTel = request.getParameter("memberTel");
-		System.out.println(memberTel);
+		System.out.println("**회원 휴대폰번호**" + memberTel);
 		return memberService.getId(memberTel);
 	}
 	
@@ -149,12 +142,14 @@ public class LoginController {
 	public MemberVO findPw(HttpServletRequest request){
 		String memberTel = request.getParameter("memberTel2");
 		String memberId = request.getParameter("memberId");
-		System.out.println(memberTel);
-		System.out.println(memberId);
+		System.out.println("pw찾기) 휴대폰번호 : " + memberTel + " / 회원 아이디 " + memberId);
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("memberTel", memberTel);
 		map.put("memberId", memberId);
+		
 		return memberService.getPw(map);
 	}
+	
 }
 
