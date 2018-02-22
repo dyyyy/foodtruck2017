@@ -53,7 +53,7 @@ public class AdminController {
 		}
 
 
-		List<FoodTruckVO> list = foodtruckService.getFoodTruckList(NpageNo);
+		List<FoodTruckVO> list = foodtruckService.getAllFoodTruckList(NpageNo);
 
 		String stat="운영중";
 		String stat2="마감";
@@ -69,7 +69,7 @@ public class AdminController {
 			}
 		}
 
-		int count = foodtruckService.getCountTruck();
+		int count = foodtruckService.getAllCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);

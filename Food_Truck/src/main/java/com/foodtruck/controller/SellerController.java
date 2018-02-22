@@ -200,23 +200,26 @@ public class SellerController {
 					return "seller/ing";
 				}
 			} else {
-				System.out.println("진입1");
+				System.out.println("member null이 아니래");
 				List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
 				request.getSession().setAttribute("member", mvo);
 				String num = licenseNo;
-				System.out.println("진입2");
+				
 				// 해당 푸드트럭의 라이센스번호를 가져와서 해당 지역의 이름의 축제정보 가져오기
-				FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);
-				System.out.println("진입3");
+				FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);				
 				if (vo.getFtruckAddr() == null) {
 					vo.setFtruckAddr(vo.getFtruckAddr2());
 				}
+				System.out.println("현재 내위치는?="+vo.getFtruckAddr());
 				// 주소의 앞부분 2자리까지 자르기
 				String addr = vo.getFtruckAddr().substring(0, 2);
 				// 주소로 축제 정보 리스트 가져오기
 				List<FestivalVO> list3 = (List<FestivalVO>) feservice.getFestivalList3(addr);
-				// 5개의 랜덤으로 축제정보 저장할 리스트
-				if(list3!=null) {
+				
+				System.out.println("축제정보의 리스트 사이즈값은 ="+list3.size());
+				//만약 지역 축제정보가 5개 이상이라면
+				if(list3.size()>=5) {
+					System.out.println("축제정보가 5개이상이래");
 					List<FestivalVO> finalList = new ArrayList<FestivalVO>();
 					// 주소로 가져온 행사의 리스트 사이즈
 					int size = list3.size();
@@ -224,6 +227,7 @@ public class SellerController {
 						int random = (int) (Math.random() * list3.size()); // 리스트 사이즈만큼의 숫자
 						ArrayList<Integer> arr = new ArrayList<Integer>();
 						arr.add(random);
+						//선별된 랜덤값 으로 5번 while문 돌리기.
 						while (true) {
 							int flag = 0; // 중복인지 아닌지 판별하는 변수
 
@@ -242,13 +246,32 @@ public class SellerController {
 							if (arr.size() == 5)
 								break; // 만약 리스트의 사이즈가 5와 같다면 무한루프 빠져나감
 						}
+						//랜덤 함수로 인해 선별된 숫자의 리스트 값을 FinalList에 저장
 						for (int i = 0; i < arr.size(); i++) {
 							finalList.add(i, list3.get(arr.get(i)));				
-						}					
+						}
+						request.setAttribute("numlist", finalList.size()-1);
 						request.setAttribute("list3", finalList);
-
-					}	
+						request.setAttribute("check", "Y");
+					}
+					//축제 정보가 5개 미만이고 0개 이상이라면
+				}else if(list3.size()<5 && list3.size()>0){
+					System.out.println("축제정보가 5개 이하면서 0이상이래");
+					request.setAttribute("list3",list3);
+					request.setAttribute("numlist", list3.size()-1);
+					request.setAttribute("check", "Y");
+				}else if(list3.size()==0){
+					System.out.println("축제정보가 없대");
+					List<FestivalVO> list4=new ArrayList<FestivalVO>();		
+					FestivalVO vo2= new FestivalVO();
+					vo2.setFesImg("none");
+					vo2.setFesName("none");
+					list4.add(0, vo2);				
+					request.setAttribute("list3", list4);
+					request.setAttribute("numlist", list4.size());
+					request.setAttribute("check", "N");
 				}
+				
 				//전체
 				List<SellerVO> slist=sservice.getTodayOrderList(num);
 				//통계

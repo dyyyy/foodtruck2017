@@ -47,17 +47,33 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function() { 
+//페이지 로드하자마자 묻는 JS	
+<%String check=(String)request.getAttribute("check");%>
+var check='<%=check%>';
+var slide=document.getElementById("myCarousel");
+if(check=='Y'){
+	slide.style.display = 'block';
+}else{
+	slide.style.display = 'none';
+}
+
+});
+
 
 $(function() {
     $('.chart').easyPieChart({
        animate : 1000
     });
+    
+    $('.carousel').carousel()
  })
  
  function ch(){
 	var sel = $("select").val();
 	location.href = "/sellerMain?licenseNo=" + sel;
 }
+
 
 </script>
 
@@ -113,28 +129,28 @@ $(function() {
 				<div class="row-fluid"></div>
 				<div class="row-fluid">
 					<!-- block -->
-					<div class="block">
+					<div class="block" style="height: 300px;">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">오늘의 추천 축제</div>
 						</div>
 						<!-- 슬라이드 시작 -->
-
-						<div id="carousel-example-generic"
-							class="carousel slide hidden-xs" data-ride="carousel"
-							style="height: 300px; width: 100%;">
+						<%int number=(int)request.getAttribute("numlist"); %>
+						<%if(check.equals("Y")){ %>
+						<div id="myCarousel"
+							class="carousel slide" 
+							style="height: 300px; width: 100%;  display: none" >
 
 							<ol class="carousel-indicators">
-
-								<li data-target="#carousel-example-generic" data-slide-to="0"
-									class="active"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="3"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="4"></li>
+								  <li data-target="#myCarousel" data-slide-to="0"
+                           		class="active"></li>
+								<%for(int i=1;i<=number;i++){ %>
+								<li data-target="#myCarousel" data-slide-to="<%=i%>" class=""></li>						
+								<%} %>
+								
 
 							</ol>
 							<div class="carousel-inner" style="height: 300px; width: 100%;"
-								role="listbox">
+								>
 								<%
 									List<FestivalVO> festivalList = (List<FestivalVO>) request.getAttribute("list3");
 								%>
@@ -162,28 +178,30 @@ $(function() {
 										<p><%=festivalList.get(j).getFesName()%></p>
 									</div>
 								</div>
-								<%
-									}
-								%>
+								<%} %>
 								<%
 									}
 								%>
 								<a class="left carousel-control"
-									href="#carousel-example-generic" role="button"
-									data-slide="prev"> <span
+									href="#myCarousel" role="button"
+									data-slide="prev"> &lsaquo;<span
 									class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 									<span class="sr-only"></span>
 								</a> <a class="right carousel-control"
-									href="#carousel-example-generic" role="button"
-									data-slide="next"> <span
+									href="#myCarousel" role="button"
+									data-slide="next">&rsaquo; <span
 									class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 									<span class="sr-only"></span>
 								</a>
 							</div>
 							<!-- carousel-inner close -->
 						</div>
+						<%}else{ %>
+						<div align="center"><h3>현재 푸드트럭위치 주변에 축제정보가 없습니다</h3></div>
+						
+						<%} %>
 					</div>
-					<div class="block">
+					<div class="block" style="margin-top: 50px;">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">매출</div>
 							<div class="pull-right">
