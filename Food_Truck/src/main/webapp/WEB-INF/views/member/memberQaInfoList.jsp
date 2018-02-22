@@ -64,9 +64,9 @@
                      	<c:forEach items="${qalist}" var="list" varStatus="status">
                      	<tr>
                      		<td class="unit">${status.count}</td>
-                     		<td class="unit" colspan="5"><a href="/memberQaInfo?qaScNo=${list.qaScNo}">${list.qaScTitle}</a></td>
-                     		<td class="unit">${list.qaScReg}</td>
-                     		<td class="unit">${list.qaScStat}</td>
+                     		<td class="unit" colspan="5"><a href="/memberQaInfo?qaSelNo=${list.qaSelNo}">${list.qaSelTitle}</a></td>
+                     		<td class="unit">${list.qaSelReg}</td>
+                     		<td class="unit">${list.qaSelStat}</td>
                      	</tr>
                      	</c:forEach>	
                      </tbody>

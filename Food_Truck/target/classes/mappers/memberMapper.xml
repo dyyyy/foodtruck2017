@@ -6,7 +6,7 @@
 
 	<!-- 사용자 문의내역리스트 -->
 	<select id="getMemberQaInfoList" resultMap="InquiryMap">
-		SELECT Q.* FROM QA_SC Q , MEMBER M 
+		SELECT Q.* FROM QA_SELLER Q , MEMBER M 
 		WHERE Q.MEM_ID = M.MEM_ID 
 		AND M.MEM_ID = #{memId}
 	</select>
