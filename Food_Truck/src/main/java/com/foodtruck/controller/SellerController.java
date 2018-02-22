@@ -1,58 +1,30 @@
 package com.foodtruck.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
-
 import java.util.List;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
-import com.foodtruck.service.MemberService;
-
-import com.foodtruck.service.OrderService;
-
 import com.foodtruck.service.ProductService;
-
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
-import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
-
-import com.foodtruck.vo.OrderVO;
-
 import com.foodtruck.vo.ProductVO;
 import com.foodtruck.vo.SellerVO;
 
@@ -60,30 +32,22 @@ import com.foodtruck.vo.SellerVO;
 public class SellerController {
 
 	@Autowired
-	FoodTruckService foodTruckService;
-
+	SellerService sellerService;
 	@Autowired
-
-	MemberService mservice;
+	ProductService productService;
 	@Autowired
-	SellerService sservice;
-
+	FoodTruckService foodtruckService;
 	@Autowired
-	private ProductService productService;
+	FestivalService festivalService;
 
-	@Autowired
-	FoodTruckService fservice;
-
-	@Autowired
-	FestivalService feservice;
-
+	// 내 푸드트럭 관리 -> 내 푸드트럭 설정
 	@RequestMapping("/sellerInfo")
 	public String sellerInfo(@RequestParam(value = "licenseNo", required = false) String licenseNo,
-			HttpServletRequest request, HttpSession session, Model model) throws Exception {	
-		String num=licenseNo;
+							 HttpServletRequest request, HttpSession session, Model model) throws Exception {	
+		
+		String num = licenseNo;
 		FoodTruckVO vo = new FoodTruckVO();
-		vo = fservice.getFoodTruck2(licenseNo);
-		System.out.println(vo.getFtruckCondtion()+"=====================");
+		vo = foodtruckService.getFoodTruck2(licenseNo);
 		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
@@ -102,25 +66,26 @@ public class SellerController {
 	@RequestMapping("/updatePosition")
 	@ResponseBody
 	public int updatePosition(FoodTruckVO vo) throws Exception {
-		int num = fservice.updateTruckPosition(vo);
+		int num = foodtruckService.updateTruckPosition(vo);
 		return num;
 	}
 	
-	
+	// 내 푸드트럭 관리 -> 매출 통계
 	@RequestMapping("/sellerCalendar")
 	public String sellerCalendar(HttpSession session, HttpServletRequest request, Model model,
-			@RequestParam(value = "licenseNo", required = false) String licenseNo, SellerVO vo) throws Exception {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
+								 @RequestParam(value = "licenseNo", required = false) String licenseNo, SellerVO vo) throws Exception {
+		
+		String memId = (String) session.getAttribute("memberId");
 		List<SellerVO> list = new ArrayList<SellerVO>();
 		JSONObject jsonObject = new JSONObject(); // 푸드트럭 매출 최종
 		JSONArray dateArray = new JSONArray(); // 푸드트럭 매출 json 배열
 		JSONObject dateInfo = null; // 매출 정보
-		if(mvo != null) {
+		if(memId != null) {
 			if (licenseNo != null) {
 				String num=licenseNo;
-				list = (List<SellerVO>)sservice.getPrice(num);
+				list = (List<SellerVO>)sellerService.getPrice(num);
 				model.addAttribute("licenseNo", num); 
-				model.addAttribute("license", sservice.getLicense(mvo.getMemberId()));
+				model.addAttribute("license", sellerService.getLicense(memId));
 				for(SellerVO vvo : list) {
 					dateInfo = new JSONObject();
 					System.out.println("salesDate : " + vvo.getSalesDate());
@@ -136,8 +101,8 @@ public class SellerController {
 				
 				// 전체의 jsonObject에 monthly 라는 이름으로 배열의 value값을 입력
 				jsonObject.put("monthly", dateArray);
-				System.out.println("state : " + fservice.getFoodTruck2(num));
-				request.setAttribute("state", fservice.getFoodTruck2(num));
+				System.out.println("state : " + foodtruckService.getFoodTruck2(num));
+				request.setAttribute("state", foodtruckService.getFoodTruck2(num));
 			}
 			request.setAttribute("monthly", jsonObject.toJSONString());
 			
@@ -149,21 +114,22 @@ public class SellerController {
 	
 	// 마감
 	@RequestMapping("/closeFoodTruck")
-	public String closeFoodTruck(@RequestParam(value = "licenseNo", required = false) String licenseNo,FoodTruckVO fvo, SellerVO svo,
-			HttpSession session) {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
+	public String closeFoodTruck(@RequestParam(value = "licenseNo", required = false) String licenseNo,
+								 FoodTruckVO fvo, SellerVO svo, HttpSession session) {
+		
+		String memId = (String) session.getAttribute("memberId");
 		String no = null;
-		if (mvo != null) {
+		if (memId != null) {
 			if (licenseNo != null) {
 				no = licenseNo;
-				sservice.closeFoodTruck(fvo);
-				System.out.println("test : " + sservice.getPrice(no));
-				if(sservice.getPrice(no).isEmpty()) {
+				sellerService.closeFoodTruck(fvo);
+				System.out.println("test : " + sellerService.getPrice(no));
+				if(sellerService.getPrice(no).isEmpty()) {
 					System.out.println("insertinsertinsert");
-					sservice.insertPrice(svo);
+					sellerService.insertPrice(svo);
 				} else {
 					System.out.println("updateupdateupdate");
-					sservice.updatePrice(svo);
+					sellerService.updatePrice(svo);
 				}
 			}
 		}
@@ -172,27 +138,29 @@ public class SellerController {
 	
 	// 운영
 	@RequestMapping("/openFoodTruck")
-	public String openFoodTruck(@RequestParam(value = "licenseNo", required = false) String licenseNo,FoodTruckVO fvo, SellerVO svo,
-			HttpSession session) {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
+	public String openFoodTruck(@RequestParam(value = "licenseNo", required = false) String licenseNo,
+								FoodTruckVO fvo, SellerVO svo, HttpSession session) {
+		
+		String memId = (String) session.getAttribute("memberId");
 		String no = null;
-		if (mvo != null) {
+		if (memId != null) {
 			if (licenseNo != null) {
 				no = licenseNo;
-				sservice.openFoodTruck(fvo);
+				sellerService.openFoodTruck(fvo);
 			}
 		}
 		return "redirect:/sellerCalendar?licenseNo="+no;
 	}
 	
-	
+	// 내 푸드트럭 관리 -> 주문 및 예약 & 배달
 	@RequestMapping("/sellerMain")
 	public String sellerMain(@RequestParam(value = "licenseNo", required = false) String licenseNo,
-			HttpServletRequest request, Model model, HttpSession session) throws Exception {
+							 HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
 		if (mvo != null) {
 			if (licenseNo == null) {
-				List<SellerVO> list = sservice.getLicense2(mvo.getMemberId());
+				List<SellerVO> list = sellerService.getLicense2(mvo.getMemberId());
 				int count = list.size();
 				if (count == 0) {
 					return "seller/null";
@@ -200,13 +168,12 @@ public class SellerController {
 					return "seller/ing";
 				}
 			} else {
-				System.out.println("member null이 아니래");
-				List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
+				List<SellerVO> list = sellerService.getLicense(mvo.getMemberId());
 				request.getSession().setAttribute("member", mvo);
 				String num = licenseNo;
 				
 				// 해당 푸드트럭의 라이센스번호를 가져와서 해당 지역의 이름의 축제정보 가져오기
-				FoodTruckVO vo = fservice.getFoodTruck2(licenseNo);				
+				FoodTruckVO vo = foodtruckService.getFoodTruck2(licenseNo);				
 				if (vo.getFtruckAddr() == null) {
 					vo.setFtruckAddr(vo.getFtruckAddr2());
 				}
@@ -214,7 +181,7 @@ public class SellerController {
 				// 주소의 앞부분 2자리까지 자르기
 				String addr = vo.getFtruckAddr().substring(0, 2);
 				// 주소로 축제 정보 리스트 가져오기
-				List<FestivalVO> list3 = (List<FestivalVO>) feservice.getFestivalList3(addr);
+				List<FestivalVO> list3 = (List<FestivalVO>) festivalService.getFestivalList3(addr);
 				
 				System.out.println("축제정보의 리스트 사이즈값은 ="+list3.size());
 				//만약 지역 축제정보가 5개 이상이라면
@@ -273,13 +240,13 @@ public class SellerController {
 				}
 				
 				//전체
-				List<SellerVO> slist=sservice.getTodayOrderList(num);
+				List<SellerVO> slist=sellerService.getTodayOrderList(num);
 				//통계
-				List<SellerVO> clist=sservice.getTodayPayment(num);
+				List<SellerVO> clist=sellerService.getTodayPayment(num);
 				//배달
-				List<SellerVO> dlist=sservice.getTodayDlvList(num);
+				List<SellerVO> dlist=sellerService.getTodayDlvList(num);
 				//예약
-				List<SellerVO> rlist=sservice.getTodayRsvList(num);
+				List<SellerVO> rlist=sellerService.getTodayRsvList(num);
 				System.out.println(slist.size());
 				System.out.println(clist.size());
 				System.out.println(dlist.size());
@@ -300,39 +267,44 @@ public class SellerController {
 
 				return "seller/main";
 			}
-		} else
+			
+		} else {
 			return "sign/login";
-
+		}
 	}
-
+	
+	// 푸드트럭 등록 
 	@RequestMapping("/insertFoodTruckForm")
 	public String insertFoodTruckForm() {
 		return "seller/insertFoodTruck";
 	}
-
+	
+	// 푸드트럭 상품 등록
 	@RequestMapping("/sellerProduct")
 	public String sellerProduct(@RequestParam(value = "licenseNo") String licenseNo, HttpServletRequest request,
-			Model model, HttpSession session) throws Exception {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if (mvo != null) {
-			FoodTruckVO vo=foodTruckService.getFoodTruck2(licenseNo);
+								Model model, HttpSession session) throws Exception {
+		
+		String memId = (String) session.getAttribute("memberId");
+		if (memId != null) {
+			FoodTruckVO vo=foodtruckService.getFoodTruck2(licenseNo);
 			String ftno=vo.getFtruckNo();
-			List<SellerVO> list = sservice.getLicense(mvo.getMemberId());
+			List<SellerVO> list = sellerService.getLicense(memId);
 			List<ProductVO> list2 = productService.getProductList(ftno);
 			request.setAttribute("list", list);
 			request.setAttribute("licenseNo", licenseNo);
 			request.setAttribute("list2", list2);
-
 			return "seller/sellerProduct";
-		} else
+			
+		} else {
 			return "sign/login";
+		}
 	}
 
 	@RequestMapping("/modal")
 	@ResponseBody
-	public HashMap modal(@RequestParam("licenseNo") String licenseNo) {
+	public HashMap<String, Object> modal(@RequestParam("licenseNo") String licenseNo) {
 
-		HashMap map = new HashMap();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("licenseNo", licenseNo);
 
 		return map;
@@ -340,74 +312,56 @@ public class SellerController {
 
 	// 푸드트럭 등록
 	@ResponseBody
-
 	@RequestMapping("/insertFoodTruck")
-	public int insertFoodTruck(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo)
-			throws Exception, IOException {
+	public int insertFoodTruck(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo) throws Exception, IOException {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-
 		// License 테이블 insert
 		LicenseVO lvo = new LicenseVO();
 		lvo.setLicenseNo(fvo.getLicenseNo());
 		lvo.setMemId(mvo.getMemberId());
-		sservice.insertLicense(lvo);
+		sellerService.insertLicense(lvo);
 
 		// Foodtruck 테이블 insert
 		fvo.setLicenseNo(lvo.getLicenseNo());
 		fvo.setFtruckTel(mvo.getMemberTel());
-		int num = sservice.insertFoodTruck(fvo);
+		int num = sellerService.insertFoodTruck(fvo);
 
 		return num;
 	}
-
-	@RequestMapping("/detailFoodTruckForm")
-	public String detailFoodTruckForm() {
-		return "seller/detailFoodTruck";
-	}
-
+	
+	// inserFoodTruck.jsp 에서 사업자 번호 중복 체크
 	@ResponseBody
 	@RequestMapping("/licenseNoCheck")
 	public FoodTruckVO licenseNoCheck(HttpServletRequest request) {
+		
 		String licenseNo = request.getParameter("licenseNo");
-
-		return sservice.getFoodTruck(licenseNo);
+		return sellerService.getFoodTruck(licenseNo);
+		
 	}
 
+	
 	@RequestMapping("/productMng")
 	public String productMng(HttpSession session, HttpServletRequest request, Model model) {
+		
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
-		if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
-			model.addAttribute("license", sservice.getLicense(mvo.getMemberId()));
-			model.addAttribute("product", sservice.getProductList(request.getParameter("licenseNo")));
+		if (!sellerService.getLicense(mvo.getMemberId()).isEmpty()) {
+			model.addAttribute("license", sellerService.getLicense(mvo.getMemberId()));
+			model.addAttribute("product", sellerService.getProductList(request.getParameter("licenseNo")));
 			return "seller/productMng";
 		} else {
 			return "seller/insertFoodTruck";
 		}
+		
 	}
-	
-	
-/*
-	@RequestMapping("/foodTruckMng")
-	public String foodTruckMng(Model model, HttpServletRequest request, HttpSession session) {
-		MemberVO mvo = (MemberVO) session.getAttribute("member");
-
-		if (!sservice.getLicense(mvo.getMemberId()).isEmpty()) {
-			model.addAttribute("foodtruck", sservice.getLicense(mvo.getMemberId()));
-			return "seller/foodTruckMng";
-		} else {
-			return "seller/insertFoodTruck";
-		}
-
-	}
-*/
 	
 	// 판매자 licenseNo로 푸드트럭 정보 가져오기
 	@RequestMapping("/asd")
 	@ResponseBody
-	public HashMap foodtruckInfo(@RequestParam("licenseNo") String licenseNo) {
-		HashMap map = new HashMap();
-		FoodTruckVO vo = sservice.getFoodtruckDtail(licenseNo);
+	public HashMap<String, Object> foodtruckInfo(@RequestParam("licenseNo") String licenseNo) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		FoodTruckVO vo = sellerService.getFoodtruckDtail(licenseNo);
 		if (vo.getFtruckAddr() == null) {
 			vo.setFtruckAddr(vo.getFtruckAddr2());
 		}
@@ -436,6 +390,5 @@ public class SellerController {
 
 		return map;
 	}
-	
 
 }
