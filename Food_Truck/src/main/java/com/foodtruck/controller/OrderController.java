@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +28,6 @@ import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
 import com.foodtruck.vo.DeliveryDetailVO;
 import com.foodtruck.vo.FoodTruckVO;
-import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.OrderDetailVO;
 import com.foodtruck.vo.OrderVO;
 import com.foodtruck.vo.ProductVO;
@@ -38,42 +36,38 @@ import com.foodtruck.vo.ReviewVO;
 
 @Controller
 public class OrderController {
-	@Autowired
-	ProductService Pservice;
 	
 	@Autowired
-	OrderService Oservice;
-	
+	ProductService productService;
+	@Autowired
+	OrderService orderService;
 	@Autowired
 	OrderDetailService orderdetailService;
-	 
 	@Autowired
 	ReviewService reviewService;
-	
 	@Autowired
-	FoodTruckService fService;
-	
+	FoodTruckService foodtruckService;
 	@Autowired
-	DeliveryDetailService ddservice;
-	
+	DeliveryDetailService deliveryDetailService;
 	@Autowired
-	MemberService mService;	
+	MemberService memberService;	
 	
-	
+	// read (푸드트럭 상세보기) 에서 주문하기 버튼 눌렀을 때
 	@RequestMapping("/order")
-	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo,HttpServletRequest request,
+	public String order(HttpSession session,@RequestParam("licenseNo") String licenseNo, HttpServletRequest request,
 						@RequestParam("ftruckNo") String ftruckNo) throws Exception {
+		
 		String memId = (String) session.getAttribute("memberId");
 		if (memId == null) {
-			List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
-			request.setAttribute("ftruckDlvYn", "N");
+			List<ProductVO> Plist = productService.getProductList(ftruckNo);
 			request.setAttribute("list", Plist);
 		} else {
-			List<ProductVO> Plist = Pservice.getProductList(ftruckNo);
-			FoodTruckVO vo = fService.getFoodTruck(ftruckNo);
+			List<ProductVO> Plist = productService.getProductList(ftruckNo);
+			FoodTruckVO vo = foodtruckService.getFoodTruck(ftruckNo);
 			String ftruckDlvYn = vo.getFtruckDlvYn();
 			
-			int mileage = mService.getMember(memId).getMileage();	//사용자가 가지고있는 마일리지
+			//사용자가 가지고있는 마일리지
+			int mileage = memberService.getMember(memId).getMileage();	
 			request.setAttribute("mileage", mileage);
 			
 			request.setAttribute("ftruckDlvYn", ftruckDlvYn);
@@ -86,6 +80,7 @@ public class OrderController {
 	//비회원 주문번호 + 전화번호로 주문내역 보기 
 	@RequestMapping("/nonMemberOrderDetail")
 	public String nonMemberOrderDetail(HttpServletRequest request) {
+		
 		String ordNo = request.getParameter("ordNo");
 		String ordTel = request.getParameter("ordTel");
 		
@@ -93,7 +88,8 @@ public class OrderController {
 		map.put("ordNo", ordNo);
 		map.put("ordTel", ordTel);
 		
-		List<OrderVO> list = (List<OrderVO>) Oservice.getNonmemberInfo(map);
+		// 주문 내역 (영수증 역할)
+		List<OrderVO> list = (List<OrderVO>) orderService.getNonmemberInfo(map);
 		request.setAttribute("nonList", list);
 		request.setAttribute("ordNo", list.get(0).getOrdNo());
 		request.setAttribute("ordName", list.get(0).getOrdName());
@@ -109,20 +105,19 @@ public class OrderController {
 	// 사용자 주문내역 조회
 	@RequestMapping("/memberOrderInfo")
 	public String memberOrderInfo(HttpSession session,HttpServletRequest request) {
-		MemberVO vo = (MemberVO)session.getAttribute("member");
-		List<OrderVO> list = Oservice.getMemberOrderList(vo.getMemberId());
-		request.setAttribute("list", list);
 		
-		MemberVO mvo = (MemberVO)session.getAttribute("member");
-		String memId = mvo.getMemberId(); 
+		String memId = (String) session.getAttribute("memberId"); 
+		
+		List<OrderVO> list = orderService.getMemberOrderList(memId);
+		request.setAttribute("list", list);
 		
 		List<ReviewVO> reviewList = reviewService.getFoodTrcukName(memId);
 		request.setAttribute("reviewList", reviewList);
-		Oservice.dlvTimeUpdate(memId); // 사용자가 배달시간? 알림온거 확인하면 변경
+		// 사용자가 배달시간? 알림온거 확인하면 변경
+		orderService.dlvTimeUpdate(memId); 
 		
 		return "member/memberOrderInfo";
 	}
-	
 	
 	// 주문 -> 예약 & 예약 디테일 (& 배달 디테일)
 	@RequestMapping("/orderRegit")
@@ -168,17 +163,21 @@ public class OrderController {
 		if(memId != null) {
 			orderMap.put("memId", memId);
 			int mileage = (int)(sumPrice * 5 * 0.01);	// 주문 총 가격 의 5% 마일리지로 적립
-			int getmileage = mService.getMember(memId).getMileage(); // 회원의 마일리지 확인
+			int getmileage = memberService.getMember(memId).getMileage(); // 회원의 마일리지 확인
+			
 			if(getmileage != 0) {	// 마일리지가 있으면 기존 마일리지 + 적립 마일리지
 				mileage += getmileage;
 			}
+			
 			memberMap.put("memId", memId);
 			memberMap.put("mileage", mileage);
-			mService.updateMileage(memberMap);	// 마일리지 수정				
-		}else {
+			memberService.updateMileage(memberMap);	// 마일리지 수정	
+			
+		} else {
 			orderMap.put("memId", "");
-		}		
-		// order 테이블에 들어갈껑!
+		}	
+		
+		// order 테이블에 들어갈 데이터
 		if(ordName != null) {
 			orderMap.put("ordName", ordName);
 			orderMap.put("ordTel", ordTel);
@@ -187,15 +186,14 @@ public class OrderController {
 			orderMap.put("sumPrice", sumPrice);
 			orderMap.put("ordDlyYn", ordDlyYn);
 			orderMap.put("payment", payment);
-				
 		}
 		
-		Oservice.insertOrder(orderMap); 
+		orderService.insertOrder(orderMap); 
 		
 		String ordNo = String.valueOf(orderMap.get("ordNo"));
 		
 		for(int i = 0 ; i < prodNo.size() ; i++) {
-			// orderdetail 테이블
+			// orderdetail 테이블에 들어갈 데이터
 			orderdetailMap.put("prodNo", prodNo.get(i));
 			orderdetailMap.put("ordQty", ordQty.get(i));
 			orderdetailMap.put("ordPrice", ordPrice.get(i));
@@ -209,6 +207,7 @@ public class OrderController {
 			
 		orderInfoList.put("ordNo", ordNo);
 		orderInfoList.put("licenseNo", licenseNo);
+		// 영수증 역할 -> 1번씩만 나와도 되는 데이터
 		List<OrderDetailVO> orderInfolist = orderdetailService.getOrderInfoList(ordNo);
 		request.setAttribute("dlvAddr", "none");
 		request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
@@ -220,20 +219,21 @@ public class OrderController {
 			
 		// 다수의 값들
 		request.setAttribute("orderInfolist", orderInfolist);	
-		System.out.println("진입이당!");
 			
-		//배달상세내역 insert
+		// deliveryDetail 테잉블에 들어갈 데이터
 		if("Y".equals(ordDlyYn)) {
+			
 			String dlvAddr="";
-			dlvAddr+=dlvAddr1;
-			dlvAddr+="  "+dlvAddr2;
+			dlvAddr += dlvAddr1;
+			dlvAddr += "  " + dlvAddr2;
 				
-			DeliveryDetailVO vo= new DeliveryDetailVO();
+			DeliveryDetailVO vo = new DeliveryDetailVO();
 			vo.setDlvAddr(dlvAddr);
 			vo.setOrdNo(ordNo);
 			vo.setDlvState(0);
-			ddservice.insertDeliveryDetail(vo);
-			System.out.println("진입이당!8");
+			
+			deliveryDetailService.insertDeliveryDetail(vo);
+			
 			request.setAttribute("dlvAddr", dlvAddr);
 			request.setAttribute("ordNo", orderInfolist.get(0).getOrdNo());
 			request.setAttribute("ordName", orderInfolist.get(0).getOrdName());
@@ -250,61 +250,66 @@ public class OrderController {
 	// 판매자 입장 / 상태 변경하기 (대기 / 조리 / 완료)
 	@RequestMapping("/cookStatChange")
 	@ResponseBody
-	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") int cookStat, @RequestParam("ordNo") String ordNo, @RequestParam(value="dlever",required=false) String dlever,@RequestParam(value="dlvDate",required=false) String dlvDate) {
-		//배달정보
-		System.out.println("상태봐꾸기 집입");
+	public ModelAndView cookStatChanage(Model model, @RequestParam("cookStat") int cookStat, 
+										@RequestParam("ordNo") String ordNo, 
+										@RequestParam(value="dlever",required=false) String dlever,
+										@RequestParam(value="dlvDate",required=false) String dlvDate) {
+
 		ModelAndView mv = new ModelAndView(new MappingJackson2JsonView());
-		if(dlever!=null) {
-			System.out.println("진입");
-			// 디비에 넣으러가잠!
+		
+		// 배달 내역 상태 바꾸기
+		if(dlever != null) {
 			HashMap<String, Object> map = new HashMap<>();
-	
 			map.put("cookStat", cookStat);
 			map.put("ordNo", ordNo);
 			map.put("dlvDate",dlvDate);
-			//배달시간 update
 			
-			mv.addObject("time", ddservice.dlyTimeUpdate(map));
-			mv.addObject("cookStatChange", ddservice.dlecookStatChange(map));
-		}else {
+			// 배달 내역 stat 변경
+			mv.addObject("time", deliveryDetailService.dlyTimeUpdate(map));
+			mv.addObject("cookStatChange", deliveryDetailService.dlecookStatChange(map));
+		
+		// 예약 내역 상태 바꾸기
+		} else {
 			System.out.println("상태 바꾸러 왔담 : " + "주문 번호" + ordNo + "변경할 상태 값 : " + cookStat);
 		
-			// 디비에 넣으러가잠!
 			HashMap<String, Object> map = new HashMap<>();
 			map.put("cookStat", cookStat);
 			map.put("ordNo", ordNo);
-			   
-			mv.addObject("cookStatChange", Oservice.cookSataChange(map));
-			   	
+			// 예약 내역 stat 변경
+			mv.addObject("cookStatChange", orderService.cookSataChange(map));
 		}
 		
 		return mv;
-		
 	}
 	
-	@ResponseBody
+	// 새로운 예약 주문 갯수 및 정보 
 	@RequestMapping("/updateOrderCountRsv")
+	@ResponseBody
 	public List<OrderVO> updateOrderCountRsv(HttpSession session) {
 		String memId = (String)session.getAttribute("memberId");
-		return Oservice.getNewCountRsv(memId);	// 판매자가 확인하지않은 새로운 예약 주문 갯수 및 정보
+		// 판매자가 확인하지않은 새로운 예약 주문 갯수 및 정보
+		return orderService.getNewCountRsv(memId);	
 	}
 	
-	@ResponseBody
+	// 판매자가 확인하지 않은 새로운 배달 주문 갯수 및 정보
 	@RequestMapping("/updateOrderCountDlv")
+	@ResponseBody
 	public List<OrderVO> updateOrderCountDlv(HttpSession session) {
 		String memId = (String)session.getAttribute("memberId");
-		return Oservice.getNewCountDlv(memId);	// 판매자가 확인하지 않은 새로운 배달 주문 갯수 및 정보
+		// 판매자가 확인하지 않은 새로운 배달 주문 갯수 및 정보
+		return orderService.getNewCountDlv(memId);	
 	}	
 	
-	@ResponseBody
+	// 조리중으로 바꾸면 일반 사용자한테 배달 시간을 보냄
 	@RequestMapping("/dlvTimeSend")
+	@ResponseBody
 	public OrderVO dlvTimeSend(HttpSession session) {
 		OrderVO vo = new OrderVO();
 		String memId = (String)session.getAttribute("memberId");
-		List<OrderVO> list = Oservice.ordStatFind(memId);
-		for(int i=0; i<list.size(); i++) {
+		List<OrderVO> list = orderService.ordStatFind(memId);
+		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getCookStat() == 1) {
-				vo = Oservice.dlvTimeSend(memId);
+				vo = orderService.dlvTimeSend(memId);
 			}
 		}
 		return vo;
@@ -313,20 +318,20 @@ public class OrderController {
 	// 주문 취소 하기
 	@RequestMapping("/orderCancel")
 	public String deleteOrder(HttpSession session, HttpServletRequest request, 
-			   							@RequestParam("ordNo") String ordNo,
-			   							@RequestParam("ordDlyYn") String ordDlyYn) {
+			   				  @RequestParam("ordNo") String ordNo,
+			   				  @RequestParam("ordDlyYn") String ordDlyYn) {
 		
 		System.out.println("주문 번호 확인 : " + ordNo + " /  배달 여부 확인  " + ordDlyYn);
 	    String memId = (String) session.getAttribute("memberId");
 	      
 	    // 배달 내역 삭제할 때
 	    if("Y".equals(ordDlyYn)) {
-	    	ddservice.deleteDeliveryDetail(ordNo);
+	    	deliveryDetailService.deleteDeliveryDetail(ordNo);
 	    }
 	    
 	    orderdetailService.deleteOrderDetail(ordNo);
 	     
-	    Oservice.deleteOrder(ordNo);
+	    orderService.deleteOrder(ordNo);
 	    System.out.println("삭제 완료");
 	         
 	    if(memId != null) {
