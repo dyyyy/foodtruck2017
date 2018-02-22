@@ -14,59 +14,68 @@ import com.foodtruck.vo.MinquiryReplyVO;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
-	MemberService mservice;
+	MemberService memberService;
+	
 	//1:1문의하기
 	@RequestMapping("memberinquriy")
 	public String memberinquriy(MInquiryVO vo) {	
-		String result="N";
-		vo.setQaScStat(result);
-		mservice.insertInquiry(vo);
+		
+		memberService.insertInquiry(vo);
 		return "home";
+
 	}
-	
+
+	// 회원으로 로그인 했을 때 나의주문 -> 나의 설정
 	@RequestMapping("/memberInfo")
-	public String memberInfo(HttpSession session,HttpServletRequest request) {
-		MemberVO vo = (MemberVO)session.getAttribute("member");
-		MemberVO vo2 = mservice.getMember(vo.getMemberId()); 
-		request.setAttribute("memberInfo", vo2);
+	public String memberInfo(HttpSession session, HttpServletRequest request) {
+		
+		String memId = (String) session.getAttribute("memberId");
+		MemberVO vo = memberService.getMember(memId);
+		
+		request.setAttribute("memberInfo", vo);
 		return "member/memberInfo";
 	}
 	
+	// 수정 클릭 했을 때, 암호입력(true / false 결과)
 	@RequestMapping("/memberInfoUpdateGet")
 	public String memberInfoUpdate(HttpSession session,HttpServletRequest request) {
-		MemberVO vo = (MemberVO)session.getAttribute("member");
-		MemberVO vo2 = mservice.getMember(vo.getMemberId());
-		request.setAttribute("memberInfo", vo2);
+		
+		String memId = (String) session.getAttribute("memberId");
+		MemberVO vo = memberService.getMember(memId);
+		request.setAttribute("memberInfo", vo);
 		return "member/memberInfoUpdate";
 	}
 	
+	// 회원 수정 폼 -> 수정 완료
 	@RequestMapping("/memberInfoUpdate")
 	public String memberInfoUpdate(MemberVO vo) {
-		mservice.updateMember(vo);
+		memberService.updateMember(vo);
 		return "redirect:/memberInfo";
 	}
 	
-	// 사용자 문의 내역 리스트
+	// *********************************************************** 사용자 문의 내역 리스트
 	@RequestMapping("/memberQaInfoList") 
 	public String memberQaInfoList(HttpSession session,HttpServletRequest request) {
 		
 		MemberVO vo = (MemberVO)session.getAttribute("member");
-		request.setAttribute("qalist",mservice.getMemberQaInfoList(vo.getMemberId()));
+		request.setAttribute("qalist",memberService.getMemberQaInfoList(vo.getMemberId()));
 		
 		return "member/memberQaInfoList";
 	}
 	
-	// 사용자 문의 내역 상세보기 
+	// *********************************************************** 사용자 문의 내역 상세보기 
 	@RequestMapping("/memberQaInfo")
 	public String memberQaInfo(HttpServletRequest request) {
 		
 		int qaScNo = Integer.parseInt(request.getParameter("qaScNo"));
-		MInquiryVO vo = mservice.getMemberQaInfo(qaScNo);
+		MInquiryVO vo = memberService.getMemberQaInfo(qaScNo);
 		request.setAttribute("qaInfo", vo);
-		MinquiryReplyVO vo2 = mservice.getMemberQaReply(qaScNo);
+		MinquiryReplyVO vo2 = memberService.getMemberQaReply(qaScNo);
 		request.setAttribute("qaReply", vo2);
 		
 		return "member/memberQaInfo";
 	}	
+	
 }
