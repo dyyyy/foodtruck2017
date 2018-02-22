@@ -56,9 +56,7 @@ public class FoodTruckService {
 	// 카테고리별 리스트
 	public List<FoodTruckVO> getCategoryList(PageVO vo) {
 
-		System.out.println("����2");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
-		System.out.println("����3");
 		try {
 			return dao.getCategoryList(vo);
 
@@ -71,7 +69,6 @@ public class FoodTruckService {
 
 	// 푸드트럭 위클리 랭킹
 	public List<FoodTruckVO> getFoodTruckRank() {
-		System.out.println("11111");
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		System.out.println(dao.getFoodTruckRank());
 		return dao.getFoodTruckRank();

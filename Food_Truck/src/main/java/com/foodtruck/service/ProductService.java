@@ -44,8 +44,5 @@ public class ProductService {
 		ProductDAO dao = sessionTemplate.getMapper(ProductDAO.class);
 		return dao.deleteProduct(prodNo);
 	}
-	
-	//판매자 관리의 
-	
 
 }

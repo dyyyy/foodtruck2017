@@ -34,6 +34,7 @@ public interface SellerDAO {
 	
 	//판매자의 푸드트럭 승인 flg
 	public List<SellerVO> getLicense2(String memberId);
+	
 	// 푸드트럭 리스트
 	public List<FoodTruckVO> getFoodTruckList(String licenseNo);
 	
@@ -62,7 +63,7 @@ public interface SellerDAO {
 	public int insertLicense(LicenseVO vo);
 	
 	// id로 라이센스 번호 가져오기
-		public List<LicenseVO> getInfo(LicenseVO vo);
+	public List<LicenseVO> getInfo(LicenseVO vo);
 
 	// 1:1 문의 insert하기
 	public int insertSinquiry();
