@@ -40,29 +40,6 @@ public class NavController {
 	@Autowired
 	OrderService orderService;
 	
-	// 1:1 일반회원 문의
-	@RequestMapping("/inquiry")
-	public String inquiryPage(HttpSession session,HttpServletRequest request) {
-		MemberVO m = (MemberVO)session.getAttribute("member");
-		String id=m.getMemberId();
-		request.setAttribute("id", id);
-		return "nav/memberinquiry";
-	}
-	
-	//1:1 판매자회원 문의
-	@RequestMapping("/inquiry2")
-	public String inquiryPage2(HttpSession session,HttpServletRequest request) {
-		MemberVO m = (MemberVO)session.getAttribute("member");
-		String id=m.getMemberId();
-		LicenseVO vo=new LicenseVO();
-		vo.setMemId(id);
-		List<LicenseVO> list=sservice.getInfo(vo);
-		request.setAttribute("id", id);
-		request.setAttribute("list", list);
-		return "nav/sellerinquiry";
-	}
-	
-
 	// ������ �޴� - ȸ������
 	@RequestMapping("/adminMember")
 	public String adminMemberPage() {

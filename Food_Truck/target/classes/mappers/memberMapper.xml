@@ -92,20 +92,20 @@
 
 	</select>
 	
-	<!-- 1:1 insert -->
+	<!-- 1:1 insert 구매자가 판매자한테 문의 -->
 	<insert id="insertInquiry">
-		INSERT INTO QA_SC
-		(QA_SC_NO,MEM_ID,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL,QA_SC_STAT)
+		INSERT INTO QA_SELLER
+		(QA_SEL_NO,MEM_ID,ORD_NO,QA_SEL_TITLE,QA_SEL_CONTENT,QA_SEL_REG,QA_SEL_CATEGORY1,QA_SEL_CATEGORY2,QA_SEL_TEL)
 		VALUES
-		(QA_SC_SEQ.NEXTVAL,#{memId},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
+		(QA_SEL_SEQ.NEXTVAL,#{memId},#{ordNo},#{qaSelTitle},#{qaSelContent},SYSDATE,#{qaSelCategory1},#{qaSelCategory2},#{qaSelTel})
 	</insert>
 	
-	<!-- 1:1 insert 판매자 -->
+	<!-- 1:1 insert 판매자가 운영자한테  -->
 	<insert id="insertInquiry2">
 		INSERT INTO QA_SC
-		(QA_SC_NO,MEM_ID,LICENSE_NO,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL,QA_SC_STAT)
+		(QA_SC_NO,MEM_ID,LICENSE_NO,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL)
 		VALUES
-		(QA_SC_SEQ.NEXTVAL,#{memId},#{licenseNo},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel},#{qaScStat})
+		(QA_SC_SEQ.NEXTVAL,#{memId},#{licenseNo},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel})
 	</insert>
 	
 	<select id="getMinquiryList" resultMap="InquiryMap">
@@ -156,6 +156,7 @@
 
 
 	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
+		<!-- 판매자 -->
 		<result column="QA_SC_NO" property="qaScNo" />
 		<result column="MEM_ID" property="memId" />
 		<result column="QA_SC_TITLE" property="qaScTitle" />
@@ -166,6 +167,16 @@
 		<result column="QA_SC_TEL" property="qaScTel" />
 		<result column="QA_SC_STAT" property="qaScStat" />
 		<result column="LICENSE_NO" property="licenseNo" />
+		<!-- 구매자 -->
+		<result column="QA_SEL_NO" property="qaSelNo" />
+		<result column="QA_SEL_TITLE" property="qaSelTitle" />
+		<result column="QA_SEL_CONTENT" property="qaSelContent" />
+		<result column="QA_SEL_REG" property="qaSelReg" />
+		<result column="QA_SEL_CATEGORY1" property="qaSelCategory1" />
+		<result column="QA_SEL_CATEGORY2" property="qaSelCategory2" />
+		<result column="QA_SEL_TEL" property="qaSelTel" />
+		<result column="QA_SEL_STAT" property="qaSelStat" />
+		<result column="ORD_NO" property="ordNo" />
 	</resultMap>
 	
 	<resultMap type="com.foodtruck.vo.MinquiryReplyVO" id="InquiryReplyMap">

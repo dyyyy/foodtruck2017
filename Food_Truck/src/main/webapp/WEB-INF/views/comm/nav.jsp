@@ -121,7 +121,7 @@
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/inquiry">1:1 문의</a></li>
+									<li><a href="/inquiryPage">1:1 문의</a></li>
 								</ul></li>
 							<%break;
 								//판매자회원
@@ -133,7 +133,7 @@
 								<ul>
 									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
 									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/inquiry2">1:1 문의</a></li>
+									<li><a href="/inquiryPage">1:1 문의</a></li>
 								</ul></li>
 							<%break;
 								}%>

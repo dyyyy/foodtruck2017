@@ -111,4 +111,10 @@ public class OrderService {
 		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
 		return dao.getFavoriteFoodtruck(memId);
 	}
+	
+	// 사용자가 주문한 정보 ordNo만 쓸거
+	public List<OrderVO> getOrdNo(String memId) {
+		OrderDAO dao = sessionTemplate.getMapper(OrderDAO.class);
+		return dao.getOrdNo(memId);
+	}	
 }
