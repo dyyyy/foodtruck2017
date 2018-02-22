@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foodtruck.service.EventService;
+import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
+import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.EventVO;
 import com.foodtruck.vo.MemberVO;
 
@@ -25,6 +27,12 @@ public class EventController {
 
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	FoodTruckService foodtruckService;
+	
+	@Autowired
+	SellerService sellerService;
 
 	// ��������
 	@RequestMapping("/eventBoard")
@@ -60,7 +68,11 @@ public class EventController {
 
 	// �������� �۾���
 	@RequestMapping("/writeEventForm")
-	public String writeEvent() {
+	public String writeEvent(HttpServletRequest request, HttpSession session) {
+		
+		String memId = (String) session.getAttribute("memberId");
+		request.setAttribute("licenseList", sellerService.getLicense(memId));
+		
 		return "nav/writeEventForm";
 	}
 

@@ -21,7 +21,8 @@ public class FoodTruckVO extends ReviewVO{
 	private int count;	// 리뷰 총 갯수
 	private int total;	// 리뷰 평점 총 합 
 	private String ftruckCondtion;
-	
+	private String ftruckEvent;	// 푸드트럭 이벤트
+	private int eventNo;		// 이벤트 번호	
 	
 	// getter & setter
 	public String getFtruckNo() {
@@ -138,5 +139,16 @@ public class FoodTruckVO extends ReviewVO{
 	public void setFtruckCondtion(String ftruckCondtion) {
 		this.ftruckCondtion = ftruckCondtion;
 	}
-	
+	public String getFtruckEvent() {
+		return ftruckEvent;
+	}
+	public void setFtruckEvent(String ftruckEvent) {
+		this.ftruckEvent = ftruckEvent;
+	}
+	public int getEventNo() {
+		return eventNo;
+	}
+	public void setEventNo(int eventNo) {
+		this.eventNo = eventNo;
+	}
 }

@@ -63,6 +63,12 @@
 			</div>
 
 			<form id="frm" action="/insertEvent" method="get">
+				<select id="licenseNo" name="licenseNo" >
+					<option value=""> 사업자 번호 </option>
+						<c:forEach items="${licenseList}" var="licenseList">
+							<option value="${licenseList.licenseNo}">${licenseList.licenseNo}</option>
+                     	</c:forEach>
+                </select>
 				<table class="table">
 					<tr>
 						<th>제목</th>

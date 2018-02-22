@@ -8,7 +8,10 @@ public class EventVO {
 	private String eventContent;	// 내용
 	private String eventReg;		// 등록일
 	private int eventCnt;			// 조회수
-	
+	private String licenseNo;		// 사업자 번호
+	private String ftruckNo;		// 푸드트럭 번호
+	private String ftruckName;		// 푸드트럭 이름
+
 	// getter & setter
 	
 	public int getEventNo() {
@@ -47,5 +50,22 @@ public class EventVO {
 	public void setEventCnt(int eventCnt) {
 		this.eventCnt = eventCnt;
 	}
-	
+	public String getLicenseNo() {
+		return licenseNo;
+	}
+	public void setLicenseNo(String licenseNo) {
+		this.licenseNo = licenseNo;
+	}
+	public String getFtruckNo() {
+		return ftruckNo;
+	}
+	public void setFtruckNo(String ftruckNo) {
+		this.ftruckNo = ftruckNo;
+	}
+	public String getFtruckName() {
+		return ftruckName;
+	}
+	public void setFtruckName(String ftruckName) {
+		this.ftruckName = ftruckName;
+	}
 }

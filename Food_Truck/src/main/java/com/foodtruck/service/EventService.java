@@ -52,5 +52,12 @@ public class EventService {
 		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);
 		return dao.getCountEvent();
 	}
+	
+	// menuBoard에 이벤트 진행중이면, 푸드트럭 이름 옆에 이벤트 띄워 주려고
+	public List<EventVO> progressEvent() {
+		EventDAO dao = sessionTemplate.getMapper(EventDAO.class);
+		return dao.progressEvent();
+	}
+
 
 }

@@ -23,11 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.foodtruck.service.EventService;
 import com.foodtruck.service.FestivalService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
 import com.foodtruck.service.ReviewService;
-
+import com.foodtruck.vo.EventVO;
 import com.foodtruck.vo.FestivalVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.PageVO;
@@ -45,7 +46,9 @@ public class FoodTruckController {
 	private ProductService pservice;
 	@Autowired
 	private FestivalService feservice;
-
+	@Autowired
+	private EventService eventService;
+	
 	// FoodTrcuk List
 	@RequestMapping("/menuBoard")
 	public String menuBoarPage(Model model, @RequestParam("pageNo") int pageNo, HttpServletRequest request)
@@ -64,6 +67,18 @@ public class FoodTruckController {
 				}
 			}
 		}
+
+		List<EventVO> eventList = eventService.progressEvent();
+		for(int i = 0; i < eventList.size(); i++) {
+			exit :for(int j=0; j<list.size(); j++) {
+				if(eventList.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
+					list.get(j).setFtruckEvent(eventList.get(i).getEventTitle());
+					list.get(j).setEventNo(eventList.get(i).getEventNo());
+					break exit;
+				}
+			}
+		}
+		
 		System.out.println("dfsdfs"+list.size());
 		for(int i=0;i<list.size();i++) {
 			System.out.println("asds===================="+list.get(i).getFtruckImg());
