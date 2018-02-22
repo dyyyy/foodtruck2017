@@ -178,12 +178,11 @@
 		<result column="FTRUCK_INTRO" property="ftruckIntro" />
 		<result column="FTRUCK_REG" property="ftruckReg" />
 		<result column="FTRUCK_CONDITION" property="ftruckCondtion" />
-
 		<result column="CATEGORY" property="category" />
-
 		<result column="COUNT" property="count" />
 		<result column="TOTAL" property="total" />		
-
+		<result column="FTRUCK_EVENT" property="ftruckEvent" />
+		<result column="EVENT_NO" property="eventNo"/>
 	</resultMap>
 	
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="LicenseMap">

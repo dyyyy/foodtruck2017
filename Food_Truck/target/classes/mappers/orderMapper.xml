@@ -22,8 +22,8 @@
 
 	<!-- 사용자 주문 상태 -->
 	<select id="ordStatFind" resultMap="OrderMap">
-		SELECT * FROM ORDERS
-		WHERE MEM_ID = #{memId}
+		SELECT * FROM ORDERS O
+		WHERE O.ORD_DLV_YN = 'Y' AND O.ORD_CHECK != '3' AND O.MEM_ID = #{memId,jdbcType=VARCHAR}
 	</select>
 	
 	
@@ -125,7 +125,7 @@
 	<update id="checkNewOrderDlv">
 		UPDATE ORDERS O SET
 		O.ORD_CHECK = '2'
-		WHERE O.ORD_DLV_YN = 'Y' AND O.LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
+		WHERE O.ORD_DLV_YN = 'Y' AND O.ORD_CHECK != '3' AND O.LICENSE_NO IN (SELECT LICENSE_NO FROM LICENSE WHERE MEM_ID = #{memId})
 	</update>
 	
 	<!-- 구매자가 주문한 푸드트럭 순위 뽑자! -->

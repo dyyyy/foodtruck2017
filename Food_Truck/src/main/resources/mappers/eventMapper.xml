@@ -55,8 +55,20 @@
 	select count(*) from
 		event_bd
 	</select>
+
+	<select id="progressEvent" resultMap="EventMap">
 	
+		 <![CDATA[
+		 	
+		 	SELECT E.*, F.FTRUCK_NO, F.FTRUCK_NAME
+		 	FROM EVENT_BD E
+		 	INNER JOIN FOODTRUCK F
+		 	ON E.LICENSE_NO = F.LICENSE_NO
+		 	
+		 ]]>
 	
+	</select>
+
 	<!-- resultMap -->
 	<resultMap type="EventVO" id="EventMap">
 		<result column="EVENT_NO" property="eventNo" />
@@ -65,7 +77,9 @@
 		<result column="EVENT_CONTENT" property="eventContent" />
 		<result column="EVENT_REG" property="eventReg" />
 		<result column="EVENT_CNT" property="eventCnt" />
-
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="FTRUCK_NO" property="ftruckNo"/>
+		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
 
 
