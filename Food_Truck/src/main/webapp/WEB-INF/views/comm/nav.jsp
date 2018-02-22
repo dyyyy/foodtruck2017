@@ -102,7 +102,7 @@
 							<li><a href="#">관리자 메뉴<i class="fa fa-angle-down"></i></a>
 								<ul>
 									<li><a href="/adminMember">회원 관리</a></li>
-									<li><a href="/admin">관리자페이지</a></li>
+									<li><a href="/stute?pageNo=1">관리자페이지</a></li>
 								</ul></li>
 							<%
 								break;

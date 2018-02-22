@@ -123,7 +123,16 @@ public class FoodTruckService {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
 		return dao.getEndFoodTruckList(pageNo);
 	}
-
+	// 푸드트럭 리스트 가져오기(조건이없는)
+	public List<FoodTruckVO> getAllFoodTruckList(int pageNo) throws Exception{
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getAllFoodTruckList(pageNo);
+	}
+	// 푸드트럭 전체 리스트 Count(조건이없는&페이징처리)
+	public int getAllCountTruck()throws Exception{
+		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);
+		return dao.getAllCountTruck();
+	}
 	// 운영중인푸드트럭 전체 Count(페이징처리)
 	public int getRunCountTruck() throws Exception {
 		FoodTruckDAO dao = sessionTemplate.getMapper(FoodTruckDAO.class);

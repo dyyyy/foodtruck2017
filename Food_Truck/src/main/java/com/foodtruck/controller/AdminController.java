@@ -35,16 +35,15 @@ public class AdminController {
 	@Autowired
 	private SellerService sservice;
 
-	// ������ �޴� - ��������
+	// 전체 푸드트럭 출력
 	@RequestMapping("/stute")
 	public String stute(@RequestParam("pageNo") int pageNo, HttpServletRequest request) throws Exception {
-		System.out.println("진입");
 		int NpageNo = 1;
 		if (pageNo != 1) {
 			NpageNo = (pageNo - 1) * 10 + 1;
 		}
 
-		List<FoodTruckVO> list = fservice.getFoodTruckList(NpageNo);
+		List<FoodTruckVO> list = fservice.getAllFoodTruckList(NpageNo);
 		String stat="운영중";
 		String stat2="마감";
 		for(int i=0;i<list.size();i++) {
@@ -60,7 +59,7 @@ public class AdminController {
 			
 			
 		}
-		int count = fservice.getCountTruck();
+		int count = fservice.getAllCountTruck();
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list", list);
 		request.setAttribute("pagecount", count);// �� ������ ��

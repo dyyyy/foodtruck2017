@@ -51,8 +51,7 @@
 		<div class="row-fluid">
 			<div class="span3" id="sidebar">
 				<ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
-					<li><a href="/admin"><i class="icon-chevron-right"></i>메인</a>
-					</li>
+					
 					<li class="active"><a href="/stute?pageNo=1"><i
 							class="icon-chevron-right"></i>푸드트럭 현황&상태</a></li>
 					<li><a href="/sellerQnA?pageNo=1"><i

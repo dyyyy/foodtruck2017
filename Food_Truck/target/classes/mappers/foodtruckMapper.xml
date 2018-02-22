@@ -52,7 +52,7 @@
 		where rnum >=#{pageNo}
 	</select>
 
-	<!-- 푸드트럭 전체 리스트 -->
+	<!-- 푸드트럭 전체 리스트(조건이 있는) -->
 	<select id="getFoodTruckList" resultMap="FoodTruckMap" parameterType="int">
 		select ffft.* from
 		(select fft.*from
@@ -61,6 +61,21 @@
 		from
 		(select f.*,l.app_stat,nvl2(f.ftruck_grade,0,10) as count from foodtruck f,license l where f.license_no =
 		l.license_no and l.app_stat = 'Y' order by l.app_stat desc,f.ftruck_reg)
+		ft)fft
+		where
+		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
+		where rnum>=#{pageNo}
+	</select>
+	
+	<!-- 푸드트럭 전체리스트(조건없는) -->
+	<select id="getAllFoodTruckList" resultMap="FoodTruckMap" parameterType="int">
+		select ffft.* from
+		(select fft.*from
+		(select rownum as
+		rnum, ft.*
+		from
+		(select foodtruck.* from
+		foodtruck order by FTRUCK_REG)
 		ft)fft
 		where
 		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
@@ -133,11 +148,17 @@
 		where LICENSE_NO = #{licenseNo}
 	</update>
 	
-
-	<!-- 푸드트럭 카운트(페이징처리) -->
+	
+	<!-- 푸드트럭 카운트(조건이 있는&페이징처리) -->
 	<select id="getCountTruck" resultType="int">
 		select count(*) from
 		foodtruck f,license l where f.license_no = l.license_no and l.app_stat = 'Y'
+	</select>
+	
+	<!-- 전체 푸드트럭 카운트(조건이 없는&페이징처리) -->
+	<select id="getAllCountTruck" resultType="int">
+	select count(*) from
+		foodtruck 	
 	</select>
 	
 	<!-- 운영중인 푸드트럭 카운트(페이징처리) -->
