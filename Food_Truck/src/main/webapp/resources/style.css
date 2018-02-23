@@ -3039,6 +3039,14 @@ h4.heading {
    -webkit-justify-content: center;
 }
 
+.product h1 {
+   font-size: 40px;
+   font-weight: 700;
+   margin-bottom: 30px;
+   text-transform: uppercase;
+   text-align: center;
+}
+
 .login h2, .product h2, .join h2, .orderForm h2 {
    font-size: 18px;
    font-weight: 700;
