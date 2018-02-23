@@ -7,7 +7,6 @@ public class MinquiryReplyVO {
 	private int qaScNo;					// 글 번호
 	private String replyScContent;		// 답글 내용
 	private String replyScReg;			// 등록일
-	
 	private String replySelNo;			// 답글 번호 ( 판매자 ) 
 	private int qaSelNo;				// 문의 번호
 	private String replySelContent;		// 답글 내용

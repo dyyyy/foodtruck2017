@@ -5,6 +5,7 @@ public class PageVO {
 	private int pageNo;
 	private int category;
 	
+	// getter & setter
 	
 	public int getPageNo() {
 		return pageNo;
@@ -18,6 +19,5 @@ public class PageVO {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	
 	
 }

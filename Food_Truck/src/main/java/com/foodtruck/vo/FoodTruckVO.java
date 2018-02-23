@@ -2,27 +2,27 @@ package com.foodtruck.vo;
 
 public class FoodTruckVO extends ReviewVO{
 	
-	private String ftruckNo; // 푸드트럭 번호
-	private String ftruckName; // 푸드트럭 이름
-	private String ftruckTel; // 푸드트럭 전화번호
-	private String ftruckAddr; // 푸드트럭 주소1
-	private String ftruckAddr2; // 푸드트럭 주소2
-	private String ftruckIntro; // 푸드트럭 소개
-	private String ftruckReg; // 푸드트럭 등록일
-	private String ftruckDlvYn; // 푸드트럭 배달여부(Y/N)
-	private String ftruckRsvYn; // 푸드트럭 예약여부(Y/N)
-	private String ftruckState; // 푸드트럭 운영여부(Y/N)
-	private double ftruckGrade; // 푸드트럭 평점
-	private String ftruckImg; // 푸드트럭 이미지
-	private String latitude; // 위도
-	private String longitude; // 경도
-	private int category; // 카테고리 번호
-	private String licenseNo; // 사업자 번호
-	private int count;	// 리뷰 총 갯수
-	private int total;	// 리뷰 평점 총 합 
-	private String ftruckCondtion;
-	private String ftruckEvent;	// 푸드트럭 이벤트
-	private int eventNo;		// 이벤트 번호	
+	private String ftruckNo; 		// 푸드트럭 번호
+	private String ftruckName;	 	// 푸드트럭 이름
+	private String ftruckTel; 		// 푸드트럭 전화번호
+	private String ftruckAddr; 		// 푸드트럭 주소1
+	private String ftruckAddr2; 	// 푸드트럭 주소2
+	private String ftruckIntro; 	// 푸드트럭 소개
+	private String ftruckReg; 		// 푸드트럭 등록일
+	private String ftruckDlvYn; 	// 푸드트럭 배달여부(Y/N)
+	private String ftruckRsvYn; 	// 푸드트럭 예약여부(Y/N)
+	private String ftruckState; 	// 푸드트럭 운영여부(Y/N)
+	private double ftruckGrade; 	// 푸드트럭 평점
+	private String ftruckImg; 		// 푸드트럭 이미지
+	private String latitude; 		// 위도
+	private String longitude; 		// 경도
+	private int category; 			// 카테고리 번호
+	private String licenseNo; 		// 사업자 번호
+	private int count;				// 리뷰 총 갯수
+	private int total;				// 리뷰 평점 총 합 
+	private String ftruckCondtion;	// 푸드트럭상태(여유 / 혼잡)
+	private String ftruckEvent;		// 푸드트럭 이벤트
+	private int eventNo;			// 이벤트 번호	
 	
 	// getter & setter
 	public String getFtruckNo() {

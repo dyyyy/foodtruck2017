@@ -5,7 +5,7 @@ public class SearchPageVO {
 	private int pageNo;
 	private String searchStr;
 	
-	
+	// getter & setter
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -18,8 +18,5 @@ public class SearchPageVO {
 	public void setSearchStr(String searchStr) {
 		this.searchStr = searchStr;
 	}
-
-
-	
 	
 }

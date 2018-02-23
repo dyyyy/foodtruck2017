@@ -8,11 +8,12 @@ public class ProductVO {
 	private String prodContent;		// 상품 내용
 	private String prodImg;			// 상품 이미지
 	private int prodPrice;			// 상품 가격 
-	private String ftruckNo;
+	private String ftruckNo;		// 푸드트럭 번호
 	private String licenseNo;		// 사업자 번호
-	private String prodOrgin; //원산지
+	private String prodOrgin; 		// 원산지
 	
 	// getter & setter
+	
 	public String getProdNo() {
 		return prodNo;
 	}
@@ -61,7 +62,6 @@ public class ProductVO {
 	public void setFtruckNo(String ftruckNo) {
 		this.ftruckNo = ftruckNo;
 	}
-	
 	
 }
 

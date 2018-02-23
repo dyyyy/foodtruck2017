@@ -1,26 +1,27 @@
 package com.foodtruck.vo;
 
 public class SellerVO {
-	private String ordNo;			
-	private String ordName;		
-	private String ordTel;		
-	private String ordDate;		
-	private String ordRsvDate;	 
-	private String ordDlyYn;	
-	private int ordStat;
-	private int cookStat;
-	private String memId;		
-	private String licenseNo;
-	private String prodName;
-	private String ftruckName;
-	private String ordReq;
-	private String payment;
-	private int ratio;
+	private String ordNo;		 // 주문 번호
+	private String ordName;		 // 주문자 이름
+	private String ordTel;		 // 주문자 연락처
+	private String ordDate;		 // 주문 시간
+	private String ordRsvDate;	 // 예약 시간
+	private String ordDlyYn;	 // 배달시간	
+	private int ordStat;		 // 주문 상태
+	private int cookStat;		 // 조리 상태
+	private String memId;		 // 회원 아이디
+	private String licenseNo;	 // 사업자 번호
+	private String prodName;	 // 제품 이름
+	private String ftruckName;	 // 푸드트럭 이름
+	private String ordReq;		 // 요구 사항
+	private String payment;		 // 결제 방식
+	private int ratio;			 
 	private int count;
-	private String sumPrice;
-	private String salesDate;
+	private String sumPrice;	 // 총가격
+	private String salesDate;	 
 	
-	
+	// getter & setter
+
 	public String getOrdNo() {
 		return ordNo;
 	}
@@ -129,7 +130,5 @@ public class SellerVO {
 	public void setSalesDate(String salesDate) {
 		this.salesDate = salesDate;
 	}
-	
-	
 
 }
