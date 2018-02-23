@@ -3,44 +3,76 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.foodtruck.dao.FestivalDAO">
 
+	<!-- 축제정보 insert하기  -->
 	<insert id="IntsertFestival" >
-		insert into
-		festival(FES_NO,FES_NAME,FES_ID,FES_CONTENT,FES_TEL,FES_ADDR,FES_SDATE,FES_EDATE,FES_IMG,FES_IMG2,FES_LATITUDE,FES_LONGITUDE)
-		values
-		(FES_SEQ.nextval,#{fesName},#{fesId},#{fesContent},#{fesTel},#{fesAddr},#{fesSdate},#{fesEdate},#{fesImg},#{fesImg2},#{fesLatitude},#{fesLongitude})
+	
+		INSERT INTO FESTIVAL
+		(FES_NO, FES_NAME, FES_ID, FES_CONTENT, FES_TEL, FES_ADDR, 
+		 FES_SDATE, FES_EDATE, FES_IMG, FES_IMG2, FES_LATITUDE, FES_LONGITUDE)
+		VALUES
+		(FES_SEQ.nextval, #{fesName}, #{fesId}, #{fesContent}, #{fesTel}, #{fesAddr}, 
+		 #{fesSdate}, #{fesEdate}, #{fesImg}, #{fesImg2}, #{fesLatitude}, #{fesLongitude})
+		 
 	</insert>
 	
+	<!-- 축제정보 10개씩 가져오기  -->
 	<select id="getFestivalList" resultMap="FestivalMap">
-		select * from FESTIVAl
+	
+		SELECT * FROM FESTIVAL
+	
 	</select>
 	
+	<!-- 축제정보 삭제하기  -->
 	<delete id="deleteFestival">
-		truncate table festival
+	
+		TRUNCATE TABLE FESTIVAL
+	
 	</delete>
 	
+	<!-- 축제정보 10개씩 가져오기  -->
 	<select id="getFestivalList2" resultMap="FestivalMap">
-	select ffft.* from
-		(select fft.*from
-		(select rownum as rnum, ft.*
-		from (select festival.*
-		from
-		festival order by fes_no) ft)fft
-		where rownum &lt;=#{pageNo}+9)ffft
-		where rnum >=#{pageNo}
+		
+		<![CDATA[
+			
+			SELECT FFFT.* 
+			FROM (SELECT FFT.*
+				  FROM (SELECT ROWNUM AS RNUM, FT.*
+						FROM (SELECT FESTIVAL.*
+							  FROM FESTIVAL ORDER BY FES_NO
+							  )FT
+						)FFT
+				  WHERE ROWNUM <=#{pageNo}+9
+				  )FFFT
+			WHERE RNUM >=#{pageNo}
+		
+		]]>
+		
 	</select>
 	
+	<!-- 축제정보 count  -->
 	<select id="getcountFestival" resultType="int">
-	select count(*) from
-		festival
+	
+		SELECT COUNT(*) FROM FESTIVAL
+		
 	</select>
+	
+	<!-- 푸드트럭 지역이름으로 행사정보 가져오기  -->
 	<select id="getFestivalList3" resultMap="FestivalMap" parameterType="String">
-	select * from festival where fes_addr like #{addr}||'%'
+	
+		SELECT * FROM FESTIVAL
+		WHERE FES_ADDR LIKE #{addr}||'%'
+	
 	</select>
 	
+	<!-- 푸드트럭 지역이름으로 행사정보 카운드  -->
 	<select id="getList3Count" resultType="int">
-	select count(*) from festival where fes_addr like #{addr}||'%'
+	
+		SELECT COUNT(*) FROM FESTIVAL
+		WHERE FES_ADDR LIKE #{addr}||'%'
 	
 	</select>
+	
+	<!-- resultMap -->
 	<resultMap type="FestivalVO" id="FestivalMap">
 		<result column="FES_NO" property="fesNo" />
 		<result column="FES_ADDR" property="fesAddr" />
@@ -55,4 +87,5 @@
 		<result column="FES_ID" property="fesId" />
 		<result column="FES_CONTENT" property="fesContent" />
 	</resultMap>
+	
 </mapper>

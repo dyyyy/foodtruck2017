@@ -6,30 +6,39 @@
 
 	<!-- 사용자 문의내역리스트 -->
 	<select id="getMemberQaInfoList" resultMap="InquiryMap">
-		SELECT Q.* FROM QA_SELLER Q , MEMBER M 
+	
+		SELECT Q.* 
+		FROM QA_SELLER Q, MEMBER M 
 		WHERE Q.MEM_ID = M.MEM_ID 
 		AND M.MEM_ID = #{memId}
+	
 	</select>
 	
 	<!-- 사용자 문의내역 정보 -->
 	<select id="getMemberQaInfo" resultMap="InquiryMap">
-		SELECT Q.* FROM QA_SELLER Q , MEMBER M 
+	
+		SELECT Q.* 
+		FROM QA_SELLER Q, MEMBER M 
 		WHERE Q.MEM_ID = M.MEM_ID 
 		AND Q.QA_SEL_NO = #{qaSelNo}
+	
 	</select>
 
 	<!-- 사용자 문의 답변 -->
 	<select id="getMemberQaReply" resultMap="InquiryReplyMap">
-		SELECT R.* FROM REPLY_SELLER R, QA_SELLER Q
+	
+		SELECT R.* 
+		FROM REPLY_SELLER R, QA_SELLER Q
 		WHERE Q.QA_SEL_NO = R.QA_SEL_NO
 		AND R.QA_SEL_NO = #{qaSelNo}
+	
 	</select>
 
 	<!-- 회원 정보 -->
 	<select id="getMember" resultMap="memberMap">
 
 		SELECT * FROM MEMBER
-		<where> MEM_ID=#{memberId} </where>
+		WHERE MEM_ID=#{memberId}
 
 	</select>
 
@@ -37,29 +46,33 @@
 	<select id="getMemberList" resultMap="memberMap">
 
 		SELECT * FROM MEMBER
+		
 	</select>
 
 	<!-- ID 찾기 -->
 	<select id="getId" resultMap="memberMap">
+	
 		SELECT * FROM MEMBER
-		<where> MEM_TEL = #{memberTel}</where>
+		WHERE MEM_TEL = #{memberTel}
+	
 	</select>
 
 	<!-- PW 찾기 -->
 	<select id="getPw" resultMap="memberMap" parameterType="map">
+	
 		SELECT * FROM MEMBER
-		<where> MEM_TEL = #{memberTel} and MEM_ID = #{memberId} </where>
+		WHERE MEM_TEL = #{memberTel} 
+		and MEM_ID = #{memberId}
+
 	</select>
 
 	<!-- 회원 등록 -->
 	<insert id="insertMember">
 
 		INSERT INTO MEMBER
-		(MEM_ID, MEM_PW, MEM_NAME, MEM_TEL,
-		MEM_AUTH)
+		(MEM_ID, MEM_PW, MEM_NAME, MEM_TEL, MEM_AUTH)
 		VALUES
-		(#{memberId}, #{memberPw}, #{memberName}, #{memberTel},
-		#{memberAuth})
+		(#{memberId}, #{memberPw}, #{memberName}, #{memberTel}, #{memberAuth})
 
 	</insert>
 
@@ -67,9 +80,8 @@
 	<update id="updateMember">
 
 		UPDATE MEMBER
-		SET MEM_PW=#{memberPw}, MEM_NAME=#{memberName},
-		MEM_TEL=#{memberTel}
-		<where> MEM_ID=#{memberId} </where>
+		SET MEM_PW=#{memberPw}, MEM_NAME=#{memberName}, MEM_TEL=#{memberTel}
+		WHERE MEM_ID=#{memberId}
 
 	</update>
 
@@ -77,7 +89,7 @@
 	<delete id="deleteMember">
 
 		DELETE FROM MEMBER
-		<where> MEM_ID=#{memberId}</where>
+		WHERE MEM_ID=#{memberId}
 
 	</delete>
 
@@ -88,58 +100,90 @@
 		FROM MEMBER
 		INNER JOIN LICENSE
 		ON MEMBER.MEM_ID = LICENSE.MEM_ID
-		<where> MEMBER.MEM_ID=#{selId} </where>
+		WHERE MEMBER.MEM_ID=#{selId}
 
 	</select>
 	
 	<!-- 1:1 insert 구매자가 판매자한테 문의 -->
 	<insert id="insertInquiry">
+	
 		INSERT INTO QA_SELLER
-		(QA_SEL_NO,MEM_ID,ORD_NO,QA_SEL_TITLE,QA_SEL_CONTENT,QA_SEL_REG,QA_SEL_CATEGORY1,QA_SEL_CATEGORY2,QA_SEL_TEL)
+		(QA_SEL_NO, MEM_ID, ORD_NO, QA_SEL_TITLE, QA_SEL_CONTENT, QA_SEL_REG, QA_SEL_CATEGORY1, QA_SEL_CATEGORY2, QA_SEL_TEL)
 		VALUES
-		(QA_SEL_SEQ.NEXTVAL,#{memId},#{ordNo},#{qaSelTitle},#{qaSelContent},SYSDATE,#{qaSelCategory1},#{qaSelCategory2},#{qaSelTel})
+		(QA_SEL_SEQ.NEXTVAL, #{memId}, #{ordNo}, #{qaSelTitle}, #{qaSelContent}, SYSDATE, #{qaSelCategory1}, #{qaSelCategory2}, #{qaSelTel})
+	
 	</insert>
 	
 	<!-- 1:1 insert 사용자도 판매자가 운영자한테  -->
 	<insert id="insertInquiry2">
+	
 		INSERT INTO QA_SC
-		(QA_SC_NO,MEM_ID,LICENSE_NO,QA_SC_TITLE,QA_SC_CONTENT,QA_SC_REG,QA_SC_CATEGORY1,QA_SC_CATEGORY2,QA_SC_TEL)
+		(QA_SC_NO, MEM_ID, LICENSE_NO, QA_SC_TITLE, QA_SC_CONTENT, QA_SC_REG, QA_SC_CATEGORY1, QA_SC_CATEGORY2, QA_SC_TEL)
 		VALUES
-		(QA_SC_SEQ.NEXTVAL,#{memId},#{licenseNo},#{qaScTitle},#{qaScContent},SYSDATE,#{qaScCategory1},#{qaScCategory2},#{qaScTel})
+		(QA_SC_SEQ.NEXTVAL, #{memId}, #{licenseNo}, #{qaScTitle}, #{qaScContent}, SYSDATE, #{qaScCategory1}, #{qaScCategory2}, #{qaScTel})
+	
 	</insert>
 	
+	<!-- 1:1문의 list가져오기  -->
 	<select id="getMinquiryList" resultMap="InquiryMap">
-		select ffft.* from
-		(select fft.*from
-		(select rownum as
-		rnum, ft.*
-		from (
-		select
-		* from qa_sc where qa_sc_stat='N' and license_no is null order by QA_SC_NO asc)
-		ft)fft
-		where
-		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
-		where rnum>=#{pageNo}
+		
+		<![CDATA[
+		
+			SELECT FFFT.*
+			FROM (SELECT FFT.*
+				  FROM (SELECT ROWNUM AS RNUM, FT.*
+						FROM (SELECT * 
+							  FROM QA_SC 
+							  WHERE QA_SC_STAT='N' 
+							  AND LICENSE_NO IS NULL 
+							  ORDER BY QA_SC_NO ASC
+							  )FT
+						)FFT
+				  WHERE ROWNUM < =#{pageNo}+9
+				  )FFFT
+			WHERE RNUM>=#{pageNo}
+			
+		]]>
+		
 	</select>
 
+	<!-- 1:1문의 total count가져오기  -->
 	<select id="getMinquiryListcount" resultType="int">
-		select count(*)from qa_sc where QA_SC_STAT='N' and LICENSE_NO is null
+	
+		SELECT COUNT(*)
+		FROM QA_SC 
+		WHERE QA_SC_STAT='N' 
+		AND LICENSE_NO IS NULL
+	
 	</select>
 
+	<!-- 1:1문의 select  -->
 	<select id="getinfo" resultMap="InquiryMap">
-		select * from qa_sc where QA_SC_NO=#{qno}
+		
+		SELECT * FROM QA_SC
+		WHERE QA_SC_NO=#{qno}
+		
 	</select>
+	
+	<!-- 1:1문의 update -->
 	<update id="updateMinquiry">
-		update qa_sc set QA_SC_STAT='Y' where QA_SC_NO=#{qno}
+	
+		UPDATE QA_SC 
+		SET QA_SC_STAT='Y' 
+		WHERE QA_SC_NO=#{qno}
+		
 	</update>
 	
 	<!-- 결제 시 마일리지 증가  -->
 	<update id="updateMileage" parameterType="map">
+	
 		UPDATE MEMBER 
 		SET MILEAGE = #{mileage}
 		WHERE MEM_ID = #{memId}
+		
 	</update>
-
+	
+	<!-- resultMap  -->
 	<resultMap type="com.foodtruck.vo.MemberVO" id="memberMap">
 		<result column="MEM_ID" property="memberId" />
 		<result column="MEM_PW" property="memberPw" />
@@ -149,11 +193,9 @@
 		<result column="MILEAGE" property="mileage"/>
 	</resultMap>
 
-
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="licenseMap">
 		<result column="LICENSE_NO" property="licenseNo" />
 	</resultMap>
-
 
 	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
 		<!-- 판매자 -->
@@ -186,4 +228,5 @@
 		<result column="REPLY_SEL_CONTENT" property="replySelContent" />
 		<result column="REPLY_SEL_REG" property="replySelReg" />
 	</resultMap>
+	
 </mapper>

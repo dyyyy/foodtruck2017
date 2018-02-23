@@ -8,7 +8,8 @@
 	<!-- 리뷰 리스트 -->
 	<select id="getReviewList" resultMap="ReviewMap">
 	
-	SELECT * FROM REVIEW <where>FTRUCK_NO=#{ftruckNo}</where>
+		SELECT * FROM REVIEW
+		WHERE FTRUCK_NO=#{ftruckNo}
 	
 	</select>
 
@@ -37,7 +38,8 @@
 		(REV_SEQ.NEXTVAL, #{ftruckNo}, #{revContent}, SYSDATE, #{grade}, #{memId})
 		
 	</insert>
-
+	
+	<!-- resultMap -->	
 	<resultMap type="ReviewVO" id="ReviewMap">
 		<result column="FTRUCK_NO" property="ftruckNo"/>
 		<result column="LICENSE_NO" property="licenseNo"/>
@@ -50,4 +52,5 @@
 		<result column="ORD_NO" property="ordNo"/>
 		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
+	
 </mapper>

@@ -7,65 +7,78 @@
 
 	<!-- 이벤트 정보 -->
 	<select id="getEvent" resultMap="EventMap">
-		select * from event_bd where
-		event_no=#{eventNo}
+		
+		SELECT * FROM EVENT_BD 
+		WHERE EVENT_NO=#{eventNo}
+		
 	</select>
-
 
 	<!-- 이벤트 전체 리스트 -->
 	<select id="getEventBoardList" resultMap="EventMap">
-		select nttt.* from
-		(select ntt.*from
-		(select rownum as
-		rnum, nt.*
-		from(SELECT * FROM EVENT_BD order by event_no desc) nt)ntt where rownum&lt;=#{pageNo}+9)nttt
-		where rnum>=#{pageNo}
+	
+		<![CDATA[
+		
+			SELECT NTTT.* 
+			FROM (SELECT NTT.*
+				  FROM (SELECT ROWNUM AS RNUM, NT.*
+						FROM (SELECT * FROM EVENT_BD ORDER BY EVENT_NO DESC)NT
+				  		)NTT 
+				  WHERE ROWNUM<=#{pageNo}+9)NTTT
+			WHERE RNUM>=#{pageNo}
+		
+		]]>
+		
 	</select>
-
 
 	<!-- 이벤트 등록 -->
 	<insert id="insertEvent" parameterType="com.foodtruck.vo.EventVO">
-		insert into event_bd
+	
+		INSERT INTO EVENT_BD
 		(EVENT_NO, MEM_ID, EVENT_TITLE, EVENT_CONTENT)
-		values((select NVL(MAX(event_No)+1, 1)FROM event_bd), #{memId},
-		#{eventTitle}, #{eventContent})
+		VALUES
+		((SELECT NVL(MAX(EVENT_NO)+1, 1)FROM EVENT_BD), #{memId}, #{eventTitle}, #{eventContent})
+		
 	</insert>
-
 
 	<!-- 이벤트 수정 -->
 	<update id="updateEvent" parameterType="com.foodtruck.vo.EventVO">
-		update event_bd set
-		EVENT_TITLE=#{eventTitle}, EVENT_CONTENT=#{eventContent}
-		where EVENT_NO=#{eventNo}
+	
+		UPDATE EVENT_BD 
+		SET EVENT_TITLE=#{eventTitle}, EVENT_CONTENT=#{eventContent}
+		WHERE EVENT_NO=#{eventNo}
+	
 	</update>
-
 
 	<!-- 이벤트 조회수 -->
 	<update id="countEvent" parameterType="int">
-		update event_bd set EVENT_CNT=EVENT_CNT+1 where EVENT_NO=#{eventNo}
+		
+		UPDATE EVENT_BD 
+		SET EVENT_CNT = EVENT_CNT+1 
+		WHERE EVENT_NO=#{eventNo}
+		
 	</update>
-
 
 	<!-- 이벤트 삭제 -->
 	<delete id="deleteEvent" parameterType="com.foodtruck.vo.EventVO">
-		delete from event_bd where EVENT_NO=#{eventNo}
+		
+		DELETE FROM EVENT_BD
+		WHERE EVENT_NO=#{eventNo}
+	
 	</delete>
 
 	<select id="getCountEvent" resultType="int">
-	select count(*) from
-		event_bd
+		
+		SELECT COUNT(*) FROM EVENT_BD
+	
 	</select>
 
+	<!-- menuBoard에 이벤트 진행중이면, 푸드트럭 이름 옆에 이벤트 띄워 주려고 -->
 	<select id="progressEvent" resultMap="EventMap">
 	
-		 <![CDATA[
-		 	
-		 	SELECT E.*, F.FTRUCK_NO, F.FTRUCK_NAME
-		 	FROM EVENT_BD E
-		 	INNER JOIN FOODTRUCK F
-		 	ON E.LICENSE_NO = F.LICENSE_NO
-		 	
-		 ]]>
+		 SELECT E.*, F.FTRUCK_NO, F.FTRUCK_NAME
+		 FROM EVENT_BD E
+		 INNER JOIN FOODTRUCK F
+		 ON E.LICENSE_NO = F.LICENSE_NO
 	
 	</select>
 
@@ -81,6 +94,5 @@
 		<result column="FTRUCK_NO" property="ftruckNo"/>
 		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
-
 
 </mapper>

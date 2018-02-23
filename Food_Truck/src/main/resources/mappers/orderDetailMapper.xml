@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="com.foodtruck.dao.OrderDetailDAO">
 
 	<!-- 주문 상세 정보 -->
 	<select id="getOrderDetail" resultMap="OrderDetailMap">
 
 		SELECT * FROM ORDERDETAIL
-		<where> ORDER_NO=#{ordNo} </where>
+		WHERE ORDER_NO=#{ordNo}
 
 	</select>
 
@@ -42,8 +41,10 @@
 	<!-- 주문 등록  -->
 	<insert id="insertOrderDetail" parameterType="map">
 		
-		INSERT INTO ORDERDETAIL (ORD_NO, PROD_NO, ORD_QTY, ORD_PRICE)
-		VALUES (#{ordNo}, #{prodNo}, #{ordQty}, (#{ordPrice} * #{ordQty}))
+		INSERT INTO ORDERDETAIL
+		(ORD_NO, PROD_NO, ORD_QTY, ORD_PRICE)
+		VALUES
+		(#{ordNo}, #{prodNo}, #{ordQty}, (#{ordPrice} * #{ordQty}))
 	
 	</insert>
 	
@@ -63,10 +64,8 @@
 	<!-- 주문 삭제  -->
 	<delete id="deleteOrderDetail">
 		
-		<![CDATA[
-			DELETE FROM ORDERDETAIL
-			WHERE ORD_NO=#{ordNo}
-		]]>
+		DELETE FROM ORDERDETAIL
+		WHERE ORD_NO=#{ordNo}
 		
 	</delete>
 
@@ -96,4 +95,5 @@
 		<result column="SUM_PRICE" property="sumPrice"/>
 		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
+	
 </mapper>

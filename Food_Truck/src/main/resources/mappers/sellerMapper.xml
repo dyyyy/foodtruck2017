@@ -6,7 +6,11 @@
 
 	<!-- 푸드트럭 정보 -->
 	<select id="getFoodTruck" resultMap="FoodTruckMap">
-		select * from foodtruck where license_no=#{licenseNo}
+	
+		SELECT * 
+		FROM FOODTRUCK 
+		WHERE LICENSE_NO=#{licenseNo}
+	
 	</select>
 	
 	<!-- 오늘의 주문 내역 리스트 -->
@@ -23,6 +27,7 @@
  	</select>
  	
  	<select id="getTodayRsvList" resultMap="SellerMap">
+ 	
  		SELECT ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, 
 			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName
 		FROM ORDERS, PRODUCT
@@ -31,10 +36,12 @@
 		AND TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
 		and ord_rsv_date != 'none'
 		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
+		
  	</select>
  	
  	<!-- 오늘의 배달주문 리스트 -->
  	<select id="getTodayDlvList" resultMap="SellerMap">
+ 	
  		SELECT ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, 
 			   ORDERS.MEM_ID, LISTAGG(PROD_NAME, ',') WITHIN GROUP(ORDER BY ORD_NO) prodName
 		FROM ORDERS, PRODUCT
@@ -43,10 +50,12 @@
 		AND TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
 		AND ORD_DLV_YN = 'Y'
 		GROUP BY ORD_NO, ORD_NAME, ORD_TEL, ORD_REQ, ORD_DATE, ORD_RSV_DATE, ORD_DLV_YN, ORDERS.MEM_ID
+		
  	</select>
  	
  	<!-- 오늘의 주문 통계 -->
  	<select id="getTodayPayment" resultMap="SellerMap">
+ 	
  		SELECT  DECODE(PAYMENT,'1','카드','0','현금',null,'총주문') payment, 
  				COUNT(*) count,
 		  		TO_CHAR(SUM(SUM_PRICE), '999,999') sumprice,
@@ -55,6 +64,7 @@
 		WHERE TO_CHAR(ORD_DATE, 'YY/MM/DD') = TO_CHAR(SYSDATE, 'YY/MM/DD')
 		AND LICENSE_NO=#{licenseNo}
 		GROUP BY ROLLUP(PAYMENT)
+		
  	</select>
 
 	<!-- 주문 리스트 -->
@@ -71,6 +81,7 @@
 	
 	<!-- 판매자 사업자번호 리스트 -->
 	<select id="getLicense" resultMap="SellerMap">
+	
 		SELECT LICENSE.LICENSE_NO AS LICENSE_NO, F.FTRUCK_NAME ftruckName,
 			   F.FTRUCK_INTRO ftruckIntro, F.FTRUCK_REG ftruckReg,
 			   F.CATEGORY category, F.FTRUCK_GRADE ftruckGrade
@@ -82,10 +93,11 @@
  		WHERE MEMBER.MEM_ID=#{memberId} 
 		AND LICENSE.APP_STAT='Y'
 	
-	
 	</select>
+	
 	<!-- 판매자 푸드트럭 승인 flg -->
 	<select id="getLicense2" resultMap="SellerMap">
+	
 		SELECT LICENSE.LICENSE_NO AS LICENSE_NO, F.FTRUCK_NAME ftruckName,
 			   F.FTRUCK_INTRO ftruckIntro, F.FTRUCK_REG ftruckReg,
 			   F.CATEGORY category, F.FTRUCK_GRADE ftruckGrade
@@ -97,21 +109,29 @@
  		WHERE MEMBER.MEM_ID=#{memberId} 
 		AND LICENSE.APP_STAT='N'
 	
-	
 	</select>
 	
 	<!-- 푸드트럭 마감 -->
 	<update id="closeFoodTruck">
-		update foodtruck set ftruck_state='N' where license_no=#{licenseNo}
+	
+		UPDATE FOODTRUCK 
+		SET FTRUCK_STATE='N' 
+		WHERE LICENSE_NO=#{licenseNo}
+		
 	</update>
 	
 	<!-- 푸드트럭 운영 -->
 	<update id="openFoodTruck">
-		update foodtruck set ftruck_state='Y' where license_no=#{licenseNo}
+	
+		UPDATE FOODTRUCK 
+		SET FTRUCK_STATE='Y' 
+		WHERE LICENSE_NO=#{licenseNo}
+		
 	</update>
 	
 	<!-- 매출 등록 -->
 	<insert id="insertPrice">
+	
 		INSERT INTO sales_management(license_no, sum_price, sales_date)
 		select license_no,
         sum(sum_price) sumPrice,
@@ -120,10 +140,12 @@
   		where license_no=#{licenseNo}
   		and to_char(ord_date, 'YYYY-MM-DD')=TO_CHAR(sysdate, 'YYYY-MM-DD')
  		group by TO_CHAR(sysdate, 'YYYY-MM-DD'), license_no
+	
 	</insert>
 	
 	<!-- 매출 수정 -->
 	<update id="updatePrice">
+	
 		update sales_management set
 		sales_date = to_char(sysdate, 'YYYY-MM-DD'),
 		sum_price = (select sum(sum_price) sum_price 
@@ -132,38 +154,47 @@
 					and to_char(ord_date, 'YYYY-MM-DD')=to_char(sysdate, 'YYYY-MM-DD'))
   		where license_no=#{licenseNo}
   		and sales_date=TO_CHAR(sysdate, 'YYYY-MM-DD')
+	
 	</update>
 	
 	<!-- 매출 조회 -->
 	<select id="getPrice" resultMap="SellerMap">
+	
 		select license_no, TO_CHAR(sales_date, 'YYYY-MM-DD') salesDate,
 				to_char(sum(sum_price), '999,999') sumPrice
 		from sales_management 
 		where license_no=#{licenseNo}
 		group by LICENSE_NO, TO_CHAR(sales_date, 'YYYY-MM-DD')
+	
 	</select>
 	
 	<!-- 중복 체크 -->
 	<select id="getPrice1" resultMap="SellerMap">
+	
 		select license_no, 
       	TO_CHAR(sales_date, 'YYYY-MM-DD') salesDate,
 				to_char(sum(sum_price), '999,999') sumPrice 
 		from sales_management 
 		where license_no=#{licenseNo} and sales_date=to_char(sysdate, 'YYYY-MM-DD')
 		group by license_no, sales_date
+	
 	</select>
 	
-	
+	<!-- 푸드트럭 리스트  -->
 	<select id="getFoodTruckList" resultMap="FoodTruckMap">
-		select * from foodtruck where license_no = #{licenseNo}
+	
+		SELECT * FROM FOODTRUCK
+		WHERE LICENSE_NO = #{licenseNo}
+		
 	</select>
 	
-	
+	<!-- 푸드트럭 등록 -->
 	<insert id="insertFoodTruck" parameterType="FoodTruckVO">
-		insert into foodtruck
-		(FTRUCK_NO,ftruck_name,FTRUCK_ADDR2,FTRUCK_DLV_YN,FTRUCK_RSV_YN,ftruck_state,ftruck_img,FTRUCK_REG,CATEGORY,FTRUCK_GRADE,LICENSE_NO)
-		values
-		(FTRUCK_SEQ.nextval,#{ftruckName},#{ftruckAddr2},#{ftruckDlvYn},#{ftruckRsvYn},'N',#{ftruckImg},SYSDATE,#{category},0,#{licenseNo})
+	
+		INSERT INTO FOODTRUCK
+		(FTRUCK_NO, ftruck_name, FTRUCK_ADDR2, FTRUCK_DLV_YN, FTRUCK_RSV_YN, ftruck_state, ftruck_img, FTRUCK_REG, CATEGORY, FTRUCK_GRADE, LICENSE_NO)
+		VALUES
+		(FTRUCK_SEQ.nextval, #{ftruckName}, #{ftruckAddr2}, #{ftruckDlvYn}, #{ftruckRsvYn}, 'N', #{ftruckImg}, SYSDATE, #{category}, 0, #{licenseNo})
 		
 	</insert>
 	
@@ -174,47 +205,75 @@
 	</insert>
 	
 	<select id="getDate" parameterType="String" resultMap="SellerMap" resultType="java.util.List">
-		select TO_CHAR(ord_date, 'YYYY-MM-DD') ordDate, 
-        to_char(sum(sum_price), '999,999') sumPrice
-  		from orders 
-  		where license_no=#{licenseNo}
- 		group by TO_CHAR(ord_date, 'YYYY-MM-DD') 
+	
+		SELECT TO_CHAR(ORD_DATE, 'YYYY-MM-DD') ordDate, 
+        TO_CHAR(SUM(SUM_PRICE), '999,999') sumPrice
+  		FROM ORDERS 
+  		WHERE LICENSE_NO=#{licenseNo}
+ 		GROUP BY TO_CHAR(ORD_DATE, 'YYYY-MM-DD') 
+ 		
 	</select>
 	
-	
+	<!-- id로 라이센스 번호 가져오기 -->
 	<select id="getInfo" resultMap="LicenseMap">
-		select * from license where mem_id='${memId}'
+	
+		SELECT * 
+		FROM LICENSE 
+		WHERE MEM_ID='${memId}'
+	
 	</select>
 	
+	<!-- 1:1문의 list가져오기  -->
 	<select id="getSinquiryList" resultMap="InquiryMap">
-		select ffft.* from
-		(select fft.*from
-		(select rownum as
-		rnum, ft.*
-		from (
-		select
-		* from qa_sc where qa_sc_stat='N' and license_no is not null order
-		by QA_SC_NO asc)
-		ft)fft
-		where
-		rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
-		where rnum>=#{pageNo}
+		
+		<![CDATA[
+		
+			SELECT FFFT.* 
+			FROM (SELECT FFT.*
+				  FROM (SELECT ROWNUM AS RNUM, FT.*
+						FROM (SELECT * 
+							  FROM QA_SC 
+							  WHERE QA_SC_STAT='N' 
+							  AND LICENSE_NO IS NOT NULL 
+							  ORDER BY QA_SC_NO ASC
+							  )FT
+						)FFT
+				  WHERE ROWNUM < =#{pageNo}+9
+				  )FFFT
+			WHERE RNUM>=#{pageNo}
+			
+		]]>
 	</select>
 
+	<!-- 1:1문의 total count가져오기  -->
 	<select id="getSinquiryListcount" resultType="int">
-		select count(*)from
-		qa_sc where QA_SC_STAT='N' and LICENSE_NO is not null
+	
+		SELECT COUNT(*)
+		FROM QA_SC 
+		WHERE QA_SC_STAT='N'
+		AND LICENSE_NO IS NOT NULL
+		
 	</select>
 	
+	<!-- lisenceNo로 푸드트럭 정보가져오기  -->
 	<select id="getFoodtruckDtail" resultMap="FoodTruckMap">
 	
-	select * from foodtruck where license_No=#{licenseNo}
+		SELECT * 
+		FROM FOODTRUCK 
+		WHERE LICENSE_NO=#{licenseNo}
+		
 	</select>
 	
+	<!-- 푸드트럭별 상품 리스트   -->
 	<select id="getProductList" resultMap="ProductMap">
-		select * from product where license_no=#{licenseNo}
+	
+		SELECT * 
+		FROM PRODUCT 
+		WHERE LICENSE_NO=#{licenseNo}
+	
 	</select>
 	
+	<!--resultMap -->
 	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
 		<result column="QA_SC_NO" property="qaScNo" />
 		<result column="MEM_ID" property="memId" />
@@ -277,6 +336,5 @@
 		<result column="LICENSE_NO" property="licenseNo" />
 		<result column="FTRUCK_NO" property="ftruckNo" />
 	</resultMap>
-	
 	
 </mapper>

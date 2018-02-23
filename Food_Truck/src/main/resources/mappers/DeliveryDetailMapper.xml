@@ -3,13 +3,19 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.foodtruck.dao.DeliveryDetailDAO">
 
-
+	<!-- 배달상세 등록  -->
 	<insert id="insertDeliveryDetail">
-		insert into
-		DELIVERYDETAIL(ORD_NO,DLV_STATE,DLV_ADDR)VALUES(#{ordNo},#{dlvState},#{dlvAddr})
+	
+		INSERT INTO DELIVERYDETAIL
+		(ORD_NO, DLV_STATE, DLV_ADDR)
+		VALUES
+		(#{ordNo}, #{dlvState}, #{dlvAddr})
 
 	</insert>
+	
+	<!-- 배달상세 리스트  -->
 	<select id="getDeliveryDetailList" resultMap="DeliveryDetailMap" parameterType="map">
+	
    		SELECT D.LICENSE_NO, O.PROD_NO, O.ORD_NO, P.PROD_NAME, O.ORD_QTY, O.ORD_PRICE,D.COOK_STAT,D.ORD_DATE,D.ORD_DLV_YN ,D2.DLV_ADDR,F.FTRUCK_NAME
      	FROM ORDERDETAIL O, PRODUCT P, ORDERS D,DELIVERYDETAIL D2,FOODTRUCK F
       	WHERE
@@ -34,35 +40,40 @@
         
    	</select>
    	
+   	<!-- 배달상세 수정  -->
    	<update id="dlecookStatChange">
 
 		UPDATE ORDERS
 		SET COOK_STAT=#{cookStat}
-		<where> ORD_NO=#{ordNo} </where>
+		WHERE ORD_NO=#{ordNo}
+		
 	</update>
 	
+	<!-- dlyTimeUpdate  -->
 	<update id="dlyTimeUpdate">
-	update DELIVERYDETAIL set DLV_DATE=#{dlvDate}
-	<where> ORD_NO=#{ordNo}</where>
+	
+		UPDATE DELIVERYDETAIL 
+		SET DLV_DATE=#{dlvDate}
+		WHERE ORD_NO=#{ordNo}
+
 	</update>
 	
 	<!-- 배달내역 삭제 할 수 있도록 -->
 	<delete id="deleteDeliveryDetail">
 		
-		<![CDATA[
-			DELETE FROM DELIVERYDETAIL
-			WHERE ORD_NO=#{ordNo}
-		]]>
+		DELETE FROM DELIVERYDETAIL
+		WHERE ORD_NO=#{ordNo}
 	
 	</delete>
 	
-
+	<!-- reulstMap -->
 	<resultMap type="DeliveryDetailVO" id="DeliveryDetailMap" extends="OrderDetailMap">
 		<result column="ORD_NO" property="ordNo" />
 		<result column="DLV_STATE" property="dlvState" />
 		<result column="DLV_ADDR" property="dlvAddr" />
 		<result column="DLV_DATE" property="dlvDate" />
 	</resultMap>
+	
 	<resultMap type="OrderDetailVO" id="OrderDetailMap" extends="OrderMap">
 		<result column="PROD_NO" property="prodNo" />
 		<result column="ORD_NO" property="ordNo" />
@@ -88,4 +99,5 @@
 		<result column="SUM_PRICE" property="sumPrice"/>
 		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
+	
 </mapper>

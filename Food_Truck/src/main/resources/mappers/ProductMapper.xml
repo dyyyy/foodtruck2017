@@ -8,22 +8,25 @@
 	<select id="getProduct" resultMap="ProductMap">
 	
 		SELECT * FROM PRODUCT
-		<where> PROD_NO=#{prodNo} </where>
+		WHERE PROD_NO=#{prodNo} 
 	
 	</select>
 
 	<!-- 제품 리스트 -->
 	<select id="getProductList" resultMap="ProductMap">
 	
-		SELECT * FROM PRODUCT <where>FTRUCK_NO = #{ftruckNo}</where>
+		SELECT * FROM PRODUCT 
+		WHERE FTRUCK_NO = #{ftruckNo}
 
 	</select>
 	
 	<!-- 제품 등록 -->
 	<insert id="insertProduct">
 		
-		INSERT INTO PRODUCT (PROD_NO, PROD_NAME, PROD_CONTENT, PROD_IMG, PROD_PRICE,PROD_ORIGIN,LICENSE_NO,FTRUCK_NO)
-		VALUES(PROD_SEQ.nextval, #{prodName}, #{prodContent}, #{prodImg},#{prodPrice},#{prodOrgin},#{licenseNo},#{ftruckNo})
+		INSERT INTO PRODUCT 
+		(PROD_NO, PROD_NAME, PROD_CONTENT, PROD_IMG, PROD_PRICE, PROD_ORIGIN, LICENSE_NO, FTRUCK_NO)
+		VALUES
+		(PROD_SEQ.nextval, #{prodName}, #{prodContent}, #{prodImg}, #{prodPrice}, #{prodOrgin}, #{licenseNo}, #{ftruckNo})
 	
 	</insert>
 	
@@ -31,8 +34,8 @@
 	<update id="updateProduct">
 	
 		UPDATE PRODUCT
-		SET PROD_NAME=#{prodName}, PROD_CONTENT=#{prodContent}, PROD_PRICE=#{prodPrice},PROD_IMG=#{prodImg},PROD_ORIGIN=#{prodOrgin}
-		<where> PROD_NO=#{prodNo} </where>
+		SET PROD_NAME=#{prodName}, PROD_CONTENT=#{prodContent}, PROD_PRICE=#{prodPrice}, PROD_IMG=#{prodImg}, PROD_ORIGIN=#{prodOrgin}
+		WHERE PROD_NO=#{prodNo} 
 		
 	</update>
 	
@@ -40,12 +43,11 @@
 	<delete id="deleteProduct">
 	
 		DELETE FROM PRODUCT
-		<where> PROD_NO=#{prodNo}</where>
+		WHERE PROD_NO=#{prodNo}
 		
 	</delete>
 	
-	
-	
+	<!-- resultMap -->
 	<resultMap type="ProductVO" id="ProductMap">
 		
 		<result column="PROD_NO" property="prodNo"/>
@@ -57,4 +59,5 @@
 		<result column="FTRUCK_NO" property="ftruckNo"/>
 		<result column="LICENSE_NO" property="licenseNo"/>
 	</resultMap>
+	
 </mapper>

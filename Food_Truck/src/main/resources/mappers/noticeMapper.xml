@@ -4,59 +4,77 @@
 
 <mapper namespace="com.foodtruck.dao.NoticeDAO">
 
-
 	<!-- 공지사항 정보 -->
 	<select id="getNotice" resultMap="NoticeMap">
-		select * from notice_bd where
-		notice_no=#{noticeNo}
+	
+		SELECT * FROM NOTICE_BD
+		WHERE NOTICE_NO=#{noticeNo}
+		
 	</select>
-
 
 	<!-- 공지사항 전체 리스트 -->
 	<select id="getNoticeBoardList" resultMap="NoticeMap">
-
-		select nttt.* from
-		(select ntt.*from
-		(select rownum as
-		rnum, nt.*
-		from(SELECT * FROM notice_bd order by notice_no desc) nt)ntt where
-		rownum&lt;=(#{pageNo}+10))nttt where rnum>=#{pageNo}
+	
+		<![CDATA[
+		
+			SELECT NTTT.* 
+			FROM (SELECT NTT.*
+				  FROM (SELECT ROWNUM AS RNUM, NT.*
+						FROM (SELECT * 
+							  FROM NOTICE_BD
+							  ORDER BY NOTICE_NO DESC
+							  )NT
+						)NTT
+				  WHERE ROWNUM<=#{pageNo}+9
+				  )NTTT 
+			WHERE RNUM>=#{pageNo}
+		
+		]]>
 
 	</select>
 
 
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotice" parameterType="com.foodtruck.vo.NoticeVO">
-		insert into notice_bd
-		(notice_no, mem_id, notice_title, notice_content)
-		values((select NVL(MAX(notice_no)+1, 1)FROM notice_bd), #{memId},
-		#{noticeTitle}, #{noticeContent})
+	
+		INSERT INTO NOTICE_BD
+		(NOTICE_NO, MEM_ID, NOTICE_TITLE, NOTICE_CONTENT)
+		values
+		((SELECT NVL(MAX(NOTICE_NO)+1, 1)FROM NOTICE_BD), #{memId}, #{noticeTitle}, #{noticeContent})
+		
 	</insert>
-
 
 	<!-- 공지사항 수정 -->
 	<update id="updateNotice" parameterType="com.foodtruck.vo.NoticeVO">
-		update notice_bd set
-		notice_title=#{noticeTitle}, notice_content=#{noticeContent}
-		where notice_no=#{noticeNo}
+	
+		UPDATE NOTICE_BD
+		SET NOTICE_TITLE=#{noticeTitle}, NOTICE_CONTENT=#{noticeContent}
+		WHERE NOTICE_NO=#{noticeNo}
+	
 	</update>
-
 
 	<!-- 공지사항 조회수 -->
 	<update id="countNotice" parameterType="int">
-		update notice_bd set notice_cnt=notice_cnt+1 where notice_no=#{noticeNo}
+		
+		UPDATE NOTICE_BD S
+		ET NOTICE_CNT = NOTICE_CNT+1
+		WHERE NOTICE_NO=#{noticeNo}
+		
 	</update>
-
 
 	<!-- 공지사항 삭제 -->
 	<delete id="deleteNotice" parameterType="com.foodtruck.vo.NoticeVO">
-		delete from notice_bd where notice_no=#{noticeNo}
+		
+		DELETE FROM NOTICE_BD 
+		WHERE NOTICE_NO=#{noticeNo}
+	
 	</delete>
 	
 	<!-- 공지사항게시물 count가져오기 -->
 	<select id="getCountNotice" resultType="int">
-		select count(*) from
-		NOTICE_BD
+	
+		SELECT COUNT(*) FROM NOTICE_BD
+	
 	</select>
 
 	<!-- resultMap -->
@@ -69,6 +87,5 @@
 		<result column="NOTICE_CNT" property="noticeCnt" />
 
 	</resultMap>
-
 
 </mapper>

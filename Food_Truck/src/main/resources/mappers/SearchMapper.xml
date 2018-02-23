@@ -6,25 +6,34 @@
 
 	<!-- 푸드트럭 검색 리스트 -->
 	<select id="getFoodTruckList" resultMap="FoodTruckMap">
-		select ffft.* from
-		(select fft.*from
-		(select rownum as
-		rnum, ft.*
-		from (select foodtruck.* from
-		foodtruck WHERE FTRUCK_ADDR LIKE '%'||#{searchStr}||'%'
-		order by FTRUCK_REG)
-		ft)fft
-		where rownum&lt;=#{pageNo}+9)ffft
-		where rnum>=#{pageNo}
 		
+		<![CDATA[
+		
+			SELECT FFFT.* 
+			FROM (SELECT FFT.*
+				  FROM (SELECT ROWNUM AS RNUM, FT.*
+						FROM (SELECT FOODTRUCK.* 
+							  FROM FOODTRUCK
+							  WHERE FTRUCK_ADDR LIKE '%'||#{searchStr}||'%'
+							  ORDER BY FTRUCK_REG
+							  )FT
+						)FFT
+				  WHERE ROWNUM <=#{pageNo}+9
+				  )FFFT
+			WHERE RNUM>=#{pageNo}
+		
+		]]>
 	</select>
 	
 	<!-- 푸드트럭 검색 카운트(페이징처리) -->
 	<select id="getCategoryCountTruck" resultType="int" parameterType="string">
-		select count(*)
-		from foodtruck where FTRUCK_ADDR LIKE '%'||#{searchStr}||'%'
+	
+		SELECT COUNT(*) FROM FOODTRUCK
+		WHERE FTRUCK_ADDR LIKE '%'||#{searchStr}||'%'
+		
 	</select>
 	
+	<!-- resultMap -->
 	<resultMap type="FoodTruckVO" id="FoodTruckMap">
 		<result column="FTRUCK_NO" property="ftruckNo" />
 		<result column="LICENSE_NO" property="licenseNo" />
@@ -40,4 +49,5 @@
 		<result column="FTRUCK_INTRO" property="ftruckIntro" />
 		<result column="FTRUCK_REG" property="ftruckReg" />
 	</resultMap>
+	
 </mapper>

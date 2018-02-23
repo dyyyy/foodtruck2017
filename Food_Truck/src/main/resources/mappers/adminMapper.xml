@@ -1,37 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.foodtruck.dao.AdminDao">
+<mapper namespace="com.foodtruck.dao.AdminDAO">
 
+	<!-- 1:1 Q&A 댓글 등록  -->
 	<insert id="insertMinquryReply">
-		insert into reply_sc
-		(REPLY_SC_NO,MEM_ID,QA_SC_NO,REPLY_SC_CONTENT,REPLY_SC_REG)
-		values(REP_SC_SEQ.nextval,#{memId},#{qaScNo},#{replyScContent},SYSDATE)
+	
+		INSERT INTO REPLY_SC
+		(REPLY_SC_NO, MEM_ID, QA_SC_NO, REPLY_SC_CONTENT, REPLY_SC_REG)
+		VALUES
+		(REP_SC_SEQ.nextval, #{memId}, #{qaScNo}, #{replyScContent}, SYSDATE)
+	
 	</insert>
 
+	<!-- 푸드트럭 신청 list  -->
 	<select id="getRequestList" resultMap="memberMap">
-		select ffft.* from
-		(select fft.*from
-		(select rownum as
-		rnum, ft.*
-		from
-		(select b.mem_id, b.mem_name, b.mem_tel,l.LICENSE_NO
-		from member b ,license l
-		where b.MEM_ID=l.MEM_ID
-		and app_stat='N' order by b.MEM_ID asc)
-		ft)fft
-		where rownum<![CDATA[ < ]]>=#{pageNo}+9)ffft
-		where rnum>=#{pageNo}
+	
+		<![CDATA[
+		
+			SELECT FFFT.* 
+			FROM (SELECT FFT.*
+				  FROM (SELECT ROWNUM AS RNUM, FT.*
+						FROM (SELECT B.MEM_ID, B.MEM_NAME, B.MEM_TEL,L.LICENSE_NO
+							  FROM MEMBER B ,LICENSE L
+							  WHERE B.MEM_ID=L.MEM_ID
+							  AND APP_STAT='N' ORDER BY B.MEM_ID ASC
+							  )FT
+						)FFT
+				  WHERE ROWNUM <=#{pageNo}+9
+				  )FFFT
+			WHERE RNUM >=#{pageNo}
+			
+		]]>	
+			
 	</select>
+	
+	<!-- 푸드트럭 신청 count  -->
 	<select id="getRequestCount" resultType="int">
-	select count(*) from license where app_stat='N'
+	
+		SELECT COUNT(*) FROM LICENSE 
+		WHERE APP_STAT='N'
+	
 	</select>
+	
 	<!-- 푸드트럭 최종 승인 -->
 	<update id="appFoodtruck">
-	update license set app_stat='Y' where license_no=#{licenseNo}
+	
+		UPDATE LICENSE 
+		SET APP_STAT='Y'
+		WHERE LICENSE_NO=#{licenseNo}
 	
 	</update>
 
+	<!-- resultMap -->
 	<resultMap type="MinquiryReplyVO" id="MinquiryReplyMap">
 		<result column="REPLY_SC_NO" property="replyScNo" />
 		<result column="MEM_ID" property="memId" />
