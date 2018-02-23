@@ -182,16 +182,16 @@
 	
 	function check(num) {
 		if(num == 1) {
-			$(".ordNoChk1,.ordNoChk2").hide();
+			$(".ordNoChk1,.ordNoChk2").hide()
 		}else{
-			$(".ordNoChk1,.ordNoChk2").show();
+			$(".ordNoChk1,.ordNoChk2").show()
 		}
 	}
 </script>
 <body>
 <section class="checkout-page pagez fix"><!--Start Checkout Area-->
 	<div class="container">
-		<div class="row">
+		<div class="row">	
 			<div class="col-md-9">
 				<div class="panel-group" id="checkout-progress">
 					<div class="panel panel-default">
@@ -276,7 +276,7 @@
 										</tr>
 										<tr>
 											<th scope="row">답변 받으실 E-mail</th>
-											<td>${id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<td>${sessionScope.memberId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<span style="font-size: 8pt">
 												 	<font color="gray" face="돋움">회원정보 변경을 하려면 ? </font>
 												 </span> 
@@ -383,7 +383,7 @@
 										</tr>
 										<tr>
 											<th scope="row">답변 받으실 E-mail</th>
-											<td>${id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<td>${sessionScope.memberId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<span style="font-size: 8pt">
 												 	<font color="gray" face="돋움">회원정보 변경을 하려면 ? </font>
 												 </span> 

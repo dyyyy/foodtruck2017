@@ -39,25 +39,13 @@
 							<li><a href="/loginform">로그인</a></li>
 							<li><a href="/joinform">회원가입</a></li>
 
-							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
-									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/loginform">1:1 문의</a></li>
-								</ul></li>
-
 							<%
 								} else {
 							%>
 							
 							<%
 								switch (mvo.getMemberAuth()) {
-									//비회원
-									case "0":
-							%>
-							<li>로그인되지 않았습니다.</li>
-							<%
-								break;
+								
 									//일반회원
 									case "3":
 							%>
@@ -79,7 +67,7 @@
                                   ssvo = (SellerVO)list3.get(0);
                                }  
                            
-                     %>
+                   			  %>
 							<li>
 								<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='/resources/img/ms3.png' ><i class="fa fa-angle-down"></i></a>
 								<ul>
@@ -88,7 +76,7 @@
 								</ul>
 							</li>									
 							<li><a href="#">판매자 메뉴<i class="fa fa-angle-down"></i></a>
-								<ul>
+								<ul style="width: 120px;">
 									<li><a href="/orderDetail">예약 내역</a></li>
 									<li><a href="/DeliveryDetail">배달 내역</a></li>
 									<li><a href="/sellerMain<%=list3.isEmpty()?"":"?licenseNo="+ssvo.getLicenseNo() %>">푸드트럭 관리</a></li>
@@ -112,35 +100,19 @@
 							<%
 								break;
 									}
-							%>
-							<%switch (mvo.getMemberAuth()) { 
-								//일반회원
-								case "3":
-							%>
-							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
-									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/inquiryPage">1:1 문의</a></li>
-								</ul></li>
-							<%break;
-								//판매자회원
-								case "2":		                    
-		                              
-
-								%>
-							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
-								<ul>
-									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
-									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
-									<li><a href="/inquiryPage">1:1 문의</a></li>
-								</ul></li>
-							<%break;
-								}%>
-								<li><a href="/logout">로그아웃</a></li>
-							<%
 								}
 							%>
+												
+							<li><a href="#">고객센터<i class="fa fa-angle-down"></i></a>
+								<ul>
+									<li><a href="/noticeBoard?pageNo=1">공지사항</a></li>
+									<li><a href="/eventBoard?pageNo=1">이벤트</a></li>
+									<li><a href="/inquiryPage">1:1 문의</a></li>
+								</ul>
+							</li>
+							<% if(isLogin) { %>
+								<li><a href="/logout">로그아웃</a></li>
+							<% } %>														
 						</ul>
 					</div>
 				</div>
@@ -163,35 +135,6 @@
 					</div>
 				</div>
 				<div class="col-sm-4 col-lg-3">
-					<!-- 쇼핑 카트 사용 ? / 안사용 ? -->
-					<!-- 				<div class="cart-info float-right"> -->
-					<!-- 					<a href="cart.html"> -->
-					<!-- 						<h5>My cart <span>2</span> items - <span>$390</span></h5> -->
-					<!-- 						<i class="fa fa-shopping-cart"></i> -->
-					<!-- 					</a> -->
-					<!-- 					<div class="cart-hover"> -->
-					<!-- 						<ul class="header-cart-pro"> -->
-					<!-- 							<li> -->
-					<!-- 								<div class="image"><a href="#"><img alt="cart item" src="/resources/img/cart-1.jpg"></a></div> -->
-					<!-- 								<div class="content fix"><a href="#">Product Name</a><span class="price">Price: $130</span><span class="quantity">Quantity: 1</span></div> -->
-					<!-- 								<i class="fa fa-trash delete"></i> -->
-					<!-- 							</li> -->
-					<!-- 							<li> -->
-					<!-- 								<div class="image"><a href="#"><img alt="cart item" src="/resources/img/cart-2.jpg"></a></div> -->
-					<!-- 								<div class="content fix"><a href="#">Product Name</a><span class="price">Price: $130</span><span class="quantity">Quantity: 2</span></div> -->
-					<!-- 								<i class="fa fa-trash delete"></i> -->
-					<!-- 							</li> -->
-					<!-- 						</ul> -->
-					<!-- 						<div class="header-button-price"> -->
-					<!-- 							<a href="checkout.html"><i class="fa fa-sign-out"></i><span>Check Out</span></a> -->
-					<!-- 							<div class="total-price"><h3>Total Price : <span>$390</span></h3></div> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-					<!-- 				</div> -->
-
-
-
-
 					<div class="search float-right">
 						<div id="search1">
 							<button onclick="getLocation()" id="getLocation" class="ico-loc">
@@ -216,10 +159,6 @@
 
 							</div>
 						</form>
-
-
-
-
 					</div>
 				</div>
 			</div>

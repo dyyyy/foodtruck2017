@@ -32,19 +32,24 @@ public class MemberController {
 	// 1:1 문의 페이지 이동
 	@RequestMapping("/inquiryPage")
 	public String inquiryPage(HttpSession session,HttpServletRequest request) {
-		MemberVO m = (MemberVO)session.getAttribute("member");
+		
+		String memId = (String)session.getAttribute("memberId");
 		String gubun = (String)session.getAttribute("memberGubun");
-		String id=m.getMemberId();
+		
+		if(memId == null) {
+			return "redirect:/loginform";
+		}
+		
 		if(gubun.equals("2")) {
 			LicenseVO vo=new LicenseVO();
-			vo.setMemId(id);
+			vo.setMemId(memId);
 			List<LicenseVO> list=sellerService.getInfo(vo);
 			request.setAttribute("list", list);
-		}else {
-			List<OrderVO> list = orderService.getOrdNo(id);		// 사용자가 주문한 정보 ordNo만 쓸거
+		}else if(gubun.equals("3")){
+			List<OrderVO> list = orderService.getOrdNo(memId);		// 사용자가 주문한 정보 ordNo만 쓸거
 			request.setAttribute("list", list);
 		}
-		request.setAttribute("id", id);
+		
 		return "member/inquiry";
 	}	
 	
