@@ -89,11 +89,7 @@
 								//운영자
 								case "1":
 							%>
-								<li><a href="#">관리자 메뉴<i class="fa fa-angle-down"></i></a>
-									<ul>
-										<li><a href="/stute?pageNo=1">관리자페이지</a></li>
-									</ul>
-								</li>
+									<li><a href="/stute?pageNo=1">관리자 메뉴</a></li>
 							<%
 								break;
 								default:
