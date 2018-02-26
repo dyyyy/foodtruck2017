@@ -32,11 +32,11 @@
 
 	<!-- 이벤트 등록 -->
 	<insert id="insertEvent" parameterType="com.foodtruck.vo.EventVO">
-	
+		
 		INSERT INTO EVENT_BD
-		(EVENT_NO, MEM_ID, EVENT_TITLE, EVENT_CONTENT)
+		(EVENT_NO, MEM_ID, EVENT_TITLE, EVENT_CONTENT, LICENSE_NO, EVENT_REG2)
 		VALUES
-		((SELECT NVL(MAX(EVENT_NO)+1, 1)FROM EVENT_BD), #{memId}, #{eventTitle}, #{eventContent})
+		((SELECT NVL(MAX(EVENT_NO)+1, 1)FROM EVENT_BD), #{memId}, #{eventTitle}, #{eventContent}, #{licenseNo}, #{eventReg2})
 		
 	</insert>
 
@@ -93,6 +93,8 @@
 		<result column="LICENSE_NO" property="licenseNo"/>
 		<result column="FTRUCK_NO" property="ftruckNo"/>
 		<result column="FTRUCK_NAME" property="ftruckName"/>
+		<result column="LICENSE_NO" property="licenseNo"/>
+		<result column="EVENT_REG2" property="eventReg2"/>
 	</resultMap>
 
 </mapper>

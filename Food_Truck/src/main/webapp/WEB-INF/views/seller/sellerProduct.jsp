@@ -50,9 +50,26 @@
 		var name = document.getElementById("name").value;
 		var price = document.getElementById("price").value;
 		var content = document.getElementById("pcontent").value;
-		var pimg = document.getElementById("path").value;
+		var pimg = document.getElementById("path2").value;
 		var origin = document.getElementById("origin").value;
 		var licenseNo = document.getElementById("licenseNo").value;
+		if(name==""){
+			$('name').focus();
+			alert("상품이름을 입력해주세요")
+			return false;
+		}else if(price==""){
+			alert("가격을 입력해주세요")
+			return false;
+		}else if(content==""){
+			alert("상품설명을 입력해주세요")
+			return false;
+		}else if(pimg=="none"){
+			alert("이미지를 선택해주세요");
+			return false;
+		}else if(origin==""){
+			alert("원산지를 입력해주세요")
+			return false;
+		}	
 		$.ajax({
 			url : "/insertProduct",
 			data : {
@@ -77,23 +94,23 @@
 	}
 	//상품등록 이미지 업로드
 	function mm() {
-		var formData = new FormData(document.getElementById("uploadForm"));
-		$.ajax({
-			url : "/imggo", //컨트롤러 URL
-			data : formData,
-			dataType : 'json',
-			processData : false,
-			contentType : false,
-			type : 'POST',
-			success : function(data) {
-				$('.img2').html('<input type="hidden" value="' + data.path + '" id="path">');
-			},
-			error : function(jqXHR) {
-				alert(jqXHR.responseText);
-			}
-		});
+	var formData = new FormData(document.getElementById("uploadForm"));	
+	$.ajax({
+		url : "/imggo", //컨트롤러 URL
+		data : formData,
+		dataType : 'json',
+		processData : false,
+		contentType : false,
+		type : 'POST',
+		success : function(data) {
+			$('.img2').html('<input type="hidden" value="' + data.path + '" id="path2">');
+		},
+		error : function(jqXHR) {
+			alert(jqXHR.responseText);
+		}
+	});
 
-	}
+}
 	//상품수정 이미지 업로드
 	function mm2() {
 		var formData = new FormData(document.getElementById("uploadForm2"));
@@ -260,6 +277,7 @@ function del(){
 									</div>
 								</c:forEach>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -281,7 +299,7 @@ function del(){
 							<tr>
 								<td align="center" style="width: 100px;">상품이름</td>
 								<td colspan=3><input type="text" style="width: 350px;"
-									id="name"></td>
+									id="name" ></td>
 							</tr>
 							<tr>
 								<td align="center">상품 가격</td>
@@ -298,9 +316,10 @@ function del(){
 							<tr>
 							<tr>
 								<td>이미지 파일</td>
-								<td colspan=3 id="mg" style="width: 100px;"><input
-									type="file" style="width: 350px;" name="img"
-									enctype="multipart/form-data" onchange="mm()"></td>
+								<td colspan=3 id="mg" style="width: 350px;">
+								<input class="input-file uniform_on" id="img"
+												type="file" name="img" enctype="multipart/form-data"
+												onchange="mm()">
 							</tr>
 
 

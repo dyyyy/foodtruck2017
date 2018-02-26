@@ -198,10 +198,6 @@
 							<!-- 이름 -->
 							<label>Name<span>*</span></label> <input type="text"
 								name="memberName">
-							<!-- 휴대폰 번호  -->
-							<label>Phone Number<span>*</span></label> <input type="text"
-								name="memberTel"> <input type="button" id="checkTel"
-								value="인증하기">
 							<!-- 이벤트 정보 수신 동의 -->
 							<label>이벤트 정보 수신 동의<span>*</span></label>
 							<div class="remember">
@@ -211,24 +207,6 @@
 							<div class="remember">
 								<input type="checkbox" name="checkEmail">
 								<p>email</p>
-							</div>
-							<!-- 이용약관  -->
-							<label>이용약관<span>*</span></label>
-							<!-- 이용약관 1 -->
-							<textarea name=textarea rows="7"></textarea>
-							<p>
-							<div class="remember">
-								<input type="checkbox" name="agree1">
-								<p>동의</p>
-							</div>
-							<br> <br>
-
-							<!-- 이용약관 2 -->
-							<textarea name=textarea rows="7"></textarea>
-							<p>
-							<div class="remember">
-								<input type="checkbox" name="agree2">
-								<p>동의</p>
 							</div>
 							<!-- 버튼 -->
 							<p>
@@ -241,12 +219,7 @@
 			</div>
 		</div>
 	</div>
-	<!--End create member Area-->
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<!--End create member Area--><br><br><br>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>

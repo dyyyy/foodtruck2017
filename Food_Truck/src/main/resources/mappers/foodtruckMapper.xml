@@ -294,6 +294,7 @@
 		<result column="TOTAL" property="total" />		
 		<result column="FTRUCK_EVENT" property="ftruckEvent" />
 		<result column="EVENT_NO" property="eventNo"/>
+		<result column="EVENT_REG2" property="eventReg2"/>
 	</resultMap>
 	
 	<resultMap type="com.foodtruck.vo.LicenseVO" id="LicenseMap">

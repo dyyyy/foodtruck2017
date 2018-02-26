@@ -1,5 +1,8 @@
 package com.foodtruck.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,17 +79,32 @@ public class EventController {
 
 	// 이벤트 등록폼에서 넘어온 값들 디비에 저장
 	@RequestMapping("/insertEvent")
-	public String insertEvent(HttpSession session, EventVO vo) {
+	public String insertEvent(HttpSession session, EventVO vo,
+							  @RequestParam(value = "licenseNo", required = false) String licenseNo,
+							  @RequestParam(value = "eventReg2", required = false) String eventReg2) {
 
 		MemberVO mvo = (MemberVO) session.getAttribute("member");
+		System.out.println("eventReg2" + eventReg2);
+			
+		// 이벤트 해당 시간내에만 보여주기 위해서
+		String addHourTime = "";
+		Date date = new Date();
+		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.HOUR, Integer.parseInt(eventReg2));
+		addHourTime = sdformat.format(cal.getTime());
+		System.out.println(addHourTime);
+			
+		vo.setEventReg2(addHourTime);
 		vo.setMemId(mvo.getMemberId()); 
-		System.out.println(vo.getEventTitle());
-
+		vo.setLicenseNo(licenseNo);
+			
 		eventService.insertEvent(vo);
 		return "redirect:/eventBoard?pageNo=1";
-		
+			
 	}
-
+	
 	// 수정하기 눌렀을 떄, 수정폼
 	@RequestMapping("/updateEventForm")
 	public String updateEventForm(HttpServletRequest request, @RequestParam("eventNo") int eventNo, HttpSession session) {
