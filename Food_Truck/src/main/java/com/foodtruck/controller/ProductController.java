@@ -54,6 +54,7 @@ public class ProductController {
 		String user = System.getProperty("user.dir");
 		String path1 = "";
 		path1 += user;
+		System.out.println("이미지경로로로로롤로"+request.getFileNames());
 		path1 += "\\food\\Food_Truck\\src\\main\\webapp\\resources\\img\\upload\\";		
 		Iterator<String> itr2= request.getFileNames();
 		System.out.println(itr2);

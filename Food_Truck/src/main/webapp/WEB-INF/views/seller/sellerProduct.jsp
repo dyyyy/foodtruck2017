@@ -51,7 +51,6 @@
 		var price = document.getElementById("price").value;
 		var content = document.getElementById("pcontent").value;
 		var pimg = document.getElementById("path2").value;
-		alert(pimg);
 		var origin = document.getElementById("origin").value;
 		var licenseNo = document.getElementById("licenseNo").value;
 		if(name==""){
@@ -95,9 +94,7 @@
 	}
 	//상품등록 이미지 업로드
 	function mm() {
-	var formData = new FormData(document.getElementById("uploadForm"));
-	alert(formData.img);
-	
+	var formData = new FormData(document.getElementById("uploadForm"));	
 	$.ajax({
 		url : "/imggo", //컨트롤러 URL
 		data : formData,
@@ -319,9 +316,10 @@ function del(){
 							<tr>
 							<tr>
 								<td>이미지 파일</td>
-								<td colspan=3 id="mg" style="width: 100px;"><input
-									type="file" style="width: 350px;" id="img"
-									enctype="multipart/form-data" onchange="mm()"></td>
+								<td colspan=3 id="mg" style="width: 350px;">
+								<input class="input-file uniform_on" id="img"
+												type="file" name="img" enctype="multipart/form-data"
+												onchange="mm()">
 							</tr>
 
 
