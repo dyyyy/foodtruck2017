@@ -23,6 +23,7 @@ public class FoodTruckVO extends ReviewVO{
 	private String ftruckCondtion;	// 푸드트럭상태(여유 / 혼잡)
 	private String ftruckEvent;		// 푸드트럭 이벤트
 	private int eventNo;			// 이벤트 번호	
+	private String eventReg2;		// 이벤트 시간
 	
 	// getter & setter
 	public String getFtruckNo() {
@@ -151,4 +152,11 @@ public class FoodTruckVO extends ReviewVO{
 	public void setEventNo(int eventNo) {
 		this.eventNo = eventNo;
 	}
+	public String getEventReg2() {
+		return eventReg2;
+	}
+	public void setEventReg2(String eventReg2) {
+		this.eventReg2 = eventReg2;
+	}
+	
 }
