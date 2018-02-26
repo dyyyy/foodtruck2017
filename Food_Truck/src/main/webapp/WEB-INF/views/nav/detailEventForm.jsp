@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,9 +26,7 @@
 						</div><br><br>
 						<p>${vo.eventContent}</p>
 						<br><br>
-						<fmt:parseDate value="${vo.eventReg2 }" pattern="yyyy-MM-dd HH:mm" var="endDate"/>
-<%-- 						<p>이벤트 진행 시간은 ${fn:substring(vo.eventReg2, 0, 13)}시  ${fn:substring(vo.eventReg2, 14, 15)} 분 까지 진행됩니다.</p> --%>
-						<p>이벤트 진행 시간은  <fmt:formatDate value="${endDate }" pattern="yyyy-MM-dd HH:mm"/> 까지 진행됩니다.</p>
+						<p>이벤트 진행 시간은 ${fn:substring(vo.hourTime, 0, 13)}시  ${fn:substring(vo.hourTime, 14, 16)} 분 까지 진행됩니다.</p>
 					</div>
 				</div>
 

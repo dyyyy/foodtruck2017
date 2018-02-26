@@ -13,6 +13,7 @@
    		$("#frm").on("submit", function() {
    			var eventTitle = $("#eventTitle").val();
    			var eventContent = $("#eventContent").val();
+   			var test = $("#hourTime option:selected").val();
    			
    			if(eventTitle == "") {
    				alert("제목을 입력해 주세요.")
@@ -25,6 +26,9 @@
    				$("#eventContent").focus();
    				return false;
    			};
+   			
+   			
+			alert(test);   			
    			
    			return true;
    		
@@ -92,7 +96,7 @@
 											<th scope="row" style="margin-bottom: 10px; width: 50px"> 이벤트 시간 설정 </th>
 											<td>
 												현재 시간으로 부터
-												<select id="eventReg2" name="eventReg2">
+												<select id="hourTime" name="hourTime">
 													<c:set var="n" value="1"/>
 													<c:forEach begin="1" end="12">
 														<option value="${n}"> ${n}시간 동안 </option>
