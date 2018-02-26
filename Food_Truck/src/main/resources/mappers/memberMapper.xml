@@ -4,34 +4,75 @@
 
 <mapper namespace="com.foodtruck.dao.MemberDAO">
 
-	<!-- 사용자 문의내역리스트 -->
-	<select id="getMemberQaInfoList" resultMap="InquiryMap">
+	<!-- 답변을 해주면 문의 테이블 답변여부 N -> Y 로 -->
+	<update id="qaSelStatUpdate">
+		UPDATE QA_SELLER Q
+		SET Q.QA_SEL_STAT = 'Y'
+		WHERE Q.QA_SEL_NO = #{qaSelNo}
+	</update>
 	
-		SELECT Q.* 
-		FROM QA_SELLER Q, MEMBER M 
-		WHERE Q.MEM_ID = M.MEM_ID 
-		AND M.MEM_ID = #{memId}
+	<!-- 고객문의 답변 (판매자) -->
+	<insert id="qaScReplyInsert">
+		INSERT INTO REPLY_SELLER
+		VALUES
+		(REP_SEL_SEQ.NEXTVAL,#{memId},#{qaSelNo},#{replySelContent},#{replySelReg})
+	</insert>
 	
+	<!-- 판매자에게 온 문의 리스트 -->
+	<select id="getSellerQaSelInfoList" resultMap="InquiryMap">
+		SELECT Q.*,F.FTRUCK_NAME
+		FROM QA_SELLER Q,ORDERS O,LICENSE L,FOODTRUCK F
+		WHERE O.LICENSE_NO = L.LICENSE_NO AND F.LICENSE_NO = O.LICENSE_NO
+		AND L.MEM_ID = #{memId}
+		ORDER BY Q.QA_SEL_STAT ASC,Q.QA_SEL_NO ASC
 	</select>
 	
-	<!-- 사용자 문의내역 정보 -->
-	<select id="getMemberQaInfo" resultMap="InquiryMap">
+	<!-- 사용자가  판매자에게 보낸 문의 내역 리스트 -->
+	<select id="getMemberQaSelInfoList" resultMap="InquiryMap">
+		SELECT Q.QA_SEL_NO,Q.MEM_ID,Q.ORD_NO,SUBSTR(Q.QA_SEL_TITLE,1,10)AS QA_SEL_TITLE,Q.QA_SEL_CONTENT,Q.QA_SEL_REG,Q.QA_SEL_CATEGORY1,Q.QA_SEL_CATEGORY2,Q.QA_SEL_TEL,Q.QA_SEL_STAT
+		FROM QA_SELLER Q , MEMBER M 
+		WHERE Q.MEM_ID = M.MEM_ID
+		AND LENGTH(Q.QA_SEL_TITLE) > 0
+		AND M.MEM_ID = #{memId}
+		ORDER BY Q.QA_SEL_STAT ASC,Q.QA_SEL_NO ASC
+	</select>
 	
-		SELECT Q.* 
-		FROM QA_SELLER Q, MEMBER M 
+	<!-- 사용자가  관리자에게  문의 내역 리스트 -->
+	<select id="getMemberQaScInfoList" resultMap="InquiryMap">
+		SELECT Q.QA_SC_NO,Q.MEM_ID,Q.LICENSE_NO,SUBSTR(Q.QA_SC_TITLE,1,10)AS QA_SC_TITLE,Q.QA_SC_CONTENT,Q.QA_SC_REG,Q.QA_SC_CATEGORY1,Q.QA_SC_CATEGORY2,Q.QA_SC_TEL,Q.QA_SC_STAT
+		FROM QA_SC Q , MEMBER M 
+		WHERE Q.MEM_ID = M.MEM_ID
+		AND LENGTH(Q.QA_SC_TITLE) > 0
+		AND M.MEM_ID = #{memId}
+		ORDER BY Q.QA_SC_STAT ASC,Q.QA_SC_NO ASC
+	</select>
+	
+	<!-- 사용자 판매자에게  문의내역 정보 -->
+	<select id="getMemberQaSelInfo" resultMap="InquiryMap">
+		SELECT Q.* FROM QA_SELLER Q , MEMBER M 
 		WHERE Q.MEM_ID = M.MEM_ID 
 		AND Q.QA_SEL_NO = #{qaSelNo}
+	</select>
 	
+	<!-- 사용자 관리자에게 문의내역 정보 -->
+	<select id="getMemberQaScInfo" resultMap="InquiryMap">
+		SELECT Q.* FROM QA_SC Q , MEMBER M 
+		WHERE Q.MEM_ID = M.MEM_ID 
+		AND Q.QA_SC_NO = #{qaScNo}		
 	</select>
 
-	<!-- 사용자 문의 답변 -->
-	<select id="getMemberQaReply" resultMap="InquiryReplyMap">
-	
-		SELECT R.* 
-		FROM REPLY_SELLER R, QA_SELLER Q
+	<!-- 판매자가 사용자에게 문의 답변 내용 -->
+	<select id="getMemberQaSelReply" resultMap="InquiryReplyMap">
+		SELECT R.* FROM REPLY_SELLER R, QA_SELLER Q
 		WHERE Q.QA_SEL_NO = R.QA_SEL_NO
 		AND R.QA_SEL_NO = #{qaSelNo}
-	
+	</select>
+
+	<!-- 관리자가 사용자에게 문의 답변 내용 -->
+	<select id="getMemberQaScReply" resultMap="InquiryReplyMap">
+		SELECT R.* FROM REPLY_SC R, QA_SC Q
+		WHERE Q.QA_SC_NO = R.QA_SC_NO
+		AND R.QA_SC_NO = #{qaScNo}
 	</select>
 
 	<!-- 회원 정보 -->
@@ -219,14 +260,23 @@
 		<result column="QA_SEL_TEL" property="qaSelTel" />
 		<result column="QA_SEL_STAT" property="qaSelStat" />
 		<result column="ORD_NO" property="ordNo" />
+		<result column="FTRUCK_NAME" property="ftruckName"/>
 	</resultMap>
 	
 	<resultMap type="com.foodtruck.vo.MinquiryReplyVO" id="InquiryReplyMap">
+		<!-- 판매자 -->
 		<result column="REPLY_SEL_NO" property="replySelNo" />
 		<result column="MEM_ID" property="memId" />
 		<result column="QA_SEL_NO" property="qaSelNo" />
 		<result column="REPLY_SEL_CONTENT" property="replySelContent" />
 		<result column="REPLY_SEL_REG" property="replySelReg" />
+	
+		<!-- 관리자 -->
+		<result column="REPLY_SC_NO" property="replyScNo" />
+		<result column="MEM_ID" property="memId" />
+		<result column="QA_SC_NO" property="qaScNo" />
+		<result column="REPLY_SC_CONTENT" property="replyScContent" />
+		<result column="REPLY_SC_REG" property="replyScReg" />		
 	</resultMap>
 	
 </mapper>

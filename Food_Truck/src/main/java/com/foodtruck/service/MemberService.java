@@ -18,23 +18,59 @@ public class MemberService {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 
-	// 사용자 문의내역 리스트
-	public List<MInquiryVO> getMemberQaInfoList(String memberId) {
+	// 판매자가 고객문의 답변해주면 문의상태 Y 로 변경
+	public int qaSelStatUpdate(int qaSelNo) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
-		return dao.getMemberQaInfoList(memberId);
+		return dao.qaSelStatUpdate(qaSelNo);
 	}
 	
-	// 사용자 문의내역 정보
-	public MInquiryVO getMemberQaInfo(int qaScNo) {
+	// 고객 문의 답변(판매자)
+	public int qaScReplyInsert(MinquiryReplyVO vo) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
-		return dao.getMemberQaInfo(qaScNo);
+		return dao.qaScReplyInsert(vo);
 	}
 	
-	// 문의 답변내용
-	public MinquiryReplyVO getMemberQaReply(int qaScNo) {
+	// 판매자에게 온 문의 리스트
+	public List<MInquiryVO> getSellerQaSelInfoList(String memberId) {
 		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
-		return dao.getMemberQaReply(qaScNo);
+		return dao.getSellerQaSelInfoList(memberId);
+	}
+	
+	// 사용자 판매자에게 문의내역 리스트
+	public List<MInquiryVO> getMemberQaSelInfoList(String memberId) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaSelInfoList(memberId);
+	}
+	
+	// 사용자 관리자에게 문의내역 리스트
+	public List<MInquiryVO> getMemberQaScInfoList(String memberId) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaScInfoList(memberId);
+	}
+	
+	// 사용자 판매자에게 문의내역 정보
+	public MInquiryVO getMemberQaSelInfo(int qaSelNo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaSelInfo(qaSelNo);
+	}
+	
+	// 사용자 관리자에게 문의내역 정보
+	public MInquiryVO getMemberQaScInfo(int qaScNo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaScInfo(qaScNo);
+	}
+	
+	// 판매자가 사용자에게 문의 답변내용
+	public MinquiryReplyVO getMemberQaSelReply(int qaSelNo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaSelReply(qaSelNo);
 	}	
+	
+	// 관리자가 사용자에게 문의 답변 내용
+	public MinquiryReplyVO getMemberQaScReply(int qaScNo) {
+		MemberDAO dao = sessionTemplate.getMapper(MemberDAO.class);
+		return dao.getMemberQaScReply(qaScNo);
+	}
 	
 	// 회원 정보
 	public MemberVO getMember(String memberId) {
