@@ -129,7 +129,7 @@ $(function() {
 				<div class="row-fluid"></div>
 				<div class="row-fluid">
 					<!-- block -->
-					<div class="block" style="height: 300px;">
+					<div class="block" style="height: 500px;">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">오늘의 추천 축제</div>
 						</div>
@@ -138,7 +138,7 @@ $(function() {
 						<%if(check.equals("Y")){ %>
 						<div id="myCarousel"
 							class="carousel slide" 
-							style="height: 300px; width: 100%;  display: none" >
+							style="height: 500px; width: 100%;  display: none" >
 
 							<ol class="carousel-indicators">
 								  <li data-target="#myCarousel" data-slide-to="0"
@@ -149,7 +149,7 @@ $(function() {
 								
 
 							</ol>
-							<div class="carousel-inner" style="height: 300px; width: 100%;"
+							<div class="carousel-inner" style="height: 500px; width: 100%;"
 								>
 								<%
 									List<FestivalVO> festivalList = (List<FestivalVO>) request.getAttribute("list3");
@@ -163,7 +163,7 @@ $(function() {
 								%>
 								<div class="item active">
 									<img src="<%=festivalList.get(j).getFesImg2()%>"
-										style="height: 300px; width: 100%;">
+										style="height: 500px; width: 100%;">
 									<div class="carousel-caption">
 										<p><%=festivalList.get(j).getFesName()%></p>
 									</div>
@@ -173,7 +173,7 @@ $(function() {
 								%>
 								<div class="item">
 									<img src="<%=festivalList.get(j).getFesImg2()%>"
-										style="height: 300px; width: 100%;">
+										style="height: 500px; width: 100%;">
 									<div class="carousel-caption">
 										<p><%=festivalList.get(j).getFesName()%></p>
 									</div>
@@ -201,7 +201,7 @@ $(function() {
 						
 						<%} %>
 					</div>
-					<div class="block" style="margin-top: 50px;">
+					<div class="block" style="margin-top: 100px;">
 						<div class="navbar navbar-inner block-header">
 							<div class="muted pull-left">매출</div>
 							<div class="pull-right">
