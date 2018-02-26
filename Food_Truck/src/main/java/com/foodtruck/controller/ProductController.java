@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ProductService;
+import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.ProductVO;
 
 @Controller
@@ -30,24 +32,40 @@ public class ProductController {
 	MappingJackson2JsonView jsonView;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private FoodTruckService foodtruckService; 
+	
+    @RequestMapping("/insertProduct")
+    @ResponseBody
+    public int insertProduct(ProductVO vo) throws Exception {
+        String licenseNo=vo.getLicenseNo();
+        FoodTruckVO vo1=foodtruckService.getFoodTruck2(licenseNo);
+        System.out.println("sdfsdf");
+        vo.setFtruckNo(vo1.getFtruckNo());
+        int num = productService.insertProduct(vo);
+        return num;
+
+    }
 
 	@RequestMapping("/imggo")
 	@ResponseBody
-	public HashMap<String, Object> img(MultipartHttpServletRequest request, HttpServletRequest req) throws IllegalStateException, IOException {
+	public HashMap<String ,Object> img(MultipartHttpServletRequest request, HttpServletRequest req) throws IllegalStateException, IOException {
 
 		String user = System.getProperty("user.dir");
 		String path1 = "";
 		path1 += user;
 		path1 += "\\food\\Food_Truck\\src\\main\\webapp\\resources\\img\\upload\\";		
-		
+		Iterator<String> itr2= request.getFileNames();
+		System.out.println(itr2);
 		Iterator<String> itr = request.getFileNames();
-
-		if (itr.hasNext()) {
+		System.out.println("진입");
+		if (itr2.hasNext()) {
+			System.out.println("진입2");
 			List<MultipartFile> mpf = request.getFiles(itr.next());
 			
 			//DB에 저장될 값
 			String pname="\\resources\\img\\upload\\"+mpf.get(0).getOriginalFilename();
-			
+			System.out.println(pname);
 			for (int i = 0; i < mpf.size(); i++) {
 				
 				File file = new File(path1 + mpf.get(i).getOriginalFilename());				
@@ -60,12 +78,15 @@ public class ProductController {
 
 			// model.addObject("path", PATH);
 			String pa = path1 + mpf.get(0).getOriginalFilename();
-			HashMap<String, Object>  map = new HashMap<>();
+            HashMap<String,Object> map = new HashMap<String,Object>();
+
 			map.put("path", pname);
 			return map;
 			
 		} else {
-			HashMap<String, Object>  map = new HashMap<>();		
+			System.out.println("진입3");
+			HashMap<String,Object> map = new HashMap<String,Object>();
+		
 			map.put("path", "실패");
 			return map;
 		}

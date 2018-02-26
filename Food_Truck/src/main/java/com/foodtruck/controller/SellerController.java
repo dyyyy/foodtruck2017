@@ -321,7 +321,7 @@ public class SellerController {
 		lvo.setLicenseNo(fvo.getLicenseNo());
 		lvo.setMemId(mvo.getMemberId());
 		sellerService.insertLicense(lvo);
-
+		
 		// Foodtruck 테이블 insert
 		fvo.setLicenseNo(lvo.getLicenseNo());
 		fvo.setFtruckTel(mvo.getMemberTel());
