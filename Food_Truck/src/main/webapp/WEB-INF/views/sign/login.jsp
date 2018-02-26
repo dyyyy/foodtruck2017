@@ -53,8 +53,8 @@
                </form>
                <form name="nonMember_form" method="post" action="/nonMemberOrderDetail">
                   <div id="non_login" style="display:none">
-					 <h2>Search</h2>
-             	     <p>HIHIHIHIHIHIHIHIHIHI</p>                  
+					 <h2>LOGIN</h2>
+             	     <p>Please enter your order number and telephone number</p>                  
                      <label>주문번호<span>*</span></label>
                      <input type="text" name="ordNo" />
                      <label>전화번호<span>*</span></label>

@@ -70,8 +70,8 @@
 			<div class="col-sm-12">
                <div class="product">
                   <div class="table-responsive" >
-                  <h2>DAILY ORDER STATE</h2>
-                     <p> 오늘의 기준 - 판매현황 <br><br>사업자 번호 선택 후, 날짜를 선택하시면 지난 예약 내역도 확인 가능하답니다 :-) </p><br><br>
+                  <h2>DAILY DELIVERY STATE</h2>
+                     <p> 오늘의 기준 - 배달현황 <br><br>사업자 번호 선택 후, 날짜를 선택하시면 지난 배달 내역도 확인 가능하답니다 :-) </p><br><br>
                      <!-- 사업자 기준으로 통계 -->
                      <div>
                      	<select id="licenseList" name="licenseNo" >
@@ -312,7 +312,7 @@
 								// 없을 경우,
 							} else {
 								htmlObj += "<tr class='table-info'>";
-								htmlObj += "	<td class='unit' colspan='5'> 해당 날짜에는 데이터가 없습니다. </td>";
+								htmlObj += "	<td class='unit' colspan='7'> 해당 날짜에는 데이터가 없습니다. </td>";
 								htmlObj += "</tr>";
 							}
 							
