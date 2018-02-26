@@ -10,16 +10,10 @@
 $(function() {
 	$("#infoupdateBtn").click(function() {
 		
-		var memberPw = $('input[name="memberPw"]')
-		var check = prompt("비밀번호를 입력하세요")
-		if(check == memberPw.val()) {
-			frm.action = "/memberInfoUpdateGet"
-			frm.method = "POST"
-			frm.submit()
-		}else{
-			alert("정보가 틀렸습니다.")
-			return false;
-		}
+		frm.action = "/memberInfoUpdate"
+		frm.method = "POST"
+		frm.submit()
+		
 	})
 })	
 </script>
@@ -72,17 +66,17 @@ h1 {
 						</tr>
 						<tr class="table-title">
 							<th width="100px">비밀번호</th>
-							<td><input type="text" name="memberPw" value="${memberInfo.memberPw}" class="box" style="width: 100%"></td>							
+							<td><input type="password" name="memberPw" value="${memberInfo.memberPw}" class="box" style="width: 100%; background-color: #c3c3b78c;"></td>							
 							<th></th>
 						</tr>
 						<tr class="table-title">
 							<th width="100px">이름</th>
-							<td><input type="text" name="memberName" value="${memberInfo.memberName}" class="box" style="width: 100%"></td>							
+							<td><input type="text" name="memberName" value="${memberInfo.memberName}" class="box" style="width: 100%; background-color: #c3c3b78c;"></td>							
 							<th></th>
 						</tr>				
 						<tr class="table-title">
 							<th width="100px">전화번호</th>
-							<td><input type="text" name="memberTel" value="${memberInfo.memberTel}" class="box" style="width: 100%"></td>							
+							<td><input type="text" name="memberTel" value="${memberInfo.memberTel}" class="box" style="width: 100%; background-color: #c3c3b78c;"></td>							
 							<th></th>
 						</tr>																		
 						<tr class="table-title">
