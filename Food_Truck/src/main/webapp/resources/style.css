@@ -3039,7 +3039,7 @@ h4.heading {
    -webkit-justify-content: center;
 }
 
-.login h2, .product h2, .join h2, .orderForm h2 {
+.login h2, .product h2, .join h2, .orderForm h2, .product h1 {
    font-size: 18px;
    font-weight: 700;
    margin-bottom: 30px;
