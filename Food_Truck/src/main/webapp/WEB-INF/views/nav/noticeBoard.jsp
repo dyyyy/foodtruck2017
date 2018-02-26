@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,6 @@
 <jsp:include page="../comm/header.jsp"></jsp:include>
 <body>
 <%@include file="../comm/nav.jsp"%>
-<!-- 손혜여니 test -->
 <section class="cart-page page fix" >
 	<div class="container">
 		<div class="row2">
@@ -23,8 +23,8 @@
                         		<tr>
                         			<th class="quantity"> 글번호 </th>
                               		<th class="unit" style="width: 100px;"> 제목 </th>
-                              		<th class="unit"> 등록일 </th>
                               		<th class="unit"> 조회수 </th>
+                              		<th class="unit"> 등록일 </th>
                               		<th class="unit"> 작성자 </th>
                            		</tr> 
                         	</thead>
@@ -34,9 +34,9 @@
          		              		<tr class="table-info">
                 	    	   			<td class="quantity">${rank.noticeNo}</td>
                     	   				<td class="unit"><a href="/detailNoticeForm?noticeNo=${rank.noticeNo}">${rank.noticeTitle}</a></td>
-                       					<td class="unit">${rank.noticeReg}</td>
                        					<td class="unit">${rank.noticeCnt}</td>
-                       					<td class="unit">운영자입니다.</td>
+                       					<td class="unit">${fn:substring(rank.noticeReg, 0, 10)}</td>
+                       					<td class="unit">운영자</td>
                           			</tr>
                          		</c:forEach>
                        		</tbody>
