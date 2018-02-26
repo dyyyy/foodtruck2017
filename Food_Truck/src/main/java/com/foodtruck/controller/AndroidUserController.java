@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodtruck.service.MemberService;
+import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.MInquiryVO;
 
 @Controller
@@ -23,6 +24,8 @@ public class AndroidUserController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private SellerService sellerService;
 
 	/* 문의하기 */
 	// MemberController - memberinquriy 메소드, MinquiryVO, MinquiryReplyVO
@@ -31,24 +34,27 @@ public class AndroidUserController {
 	public ResponseEntity<String> androidinquriy(@RequestBody MInquiryVO vo) throws Exception {
 		System.out.println("inquiry connect");
 
-		vo.setQaScStat("N");
+		if (vo.getOrdNo() != null) {
+			memberService.insertInquiry(vo);
+		} else if (vo.getLicenseNo() != null) {
+			memberService.insertInquiry2(vo);
+		} else {
 
-		memberService.insertInquiry(vo);
+		}
 
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
 
 	/* 문의내역 */
-	@RequestMapping(value = "/user/inqueryinfo/{id:.+}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/inqueryinfo/{id:.+}", method = RequestMethod.GET, produces = "application/json;charset=utf-8", consumes = "application/json;charset=utf-8")
 	@ResponseBody
 	public String androidInquriyInfo(@PathVariable("id") String id) throws Exception {
 		System.out.println("inqueryinfo connect" + " : " + id);
 
 		JSONObject json = new ObjectMapper().readValue(id, JSONObject.class);
-		
 
-		List<MInquiryVO> list = memberService.getMemberQaInfoList(json.get("id").toString());
+		List<MInquiryVO> list = memberService.getSellerQaSelInfoList(json.get("id").toString());
 
 		if (list != null) {
 			String result = new ObjectMapper().writeValueAsString(list);

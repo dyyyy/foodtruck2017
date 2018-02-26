@@ -27,7 +27,7 @@ import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.NoticeVO;
-
+    
 @Controller
 @RequestMapping("/android")
 public class AndroidController<Article> {
