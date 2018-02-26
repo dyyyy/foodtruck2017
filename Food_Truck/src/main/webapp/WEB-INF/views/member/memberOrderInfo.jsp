@@ -15,14 +15,14 @@
 <!-- 소스시작  -->
 <script type="text/javascript">
 
-	$(function() {
-		
-		$("#reviewForm").hide();
-		
-		$("#reviewBtn").on("click", function() {
-			$("#reviewForm").show();
-		})
-	});
+   $(function() {
+      
+      $("#reviewForm").hide();
+      
+      $("#reviewBtn").on("click", function() {
+         $("#reviewForm").show();
+      })
+   });
 </script>
 <body>
 
@@ -33,16 +33,32 @@
       <!--Start Cart Area-->
       <div class="container">
          <div class="row">
-            <div class="col-sm-4 col-md-3">
-               <div class="single-sidebar">
-                  <h2>내 정보</h2>
-                  <ul align="center">
-                     <li><a href="/memberInfo">회원 정보</a></li>
-                     <li><a href="/memberOrderInfo">주문 내역</a></li>
-                     <li><a href="/memberQaInfoList">문의 내역</a></li>
-                  </ul>
+        <c:choose>        
+            <c:when test="${sessionScope.memberGubun eq '3'}">
+               <div class="col-sm-4 col-md-3">
+                  <div class="single-sidebar">
+                     <h2>내 정보</h2>
+                     <ul align="center">
+                        <li><a href="/memberInfo">회원 정보</a></li>
+                        <li><a href="/memberOrderInfo">주문 내역</a></li>
+                        <li><a href="/memberQaInfoList">문의 내역(판매자)</a></li>
+                        <li><a href="/memberQaInfoList?gubun=1">문의 내역(관리자)</a></li>
+                     </ul>
+                  </div>
                </div>
-            </div>
+              </c:when>
+               <c:when test="${sessionScope.memberGubun eq '2'}">
+               <div class="col-sm-4 col-md-3">
+                  <div class="single-sidebar">
+                     <h2>문의 관리</h2>
+                     <ul align="center">
+                        <li><a href="/memberQaInfoList">내 문의 내역</a></li>
+                        <li><a href="/memberQaInfoList?gubun=1">고객 문의 내역</a></li>
+                     </ul>
+                  </div>
+               </div>                  
+               </c:when>
+           </c:choose>
             <div class="col-sm-8 col-md-9">
                <div class="table-responsive">
                   <table class="table cart-table">      
@@ -72,17 +88,17 @@
                               <td class="unit">${MemberInfo.ordPrice}원</td>
                               <!-- 결제 취소 하기 버튼 -->
                               <c:if test="${MemberInfo.cookStat eq 0 }">
-                              	<td class="unit">
-                              		<input type="button" value="결제취소하기" onclick="location.href='/orderCancel?ordNo=${MemberInfo.ordNo}&ordDlyYn=${MemberInfo.ordDlyYn}'">
-                              	</td>
+                                 <td class="unit">
+                                    <input type="button" value="결제취소하기" onclick="location.href='/orderCancel?ordNo=${MemberInfo.ordNo}&ordDlyYn=${MemberInfo.ordDlyYn}'">
+                                 </td>
                               </c:if>
-                              	
+                                 
                               <c:if test="${MemberInfo.cookStat eq 1 }">
-                              	<td class="unit"> 조리중 </td>
+                                 <td class="unit"> 조리중 </td>
                               </c:if>
-                              	
+                                 
                               <c:if test="${MemberInfo.cookStat eq 2 }">
-                              	<td class="unit"> 주문 완료 </td>
+                                 <td class="unit"> 주문 완료 </td>
                               </c:if>
                            </tr>
                               <c:set var="sum" value="${sum+MemberInfo.ordPrice}" />
@@ -96,14 +112,15 @@
                      <div class="total">
                         <h6>총 금액 <span class="totalPriceTest"><c:out value="${sum}" />원</span></h6>
                      </div>
-		             <div class="reviewBtn"><input type="button" value="리뷰등록" id="reviewBtn"></div>
+                   <div class="reviewBtn"><input type="button" value="리뷰등록" id="reviewBtn"></div>
                   </div>
                </div>   
             </div>         
          </div>
       </div>
+   </section>
    <!--End Cart Area-->
-		<%@include file="../form/reviewForm.jsp" %>
+      <%@include file="../form/reviewForm.jsp" %>
    <br><br><br>
    
    <jsp:include page="../comm/footer.jsp"></jsp:include>

@@ -78,6 +78,7 @@ public class FoodTruckController {
 				if(eventList.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
 					list.get(j).setFtruckEvent(eventList.get(i).getEventTitle());
 					list.get(j).setEventNo(eventList.get(i).getEventNo());
+					list.get(j).setEventReg2(eventList.get(i).getEventReg2());
 					break exit;
 				}
 			}

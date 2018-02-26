@@ -63,20 +63,44 @@ $(function() {
 			<div class="col-sm-6">
 				<div class="shop-details">
 				<!-- Product Name -->
-					<h2><%=vo.getFtruckName()%></h2>
+					<h2><%=vo.getFtruckName()%></h2><br>
 						<!-- Product Ratting -->
 					<div class="pro-ratting">
 						<span style="width:<%=vo.getFtruckGrade()*20%>%"></span>
 					</div>						
 					<div class="infomation" style="font-size: 15px; color: #5e636d">
-						평점:<%=vo.getFtruckGrade()%>점<br>
-						주소:<%=vo.getFtruckAddr()%><br>
-						전화번호:<%=vo.getFtruckTel()%><br> 
-						배달여부:<%=vo.getFtruckDlvYn()%>
-						예약여부:<%=vo.getFtruckRsvYn()%>
-					</div>
-					
-					
+						평점 : <%=vo.getFtruckGrade()%>점<br>
+						주소 : <%=vo.getFtruckAddr()%><br>
+						전화번호 : <%=vo.getFtruckTel()%><br> 
+						<!-- 예약 여부 -->
+						<%
+							String ftruckRsvYn = vo.getFtruckRsvYn();
+							if("y".equals(ftruckRsvYn) || "Y".equals(ftruckRsvYn)) {
+						%>
+							예약여부 : 가능 &emsp;
+						<%
+							} else {
+						%>
+							예약여부 : 불가능  &emsp;
+						<%		
+							}
+						%>
+						
+						<!-- 배달 여부  -->
+						<%
+							String ftruckDlvYn = vo.getFtruckDlvYn();
+							if("y".equals(ftruckDlvYn) || "Y".equals(ftruckDlvYn)) {
+						%>
+							배달여부 : 가능 &emsp;
+						<%
+							} else {
+						%>
+							배달여부 : 불가능  &emsp;
+						<%		
+							}
+						%>
+					</div><br><br>
+						
 						<%@include file="map.jsp"%>
 						<%String ck=vo.getFtruckCondtion(); %>
 						<div class="alert alert-danger" role="alert" id="alert" style="display: none;">
@@ -85,7 +109,7 @@ $(function() {
 						</div>
 						<form name="order" >				
 						<div align="center" class="orderForm">
-						<input type="submit" value="주문하러가기" style="width: 100%;" onclick="goOrder()">
+						<input type="submit" value="주문하러가기" style="width: 100%;" onclick="goOrder()"><br><br>
 						</div>
 						
 						
@@ -174,5 +198,4 @@ $(function() {
 	</section>
 <!--End Product Details Area-->
 <jsp:include page="../comm/footer.jsp"></jsp:include>
-
 </body>

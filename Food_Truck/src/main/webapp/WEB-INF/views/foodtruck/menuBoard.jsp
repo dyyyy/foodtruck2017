@@ -1,7 +1,12 @@
+<%@page import="com.foodtruck.vo.FoodTruckVO"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <style>
@@ -57,9 +62,20 @@
 						</div>
 						<div class="list-pro-des fix">
 							<a class="pro-name" href="/read?ftruckNo=${all.ftruckNo}">${all.ftruckName}</a>
+							<!-- 이벤트 설정된 시간에 맞게 반짝반짝 작은이벤트~~~~ 아름답게 비추네~~~ -->
+							<%
+								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+								Date currentTime = new Date();
+								String dTime = sdf.format(currentTime);
+							%>
+							<c:set var="time" value="<%=dTime %>"/>					
+							<c:set var="endEventTime" value="${fn:substring(all.eventReg2, 0, 16)}"/>
 							<c:if test="${all.ftruckEvent ne null }">
-								<a class="eventA blinkcss" href="/detailEventForm?eventNo=${all.eventNo}">이벤트 중입니다.</a><br><br>
+								<c:if test="${time < endEventTime }">
+									<a class="eventA blinkcss" href="/detailEventForm?eventNo=${all.eventNo}">이벤트 중입니다.</a><br><br>
+								</c:if>
 							</c:if>
+							<!-- 이벤트 끝! -->
 							<!-- 푸드 트럭 별점 -->
 							<div class="pro-ratting">
 								<span style="width: ${all.ftruckGrade*20}%"></span>

@@ -56,10 +56,13 @@ public class MemberController {
 	//1:1문의하기
 	@RequestMapping("/inquriy")
 	public String memberinquriy(MInquiryVO vo,HttpSession session,HttpServletRequest request,@RequestParam(value="ordNo",required=false)String ordNo) {	
-		
+		String memId = (String)session.getAttribute("memberId");
 		String gubun = (String)session.getAttribute("memberGubun");
+		vo.setMemId(memId);
+		
 		if(gubun == "2") {
 			memberService.insertInquiry2(vo);
+			
 		} else if(gubun == "3"){
 			if(ordNo == "") {
 				vo.setLicenseNo("");
@@ -116,26 +119,89 @@ public class MemberController {
 		return "nav/favoriteFoodtruck";
 	}
 	
-	// *********************************************************** 사용자 문의 내역 리스트
+	//사용자 문의 내역 리스트
 	@RequestMapping("/memberQaInfoList") 
 	public String memberQaInfoList(HttpSession session,HttpServletRequest request) {
 		
 		String memId = (String)session.getAttribute("memberId");
-		request.setAttribute("qalist",memberService.getMemberQaInfoList(memId));
+		String memGubun = (String)session.getAttribute("memberGubun");
+		String gubun = request.getParameter("gubun");
+		
+		if(memId == null) {
+			return "redirect:/loginform";
+		}
+		
+		if(memGubun == "3") {
+			if(gubun == null) {
+				request.setAttribute("qalist",memberService.getMemberQaSelInfoList(memId));	// 사용자가 판매자에게 문의한 리스트 
+			}else {
+				request.setAttribute("qalist", memberService.getMemberQaScInfoList(memId));// 사용자가 관리자에게 문의한 리스트
+			}
+		} else if(memGubun == "2"){
+			if(gubun != null) {
+				request.setAttribute("qalist", memberService.getSellerQaSelInfoList(memId));
+				return "member/sellerQnA";
+			}
+			request.setAttribute("qalist", memberService.getMemberQaScInfoList(memId));// 판매자가 관리자에게 문의한 리스트
+		}
 		
 		return "member/memberQaInfoList";
 	}
 	
-	// *********************************************************** 사용자 문의 내역 상세보기 
-	@RequestMapping("/memberQaInfo")
-	public String memberQaInfo(HttpServletRequest request) {
+	//사용자 문의 내역 상세보기 (판매자)
+	@RequestMapping("/memberQaSelInfo")
+	public String memberQaSelInfo(HttpServletRequest request) {
 		
 		int qaSelNo = Integer.parseInt(request.getParameter("qaSelNo"));
-		MInquiryVO vo = memberService.getMemberQaInfo(qaSelNo);
+		
+		MInquiryVO vo = memberService.getMemberQaSelInfo(qaSelNo);
+		System.out.println(vo.getQaSelCategory1());
+		System.out.println(vo.getQaSelCategory2());
 		request.setAttribute("qaInfo", vo);
-		MinquiryReplyVO vo2 = memberService.getMemberQaReply(qaSelNo);
+		MinquiryReplyVO vo2 = memberService.getMemberQaSelReply(qaSelNo);
 		request.setAttribute("qaReply", vo2);
+		
+		
 		
 		return "member/memberQaInfo";
 	}	
+	
+	// 사용자  문의 내역 상세보기(관리자)
+	@RequestMapping("/memberQaScInfo")
+	public String memberQaScInfo(HttpServletRequest request) {
+		
+		int qaScNo = Integer.parseInt(request.getParameter("qaScNo"));
+		
+		MInquiryVO vo = memberService.getMemberQaScInfo(qaScNo);
+
+		request.setAttribute("qaInfo", vo);
+		MinquiryReplyVO rvo = memberService.getMemberQaScReply(qaScNo);
+		request.setAttribute("qaReply", rvo);
+		
+		return "member/memberQaInfo";
+	}
+	
+	
+	// 사용자가 문의한 문의 내역 상세보기 ( 판매자가 ) 
+	@RequestMapping("/sellerQnAReply")
+	public String sellerQnAReply(HttpServletRequest request) {
+		
+		int qaSelNo = Integer.parseInt(request.getParameter("qaSelNo"));
+		MInquiryVO vo = memberService.getMemberQaSelInfo(qaSelNo);
+		request.setAttribute("qaInfo", vo);
+		MinquiryReplyVO rvo = memberService.getMemberQaSelReply(qaSelNo);
+		request.setAttribute("qaReply", rvo);
+		
+		return "member/sellerQnAInfo";
+	}
+	
+	// 사용자 문의 답변 ( 판매자 ) 
+	@RequestMapping("/qaScInsert")
+	public String qaScInsert(HttpServletRequest request,MinquiryReplyVO vo) {
+		
+		if(memberService.qaScReplyInsert(vo) != 0 ) {		// 답변이 성공하면
+			memberService.qaSelStatUpdate(vo.getQaSelNo());  // 고객문의 테이블 답변여부 N -> Y 로 수정
+		}
+		return "redirect:/memberQaInfoList";				// 문의 내역 폼으로 
+	}
 }

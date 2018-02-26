@@ -48,7 +48,7 @@ public class AndroidUserController {
 		JSONObject json = new ObjectMapper().readValue(id, JSONObject.class);
 		
 
-		List<MInquiryVO> list = memberService.getMemberQaInfoList(json.get("id").toString());
+		List<MInquiryVO> list = memberService.getSellerQaSelInfoList(json.get("id").toString());
 
 		if (list != null) {
 			String result = new ObjectMapper().writeValueAsString(list);

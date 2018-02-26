@@ -34,7 +34,6 @@ public class LoginController {
 	// 로그인 폼으로 이동
 	@RequestMapping("/loginform")
 	public String loginform() {
-		System.out.println("loginform");
 		logger.info("loginform");
 		return "sign/login";
 	}
