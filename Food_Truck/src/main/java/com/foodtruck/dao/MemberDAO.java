@@ -10,14 +10,31 @@ import com.foodtruck.vo.MinquiryReplyVO;
 
 public interface MemberDAO {
 	
-	// 사용자 문의내역 리스트
-	public List<MInquiryVO> getMemberQaInfoList(String memberId);
+	public int qaSelStatUpdate(int qaSelNo);
 	
-	// 사용자 문의내역 정보
-	public MInquiryVO getMemberQaInfo(int qaScNo);
+	// 고객 문의 답변 (판매자)
+	public int qaScReplyInsert(MinquiryReplyVO vo);
 	
-	// 답변 내용
-	public MinquiryReplyVO getMemberQaReply(int qaScNo);	
+	// 판매자에게 온 문의 리스트
+	public List<MInquiryVO> getSellerQaSelInfoList(String memberId);
+	
+	// 사용자 판매자에게 문의내역 리스트
+	public List<MInquiryVO> getMemberQaSelInfoList(String memberId);
+	
+	// 사용자 관리자에게 문의 내역 리스트
+	public List<MInquiryVO> getMemberQaScInfoList(String memberId);
+	
+	// 사용자 판매자에게 문의 내역 정보
+	public MInquiryVO getMemberQaSelInfo(int qaSelNo);
+	
+	// 사용자 관리자에게 문의 내역 정보
+	public MInquiryVO getMemberQaScInfo(int qaScNo);
+	
+	// 판매자가 사용자에게 답변 내용
+	public MinquiryReplyVO getMemberQaSelReply(int qaSelNo);	
+	
+	// 관리자가 사용자에게 답변 내용
+	public MinquiryReplyVO getMemberQaScReply(int qaScNo);
 	
 	// 회원 정보
 	public MemberVO getMember(String memberId);

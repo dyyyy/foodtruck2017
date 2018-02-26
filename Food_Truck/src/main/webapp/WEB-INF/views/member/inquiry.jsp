@@ -187,6 +187,12 @@
 			$(".ordNoChk1,.ordNoChk2").show()
 		}
 	}
+	
+	$(function(){
+		$("#backPage").click(function() {
+			history.back()
+		})
+	})
 </script>
 <body>
 <section class="checkout-page pagez fix"><!--Start Checkout Area-->
@@ -406,7 +412,7 @@
 									<% } %>
 								<div class="btn_center_box" align="center">
 									<input type="submit" class="btn btn-danger btn-large" value="문의하기 등록" id="go" onsubmit="return validation();">&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="button" class="btn btn-danger btn-large" value="입력취소">
+									<input type="button" class="btn btn-danger btn-large" value="입력취소" id="backPage">
 								</div>								
 							</form>
 						</div>

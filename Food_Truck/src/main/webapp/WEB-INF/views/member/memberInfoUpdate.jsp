@@ -56,7 +56,8 @@ h1 {
 					<ul align="center">
 						<li><a href="/memberInfo">회원 정보</a></li>
 						<li><a href="/memberOrderInfo">주문 내역</a></li>
-						<li><a href="/memberQaInfoList">문의 내역</a></li>
+                        <li><a href="/memberQaInfoList">문의 내역(판매자)</a></li>
+                        <li><a href="/memberQaInfoList?gubun=1">문의 내역(관리자)</a></li>
 					</ul>
 				</div>
 			</div>

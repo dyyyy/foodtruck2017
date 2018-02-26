@@ -13,6 +13,7 @@ public class MInquiryVO {
 	private String qaScTel;			//판매자 전화번호
 	private String qaScStat;		//y&n flag
 	private String licenseNo;		//사업자 번호
+	private String ftruckName;		//상호명
 	
 	// 구매자 
 	private int qaSelNo;			//qna 번호
@@ -142,4 +143,10 @@ public class MInquiryVO {
 	public void setQaSelStat(String qaSelStat) {
 		this.qaSelStat = qaSelStat;
 	}
+	public String getFtruckName() {
+		return ftruckName;
+	}
+	public void setFtruckName(String ftruckName) {
+		this.ftruckName = ftruckName;
+	}	
 }

@@ -56,11 +56,12 @@ h1 {
 					<ul align="center">
 						<li><a href="/memberInfo">회원 정보</a></li>
 						<li><a href="/memberOrderInfo">주문 내역</a></li>
-						<li><a href="/memberQaInfoList">문의 내역</a></li>
+	                    <li><a href="/memberQaInfoList">문의 내역(판매자)</a></li>
+	                    <li><a href="/memberQaInfoList?gubun=1">문의 내역(관리자)</a></li>
 					</ul>
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-5">
+			<div class="col-sm-6 col-md-5" style="margin-left: 100px">
 				<div class="myInfo">																																									
 					<form id="frm" action="/join" method="post" class="joinForm">
 						<input type="hidden" name="memberPw" value="${memberInfo.memberPw}" class="box" style="width: 100%">
