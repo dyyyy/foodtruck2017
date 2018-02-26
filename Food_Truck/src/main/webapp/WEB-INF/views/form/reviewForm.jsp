@@ -52,15 +52,36 @@
          };
          
          starRating();
-      	
-         	
-         // 폼전송
-         $("#reviewForm").on("submit", function() {
-       		 var ftruckNo = $("#ftruckNo option:selected").val();
-       		 var revContent = $("#revContent").val();
-             var grade = Number($(":input:radio[name=grade]:checked").val());
-          });
+      
    });
+   
+   // 유효성 검사 & 폼전송
+   $(function() {
+	   
+       $("#reviewForm").on("submit", function() {
+    	   var ftruckNo = $("#ftrukNameList option:selected").val();
+    	   var revContent = $("#revContent").val();
+    	   var grade = Number($(":input:radio[name=grade]:checked").val());
+         
+    	   // 이용한 푸드트럭 
+           if(ftruckNo == "") {
+          	 alert("이용한 푸드트럭을 선택해주시기 바랍니다.");
+          	 $("#ftrukNameList").focus();
+          	 return false;
+           }
+           
+    	   // 리뷰
+           if(revContent == "") {
+        	   alert("리뷰 작성부탁드립니다.");
+        	   $("#revContent").focus();
+        	   return false;
+           }
+    	   
+           return true;
+           
+        });
+       
+   })
    
 </script>
 <div class="login-page page fix">
@@ -83,7 +104,7 @@
 					</select><BR><Br>
 					
 					<label> 고객님의 리뷰가 저희에게는 힘이 됩니다 :-) </label>
-					<textarea class="form-control" rows="3" name="revContent"></textarea>
+					<textarea class="form-control" rows="3" id="revContent" name="revContent"></textarea>
 					<label> 평점 </label>
 					<span class="star-input">
 						<span class="input">
