@@ -15,31 +15,15 @@
 <!-- 소스시작  -->
 <script type="text/javascript">
 
-	$(function() {
-		$(".hihide").hide()
-		$(".reviewBtn2").hide()
-		
-		
-		$("#reviewBtn").on("click", function() {
-			$(".hihide").show()
-			$("#reviewBtn").hide()
-			$(".reviewBtn2").show()
-		})
-	});
-
-	$(function() {
-		$("#listQnA").click(function() {
-			history.back()
-		})
-	})
-	
+   $(function() {
+      
+      $("#reviewForm").hide();
+      
+      $("#reviewBtn").on("click", function() {
+         $("#reviewForm").show();
+      })
+   });
 </script>
-<style>
-	 a:link { color: black; text-decoration: none;}
- 	a:visited { color: black; text-decoration: none;}
-	 a:hover { color: blue; text-decoration: underline;
-
-</style>
 <body>
 
    <%@include file="../comm/nav.jsp"%>
@@ -49,97 +33,94 @@
       <!--Start Cart Area-->
       <div class="container">
          <div class="row">
- 		 <c:choose>        
-	         <c:when test="${sessionScope.memberGubun eq '3'}">
-	            <div class="col-sm-4 col-md-3">
-	               <div class="single-sidebar">
-	                  <h2>내 정보</h2>
-	                  <ul align="center">
-	                     <li><a href="/memberInfo">회원 정보</a></li>
-	                     <li><a href="/memberOrderInfo">주문 내역</a></li>
-	                     <li><a href="/memberQaInfoList">문의 내역(판매자)</a></li>
-	                     <li><a href="/memberQaInfoList?gubun=1">문의 내역(관리자)</a></li>
-	                  </ul>
-	               </div>
-	            </div>
-	       	 </c:when>
-       	 	 <c:when test="${sessionScope.memberGubun eq '2'}">
-	            <div class="col-sm-4 col-md-3">
-	               <div class="single-sidebar">
-	                  <h2>문의 관리</h2>
-	                  <ul align="center">
-	                     <li><a href="/memberQaInfoList">내 문의 내역</a></li>
-	                     <li><a href="/memberQaInfoList?gubun=1">고객 문의 내역</a></li>
-	                  </ul>
-	               </div>
-	            </div>       	 	 	
-       	 	 </c:when>
-       	 </c:choose>
+        <c:choose>        
+            <c:when test="${sessionScope.memberGubun eq '3'}">
+               <div class="col-sm-4 col-md-3">
+                  <div class="single-sidebar">
+                     <h2>내 정보</h2>
+                     <ul align="center">
+                        <li><a href="/memberInfo">회원 정보</a></li>
+                        <li><a href="/memberOrderInfo">주문 내역</a></li>
+                        <li><a href="/memberQaInfoList">문의 내역(판매자)</a></li>
+                        <li><a href="/memberQaInfoList?gubun=1">문의 내역(관리자)</a></li>
+                     </ul>
+                  </div>
+               </div>
+              </c:when>
+               <c:when test="${sessionScope.memberGubun eq '2'}">
+               <div class="col-sm-4 col-md-3">
+                  <div class="single-sidebar">
+                     <h2>문의 관리</h2>
+                     <ul align="center">
+                        <li><a href="/memberQaInfoList">내 문의 내역</a></li>
+                        <li><a href="/memberQaInfoList?gubun=1">고객 문의 내역</a></li>
+                     </ul>
+                  </div>
+               </div>                  
+               </c:when>
+           </c:choose>
             <div class="col-sm-8 col-md-9">
                <div class="table-responsive">
-                  <table class="table cart-table">
-                        <tr class="table-title">
-                           <th class="qaScNo">문의번호</th>
-                           <th class="qaScTitle">제목</th>
-                           <th class="qaScReg">등록일</th>
-                           <th class="qaSelCategory">카테고리</th>
+                  <table class="table cart-table">      
+                     <thead class="table-title">            
+                        <tr>
+                           <th class="ftruckNo">푸드 트럭</th>
+                           <th class="ordDate">주문일</th>
+                           <th class="prodName">상품명</th>
+                           <th class="ordQty">수량</th>
+                           <th class="ordPrice">가격</th>
+                           <th class="ordPrice">주문 현황</th>
                         </tr>
-                     	<tr>
-                     	<c:choose>
-                     		<c:when test="${qaInfo.qaScNo ne 0}">
-                     			<td class="unit">${qaInfo.qaScNo}</td>
-                     			<c:set var="ScCategory" value="${qaInfo.qaScCategory1}(${qaInfo.qaScCategory2})"/>
-                     		</c:when>
-                            <c:when test="${qaInfo.qaSelNo ne 0}">
-                     			<td class="unit">${qaInfo.qaSelNo}</td>
-                     			<c:set var="SelCategory1" value="${qaInfo.qaSelCategory1}(${qaInfo.qaSelCategory2})"/>
-                     		</c:when>	         			
-                     	</c:choose>	
-                     		<td class="unit">${qaInfo.qaSelTitle}${qaInfo.qaScTitle}</td>
-                     		<td class="unit">${qaInfo.qaSelReg}${qaInfo.qaScReg}</td>
-                     		<td class="unit">${ScCategory}${SelCategory1}</td>
-                     	</tr>
-                     	<tr class="table-title">
-                     		<th class="qaScContent" colspan="4">문의내용</th>
-                     	</tr>
-                     	<tr>
-                     		<td class="unit" colspan="4">${qaInfo.qaSelContent}${qaInfo.qaScContent}</td>
-                     	</tr>
+                     </thead>
+                     <tbody>
+                     <c:set var = "sum" value="0" />
+                        <c:forEach items='${list}' var="MemberInfo">
+                           <tr class="table-info">
+                              <!-- 푸드트럭 이름 -->
+                              <td class="unit" id="ftruckName">${MemberInfo.ftruckName}
+                              <!-- 주문일 -->
+                              <td class="unit">${MemberInfo.ordDate}</td>      
+                              <!-- 상품명 -->
+                              <td class="unit">${MemberInfo.prodName}</td>
+                              <!-- 상품 갯수  -->
+                              <td class="unit">${MemberInfo.ordQty}개</td>
+                              <!-- 제품 가격 -->
+                              <td class="unit">${MemberInfo.ordPrice}원</td>
+                              <!-- 결제 취소 하기 버튼 -->
+                              <c:if test="${MemberInfo.cookStat eq 0 }">
+                                 <td class="unit">
+                                    <input type="button" value="결제취소하기" onclick="location.href='/orderCancel?ordNo=${MemberInfo.ordNo}&ordDlyYn=${MemberInfo.ordDlyYn}'">
+                                 </td>
+                              </c:if>
+                                 
+                              <c:if test="${MemberInfo.cookStat eq 1 }">
+                                 <td class="unit"> 조리중 </td>
+                              </c:if>
+                                 
+                              <c:if test="${MemberInfo.cookStat eq 2 }">
+                                 <td class="unit"> 주문 완료 </td>
+                              </c:if>
+                           </tr>
+                              <c:set var="sum" value="${sum+MemberInfo.ordPrice}" />
+                        </c:forEach>
+                     </tbody>
                   </table>
                </div>
-               	<c:set var="temp" value="${qaInfo.qaSelStat}" />
-               	<c:set var="temp2" value="${qaInfo.qaScStat}" />
-               	<c:if test="${temp eq 'N' || temp2 eq 'N'}">
-					<div class="reviewBtn"><input type="button" value="목록으로" id="listQnA" style="float:right"></div>
-               	</c:if>
-               	<c:if test="${temp eq 'Y' || temp2 eq 'Y'}">
-               		<div class="reviewBtn"><input type="button" value="답변내용" id="reviewBtn" style="float: right"></div>
-               		<div class="reviewBtn2"><input type="button" value="목록으로" id="listQnA" style="float:right"></div>
-               	</c:if>
-               <br><br><br><br><br>
-               <div class="table-responsive hihide">
-               		<table class="table cart-table">
-               			<tr class="table-title">
-               				<th class="replyScContent" colspan="2">답변내용</th>
-               			</tr>
-               			<tr>
-               				<td class="unit" colspan="2" align="center">${qaReply.replySelContent}${qaReply.replyScContent}</td>
-               			</tr>
-               			<tr class="table-title">
-               				<th class="memId">관리자</th>
-               				<th class="replyScReg">답변일</th>
-               			</tr>
-               			<tr>
-							<td class="unit">${qaReply.memId}</td>
-							<td class="unit">${qaReply.replySelReg}${qaReply.replyScReg}</td>               			
-               			</tr>
-               		</table>
-               </div>
+               <div class="col-sm-6 col-md-7"></div>               
+               <div class="col-sm-6 col-md-5">
+                  <div class="proceed fix">
+                     <div class="total">
+                        <h6>총 금액 <span class="totalPriceTest"><c:out value="${sum}" />원</span></h6>
+                     </div>
+                   <div class="reviewBtn"><input type="button" value="리뷰등록" id="reviewBtn"></div>
+                  </div>
+               </div>   
             </div>         
          </div>
       </div>
-   </section>   
+   </section>
    <!--End Cart Area-->
+      <%@include file="../form/reviewForm.jsp" %>
    <br><br><br>
    
    <jsp:include page="../comm/footer.jsp"></jsp:include>
