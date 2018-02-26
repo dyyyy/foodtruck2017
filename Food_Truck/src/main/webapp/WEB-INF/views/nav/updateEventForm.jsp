@@ -63,7 +63,7 @@
                                  <th scope="row" style="margin-bottom: 10px; width: 50px"> 이벤트 시간 설정 </th>
                                  <td>
                                     현재 시간으로 부터
-                                    <select id="hourTime" name="hourTime">
+                                    <select id="eventReg2" name="eventReg2">
                                        <c:set var="n" value="1"/>
                                        <c:forEach begin="1" end="12">
                                           <option value="${n}"> ${n}시간 동안 </option>
