@@ -42,10 +42,6 @@
 				alert("휴대폰번호를 입력해 주세요.");
 				memberTel.focus();
 				return false;
-			} else if ($('input[name="agree1"]').is(":checked") != true
-					|| $('input[name="agree2"]').is(":checked") != true) {
-				alert("이용약관 동의를 해야합니다.");
-				return false;
 			} else if ($("#checkId").attr("result") == "unchecked") {
 				alert("아이디 중복체크를 해주세요.");
 				return false;
