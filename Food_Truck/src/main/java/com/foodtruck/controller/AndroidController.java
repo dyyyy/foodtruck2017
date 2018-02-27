@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodtruck.service.EventService;
+import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.NoticeService;
 import com.foodtruck.service.SellerService;
@@ -39,20 +41,27 @@ public class AndroidController<Article> {
 	private MemberService memberService;
 	@Autowired
 	private SellerService sellerService;
-	
+	@Autowired
+	private FoodTruckService ftruckService;
 	/* 안드로이드에서 페이징처리 어떻게 할것인지 */
 
 	/* NOTICE */
-	@RequestMapping(value = "/notice", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/notice/{pageNo}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String androidNotice() throws Exception {
+	public String androidNotice(@PathVariable("pageNo") int pageNo) throws Exception {
 		System.out.println("android notice connect");
 
-		List<NoticeVO> list = noticeService.getNoticeBoardList(1);
+		int page = noticeService.getCountNotice();
+		
+		
+	
+		List<NoticeVO> list = noticeService.getNoticeBoardList(pageNo);
 
 		String result = new ObjectMapper().writeValueAsString(list);
 
 		System.out.println("json: " + result);
+		int pagecount =noticeService.getCountNotice();
+		
 
 		return result;
 
@@ -188,6 +197,8 @@ public class AndroidController<Article> {
 	}
 	
 	/* 푸드트럭과 상품보여주기 */
+	
+	
 	/* 푸드트럭 검색기능 */
 	/* 푸드트럭 상세보기 기능 */
 	/* 푸드트럭 위치 지도로 보여주는 기능 */
