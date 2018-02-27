@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.ReviewService;
@@ -48,4 +49,13 @@ public class ReviewController {
 		    return "comm/msg";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping("/reviewDelete")
+	public void reviewDelete(HttpServletRequest request) {
+		
+		int revNo = Integer.parseInt(request.getParameter("revNo"));
+		reviewService.reviewDelete(revNo);
+		
+	}	
 }

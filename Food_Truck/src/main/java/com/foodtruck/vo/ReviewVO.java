@@ -2,7 +2,7 @@ package com.foodtruck.vo;
 
 public class ReviewVO {
 	
-	private int revSeq;				// 댓글 번호
+	private int revNo;				// 댓글 번호
 	private String ftruckNo;		// 푸드트럭 번호
 	private String revContent;		// 댓글 내용
 	private String revDtm;			// 댓글 등록일
@@ -15,8 +15,8 @@ public class ReviewVO {
 	
 	// getter & setter
 	
-	public int getRevSeq() {
-		return revSeq;
+	public int getRevNo() {
+		return revNo;
 	}
 	public String getOrdNo() {
 		return ordNo;
@@ -36,8 +36,8 @@ public class ReviewVO {
 	public void setLicenseNo(String licenseNo) {
 		this.licenseNo = licenseNo;
 	}
-	public void setRevSeq(int revSeq) {
-		this.revSeq = revSeq;
+	public void setRevNo(int revNo) {
+		this.revNo = revNo;
 	}
 	public String getFtruckNo() {
 		return ftruckNo;
@@ -75,5 +75,6 @@ public class ReviewVO {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
+	
 		
 }

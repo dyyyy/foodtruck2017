@@ -39,11 +39,17 @@
 		
 	</insert>
 	
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewDelete">
+		DELETE FROM REVIEW
+		WHERE REV_NO = #{revNo}
+	</delete>
+	
 	<!-- resultMap -->	
 	<resultMap type="ReviewVO" id="ReviewMap">
 		<result column="FTRUCK_NO" property="ftruckNo"/>
 		<result column="LICENSE_NO" property="licenseNo"/>
-		<result column="REV_SEQ" property="revSeq"/>
+		<result column="REV_NO" property="revNo"/>
 		<result column="REV_CONTENT" property="revContent"/>
 		<result column="REV_DTM" property="revDtm"/>
 		<result column="REV_DEL_YN" property="revDelYn"/>
