@@ -36,9 +36,9 @@ public class ReviewService {
 	}
 
 	// 리뷰 삭제
-	public int deleteReview(int revSeq) {
+	public int reviewDelete(int revNo) {
 		ReviewDAO dao = sessionTemplate.getMapper(ReviewDAO.class);
-		return dao.deleteReview(revSeq);
+		return dao.reviewDelete(revNo);
 	}
 	
 	// 리뷰 쓸 때, 먹었던 해당 푸드트럭 이름 조회

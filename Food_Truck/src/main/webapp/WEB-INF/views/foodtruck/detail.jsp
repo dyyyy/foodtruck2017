@@ -38,6 +38,22 @@ $(function() {
 		alert.style.display = 'none';
 	}
 })	
+
+$(function() {
+	$(".rdelete").on("click",function() {
+		var revNo = $(this).attr('value')
+		
+		$.ajax({
+			url : "/reviewDelete",
+			type : "post",
+			data : {"revNo" : revNo},
+			success : function(getData) {
+				location.reload()
+				
+			} 
+		})
+	})
+})
 </script>
 <body onload="map()">
 
@@ -123,10 +139,10 @@ $(function() {
 				<div class="description">
 					<!-- Nav tabs -->
 					<ul class="nav product-nav">
-						<li class="active">
+						<li class="">
 							<a data-toggle="tab" href="#description">푸드트럭소개</a>
 						</li>
-						<li class="">
+						<li class="active">
 							<a data-toggle="tab" href="#review">리뷰</a>
 						</li>
 						<li class="">
@@ -135,7 +151,7 @@ $(function() {
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div id="description" class="tab-pane fade active in" role="tabpanel">
+						<div id="description" class="tab-pane fade" role="tabpanel">
 							<%=vo.getFtruckIntro()%>
 						</div>
 						<!-- 상품 리스트 시작 -->
@@ -161,7 +177,7 @@ $(function() {
 						</div>
 						
 						<!-- 상품리스트 끝 -->
-						<div id="review" class="tab-pane fade" role="tabpanel">
+						<div id="review" class="tab-pane fade active in" role="tabpanel">
 							<!-- 리뷰 리스트 시작 -->
 							<table class="reviewlist">
 								<%
@@ -172,8 +188,12 @@ $(function() {
 										<div class="reply-ratting">
 											<span style="width: <%=list.get(i).getGrade() * 20%>%"></span>
 										</div>
-									</td>
+										</td>
+									<% if(mvo.getMemberId().equals(list.get(i).getMemId())) {%>
+									<td style="width: 840px; height: 95.2px;"><%=list.get(i).getRevContent()%>&emsp;<a value="<%=list.get(i).getRevNo()%>" class="glyphicon glyphicon-trash rdelete"></a></td>
+									<% } else{ %>
 									<td style="width: 840px; height: 95.2px;"><%=list.get(i).getRevContent()%></td>
+									<% } %>
 									<td style="width: 140px; height: 95.2px;">
 										<dl class="comment">
 											<dt>작성자</dt>
@@ -184,6 +204,7 @@ $(function() {
 									</td>
 								</tr>
 								<%
+								
 									}
 								%>
 							</table>
