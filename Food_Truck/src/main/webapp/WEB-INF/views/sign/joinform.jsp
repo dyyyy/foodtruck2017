@@ -194,6 +194,9 @@
 							<!-- 이름 -->
 							<label>Name<span>*</span></label> <input type="text"
 								name="memberName">
+							<!-- 휴대폰 번호  -->
+							<label>Phone Number<span>*</span></label> <input type="text"
+								name="memberTel">
 							<!-- 이벤트 정보 수신 동의 -->
 							<label>이벤트 정보 수신 동의<span>*</span></label>
 							<div class="remember">
@@ -215,7 +218,12 @@
 			</div>
 		</div>
 	</div>
-	<!--End create member Area--><br><br><br>
+	<!--End create member Area-->
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<jsp:include page="../comm/footer.jsp"></jsp:include>
 </body>
 </html>

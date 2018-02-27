@@ -42,16 +42,18 @@ $(function() {
 $(function() {
 	$(".rdelete").on("click",function() {
 		var revNo = $(this).attr('value')
-		
-		$.ajax({
-			url : "/reviewDelete",
-			type : "post",
-			data : {"revNo" : revNo},
-			success : function(getData) {
-				location.reload()
-				
-			} 
-		})
+		var con = confirm("삭제 하시겠습니까 ? ")
+		if(con) {
+			$.ajax({
+				url : "/reviewDelete",
+				type : "post",
+				data : {"revNo" : revNo},
+				success : function(getData) {
+					location.reload()
+					
+				} 
+			})
+		}
 	})
 })
 </script>
