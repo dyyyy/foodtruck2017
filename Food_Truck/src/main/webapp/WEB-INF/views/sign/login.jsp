@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>    
 <html>
-
-
+<script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script>
    // 라디오버튼 회원 / 비회원 체크 
    function memberCheck(num) {
@@ -17,6 +16,24 @@
       }
    }
 
+   $(function() {
+	   $("#nonMember_form").on("submit", function() {
+		   var ordNo = $("#ordNo").val();
+		   var ordTel = $("#ordTel").val();
+		   
+		   if(ordNo == "") {
+			   alert("주문 번호를 입력해주세요.");
+			   return false;
+		   }
+		   
+		   if(ordTel == "") {
+			   alert("휴대폰 번호를 입력해주세요.")
+			   return false;
+		   }
+		   
+		   return true;
+	   })
+   })
    
 </script>
 
@@ -51,14 +68,14 @@
                      <p><input type=submit value="로그인" /></p>
                   </div>
                </form>
-               <form name="nonMember_form" method="post" action="/nonMemberOrderDetail">
+               <form id="nonMember_form" name="nonMember_form" method="post" action="/nonMemberOrderDetail">
                   <div id="non_login" style="display:none">
 					 <h2>로그인</h2>
              	     <p>주문번호 & 휴대폰 번호를 입력해주세요.</p>                  
                      <label>주문 번호<span>*</span></label>
-                     <input type="text" name="ordNo" />
+                     <input type="text" name="ordNo" id="ordNo"/>
                      <label>휴대폰 번호<span>*</span></label>
-                     <input type="text" name="ordTel" />
+                     <input type="text" name="ordTel" id="ordTel" />
                      <p><input type="submit" value="조회" /></p>
                   </div>
                </form>
