@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -79,7 +80,7 @@
                               <!-- 푸드트럭 이름 -->
                               <td class="unit" id="ftruckName">${MemberInfo.ftruckName}
                               <!-- 주문일 -->
-                              <td class="unit">${MemberInfo.ordDate}</td>      
+                              <td class="unit">${fn:substring(MemberInfo.ordDate,0,11)}</td>      
                               <!-- 상품명 -->
                               <td class="unit">${MemberInfo.prodName}</td>
                               <!-- 상품 갯수  -->

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -69,7 +70,7 @@
 								<td class="unit">${status.count}</td>
 								<td class="unit">${list.ftruckName}</td>
 								<td class="unit" colspan="5"><a href="/sellerQnAReply?qaSelNo=${list.qaSelNo}">${list.qaSelTitle}</a></td>
-								<td class="unit">${list.qaSelReg}</td>
+								<td class="unit">${fn:substring(list.qaSelReg,0,10)}</td>
 	                     	<c:choose>
 	                     		<c:when test="${list.qaSelStat eq 'Y'}">
 	                     			<td class="unit">답변 완료</td> 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -96,7 +97,7 @@
                      		</c:when>	         			
                      	</c:choose>	
                      		<td class="unit">${qaInfo.qaSelTitle}${qaInfo.qaScTitle}</td>
-                     		<td class="unit">${qaInfo.qaSelReg}${qaInfo.qaScReg}</td>
+                     		<td class="unit">${fn:substring(qaInfo.qaSelReg,0,10)}${fn:substring(qaInfo.qaScReg,0,10)}</td>
                      		<td class="unit">${ScCategory}${SelCategory1}</td>
                      	</tr>
                      	<tr class="table-title">
@@ -131,7 +132,7 @@
                			</tr>
                			<tr>
 							<td class="unit">${qaReply.memId}</td>
-							<td class="unit">${qaReply.replySelReg}${qaReply.replyScReg}</td>               			
+							<td class="unit">${fn:substring(qaReply.replySelReg,0,10)}${fn:substring(qaReply.replyScReg,0,10)}</td>               			
                			</tr>
                		</table>
                </div>

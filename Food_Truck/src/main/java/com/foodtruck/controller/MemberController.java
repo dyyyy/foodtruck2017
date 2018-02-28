@@ -202,6 +202,6 @@ public class MemberController {
 		if(memberService.qaScReplyInsert(vo) != 0 ) {		// 답변이 성공하면
 			memberService.qaSelStatUpdate(vo.getQaSelNo());  // 고객문의 테이블 답변여부 N -> Y 로 수정
 		}
-		return "redirect:/memberQaInfoList";				// 문의 내역 폼으로 
+		return "redirect:/memberQaInfoList?gubun=1";				// 문의 내역 폼으로 
 	}
 }
