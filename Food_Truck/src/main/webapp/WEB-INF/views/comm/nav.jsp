@@ -128,7 +128,7 @@
 				</div>
 				<div class="col-sm-4 col-lg-6">
 					<div class="logo text-center">
-						<a href="/"> <img src="/resources/img/header/logo.png" alt="" />
+						<a href="/"> <img src="/resources/img/header/home.png" alt="" />
 							<!-- 푸드 트럭 이미지  /  h4 밑에 설명 --> <!-- 						<h4>online jewelry store</h4> -->
 						</a>
 					</div>
