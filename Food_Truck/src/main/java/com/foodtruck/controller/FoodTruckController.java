@@ -150,6 +150,19 @@ public class FoodTruckController {
 			}
 		}
 		
+		// 이벤트 작성한 푸드트럭은 리스트 형식에 이벤트반짝반짝 만들기
+		List<EventVO> eventList = eventService.progressEvent();
+		for(int i = 0; i < eventList.size(); i++) {
+			exit :for(int j=0; j<list.size(); j++) {
+				if(eventList.get(i).getFtruckNo().equals(list.get(j).getFtruckNo())) {
+					list.get(j).setFtruckEvent(eventList.get(i).getEventTitle());
+					list.get(j).setEventNo(eventList.get(i).getEventNo());
+					list.get(j).setEventReg2(eventList.get(i).getEventReg2());
+					break exit;
+				}
+			}
+		}
+		
 		int pagecount=foodtruckService.getCategoryCountTruck(category);	//총 푸드트럭 개수
 		request.setAttribute("pageNo", pageNo);
 		request.setAttribute("list",list);
