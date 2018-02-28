@@ -170,15 +170,15 @@
 					<div class="join">
 						<form id="signup-form" action="/join" method="post"
 							class="joinForm">
-							<h2>Create A new Account</h2>
-							<p>Create your own account</p>
+							<h2>회원 가입</h2>
+							<p>자신만의 계정을 만들어 보세요!</p>
 							<!-- 회원 구분  -->
 							<label>일반 회원 / 판매자<span>*</span></label> <label><input
 								type="radio" name="gubun" value="member" checked> 일반 회원
 								<input type="radio" name="gubun" value="seller"> 판매자 </label>
 							<!-- 이메일 (id) -->
-							<label>ID (이메일 형식)<span>*</span></label> <input type="text"
-								name="memberId"> <input type="button" id="checkId"
+							<label>아이디 (이메일 형식)<span>*</span></label> <input type="text"
+								name="memberId" placeholder="이메일 형식으로 작성해주세요."> <input type="button" id="checkId"
 								value="중복확인" result="unchecked" style="display: inline;">
 							<input type="button" id="comform" value="인증하기" result="unchecked"
 								style="display: none;">
@@ -186,16 +186,16 @@
 								<input type="button" id="finalcheck" value="인증완료" result="unchecked"
 								style="display: none;">
 							<!-- 비밀번호 (memberPw) -->
-							<label>Password<span>*</span></label> <input type="password"
+							<label>비밀 번호<span>*</span></label> <input type="password"
 								name="memberPw">
 							<!-- 비밀번호확인 (memberPw1) -->
-							<label>Confirm Password<span>*</span></label> <input
+							<label>비밀 번호 체크<span>*</span></label> <input
 								type="password" name="memberPw1">
 							<!-- 이름 -->
-							<label>Name<span>*</span></label> <input type="text"
+							<label>이름<span>*</span></label> <input type="text"
 								name="memberName">
 							<!-- 휴대폰 번호  -->
-							<label>Phone Number<span>*</span></label> <input type="text"
+							<label>휴대폰 번호<span>*</span></label> <input type="text"
 								name="memberTel">
 							<!-- 이벤트 정보 수신 동의 -->
 							<label>이벤트 정보 수신 동의<span>*</span></label>
@@ -209,8 +209,8 @@
 							</div>
 							<!-- 버튼 -->
 							<p>
-								<input type="reset" value="Reset"> <input type="submit"
-									value="Sign up">
+								<input type="reset" value="재작성"> <input type="submit"
+									value="가입">
 							</p>
 						</form>
 					</div>

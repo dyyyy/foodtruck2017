@@ -175,24 +175,19 @@
 						<nav>
 							<ul>
 								<!-- 푸드트럭 리스트 -->
-								<li><a href="/menuBoard?pageNo=1" class="active">FoodTruck
-										List</a></li>
+								<li><a href="/menuBoard?pageNo=1" class="active">푸드트럭 리스트</a></li>
 
 								<!-- 한식  -->
-								<li><a href="/CategoryFood?pageNo=1&category=1">Korean
-										Food</a></li>
+								<li><a href="/CategoryFood?pageNo=1&category=1">한식</a></li>
 
 								<!-- 중식  -->
-								<li><a href="/CategoryFood?pageNo=1&category=2">Chinese
-										Food</a></li>
+								<li><a href="/CategoryFood?pageNo=1&category=2">중식</a></li>
 
 								<!-- 양식  -->
-								<li><a href="/CategoryFood?pageNo=1&category=3">Western
-										Food</a></li>
+								<li><a href="/CategoryFood?pageNo=1&category=3">양식</a></li>
 
 								<!-- 일식  -->
-								<li><a href="/CategoryFood?pageNo=1&category=4">Japanese
-										Food</a></li>
+								<li><a href="/CategoryFood?pageNo=1&category=4">일식</a></li>
 							</ul>
 						</nav>
 					</div>

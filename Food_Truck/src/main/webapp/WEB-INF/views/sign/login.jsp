@@ -37,29 +37,29 @@
                         <input type="radio" name="gubun" id="memberN" value="2" onclick ="memberCheck(2)">비회원</label>
                   </div><br><br>
                   <div id="mem_login" style="display:block">
-					 <h2>Login</h2>
-             	     <p>Welcome to your account</p>
-                     <label>ID<span>*</span></label>
+					 <h2>로그인</h2>
+             	     <p>환영합니다!</p>
+                     <label>아이디<span>*</span></label>
                      <input type="text" name="id" />
-                     <label>Password<span>*</span></label>
+                     <label>비밀번호<span>*</span></label>
                      <input type="password" name="pw"/>
                      <div class="remember">
                         <input type="checkbox" />
                         <p>Remember me!</p>
-                        <a href="/findAccount">Forgot Your Password ?</a>
+                        <a href="/findAccount">비밀번호를 잊어 버리셨다구요?</a>
                      </div>
-                     <p><input type=submit value="login" /></p>
+                     <p><input type=submit value="로그인" /></p>
                   </div>
                </form>
                <form name="nonMember_form" method="post" action="/nonMemberOrderDetail">
                   <div id="non_login" style="display:none">
-					 <h2>LOGIN</h2>
-             	     <p>Please enter your order number and telephone number</p>                  
-                     <label>주문번호<span>*</span></label>
+					 <h2>로그인</h2>
+             	     <p>주문번호 & 휴대폰 번호를 입력해주세요.</p>                  
+                     <label>주문 번호<span>*</span></label>
                      <input type="text" name="ordNo" />
-                     <label>전화번호<span>*</span></label>
+                     <label>휴대폰 번호<span>*</span></label>
                      <input type="text" name="ordTel" />
-                     <p><input type="submit" value="search" /></p>
+                     <p><input type="submit" value="조회" /></p>
                   </div>
                </form>
             </div>
@@ -67,7 +67,7 @@
       </div>
    </div>
 </div>
-<!--End login Area-->
+<!--End login Area-->  
 
 <BR><BR><BR><BR>
 
