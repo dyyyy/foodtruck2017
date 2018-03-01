@@ -163,6 +163,16 @@ public class SellerController {
 				List<SellerVO> list = sellerService.getLicense2(mvo.getMemberId());
 				int count = list.size();
 				if (count == 0) {
+					List<LicenseVO> list2=sellerService.getCheckList(mvo.getMemberId());
+					System.out.println("진입");
+					if(list2.size()==0) {
+						System.out.println("진입1");
+						request.setAttribute("msg", "none");
+					}else {
+						System.out.println("진입2");
+						request.setAttribute("Id", mvo.getMemberId());
+						request.setAttribute("msg",list2.get(0).getAppMsg());
+					}
 					return "seller/null";
 				} else {
 					return "seller/ing";
@@ -321,7 +331,7 @@ public class SellerController {
 		lvo.setLicenseNo(fvo.getLicenseNo());
 		lvo.setMemId(mvo.getMemberId());
 		sellerService.insertLicense(lvo);
-		
+		System.out.println(fvo.getFtruckAddr());
 		// Foodtruck 테이블 insert
 		fvo.setLicenseNo(lvo.getLicenseNo());
 		fvo.setFtruckTel(mvo.getMemberTel());
@@ -390,5 +400,46 @@ public class SellerController {
 
 		return map;
 	}
+	//푸드트럭 요창 거부후 수정Btn 모달창 띄우기
+	@RequestMapping("/fixTruck")
+	@ResponseBody
+	public HashMap<String, Object> fixTruck(@RequestParam("memId") String memId) throws Exception{
+		System.out.println(memId);
+		HashMap<String, Object> map = new HashMap<>();
+		FoodTruckVO vo =new FoodTruckVO();
+		vo=sellerService.getFoodTruckInfo(memId);
+		map.put("licenseNo", vo.getLicenseNo());
+		map.put("ftruckName", vo.getFtruckName());
+		map.put("ftruckAddr", vo.getFtruckAddr2());
+		map.put("category", vo.getCategory());
+		map.put("ftruckDlvYn", vo.getFtruckDlvYn());
+		map.put("ftruckRsvYn", vo.getFtruckRsvYn());
+		map.put("memId", memId);
+		return map;	
+	}
 
+	//푸드트럭 요창 거부후 수정Btn 모달창 띄우기-> 수정하기
+	@RequestMapping("updateFoodTruck2")
+	@ResponseBody
+	public int updateFoodTruck2(Model model, HttpSession session, HttpServletRequest request, FoodTruckVO fvo,@RequestParam("memId") String memId,@RequestParam("pastlicenseno") String pastlicenseno) throws Exception {
+		int num=0;	
+		System.out.println(fvo.getFtruckName());
+		System.out.println(fvo.getCategory());
+		System.out.println(fvo.getFtruckDlvYn());
+		System.out.println(fvo.getFtruckAddr2());
+		System.out.println(fvo.getFtruckImg());
+		System.out.println(fvo.getFtruckRsvYn());
+		System.out.println(fvo.getLicenseNo());
+		LicenseVO lvo = new LicenseVO();
+		String stat="I";
+		lvo.setLicenseNo(fvo.getLicenseNo());
+		lvo.setAppStat(stat);
+		lvo.setMemId(memId);
+		sellerService.fixUpdate(lvo);
+		FoodTruckVO vo= foodtruckService.getFoodTruck2(pastlicenseno);
+		fvo.setFtruckNo(vo.getFtruckNo());
+		num=sellerService.fixUpdateFoodtruck(fvo);
+		
+		return num;
+	}
 }

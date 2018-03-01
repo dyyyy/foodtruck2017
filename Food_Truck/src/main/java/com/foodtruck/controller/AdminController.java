@@ -326,7 +326,7 @@ public class AdminController {
 	@RequestMapping("/approvalList")
 	@ResponseBody
 	public HashMap<String, Object> approvalList(@RequestParam("licenseNo") String licenseNo) throws Exception {
-		
+		System.out.println("진입니다이이이잉이");
 		System.out.println("푸드트럭 관리에서 상세정보보기 클릭 -> 해당 푸드트럭의 라이센스 번호 : " + licenseNo );
 		
 		String category = "";
@@ -439,8 +439,24 @@ public class AdminController {
 		String app = "Y";
 		LicenseVO vo = new LicenseVO();
 		vo.setAppStat(app);
-		vo.setLicenseNo(licenseNo);		
+		vo.setLicenseNo(licenseNo);
+		vo.setAppMsg("none");
 		num = adminService.appFoodtruck(vo);
+		return num;
+	}
+	
+	//승인취소
+	@RequestMapping("/cancelApp")
+	@ResponseBody
+	public int cancelApp(@RequestParam("licenseNo") String licenseNo,@RequestParam("appMsg") String appMsg) throws Exception {
+		int num=0;
+		LicenseVO vo = new LicenseVO();
+		vo.setAppStat("N");
+		vo.setLicenseNo(licenseNo);
+		vo.setAppMsg(appMsg);
+		
+		num = adminService.appFoodtruck(vo);
+
 		return num;
 	}
 }

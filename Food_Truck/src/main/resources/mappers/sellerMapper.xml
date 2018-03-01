@@ -107,7 +107,7 @@
 		INNER JOIN FOODTRUCK F
 		ON F.LICENSE_NO = LICENSE.LICENSE_NO
  		WHERE MEMBER.MEM_ID=#{memberId} 
-		AND LICENSE.APP_STAT='N'
+		AND LICENSE.APP_STAT='I'
 	
 	</select>
 	
@@ -201,7 +201,7 @@
 	<!-- 라이센스 번호 등록 -->
 	<insert id="insertLicense" parameterType="LicenseVO">
 		insert into license(license_no, mem_id, app_stat)
-		values(#{licenseNo}, #{memId}, 'N') 
+		values(#{licenseNo}, #{memId}, 'I') 
 	</insert>
 	
 	<select id="getDate" parameterType="String" resultMap="SellerMap" resultType="java.util.List">
@@ -273,6 +273,31 @@
 	
 	</select>
 	
+	<!-- 푸드트럭신청->거절후 메시지 -->
+	<select id="getCheckList" resultMap="LicenseMap">
+	select * from LICENSE where MEM_ID=#{memId}
+	</select>
+	
+	<!-- 푸드트럭 거절후 수정하기 btn클릭시 모달창에 푸드트럭 정보 가져오기 -->
+	<select id="getFoodTruckInfo" resultMap="FoodTruckMap">
+	select f.FTRUCK_NAME,f.FTRUCK_ADDR2,f.FTRUCK_DLV_YN,f.FTRUCK_RSV_YN,f.LICENSE_NO,f.CATEGORY 
+    from foodtruck f ,license l
+    where f.LICENSE_NO=l.LICENSE_NO
+    and l.MEM_ID=#{memId}
+	
+	</select>
+	
+	<!-- 푸드트럭 신청 거절후 수정 버튼 클릭시 모달창에 가져오는 푸드트럭 정보 가져오기->수정요청(license Table) -->
+	<update id="fixUpdate">
+	update license set license_no=#{licenseNo},APP_STAT=#{appStat} where MEM_ID=#{memId}
+	</update>
+	
+	<!-- 푸드트럭 신청 거절후 수정 버튼 클릭시 모달창에 가져오는 푸드트럭 정보 가져오기->수정요청(Foodtruck Table) -->
+	<update id="fixUpdateFoodtruck">
+	update foodtruck set ftruck_name=#{ftruckName},FTRUCK_ADDR2=#{ftruckAddr2},FTRUCK_DLV_YN=#{ftruckDlvYn},FTRUCK_RSV_YN=#{ftruckRsvYn},ftruck_img=#{ftruckImg},CATEGORY=#{category},LICENSE_NO=#{licenseNo}
+	where FTRUCK_NO=#{ftruckNo}
+	</update>
+	
 	<!--resultMap -->
 	<resultMap type="com.foodtruck.vo.MInquiryVO" id="InquiryMap">
 		<result column="QA_SC_NO" property="qaScNo" />
@@ -306,6 +331,7 @@
 		<result column="LICENSE_NO" property="licenseNo" />
 		<result column="MEM_ID" property="memId" />
 		<result column="APP_STAT" property="appStat" />
+		<result column="APP_MSG" property="appMsg" />
 	</resultMap>
 	
 	<resultMap type="FoodTruckVO" id="FoodTruckMap">

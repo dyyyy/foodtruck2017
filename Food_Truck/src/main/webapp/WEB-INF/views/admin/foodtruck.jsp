@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	
 	function modal(e) {
-		
+		alert("진입");
 		var licenseNo = e.getAttribute("data-id");
 		$.ajax({
 			url : "/approvalList",
@@ -50,6 +50,44 @@
 		})
 	}
 	
+	
+	function sel(){
+		var go = $("#go option:selected").val();
+		var etc=document.getElementById("etc");
+		if(go=="2"){
+			etc.style.display = 'block';
+		}else{
+			etc.style.display = 'none';
+		}
+	}
+	
+	function none(){
+		  var licenseNo=document.getElementById("licenseNo").value;
+	      var go = $("#go option:selected").val();   
+	      var text = $("#etc").val(); 
+	      var msg="";
+	      if(text==""){
+	         msg=go;
+	      }else{
+	         msg=text;
+	      }
+	      $.ajax({
+	    	  url:"/cancelApp",
+	    	  data: 
+	          {
+	             "licenseNo" : licenseNo,
+	             "appMsg":msg
+	          },
+	          type: "post",
+	          success : function(data) {
+	        	  if(date=="1"){
+	        		alert("승인취소가 되었습니다");  
+	        	  }	        	  
+	          }
+	      })
+	}
+	
+	
 </script>
 </head>
 <%@include file="../comm/header2.jsp"%>
@@ -65,6 +103,7 @@
 				<li class="active"><a href="/foodtruck?pageNo=1"><i class="icon-chevron-right"></i>푸드트럭 관리</a></li>
 			</ul>
 		</div>
+		
 		<!--/span-->
 		<div class="span9" id="content">
 			<div class="row-fluid">
@@ -174,10 +213,11 @@
 <!-- 맨위 DIV끝 -->
 
 <!-- 모달  -->
-<div id="tutorialsplaneModal" class="modal fade" role='dialog'>
+<div id="tutorialsplaneModal" class="modal fade" role='dialog'style="display: none; z-index: 1050;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<h4 class="modal-title">푸드트럭 정보</h4>
 			</div>
 			<div class="modal-body" style="margin-left: 10px;">
@@ -196,16 +236,47 @@
 					var map = new daum.maps.Map(mapContainer, mapOption);
 				</script>
 				<div class="set"></div><br><br>
-				<div><h4>정보</h4></div>ㅇㅇ
+				<div><h4>정보</h4></div>
 				<div class="table12" align="center"></div>
 				<div class="asd"></div>
 			</div>
 			<div class="modal-footer">
+				<button class="btn btn-default" href="#myModal2" data-toggle="modal">승인취소</button>
 				<button class="btn btn-default" onclick="approval()">승인하기</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="cl()">닫기</button>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- 취소 반려 모달 -->
+	<div class="modal" id="myModal2" aria-hidden="true"
+		style="display: none; z-index: 1060;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h4 class="modal-title">승인취소사유</h4>
+				</div>
+				<div class="container"></div>
+				<div class="modal-body" style="width: 90%;">
+					<div >
+						<select onchange="sel()" id="go">
+							<option value="사업자번호가 확인되지않음">사업자번호가 확인되지않음.</option>
+							<option value="사업자와 연락이안됨">사업자와 연락이안됨.</option>
+							<option value="2">기타</option>							
+						</select>
+						<textarea rows="5" style="display: none; width: 90%" id="etc"></textarea>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<a href="#" data-dismiss="modal" class="btn btn-default">닫기</a> 
+					<a href="#" class="btn btn-default" onclick="none()">승인취소</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

@@ -24,7 +24,7 @@
 						FROM (SELECT B.MEM_ID, B.MEM_NAME, B.MEM_TEL,L.LICENSE_NO
 							  FROM MEMBER B ,LICENSE L
 							  WHERE B.MEM_ID=L.MEM_ID
-							  AND APP_STAT='N' ORDER BY B.MEM_ID ASC
+							  AND APP_STAT='I' ORDER BY B.MEM_ID ASC
 							  )FT
 						)FFT
 				  WHERE ROWNUM <=#{pageNo}+9
@@ -44,10 +44,9 @@
 	</select>
 	
 	<!-- 푸드트럭 최종 승인 -->
-	<update id="appFoodtruck">
-	
+	<update id="appFoodtruck" > 
 		UPDATE LICENSE 
-		SET APP_STAT='Y'
+		SET APP_STAT=#{appStat},APP_MSG=#{appMsg}
 		WHERE LICENSE_NO=#{licenseNo}
 	
 	</update>
@@ -74,6 +73,7 @@
 		<result column="LICENSE_NO" property="licenseNo" />
 		<result column="MEM_ID" property="memId" />
 		<result column="APP_STAT" property="appStat" />
+		<result column="APP_MSG" property="appMsg" />
 	</resultMap>
 
 </mapper>

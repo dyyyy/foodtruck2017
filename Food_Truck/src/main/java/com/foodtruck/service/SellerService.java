@@ -156,4 +156,28 @@ public class SellerService {
 		return dao.getDate(licenseNo);
 	}
 	
+	//푸드트럭 신청->거절된 메시지 리스트
+	public List<LicenseVO> getCheckList(String memid){
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getCheckList(memid);
+	}
+	//푸드트럭 신청 거절후 수정 버튼 클릭시 푸드트럭 정보 가져오는 서비스
+	public FoodTruckVO getFoodTruckInfo(String memId) throws Exception {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.getFoodTruckInfo(memId);
+	}
+	
+	//푸드트럭 신청 거절후 수정 버튼 클릭시 푸드트럭 정보 가져오는 서비스-->업데이트 요청
+	public int fixUpdate(LicenseVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.fixUpdate(vo);
+	}
+	
+	public int fixUpdateFoodtruck(FoodTruckVO vo) {
+		SellerDAO dao = sessionTemplate.getMapper(SellerDAO.class);
+		return dao.fixUpdateFoodtruck(vo);
+		
+	}
+	
+	
 }

@@ -80,6 +80,18 @@ public interface SellerDAO {
 	// 푸드트럭별 상품 리스트 
 	public List<ProductVO> getProductList(String licenseNo);
 	
+	
 	public List<SellerVO> getDate(String licenseNo);
 	
+	//푸드트럭신청후 반려된 메시지 리스트
+	public List<LicenseVO> getCheckList(String memid);
+	
+	//푸드트럭 신청 거절후 수정 버튼 클릭시 모달창에 가져오는 푸드트럭 정보 가져오기
+	public FoodTruckVO getFoodTruckInfo(String memId) throws Exception;
+	
+	//푸드트럭 신청 거절후 수정 버튼 클릭시 모달창에 가져오는 푸드트럭 정보 가져오기->수정요청(license Table)
+	public int fixUpdate(LicenseVO vo);
+	
+	//푸드트럭 신청 거절후 수정 버튼 클릭시 모달창에 가져오는 푸드트럭 정보 가져오기->수정요청(FoodTruck Table)
+	public int fixUpdateFoodtruck(FoodTruckVO vo);
 }
