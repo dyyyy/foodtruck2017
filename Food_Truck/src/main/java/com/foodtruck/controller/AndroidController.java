@@ -25,6 +25,7 @@ import com.foodtruck.service.MemberService;
 import com.foodtruck.service.NoticeService;
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.EventVO;
+import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
@@ -196,11 +197,34 @@ public class AndroidController<Article> {
 		}
 	}
 	
-	/* 푸드트럭과 상품보여주기 */
-	
+	/* 푸드트럭과 상품보여주기 */ 
+	@RequestMapping(value = "/getfoodtrucklist/{pageNo}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getFoodtruckList(@PathVariable int pageNo) throws Exception {
+		System.out.println("getfoodtrucklist");
+		
+		ftruckService.getAllCountTruck();
+		List<FoodTruckVO> list =  ftruckService.getAllFoodTruckList(pageNo);
+		/*json 으로 변환한후  return 하기*/
+		return "foodtruck list";
+	}
 	
 	/* 푸드트럭 검색기능 */
+	@RequestMapping(value = "/getfoodtrucksearch", method = RequestMethod.GET)
+	@ResponseBody
+	public String getFoodtrucksearch() throws Exception {
+		System.out.println("getfoodtrucksearch");
+
+		return "foodtruck list";
+	}
 	/* 푸드트럭 상세보기 기능 */
-	/* 푸드트럭 위치 지도로 보여주는 기능 */
+	@RequestMapping(value = "/getfoodtruckdetail", method = RequestMethod.GET)
+	@ResponseBody
+	public String getFoodtruckdetail() throws Exception {
+		System.out.println("getfoodtrucklist");
+
+		return "foodtruck list";
+	}
+	
 
 }
