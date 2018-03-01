@@ -21,15 +21,6 @@
 							<i class="fa fa-th-list"></i>
 						</a>
 					</div>
-					<div class="sort-by">
-						<span>Sort By</span>
-						<select name="sort-by">
-							<option selected="selected" value="mercede">price: Lower</option>
-							<option value="saab">price(low&gt;high)</option>
-							<option value="mercedes">price(high &gt; low)</option>
-							<option value="audi">rating(highest)</option>
-						</select>
-					</div>
 				</div>
 				<div class="shop-products">
 				<!-- Single Product Start -->

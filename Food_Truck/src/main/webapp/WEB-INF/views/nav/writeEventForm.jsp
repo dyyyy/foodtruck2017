@@ -85,9 +85,7 @@
 												<th>&nbsp;</th>
 												<td>&nbsp;</td>
 											</tr>
-										<%
-											}
-										%>
+										
 										<tr>
 											<th scope="row" style="margin-bottom: 10px; width: 50px"> 이벤트 시간 설정 </th>
 											<td>
@@ -103,7 +101,9 @@
 												진행하겠습니다.
 											</td>
 										</tr>										
-										
+										<%
+											}
+										%>
 										<tr>
 											<th>&nbsp;</th>
 											<td>&nbsp;</td>

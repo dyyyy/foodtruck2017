@@ -6,7 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <jsp:include page="../comm/header.jsp"></jsp:include>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style>
    .table-responsive, .unit, .table-info{
       border: hidden;
@@ -95,7 +95,7 @@
 							<td class="unit" colspan="5"><a href="/memberQaSelInfo?qaSelNo=${list.qaSelNo}">${list.qaSelTitle}</a></td>		
 							</c:when>
                      	</c:choose>
-                     		<td class="unit">${list.qaSelReg}${list.qaScReg}</td>
+                     		<td class="unit">${fn:substring(list.qaSelReg,0,10)}${fn:substring(list.qaScReg,0,10)}</td>
                      	<c:choose>
                      		<c:when test="${list.qaScStat eq 'Y' || list.qaSelStat eq 'Y'}">
                      			<td class="unit">답변 완료</td> 

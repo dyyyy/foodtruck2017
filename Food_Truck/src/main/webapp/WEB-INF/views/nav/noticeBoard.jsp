@@ -17,7 +17,7 @@
 			<div class="col-sm-12">
                <div class="product">
                   <div class="table-responsive">
-                  	<h1>NOTICE</h1><br>
+                  	<h1>공지사항</h1><br>
                      	<table class="table cart-table">
                         	<thead class="table-title">
                         		<tr>

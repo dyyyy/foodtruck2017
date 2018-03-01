@@ -13,7 +13,7 @@
 			<div class="col-sm-12">
                <div class="product">
                   <div class="table-responsive">
-                  	<h1>EVENT</h1><br>
+                  	<h1>이벤트</h1><br>
                      	<table class="table cart-table">
                         	<thead class="table-title">
                         		<tr>

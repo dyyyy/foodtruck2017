@@ -20,7 +20,7 @@
 			<div class="col-sm-12">
                <div class="product">
                   <div class="table-responsive">
-                  <h2>FAVORITE FOODTRUCKS</h2>
+                  <h2>TOP5 푸드트럭</h2>
                      <p> 주문횟수가 많은 푸드트럭을 5개 보여드립니다.<br>
                      	 푸드트럭의 이름을 클릭하시면 바로 주문이 가능하답니다 :-)
                      </p><br><br>

@@ -70,7 +70,7 @@
 			<div class="col-sm-12">
                <div class="product">
                   <div class="table-responsive" >
-                  <h2>DAILY DELIVERY STATE</h2>
+                  <h2>오늘 배달 내역</h2>
                      <p> 오늘의 기준 - 배달현황 <br><br>사업자 번호 선택 후, 날짜를 선택하시면 지난 배달 내역도 확인 가능하답니다 :-) </p><br><br>
                      <!-- 사업자 기준으로 통계 -->
                      <div>
