@@ -172,7 +172,7 @@ function updateDlvTimeSend() {
 				var str = "<a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='/resources/img/ms3.png'></a>"
 				$("#dlvTime").html(str)
 				$("#dlvTime").click(function() {
-					alert(data.ftruckName+":"+data.dlvDate)
+					alert(data.ftruckName+": 배달 시간 약 "+data.dlvDate +"분")
 					location.href="/memberOrderInfo";
 				})
 			}

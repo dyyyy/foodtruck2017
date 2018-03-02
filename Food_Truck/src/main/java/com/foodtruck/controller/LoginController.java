@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.SellerService;
@@ -70,9 +71,9 @@ public class LoginController {
 			}
 
 		} else {
-
+			request.setAttribute("msg","아이디를 다시 확인해 주세요");
+			request.setAttribute("addr", "loginform");
 			return "comm/msg";
-			
 		}
 	}
 
