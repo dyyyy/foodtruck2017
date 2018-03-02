@@ -205,7 +205,13 @@ public class AndroidController<Article> {
 		
 		 int pagecount = ftruckService.getCategoryCountTruck(category);
 		 List<FoodTruckVO> lists = ftruckService.getCategoryList(vo);
-		  
+		 
+		  /*리뷰갯수 구하기*/
+		 for(int i=0; i<lists.size(); i++) {
+			 FoodTruckVO a = ftruckService.getReviewCount(lists.get(i).getFtruckNo());
+			 FoodTruckVO b =ftruckService.getReviewTotal(lists.get(i).getFtruckNo());
+			 List<FoodTruckVO> c = ftruckService.getReviewCountList();
+		 }
 
 		 /*json 으로 변환한후 return 하기*/
 		 
