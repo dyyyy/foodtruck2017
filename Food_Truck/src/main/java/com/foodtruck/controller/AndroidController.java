@@ -1,10 +1,7 @@
 package com.foodtruck.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.catalina.Session;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodtruck.service.EventService;
@@ -27,10 +22,10 @@ import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.EventVO;
 import com.foodtruck.vo.FoodTruckVO;
 import com.foodtruck.vo.LicenseVO;
-import com.foodtruck.vo.MInquiryVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.NoticeVO;
-    
+import com.foodtruck.vo.PageVO;
+
 @Controller
 @RequestMapping("/android")
 public class AndroidController<Article> {
@@ -47,22 +42,20 @@ public class AndroidController<Article> {
 	/* 안드로이드에서 페이징처리 어떻게 할것인지 */
 
 	/* NOTICE */
-	@RequestMapping(value = "/notice/{pageNo}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@RequestMapping(value = "/notice", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String androidNotice(@PathVariable("pageNo") int pageNo) throws Exception {
+	public String androidNotice() throws Exception {
 		System.out.println("android notice connect");
 
+		/*미완 페이징처리*/
 		int page = noticeService.getCountNotice();
-		
-		
-	
-		List<NoticeVO> list = noticeService.getNoticeBoardList(pageNo);
+
+		List<NoticeVO> list = noticeService.getNoticeBoardList(1);
 
 		String result = new ObjectMapper().writeValueAsString(list);
 
 		System.out.println("json: " + result);
-		int pagecount =noticeService.getCountNotice();
-		
+		int pagecount = noticeService.getCountNotice();
 
 		return result;
 
@@ -84,6 +77,7 @@ public class AndroidController<Article> {
 	public String androidEvent() throws Exception {
 		System.out.println("android event connect");
 
+		/*미완 페이징처리*/
 		List<EventVO> list = eventService.getEventBoardList(1);
 
 		String result = new ObjectMapper().writeValueAsString(list);
@@ -109,10 +103,10 @@ public class AndroidController<Article> {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> androidRegister(@RequestBody MemberVO vo) throws Exception {
-		
+
 		System.out.println("register connect");
 		memberService.insertMember(vo);
-		if(vo.getLicenseNo() != null ) {
+		if (vo.getLicenseNo() != null) {
 			System.out.println("license no empty ");
 			LicenseVO lvo = new LicenseVO();
 			lvo.setLicenseNo(vo.getLicenseNo());
@@ -180,6 +174,7 @@ public class AndroidController<Article> {
 		 */
 
 	}
+
 	/* idcheck */
 	@RequestMapping(value = "/idcheck/{id:.+}", method = RequestMethod.GET)
 	@ResponseBody
@@ -187,44 +182,39 @@ public class AndroidController<Article> {
 		System.out.println("inqueryinfo connect" + " : " + id);
 
 		JSONObject json = new ObjectMapper().readValue(id, JSONObject.class);
-		
+
 		MemberVO vo = memberService.getMember(json.get("id").toString());
-		
-		if(vo !=null) {
-			return "id";	
-		}else {
+
+		if (vo != null) {
+			return "id";
+		} else {
 			return "checked";
 		}
 	}
-	
-	/* 푸드트럭과 상품보여주기 */ 
-	@RequestMapping(value = "/getfoodtrucklist/{pageNo}", method = RequestMethod.GET)
+
+	/* 푸드트럭과 상품보여주기 *//* 푸드트럭 상세보기 */
+	@RequestMapping(value = "/getfoodtrucklist/{category}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String getFoodtruckList(@PathVariable int pageNo) throws Exception {
-		System.out.println("getfoodtrucklist");
+	public String getFoodtruckList(@PathVariable int category) throws Exception {
+		System.out.println("getfoodtrucklist _ category : " + category);
+
 		
-		ftruckService.getAllCountTruck();
-		List<FoodTruckVO> list =  ftruckService.getAllFoodTruckList(pageNo);
-		/*json 으로 변환한후  return 하기*/
-		return "foodtruck list";
-	}
-	
-	/* 푸드트럭 검색기능 */
-	@RequestMapping(value = "/getfoodtrucksearch", method = RequestMethod.GET)
-	@ResponseBody
-	public String getFoodtrucksearch() throws Exception {
-		System.out.println("getfoodtrucksearch");
+		PageVO vo = new PageVO();
+		vo.setCategory(category);
+		vo.setPageNo(1);
+		
+		 int pagecount = ftruckService.getCategoryCountTruck(category);
+		 List<FoodTruckVO> lists = ftruckService.getCategoryList(vo);
+		  
 
-		return "foodtruck list";
+		 /*json 으로 변환한후 return 하기*/
+		 
+		String result = new ObjectMapper().writeValueAsString(lists);
+		
+		// pageNo, list
+		
+		
+		return result;
 	}
-	/* 푸드트럭 상세보기 기능 */
-	@RequestMapping(value = "/getfoodtruckdetail", method = RequestMethod.GET)
-	@ResponseBody
-	public String getFoodtruckdetail() throws Exception {
-		System.out.println("getfoodtrucklist");
-
-		return "foodtruck list";
-	}
-	
 
 }
