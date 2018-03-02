@@ -43,7 +43,7 @@
 	<delete id="deleteProduct">
 	
 		DELETE FROM PRODUCT
-		WHERE PROD_NO=#{prodNo}
+		WHERE PROD_NO=#{prodNo} c
 		
 	</delete>
 	

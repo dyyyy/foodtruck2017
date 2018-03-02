@@ -66,9 +66,9 @@ $( document ).ready(function() {
 		var num=/^[0-9]{10,10}$/;
 		var licenseno = document.getElementById("licenseNo").value;
 		var name = document.getElementById("name").value;
-		var addr = document.getElementById("sample5_address").value;
+		var addr = document.getElementById("addr").value;
 		var category = $("#select1").val();
-		var img = document.getElementById("path2").value;
+		var img = document.getElementById("path").value;
 		var ftruckDlvYn = $("input[name='ftruckDlvYn']:checked").val();
 		var ftruckRsvYn = $("input[name='ftruckRsvYn']:checked").val();
 		if(licenseno==""||num.test(licenseno)!=true){
@@ -311,7 +311,7 @@ textarea {
 								</tr>
 								<tr>
 									<th>주소</th>
-									<td><input type="text" id="sample5_address"
+									<td><input type="text" id="addr"
 										placeholder="주소" style="margin-top: 5px;"> <input
 										type="button" class="btn" onclick="sample5_execDaumPostcode()"
 										value="주소 검색"><br>
@@ -361,7 +361,7 @@ textarea {
 														}
 										
 														// 주소 정보를 해당 필드에 넣는다.
-														document.getElementById("sample5_address").value = fullAddr;
+														document.getElementById("addr").value = fullAddr;
 														// 주소로 상세 정보를 검색
 														geocoder.addressSearch(data.address, function(results, status) {
 															// 정상적으로 검색이 완료됐으면

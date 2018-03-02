@@ -141,13 +141,14 @@
 			dataType : 'json',
 			type : 'POST',
 			success : function(data) {
+				
 				$('.imgInfo').html('<img data-src="holder.js/260x180" alt="260x180" style="width: 100%; height: 180px;" src="'+data.prodImg+'">');
 				$('.nameInfo').html('<input type="text" style="width: 350px;" id="na" value="'+data.prodName+'">');
 				$('.priceInfo').html('<input type="text" style="width: 350px;" id="pr" value="'+data.prodPrice+'">');
 				$('.contentInfo').html('<textarea rows="5" cols="8" style="width: 350px;" id="pcon">'+data.prodContent+'</textarea>');
 				$('.regionInfo').html('<textarea rows="5" cols="8" style="width: 350px;" id="porg">'+data.prodOrgin+'</textarea>');
-				$('.num2').html('<input type="hidden" value="' + data.prodNo + '" id="pno">');
-				$('.img5').html('<input type="hidden" value="' + data.prodImg + '" id="path3">');
+				$('.num2').html('<input type="hidden" value="'+data.prodNo+'" id="pno">');
+				$('.img5').html('<input type="hidden" value="'+data.prodImg+'" id="path3">');
 			},
 			error : function(jqXHR) {
 				alert("에러");
@@ -184,12 +185,13 @@ function update(){
 }	
 
 function del(){
-	var pno1=document.getElementById("pno").value;
+	var pno=document.getElementById("pno").value;
+	
 	if(confirm("정말로 삭제하시겟습니까? 삭제한 데이터는 복구가 불가능합니다.")==true){
 		$.ajax({
 			url:"/productDelete",
 			data:{
-				"prodNo":pno1
+				"prodNo":pno
 			},
 			dataType : 'json',
 			type : 'POST',

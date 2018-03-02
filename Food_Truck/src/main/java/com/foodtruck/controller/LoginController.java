@@ -105,7 +105,7 @@ public class LoginController {
 
 		memberService.insertMember(vo);
 
-		return "home";
+		return "redirect:/";
 	}
 
 	// ID 중복체크

@@ -333,6 +333,7 @@ public class SellerController {
 		sellerService.insertLicense(lvo);
 		System.out.println(fvo.getFtruckAddr());
 		// Foodtruck 테이블 insert
+		fvo.setFtruckTel(mvo.getMemberTel());
 		fvo.setLicenseNo(lvo.getLicenseNo());
 		fvo.setFtruckTel(mvo.getMemberTel());
 		int num = sellerService.insertFoodTruck(fvo);
