@@ -18,6 +18,8 @@ import com.foodtruck.service.EventService;
 import com.foodtruck.service.FoodTruckService;
 import com.foodtruck.service.MemberService;
 import com.foodtruck.service.NoticeService;
+import com.foodtruck.service.ProductService;
+import com.foodtruck.service.ReviewService;
 import com.foodtruck.service.SellerService;
 import com.foodtruck.vo.EventVO;
 import com.foodtruck.vo.FoodTruckVO;
@@ -25,6 +27,8 @@ import com.foodtruck.vo.LicenseVO;
 import com.foodtruck.vo.MemberVO;
 import com.foodtruck.vo.NoticeVO;
 import com.foodtruck.vo.PageVO;
+import com.foodtruck.vo.ProductVO;
+import com.foodtruck.vo.ReviewVO;
 
 @Controller
 @RequestMapping("/android")
@@ -39,6 +43,10 @@ public class AndroidController<Article> {
 	private SellerService sellerService;
 	@Autowired
 	private FoodTruckService ftruckService;
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private ReviewService reviewService;
 	/* 안드로이드에서 페이징처리 어떻게 할것인지 */
 
 	/* NOTICE */
@@ -47,7 +55,7 @@ public class AndroidController<Article> {
 	public String androidNotice() throws Exception {
 		System.out.println("android notice connect");
 
-		/*미완 페이징처리*/
+		/* 미완 페이징처리 */
 		int page = noticeService.getCountNotice();
 
 		List<NoticeVO> list = noticeService.getNoticeBoardList(1);
@@ -77,7 +85,7 @@ public class AndroidController<Article> {
 	public String androidEvent() throws Exception {
 		System.out.println("android event connect");
 
-		/*미완 페이징처리*/
+		/* 미완 페이징처리 */
 		List<EventVO> list = eventService.getEventBoardList(1);
 
 		String result = new ObjectMapper().writeValueAsString(list);
@@ -198,28 +206,50 @@ public class AndroidController<Article> {
 	public String getFoodtruckList(@PathVariable int category) throws Exception {
 		System.out.println("getfoodtrucklist _ category : " + category);
 
-		
 		PageVO vo = new PageVO();
 		vo.setCategory(category);
 		vo.setPageNo(1);
-		
-		 int pagecount = ftruckService.getCategoryCountTruck(category);
-		 List<FoodTruckVO> lists = ftruckService.getCategoryList(vo);
-		 
-		  /*리뷰갯수 구하기
-		 for(int i=0; i<lists.size(); i++) {
-			 FoodTruckVO a = ftruckService.getReviewCount(lists.get(i).getFtruckNo());
-			 FoodTruckVO b =ftruckService.getReviewTotal(lists.get(i).getFtruckNo());
-			 List<FoodTruckVO> c = ftruckService.getReviewCountList();
-		 }
-*/
-		 /*json 으로 변환한후 return 하기*/
-		 
+
+		int pagecount = ftruckService.getCategoryCountTruck(category);
+		List<FoodTruckVO> lists = ftruckService.getCategoryList(vo);
+
+		/*
+		 * 리뷰갯수 구하기 for(int i=0; i<lists.size(); i++) { FoodTruckVO a =
+		 * ftruckService.getReviewCount(lists.get(i).getFtruckNo()); FoodTruckVO b
+		 * =ftruckService.getReviewTotal(lists.get(i).getFtruckNo()); List<FoodTruckVO>
+		 * c = ftruckService.getReviewCountList(); }
+		 */
+		/* json 으로 변환한후 return 하기 */
+
 		String result = new ObjectMapper().writeValueAsString(lists);
-		
+
 		// pageNo, list
-		
-		
+
+		return result;
+	}
+
+	// 상품리스트
+	@RequestMapping(value = "/getproductlist/{ftruckNo}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String getProductList(@PathVariable String ftruckNo) throws Exception {
+		System.out.println("getproductlist : " + ftruckNo);
+
+		List<ProductVO> pvolist = productService.getProductList(ftruckNo);
+
+		String result = new ObjectMapper().writeValueAsString(pvolist);
+		System.out.println(result);
+		return result;
+	}
+
+	// 리뷰
+	@RequestMapping(value = "/getreviewlist/{ftruckNo}", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String getReviewList(@PathVariable String ftruckNo) throws Exception {
+		System.out.println("getReview  : " + ftruckNo);
+
+		List<ReviewVO> rvolist = reviewService.getReviewList(ftruckNo); // 由щ럭 �젙蹂� �샇異�
+		String result = new ObjectMapper().writeValueAsString(rvolist);
+		System.out.println(result);
 		return result;
 	}
 
