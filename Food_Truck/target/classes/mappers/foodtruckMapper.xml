@@ -61,7 +61,8 @@
 							  FROM FOODTRUCK F, LICENSE L 
 							  WHERE CATEGORY=#{category}
 							  AND F.LICENSE_NO = L.LICENSE_NO
-							  AND L.APP_STAT = 'Y' 
+							  AND L.APP_STAT = 'Y'
+							  AND F.FTRUCK_STATE = 'Y'
 							  ORDER BY L.APP_STAT DESC, F.FTRUCK_REG
 							  )FT
 						)FFT
@@ -85,6 +86,7 @@
 							  FROM FOODTRUCK F, LICENSE L 
 							  WHERE F.LICENSE_NO = L.LICENSE_NO
 							  AND L.APP_STAT = 'Y'
+							  AND F.FTRUCK_STATE = 'Y'
 							  ORDER BY L.APP_STAT DESC,F.FTRUCK_REG
 							  )FT
 						)FFT
@@ -169,6 +171,7 @@
 			FROM (SELECT F.* 
 				  FROM FOODTRUCK F, LICENSE L 
 				  WHERE F.LICENSE_NO = L.LICENSE_NO
+				  AND F.FTRUCK_STATE = 'Y'
 				  ORDER BY L.APP_STAT DESC, FTRUCK_GRADE DESC
 				  )
 			WHERE ROWNUM<=10
