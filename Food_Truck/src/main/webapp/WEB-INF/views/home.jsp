@@ -23,7 +23,7 @@
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="/read?ftruckNo=${rank.ftruckNo}" class="pro-image fix"><img src="${rank.ftruckImg}" alt="featured" /></a>
+								<a href="/read?ftruckNo=${rank.ftruckNo}" class="pro-image fix"><img src="${rank.ftruckImg}" alt="featured" style="width: 240.5px;height: 180.14px;"/></a>
 								<!-- Product action Btn -->
 								<div class="product-action-btn">
 									<a class="quick-view" href="#"><i class="fa fa-search"></i></a>
@@ -75,7 +75,7 @@
 						<div class="product-item fix">
 							<div class="product-img-hover">
 								<!-- Product image -->
-								<a href="/read?ftruckNo=${newTruck.ftruckNo}" class="pro-image fix"><img src="${newTruck.ftruckImg}" alt="featured" /></a>
+								<a href="/read?ftruckNo=${newTruck.ftruckNo}" class="pro-image fix"><img src="${newTruck.ftruckImg}" alt="featured" style="width: 240.5px;height: 180.14px;"/></a>
 								<!-- Product action Btn -->
 								<div class="product-action-btn">
 									<a class="quick-view" href="#"><i class="fa fa-search"></i></a>

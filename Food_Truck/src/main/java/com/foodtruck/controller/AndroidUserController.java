@@ -33,7 +33,12 @@ public class AndroidUserController {
 	@ResponseBody
 	public ResponseEntity<String> androidinquriy(@RequestBody MInquiryVO vo) throws Exception {
 		System.out.println("inquiry connect");
-
+/*
+		if() {
+			
+		}
+		
+		
 		if (vo.getOrdNo() != null) {
 			memberService.insertInquiry(vo);
 		} else if (vo.getLicenseNo() != null) {
@@ -41,30 +46,41 @@ public class AndroidUserController {
 		} else {
 
 		}
-
+*/
 		return new ResponseEntity<String>(HttpStatus.OK);
 
 	}
 
 	/* 문의내역 */
-	@RequestMapping(value = "/user/inqueryinfo/{id:.+}", method = RequestMethod.GET, produces = "application/json;charset=utf-8", consumes = "application/json;charset=utf-8")
+	@RequestMapping(value = "/user/inqueryinfo/{id:.+}/{auth}", method = RequestMethod.GET, produces = "application/json;charset=utf-8", consumes = "application/json;charset=utf-8")
 	@ResponseBody
-	public String androidInquriyInfo(@PathVariable("id") String id) throws Exception {
+	public String androidInquriyInfo(@PathVariable("id") String id, @PathVariable("auth") String auth)
+			throws Exception {
 		System.out.println("inqueryinfo connect" + " : " + id);
 
 		JSONObject json = new ObjectMapper().readValue(id, JSONObject.class);
 
-		List<MInquiryVO> list = memberService.getSellerQaSelInfoList(json.get("id").toString());
-
-		if (list != null) {
-			String result = new ObjectMapper().writeValueAsString(list);
-
-			System.out.println("json: " + result);
-
-			return result;
-		} else {
+		List<MInquiryVO> list;
+		if (auth != null) {
 			return null;
+		} else if (auth.equals(3)) {
+			// 사용자 문의내역
+			list = memberService.getMemberQaScInfoList(json.get("id").toString());
+			list.addAll(memberService.getMemberQaSelInfoList(json.get("id").toString()));
+			String result = new ObjectMapper().writeValueAsString(list);
+			System.out.println("json: " + result);
+			return result;
+		} else if (auth.equals(2)) {
+			// 판매자 문의내역
+			list = memberService.getSellerQaSelInfoList(json.get("id").toString());
+			list.addAll(memberService.getMemberQaScInfoList(json.get("id").toString()));
+			
+			String result = new ObjectMapper().writeValueAsString(list);
+			System.out.println("json: " + result);
+			return result;
+
 		}
+		return auth;
 
 	}
 
